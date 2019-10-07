@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const { isObject } = require('lodash');
 const buildUrl = require('build-url');
 const importCwd = require('import-cwd');
+const resolveFrom = require('resolve-from');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -823,7 +824,6 @@ function createClientWebpackConfig({
 // -----------------------------------------------------------------------------
 function createServerWebpackConfig({
   app = rootApp,
-  libs,
   isDebug = true,
   isHmr = false,
   hmrPort,
@@ -948,7 +948,12 @@ function createServerWebpackConfig({
           reAssets,
           /bootstrap-hot-loader/,
           /yoshi-server/,
-          ...libs.map(lib => new RegExp(lib.name)),
+          // Hacky: Don't treat modules inside the monorepo as external
+          moduleName => {
+            return !/node_modules/.test(
+              resolveFrom(serverConfig.context, moduleName),
+            );
+          },
         ],
       }),
       // Here for local integration tests as Yoshi's `node_modules`

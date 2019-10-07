@@ -20,7 +20,7 @@ const { watchPublicFolder } = require('./copy-assets');
 
 const host = '0.0.0.0';
 
-module.exports = async (app, libs, options) => {
+module.exports = async (app, options) => {
   console.log(chalk.cyan('Starting development environment...\n'));
 
   const https = options.https || app.servers.cdn.ssl;
@@ -47,7 +47,6 @@ module.exports = async (app, libs, options) => {
 
   const serverConfig = createServerWebpackConfig({
     app,
-    libs,
     isDebug: true,
     isHmr: true,
     hmrPort,
