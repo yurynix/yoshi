@@ -772,7 +772,10 @@ function createClientWebpackConfig({
           test: /\.svelte$/,
           loader: 'svelte-loader',
           options: {
-            // emitCss: true,
+            emitCss: true,
+            onwarn: (warning, onwarn) => {
+              warning.code === 'css-unused-selector' || onwarn(warning);
+            },
             preprocess: {
               style: importCwd('svelte-preprocess-sass').sass({
                 includePaths: ['src', 'node_modules'],
@@ -885,6 +888,9 @@ function createServerWebpackConfig({
           loader: 'svelte-loader',
           options: {
             generate: 'ssr',
+            onwarn: (warning, onwarn) => {
+              warning.code === 'css-unused-selector' || onwarn(warning);
+            },
             preprocess: {
               style: importCwd('svelte-preprocess-sass').sass({
                 includePaths: ['src', 'node_modules'],
