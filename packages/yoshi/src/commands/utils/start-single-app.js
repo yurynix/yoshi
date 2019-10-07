@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const openBrowser = require('./open-browser');
-const rootApp = require('yoshi-config/root-app');
 const { isWebWorkerBundle } = require('yoshi-helpers/queries');
 const { PORT } = require('../../constants');
 const {
@@ -24,7 +23,7 @@ const host = '0.0.0.0';
 module.exports = async (app, libs, options) => {
   console.log(chalk.cyan('Starting development environment...\n'));
 
-  const https = options.https || rootApp.servers.cdn.ssl;
+  const https = options.https || app.servers.cdn.ssl;
 
   // Clean tmp folders
   await Promise.all([fs.emptyDir(app.BUILD_DIR), fs.emptyDir(app.TARGET_DIR)]);
@@ -43,7 +42,7 @@ module.exports = async (app, libs, options) => {
     app,
     isDebug: true,
     isAnalyze: false,
-    isHmr: rootApp.hmr,
+    isHmr: app.hmr,
   });
 
   const serverConfig = createServerWebpackConfig({
