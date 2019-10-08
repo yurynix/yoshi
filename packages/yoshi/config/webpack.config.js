@@ -772,6 +772,7 @@ function createClientWebpackConfig({
           test: /\.svelte$/,
           loader: 'svelte-loader',
           options: {
+            dev: isDebug,
             emitCss: true,
             onwarn: (warning, onwarn) => {
               warning.code === 'css-unused-selector' || onwarn(warning);
@@ -887,6 +888,7 @@ function createServerWebpackConfig({
           test: /\.svelte$/,
           loader: 'svelte-loader',
           options: {
+            dev: isDebug,
             generate: 'ssr',
             onwarn: (warning, onwarn) => {
               warning.code === 'css-unused-selector' || onwarn(warning);
