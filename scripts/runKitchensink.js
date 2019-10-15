@@ -13,6 +13,8 @@ const filterProject = cliArgs.filterProject;
 
 const watchMode = cliArgs.watch;
 
+const buildMode = cliArgs.buildMode;
+
 // Publish the entire monorepo and install everything from CI to get
 // the maximum reliability
 //
@@ -46,6 +48,7 @@ if (filterProject) {
         templateDirectory,
         rootDirectory,
         watchMode,
+        buildMode,
       });
     } catch (error) {
       console.log();
