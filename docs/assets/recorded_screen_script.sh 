@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# create yoshi app script
+npx create-yoshi-app my-app
+# name
+# email
+# project type - fullstack
+# transpiler - Typescript

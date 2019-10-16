@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+DIRECTORY=`dirname $0`
+
+export TEMP_DIR=$(mktemp -d -t cya)
+
+RECORDING_PATH=$DIRECTORY/screen_recording
+
+asciinema rec --overwrite -t create-yoshi-app -c "source $DIRECTORY/recorded_screen_script.sh\ " $RECORDING_PATH
+cat $RECORDING_PATH | sed "s@$TEMP_DIR@~@g" | svg-term --window --out $DIRECTORY/cya.svg --height=17 --width=70
+rm -rf my-app/
+rm -rf screen_recording
