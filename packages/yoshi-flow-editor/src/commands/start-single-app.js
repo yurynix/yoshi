@@ -42,12 +42,7 @@ module.exports = async (app, options) => {
   // Generate an available port for server HMR
   const hmrPort = await detect();
 
-  const editorEntries = buildEditorPlatformEntries();
-
-  const customEntry = {
-    ...editorEntries,
-    'wix-private-mock': '../dev/wix-private.mock.js',
-  };
+  const customEntry = buildEditorPlatformEntries();
 
   const clientConfig = createClientWebpackConfig({
     app,

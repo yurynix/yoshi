@@ -67,13 +67,7 @@ module.exports = async function buildApps(apps, options) {
     buildViewerScriptEntry,
   } = require('../../buildEditorEntires');
 
-  const editorEntries = buildEditorPlatformEntries();
-
-  const customEntry = {
-    editorApp: './editorApp/editorApp.js',
-    ...editorEntries,
-    'wix-private-mock': '../dev/wix-private.mock.js',
-  };
+  const customEntry = buildEditorPlatformEntries();
 
   apps.forEach(app => {
     const clientDebugConfig = createClientWebpackConfig({

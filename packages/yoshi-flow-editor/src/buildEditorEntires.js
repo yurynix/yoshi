@@ -3,6 +3,7 @@ const globby = require('globby');
 const componentWrapping = require('./componentWrapping');
 const editorAppWrapping = require('./editorAppWrapping');
 const settingsWrapping = require('./settingsWrapping');
+const wixPrivateMockWrapping = require('./wixPrivateMockWrapping');
 const viewerScriptWrapping = require('./viewerScriptWrapping');
 
 const generatedWidgetEntriesPath = path.resolve(__dirname, '../tmp/components');
@@ -39,8 +40,14 @@ const buildEditorPlatformEntries = () => {
     generatedWidgetEntriesPath,
     userSettings,
   );
+  const wixPrivateMockEntry = wixPrivateMockWrapping();
 
-  return { ...componentEntries, ...editorAppEntries, ...settingsEntries };
+  return {
+    ...wixPrivateMockEntry,
+    ...componentEntries,
+    ...editorAppEntries,
+    ...settingsEntries,
+  };
 };
 
 const buildViewerScriptEntry = () => {
