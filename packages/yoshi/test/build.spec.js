@@ -114,7 +114,7 @@ describe('Aggregator: Build', () => {
             ),
           ],
         )
-        .execute('build', ['--source-map']);
+        .execute('build', ['--source-map=true']);
     });
 
     afterEach(function() {
@@ -862,7 +862,7 @@ describe('Aggregator: Build', () => {
     });
   });
 
-  describe('build project with --stats flag', () => {
+  describe('build project with --stats flag and --source-map=false should generate stats file and ignore source maps', () => {
     before(() => {
       test = tp.create();
       test
@@ -870,11 +870,16 @@ describe('Aggregator: Build', () => {
           'src/client.js': '',
           'package.json': fx.packageJson(),
         })
-        .execute('build', ['--stats']);
+        .execute('build', ['--stats', '--source-map=false']);
     });
 
     it('should generate stats files', () => {
       expect(test.list('target')).to.contain('webpack-stats.json');
+    });
+
+    it('should not generate source maps', () => {
+      expect(test.list('dist/statics')).to.not.contain('app.bundle.min.js.map');
+      expect(test.list('dist/statics')).to.not.contain('app.bundle.js.map');
     });
   });
 
@@ -909,6 +914,21 @@ describe('Aggregator: Build', () => {
           'package.json': fx.packageJson(),
         })
         .execute('build', [], outsideTeamCity);
+
+      expect(test.list('dist/statics')).not.to.contain('app.bundle.min.js.map');
+      expect(test.list('dist/statics')).not.to.contain('app.bundle.js.map');
+    });
+  });
+
+  describe('build on CI (Teamcity) with --source-map=false argument', () => {
+    it('should not generate source maps', () => {
+      test = tp.create();
+      test
+        .setup({
+          'src/client.js': 'const aVariable = 3',
+          'package.json': fx.packageJson(),
+        })
+        .execute('build', ['--source-map=false'], insideTeamCity);
 
       expect(test.list('dist/statics')).not.to.contain('app.bundle.min.js.map');
       expect(test.list('dist/statics')).not.to.contain('app.bundle.js.map');
