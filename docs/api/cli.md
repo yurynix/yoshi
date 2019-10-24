@@ -126,9 +126,9 @@ run webpack-bundle-analyzer plugin.
 
 output webpack stats file to `dist/webpack-stats.json` (see also [bundle analysis](../guides/bundle-analyze.md))|
 
-#### `--source-map`
+#### `--source-map` or `--source-map=[true|false]`
 
-Explicitly emit bundle source maps.
+Explicitly emit or bypass source maps generation.
 
 This task will perform the following:
 

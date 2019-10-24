@@ -317,6 +317,17 @@ function createCommonWebpackConfig({
   isHmr = false,
   withLocalSourceMaps,
 } = {}) {
+  let devtool = false;
+  const shouldIgnoreSourceMaps = withLocalSourceMaps === 'false';
+
+  if (!shouldIgnoreSourceMaps) {
+    if (withLocalSourceMaps || inTeamCity) {
+      devtool = 'source-map';
+    } else if (!isProduction) {
+      devtool = 'cheap-module-eval-source-map';
+    }
+  }
+
   const config = {
     context: app.SRC_DIR,
 
@@ -589,12 +600,7 @@ function createCommonWebpackConfig({
     // If we are in CI or requested explicitly we create full source maps
     // Once we are in a local build, we create cheap eval source map only
     // for a development build (hence the !isProduction)
-    devtool:
-      inTeamCity || withLocalSourceMaps
-        ? 'source-map'
-        : !isProduction
-        ? 'cheap-module-eval-source-map'
-        : false,
+    devtool,
   };
 
   return config;
