@@ -7,7 +7,9 @@ import {
   PUBLIC_DIR,
   ASSETS_DIR,
 } from 'yoshi-config/paths';
-import { createCompiler } from 'yoshi-common/build/webpack-utils';
+import { runWebpack } from 'yoshi-common/build/webpack-utils';
+import writeManifest from 'yoshi-common/build/write-manifest';
+import { inTeamCity } from 'yoshi-helpers/queries';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
@@ -46,13 +48,16 @@ const build: cliCommand = async function(argv, config) {
     isDev: true,
   });
 
-  const compiler = createCompiler(
-    [clientDebugConfig, clientOptimizedConfig, serverConfig],
-    {
-      https: false,
-      port: 3200,
-    },
-  );
+  const stats = await runWebpack([
+    clientDebugConfig,
+    clientOptimizedConfig,
+    serverConfig,
+  ]);
+
+  if (inTeamCity()) {
+    const [, clientOptimizedStats] = stats.stats;
+    await writeManifest(clientOptimizedConfig, clientOptimizedStats);
+  }
 };
 
 export default build;

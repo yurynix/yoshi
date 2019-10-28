@@ -281,7 +281,51 @@ function calculatePublicPath({
   return publicPath;
 }
 
+async function runWebpack(
+  configs: Array<webpack.Configuration>,
+  //@ts-ignore
+): Promise<webpack.compilation.MultiStats> {
+  try {
+    const compiler = webpack(configs);
+
+    const webpackStats: webpack.compilation.MultiStats = await new Promise(
+      (resolve, reject) => {
+        // @ts-ignore
+        compiler.run((err, stats) => (err ? reject(err) : resolve(stats)));
+      },
+    );
+
+    // @ts-ignore
+    const messages = formatWebpackMessages(webpackStats.toJson({}, true));
+
+    if (messages.errors.length) {
+      // Only keep the first error. Others are often indicative
+      // of the same problem, but confuse the reader with noise.
+      if (messages.errors.length > 1) {
+        messages.errors.length = 1;
+      }
+
+      throw new Error(messages.errors.join('\n\n'));
+    }
+
+    if (messages.warnings.length) {
+      console.log(chalk.yellow('Compiled with warnings.\n'));
+      console.log(messages.warnings.join('\n\n'));
+    } else {
+      console.log(chalk.green('Compiled successfully.\n'));
+    }
+
+    return webpackStats;
+  } catch (error) {
+    console.log(chalk.red('Failed to compile.\n'));
+    console.error(error.message || error);
+
+    process.exit(1);
+  }
+}
+
 export {
+  runWebpack,
   createCompiler,
   waitForCompilation,
   addEntry,
