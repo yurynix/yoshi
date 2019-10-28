@@ -415,13 +415,6 @@ function createCommonWebpackConfig({
           test: /\.(ts|tsx)$/,
           include: unprocessedModules,
           use: [
-            {
-              loader: 'thread-loader',
-              options: {
-                workers: require('os').cpus().length - 1,
-              },
-            },
-
             // https://github.com/huston007/ng-annotate-loader
             ...(app.isAngularProject
               ? [{ loader: 'yoshi-angular-dependencies/ng-annotate-loader' }]
@@ -458,20 +451,8 @@ function createCommonWebpackConfig({
         {
           test: reScript,
           include: unprocessedModules,
-          use: [
-            {
-              loader: 'thread-loader',
-              options: {
-                workers: require('os').cpus().length - 1,
-              },
-            },
-            {
-              loader: 'babel-loader',
-              options: {
-                ...babelConfig,
-              },
-            },
-          ],
+          loader: 'babel-loader',
+          options: babelConfig,
         },
 
         // Rules for assets
