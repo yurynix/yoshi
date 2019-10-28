@@ -74,9 +74,7 @@ const artifactVersion = process.env.ARTIFACT_VERSION;
 
 const sassIncludePaths = ['node_modules', 'node_modules/compass-mixins/lib'];
 
-function addHashToAssetName(
-  { name, hash, app } = { hash: 'contenthash:8', app: rootApp },
-) {
+function addHashToAssetName({ name, hash = 'contenthash:8', app = rootApp }) {
   if (app.experimentalBuildHtml && isProduction) {
     return name.replace('[name]', `[name].[${hash}]`);
   }
