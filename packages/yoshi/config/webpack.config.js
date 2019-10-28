@@ -77,7 +77,7 @@ const sassIncludePaths = ['node_modules', 'node_modules/compass-mixins/lib'];
 function addHashToAssetName(
   { name, hash, app } = { hash: 'contenthash:8', app: rootApp },
 ) {
-  if (app.experimentalBuildHtml) {
+  if (app.experimentalBuildHtml && isProduction) {
     return name.replace('[name]', `[name].[${hash}]`);
   }
 
