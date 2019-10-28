@@ -18,10 +18,10 @@ const isInteractive = process.stdout.isTTY;
 const possibleServerEntries = ['./server', '../dev/server'];
 
 function createCompiler(
-  webpackConfig: webpack.Configuration,
+  webpackConfig: Array<webpack.Configuration>,
   { https, port }: { https: boolean; port: number },
 ) {
-  let compiler: webpack.Compiler;
+  let compiler: webpack.MultiCompiler;
 
   try {
     compiler = webpack(webpackConfig);
@@ -46,6 +46,7 @@ function createCompiler(
       clearConsole();
     }
 
+    // @ts-ignore
     const messages = formatWebpackMessages(stats.toJson({}, true));
     const isSuccessful = !messages.errors.length && !messages.warnings.length;
 
@@ -232,7 +233,7 @@ function validateServerEntry({
   extensions,
   yoshiServer = false,
 }: {
-  cwd: string;
+  cwd?: string;
   extensions: Array<string>;
   yoshiServer: boolean;
 }) {

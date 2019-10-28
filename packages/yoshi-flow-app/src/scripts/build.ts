@@ -1,20 +1,18 @@
 import path from 'path';
-import arg from 'arg';
 import fs from 'fs-extra';
+import arg from 'arg';
 import {
   BUILD_DIR,
   TARGET_DIR,
   PUBLIC_DIR,
   ASSETS_DIR,
 } from 'yoshi-config/paths';
-import getBaseWebpackConfig from 'yoshi-common/build/webpack.config';
+import { createCompiler } from 'yoshi-common/build/webpack-utils';
+import {
+  createClientWebpackConfig,
+  createServerWebpackConfig,
+} from '../webpack.config';
 import { cliCommand } from '../bin/yoshi-app';
-
-// const buildApps = require('yoshi/src/commands/utils/build-apps');
-// const {
-//   printBundleSizeSuggestion,
-//   printBuildResult,
-// } = require('yoshi/src/commands/utils/print-build-results');
 
 const build: cliCommand = async function(argv, config) {
   const args = arg(
@@ -38,28 +36,23 @@ const build: cliCommand = async function(argv, config) {
     await fs.copy(join(PUBLIC_DIR), join(ASSETS_DIR));
   }
 
-  const clientDebugConfig = getBaseWebpackConfig({
-    name: config.name as string,
-    target: 'web',
-    publicPath: '',
+  const clientDebugConfig = await createClientWebpackConfig(config, {
     isDev: true,
-    // withLocalSourceMaps: options['source-map'],
   });
 
-  const clientOptimizedConfig = getBaseWebpackConfig({
-    name: config.name as string,
-    target: 'web',
-    publicPath: '',
-    // isAnalyze: options.analyze,
-    // withLocalSourceMaps: options['source-map'],
+  const clientOptimizedConfig = await createClientWebpackConfig(config);
+
+  const serverConfig = await createServerWebpackConfig(config, {
+    isDev: true,
   });
 
-  const serverConfig = getBaseWebpackConfig({
-    name: config.name as string,
-    target: 'node',
-    isDev: true,
-    publicPath: '',
-  });
+  const compiler = createCompiler(
+    [clientDebugConfig, clientOptimizedConfig, serverConfig],
+    {
+      https: false,
+      port: 3200,
+    },
+  );
 };
 
 export default build;

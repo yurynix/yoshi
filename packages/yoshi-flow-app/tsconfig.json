@@ -10,6 +10,7 @@
   ],
   "references": [
     { "path": "../yoshi-config" },
+    { "path": "../yoshi-helpers" },
     { "path": "../yoshi-common" }
   ]
 }

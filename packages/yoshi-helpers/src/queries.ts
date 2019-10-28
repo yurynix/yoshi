@@ -21,7 +21,7 @@ export const watchMode = () => {
 };
 
 export const inTeamCity = () => {
-  return process.env.BUILD_NUMBER || process.env.TEAMCITY_VERSION;
+  return !!(process.env.BUILD_NUMBER || process.env.TEAMCITY_VERSION);
 };
 
 export const inPRTeamCity = () => {
