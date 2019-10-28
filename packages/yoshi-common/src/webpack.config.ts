@@ -198,14 +198,14 @@ export const getStyleLoaders = ({
   ];
 };
 
-export default async function getBaseWebpackConfig({
+export default async function createBaseWebpackConfig({
   name,
   target,
   isDev = false,
   isHot = false,
-  isTypeScript = false,
-  isTypecheck = false,
-  isAngular = false,
+  useTypeScript = false,
+  typeCheckTypeScript = false,
+  useAngular = false,
   separateCss = false,
   keepFunctionNames = false,
   stylableSeparateCss = false,
@@ -218,9 +218,9 @@ export default async function getBaseWebpackConfig({
   target: 'web' | 'node' | 'webworker';
   isDev?: boolean;
   isHot?: boolean;
-  isTypeScript?: boolean;
-  isTypecheck?: boolean;
-  isAngular?: boolean;
+  useTypeScript?: boolean;
+  typeCheckTypeScript?: boolean;
+  useAngular?: boolean;
   separateCss?: boolean;
   keepFunctionNames?: boolean;
   stylableSeparateCss?: boolean;
@@ -318,7 +318,7 @@ export default async function getBaseWebpackConfig({
       new ModuleNotFoundPlugin(cwd),
       new CaseSensitivePathsPlugin(),
 
-      ...(isTypeScript && isTypecheck && isDev
+      ...(useTypeScript && typeCheckTypeScript && isDev
         ? [
             new (await import('fork-ts-checker-webpack-plugin')).default({
               tsconfig: join(TSCONFIG_FILE),
@@ -422,7 +422,7 @@ export default async function getBaseWebpackConfig({
           },
         },
 
-        ...(isAngular
+        ...(useAngular
           ? [
               {
                 test: reScript,
@@ -443,7 +443,7 @@ export default async function getBaseWebpackConfig({
               },
             },
 
-            ...(isAngular
+            ...(useAngular
               ? [{ loader: 'yoshi-angular-dependencies/ng-annotate-loader' }]
               : []),
 
@@ -451,7 +451,7 @@ export default async function getBaseWebpackConfig({
               loader: 'ts-loader',
               options: {
                 happyPackMode: true,
-                compilerOptions: isAngular
+                compilerOptions: useAngular
                   ? {}
                   : {
                       module: 'esnext',
