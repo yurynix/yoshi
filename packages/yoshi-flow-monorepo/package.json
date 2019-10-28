@@ -14,7 +14,7 @@
   "devDependencies": {},
   "dependencies": {
     "arg": "^4.1.1",
-    "yoshi": "4.17.2",
+    "yoshi-common": "4.17.2",
     "yoshi-config": "4.17.2"
   }
 }

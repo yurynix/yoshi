@@ -9,6 +9,7 @@
     "src/**/*.json"
   ],
   "references": [
-    { "path": "../yoshi-config" }
+    { "path": "../yoshi-config" },
+    { "path": "../yoshi-common" }
   ]
 }
