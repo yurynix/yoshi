@@ -91,9 +91,9 @@ Yoshi will also use this field to infer whether to create <code>/es</code> direc
 </code></pre>
 <p>This will create 2 output targets:</p>
 <pre><code class="hljs">dist
-└── src/entry<span class="hljs-selector-class">.js</span>
-└── es
-     └── src/entry<span class="hljs-selector-class">.js</span>
+└── src/entry<span class="hljs-number">.</span><span class="hljs-keyword">js</span>
+└── <span class="hljs-built_in">es</span>
+     └── src/entry<span class="hljs-number">.</span><span class="hljs-keyword">js</span>
 </code></pre>
 <p><strong>NOTE:</strong> In <code>pacakge.json</code>, you can <a href="https://github.com/webpack/webpack/tree/master/examples/side-effects">configure <code>&quot;sideEffects&quot;: false</code></a> and allow webpack to perform tree-shaking on your library when imported to other projects, eg:</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> { Button } <span class="hljs-keyword">from</span> <span class="hljs-string">"wix-style-react"</span>;

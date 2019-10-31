@@ -124,7 +124,7 @@ import wixExpressRequireHttps from '@wix/wix-express-require-https';
 };
 </code></pre>
 <p>We use <code>source-map-support</code> internally so stack traces show locations in your source files. To work in production (with New Relic monitoring), please install <code>source-map-support</code> under <code>dependencies</code>:</p>
-<pre><code class="hljs">npm i --<span class="hljs-built_in">save</span> source-<span class="hljs-built_in">map</span>-support
+<pre><code class="hljs"><span class="hljs-built_in">npm</span> i --save source-<span class="hljs-keyword">map</span>-support
 </code></pre>
 <p>If you're interested, opt-into hot module replacement for your server by installing:</p>
 <pre><code class="hljs css language-sh">npm i --save bootstrap-hot-loader
@@ -174,7 +174,7 @@ import wixExpressRequireHttps from '@wix/wix-express-require-https';
 </code></pre>
 <p>In app flow, Yoshi looks for the entry file of your server at <code>/dev/server.(js|ts)</code>. Move your current local dev server to that location. For example, if your local dev server is in <code>index.js</code>:</p>
 <pre><code class="hljs">mkdir dev
-mv index<span class="hljs-selector-class">.js</span> dev/server<span class="hljs-selector-class">.js</span>
+mv <span class="hljs-keyword">index</span>.js dev/<span class="hljs-keyword">server</span>.js
 </code></pre>
 <p>With that, Yoshi will now bundle it into <code>/dist/server.js</code>.</p>
 <p>Finally, adjust your <code>package.json</code> to run it:</p>
