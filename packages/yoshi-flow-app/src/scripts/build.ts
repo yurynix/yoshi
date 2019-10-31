@@ -16,6 +16,8 @@ import {
 } from '../webpack.config';
 import { cliCommand } from '../bin/yoshi-app';
 
+const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
+
 const build: cliCommand = async function(argv, config) {
   const args = arg(
     {
@@ -26,8 +28,6 @@ const build: cliCommand = async function(argv, config) {
     },
     { argv },
   );
-
-  const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
   await Promise.all([
     fs.emptyDir(join(BUILD_DIR)),

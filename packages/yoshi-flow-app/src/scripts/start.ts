@@ -1,8 +1,15 @@
+import path from 'path';
 import arg from 'arg';
-// import rootApp from 'yoshi-config/root-app';
+import fs from 'fs-extra';
+import { TARGET_DIR, BUILD_DIR, PUBLIC_DIR } from 'yoshi-config/paths';
+import { watchPublicFolder } from 'yoshi-common/build/copy-assets';
 import { cliCommand } from '../bin/yoshi-app';
+import {
+  createClientWebpackConfig,
+  createServerWebpackConfig,
+} from '../webpack.config';
 
-// const startSingleApp = require('yoshi/src/commands/utils/start-single-app');
+const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
 const start: cliCommand = async function(argv, config) {
   const args = arg(
@@ -17,7 +24,24 @@ const start: cliCommand = async function(argv, config) {
     { argv },
   );
 
-  // await startSingleApp(rootApp, args);
+  await Promise.all([
+    fs.emptyDir(join(BUILD_DIR)),
+    fs.emptyDir(join(TARGET_DIR)),
+  ]);
+
+  if (await fs.pathExists(join(PUBLIC_DIR))) {
+    watchPublicFolder();
+  }
+
+  const clientDebugConfig = await createClientWebpackConfig(config, {
+    isDev: true,
+    isHot: config.hmr as boolean,
+  });
+
+  const serverConfig = await createServerWebpackConfig(config, {
+    isDev: true,
+    isHot: true,
+  });
 };
 
 export default start;

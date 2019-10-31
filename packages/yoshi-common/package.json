@@ -20,6 +20,7 @@
     "@types/sockjs": "^0.3.31",
     "@types/react-dev-utils": "^9.0.1",
     "@types/fs-extra": "^8.0.1",
+    "chokidar": "^3.2.3",
     "mini-css-extract-plugin": "^0.8.0",
     "express": "^4.17.1",
     "import-cwd": "^3.0.0",
