@@ -3,6 +3,7 @@ import arg from 'arg';
 import fs from 'fs-extra';
 import { TARGET_DIR, BUILD_DIR, PUBLIC_DIR } from 'yoshi-config/paths';
 import { watchPublicFolder } from 'yoshi-common/build/copy-assets';
+import WebpackDevServer from 'yoshi-common/build/webpack-dev-server';
 import { cliCommand } from '../bin/yoshi-app';
 import {
   createClientWebpackConfig,
@@ -33,7 +34,7 @@ const start: cliCommand = async function(argv, config) {
     watchPublicFolder();
   }
 
-  const clientDebugConfig = await createClientWebpackConfig(config, {
+  const clientConfig = await createClientWebpackConfig(config, {
     isDev: true,
     isHot: config.hmr as boolean,
   });
@@ -42,6 +43,15 @@ const start: cliCommand = async function(argv, config) {
     isDev: true,
     isHot: true,
   });
+
+  const devServer = new WebpackDevServer([clientConfig, serverConfig], {
+    publicPath: '',
+    host: 'localhost',
+    https: false,
+    port: 3200,
+  });
+
+  await devServer.listenPromise();
 };
 
 export default start;

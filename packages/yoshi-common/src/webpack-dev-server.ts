@@ -38,8 +38,12 @@ export function redirectMiddleware(
 }
 
 export default class extends WebpackDevServer {
+  private port: number;
+  private host: string;
+
   constructor(
-    compiler: webpack.Compiler,
+    // compiler: webpack.Compiler | webpack.MultiCompiler,
+    configs: Array<webpack.Configuration>,
     {
       publicPath,
       https,
@@ -51,10 +55,12 @@ export default class extends WebpackDevServer {
       https: boolean;
       host: string;
       port: number;
-      cwd: string;
+      cwd?: string;
     },
   ) {
-    super(compiler, {
+    const multiCompiler = webpack(configs);
+
+    super(multiCompiler, {
       // Enable gzip compression for everything served
       compress: true,
       clientLogLevel: 'error',
@@ -62,6 +68,7 @@ export default class extends WebpackDevServer {
       watchContentBase: true,
       hot: true,
       publicPath,
+      writeToDisk: true,
       // We write our own errors/warnings to the console
       quiet: true,
       https,
@@ -82,6 +89,9 @@ export default class extends WebpackDevServer {
         expressApp.use(redirectMiddleware(host, port));
       },
     });
+
+    this.port = port;
+    this.host = host;
   }
 
   // Update sockets with new stats, we use the sockWrite() method
@@ -89,5 +99,13 @@ export default class extends WebpackDevServer {
   send(type: string, data: any) {
     // @ts-ignore
     return this.sockWrite(this.sockets, type, data);
+  }
+
+  listenPromise() {
+    return new Promise((resolve, reject) => {
+      super.listen(this.port, this.host, err =>
+        err ? reject(err) : resolve(),
+      );
+    });
   }
 }

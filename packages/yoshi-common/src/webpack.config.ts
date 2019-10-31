@@ -1,7 +1,12 @@
 import path from 'path';
 import fs from 'fs-extra';
 import webpack from 'webpack';
-import { SRC_DIR, STATICS_DIR, TSCONFIG_FILE } from 'yoshi-config/paths';
+import {
+  SRC_DIR,
+  STATICS_DIR,
+  TSCONFIG_FILE,
+  BUILD_DIR,
+} from 'yoshi-config/paths';
 import {
   isProduction as checkIsProduction,
   inTeamCity as checkInTeamCity,
@@ -15,7 +20,6 @@ import {
 } from 'yoshi-helpers/utils';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import WriteFilePlugin from 'write-file-webpack-plugin';
 import { resolveNamespaceFactory } from '@stylable/node';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { StylableWebpackPlugin } from '@stylable/webpack-plugin';
@@ -259,6 +263,7 @@ export default async function createBaseWebpackConfig({
 
       ...(target === 'node'
         ? {
+            path: join(BUILD_DIR),
             filename: '[name].js',
             chunkFilename: 'chunks/[name].js',
             libraryTarget: 'umd',
@@ -334,12 +339,6 @@ export default async function createBaseWebpackConfig({
 
       ...(target === 'web'
         ? [
-            new WriteFilePlugin({
-              exitOnErrors: false,
-              log: false,
-              useHashIndex: false,
-            }),
-
             new webpack.LoaderOptionsPlugin({
               minimize: !isDev,
             }),
