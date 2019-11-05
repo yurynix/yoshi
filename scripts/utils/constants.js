@@ -6,10 +6,4 @@ const ciEnv = {
   ARTIFACT_VERSION: '1.0.0-SNAPSHOT',
 };
 
-const localEnv = {
-  BUILD_NUMBER: '',
-  TEAMCITY_VERSION: '',
-  ARTIFACT_VERSION: '',
-};
-
-module.exports = { testRegistry, ciEnv, localEnv };
+module.exports = { testRegistry, ciEnv };
