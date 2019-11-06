@@ -787,7 +787,7 @@ function createClientWebpackConfig({
       ...(withStats
         ? [
             new StatsWriterPlugin({
-              filename: '../../target/webpack-stats.json', // Default
+              filename: '../../target/webpack-stats.json',
               stats: {
                 all: true,
                 assets: true,
