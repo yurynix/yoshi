@@ -18,7 +18,7 @@ const TpaStyleWebpackPlugin = require('tpa-style-webpack-plugin');
 const RtlCssPlugin = require('rtlcss-webpack-plugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const WriteFilePlugin = require('write-file-webpack-plugin');
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
+const StatsWriterPlugin = require('../src/webpack-plugins/stats-writer-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlPolyfillPlugin = require('./html-polyfill-plugin');
@@ -788,12 +788,6 @@ function createClientWebpackConfig({
         ? [
             new StatsWriterPlugin({
               filename: '../../target/webpack-stats.json',
-              stats: {
-                all: true,
-                assets: true,
-              },
-              fields: null,
-              filteredModules: false,
             }),
           ]
         : []),
