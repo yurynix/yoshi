@@ -27,7 +27,7 @@ const PublicDataProvider: typeof React.Component =
     ? PublicDataProviderViewer
     : PublicDataProviderEditor;
 
-const ComponentWrapper = (UserComponent: typeof React.Component) => (
+const WidgetWrapper = (UserComponent: typeof React.Component) => (
   props: IHostProps & IFrameworkProps,
 ) => {
   console.log(props.style);
@@ -43,19 +43,19 @@ const ComponentWrapper = (UserComponent: typeof React.Component) => (
       />
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <ErrorBoundary handleException={error => console.log(error)}>
-        <PublicDataProvider data={props.__publicData__} Wix={window.Wix}>
-          <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <PublicDataProvider data={props.__publicData__} Wix={window.Wix}>
             <ControllerProvider data={props}>
               <UserComponent
                 {...createInstances(props.experiments)}
                 {...props}
               />
             </ControllerProvider>
-          </Suspense>
-        </PublicDataProvider>
+          </PublicDataProvider>
+        </Suspense>
       </ErrorBoundary>
     </div>
   );
 };
 
-export default ComponentWrapper;
+export default WidgetWrapper;

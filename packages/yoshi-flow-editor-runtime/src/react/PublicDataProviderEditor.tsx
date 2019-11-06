@@ -38,19 +38,26 @@ export class PublicDataProviderEditor extends React.Component<
   componentDidMount() {
     const { Wix } = this.props;
 
-    const publicDataPromise: Promise<Record<string, any>> = new Promise(
-      (resolve, reject) => Wix.Data.Public.getAll(resolve, reject),
-    );
-
-    publicDataPromise.then(
-      data => {
+    const publicDataPromise = new Promise((resolve, reject) => {
+      setTimeout(function() {
+        reject(new Error('timeout of 500ms reached on Wix.Data.Public.getAll'));
+      }, 500);
+      Wix.Data.Public.getAll(resolve, reject);
+    }).then(
+      (data: any) => {
         this.setState({
           data: data[scope] || {},
           ready: true,
         });
+        return data[scope] || {};
       },
-      error => {
-        throw new Error(error);
+      e => {
+        console.error(e);
+        this.setState({
+          data: {},
+          ready: true,
+        });
+        return {};
       },
     );
 
@@ -72,7 +79,7 @@ export class PublicDataProviderEditor extends React.Component<
 
   handleGetParam = (key: string) => {
     if (!this.state.ready || !this.state.data) {
-      throw new Error('Public data provider is not ready');
+      throw this.state.readyPromise;
     }
 
     return this.state.data[key];
@@ -82,7 +89,7 @@ export class PublicDataProviderEditor extends React.Component<
     const { Wix } = this.props;
 
     if (!this.state.ready || !this.state.data) {
-      throw new Error('Public data provider is not ready');
+      throw this.state.readyPromise;
     }
 
     if (this.state.data[key] === value) {
