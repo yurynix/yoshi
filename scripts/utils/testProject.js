@@ -123,8 +123,8 @@ module.exports = async ({
     }
   }
 
-  await testProductionBuild();
-  await testLocalDevelopment();
+  // await testProductionBuild();
+  // await testLocalDevelopment();
   await runAdditionalTests();
 
   // Clean eventually
