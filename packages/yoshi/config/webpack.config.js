@@ -612,7 +612,6 @@ function createClientWebpackConfig({
   isDebug = true,
   isHmr,
   withLocalSourceMaps,
-  withStats,
 } = {}) {
   const config = createCommonWebpackConfig({
     app,
@@ -784,13 +783,10 @@ function createClientWebpackConfig({
         : []),
 
       //https://github.com/FormidableLabs/webpack-stats-plugin
-      ...(withStats
-        ? [
-            new StatsWriterPlugin({
-              filename: '../../target/webpack-stats.json',
-            }),
-          ]
-        : []),
+
+      new StatsWriterPlugin({
+        filename: '../../target/webpack-stats.json',
+      }),
     ],
 
     module: {

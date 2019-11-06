@@ -97,7 +97,7 @@ module.exports = runner.command(
             {
               ...defaultOptions,
               callbackPath: productionCallbackPath,
-              statsFilename: cliArgs.stats ? rootApp.STATS_FILE : false,
+              statsFilename: rootApp.STATS_FILE,
               configParams: {
                 isDebug: false,
                 isAnalyze: cliArgs.analyze,

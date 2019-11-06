@@ -862,7 +862,7 @@ describe('Aggregator: Build', () => {
     });
   });
 
-  describe('build project with --stats flag', () => {
+  describe('build project with stats file by deafult', () => {
     before(() => {
       test = tp.create();
       test
@@ -870,7 +870,7 @@ describe('Aggregator: Build', () => {
           'src/client.js': '',
           'package.json': fx.packageJson(),
         })
-        .execute('build', ['--stats']);
+        .execute('build');
     });
 
     it('should generate stats files', () => {

@@ -78,7 +78,6 @@ module.exports = async function buildApps(apps, options) {
       isAnalyze: options.analyze,
       isHmr: false,
       withLocalSourceMaps: options['source-map'],
-      withStats: options.stats,
     });
 
     const serverConfig = createServerWebpackConfig({
