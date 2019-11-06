@@ -82,6 +82,7 @@ if (config.experimentalMonorepo) {
     .description('Experimental local development experience')
     .option('--url', 'Opens the browser with the supplied URL')
     .option('--server', 'The main file to start your server')
+    .option('--stats', 'Generate target/webpack-stats.json file')
     // Backward compatibility
     .option('-e --entry-point', 'The main file to start your server')
     .option('--production', 'Start using unminified production build')

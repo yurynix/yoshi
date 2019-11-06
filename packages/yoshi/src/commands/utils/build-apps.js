@@ -1,5 +1,3 @@
-const bfj = require('bfj');
-const path = require('path');
 const fs = require('fs-extra');
 const {
   inTeamCity: checkInTeamCity,
@@ -80,6 +78,7 @@ module.exports = async function buildApps(apps, options) {
       isAnalyze: options.analyze,
       isHmr: false,
       withLocalSourceMaps: options['source-map'],
+      withStats: options.stats,
     });
 
     const serverConfig = createServerWebpackConfig({
@@ -123,19 +122,6 @@ module.exports = async function buildApps(apps, options) {
         const [, clientOptimizedStats] = stats;
 
         await writeManifest(clientOptimizedConfig, clientOptimizedStats, app);
-      }),
-    );
-  }
-
-  // Write a Webpack stats file
-  if (options.stats) {
-    await Promise.all(
-      apps.map(async app => {
-        const { stats } = getAppData(app);
-        const [, clientOptimizedStats] = stats;
-
-        await fs.ensureDir(path.dirname(app.STATS_FILE));
-        await bfj.write(app.STATS_FILE, clientOptimizedStats.toJson());
       }),
     );
   }

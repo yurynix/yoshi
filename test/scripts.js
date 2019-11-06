@@ -17,10 +17,10 @@ module.exports = class Scripts {
     this.staticsServerPort = 3200;
   }
 
-  async start(env) {
-    const startProcess = execa('npx', ['yoshi', 'start'], {
+  async start(env, args = []) {
+    const startProcess = execa('npx', ['yoshi', 'start', ...args], {
       cwd: this.testDirectory,
-      // stdio: 'inherit',
+      stdio: 'inherit',
       env: {
         PORT: this.serverProcessPort,
         ...defaultOptions,

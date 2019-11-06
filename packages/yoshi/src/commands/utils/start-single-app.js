@@ -43,6 +43,7 @@ module.exports = async (app, options) => {
     isDebug: true,
     isAnalyze: false,
     isHmr: app.hmr,
+    withStats: options.stats,
   });
 
   const serverConfig = createServerWebpackConfig({

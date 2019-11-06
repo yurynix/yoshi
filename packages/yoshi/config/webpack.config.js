@@ -18,6 +18,7 @@ const TpaStyleWebpackPlugin = require('tpa-style-webpack-plugin');
 const RtlCssPlugin = require('rtlcss-webpack-plugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const WriteFilePlugin = require('write-file-webpack-plugin');
+const { StatsWriterPlugin } = require('webpack-stats-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlPolyfillPlugin = require('./html-polyfill-plugin');
@@ -611,6 +612,7 @@ function createClientWebpackConfig({
   isDebug = true,
   isHmr,
   withLocalSourceMaps,
+  withStats,
 } = {}) {
   const config = createCommonWebpackConfig({
     app,
@@ -777,6 +779,21 @@ function createClientWebpackConfig({
         ? [
             new BundleAnalyzerPlugin({
               openAnalyzer: process.env.BROWSER !== 'none',
+            }),
+          ]
+        : []),
+
+      //https://github.com/FormidableLabs/webpack-stats-plugin
+      ...(withStats
+        ? [
+            new StatsWriterPlugin({
+              filename: '../../target/webpack-stats.json', // Default
+              stats: {
+                all: true,
+                assets: true,
+              },
+              fields: null,
+              filteredModules: false,
             }),
           ]
         : []),
