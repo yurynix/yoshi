@@ -7,7 +7,7 @@ jest.setTimeout(60 * 1000);
 describe('stats', () => {
   describe('build', () => {
     it('generates webpack stats file', async () => {
-      await global.scripts.build({}, ['--stats']);
+      await global.scripts.build({});
 
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
@@ -26,7 +26,7 @@ describe('stats', () => {
     });
 
     it('generates webpack stats file', async () => {
-      startResult = await global.scripts.start(localEnv, ['--stats']);
+      startResult = await global.scripts.start(localEnv);
 
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
