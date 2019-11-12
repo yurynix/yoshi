@@ -1098,6 +1098,7 @@ function createWebWorkerWebpackConfig({
   app = rootApp,
   isDebug = true,
   isHmr = false,
+  customEntry,
 }) {
   const config = createCommonWebpackConfig({ isDebug, isHmr });
 
@@ -1108,7 +1109,7 @@ function createWebWorkerWebpackConfig({
 
     target: 'webworker',
 
-    entry: app.webWorkerEntry,
+    entry: customEntry ? customEntry : app.webWorkerEntry,
 
     optimization: {
       minimize: !isDebug,

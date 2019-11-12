@@ -6,7 +6,7 @@ const defaultState = {
   visibilityFilter: 'SHOW_ALL',
 };
 
-export const createController = async function({
+const createController = async function({
   // controllerConfig,
   frameworkData,
   appData: appDataPromise,
@@ -71,3 +71,5 @@ export const createController = async function({
     },
   };
 };
+
+export default createController;

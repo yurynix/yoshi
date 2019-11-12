@@ -1,10 +1,7 @@
 const bfj = require('bfj');
 const path = require('path');
 const fs = require('fs-extra');
-const {
-  inTeamCity: checkInTeamCity,
-  isWebWorkerBundle,
-} = require('yoshi-helpers/queries');
+const { inTeamCity: checkInTeamCity } = require('yoshi-helpers/queries');
 const { copyTemplates } = require('yoshi/src/commands/utils/copy-assets');
 const writeManifest = require('yoshi/src/commands/utils/write-manifest');
 const {
@@ -65,9 +62,12 @@ module.exports = async function buildApps(apps, options) {
   // Build apps
   const webpackManager = new WebpackManager();
 
-  const buildEditorEntries = require('../../buildEditorEntires');
+  const {
+    buildEditorPlatformEntries,
+    buildViewerScriptEntry,
+  } = require('../../buildEditorEntires');
 
-  const editorEntries = buildEditorEntries();
+  const editorEntries = buildEditorPlatformEntries();
 
   const customEntry = {
     editorApp: './editorApp/editorApp.js',
@@ -99,18 +99,17 @@ module.exports = async function buildApps(apps, options) {
       isDebug: true,
     });
 
-    let webWorkerConfig;
-    let webWorkerOptimizeConfig;
+    const webWorkerCustomEntry = buildViewerScriptEntry();
 
-    if (isWebWorkerBundle) {
-      webWorkerConfig = createWebWorkerWebpackConfig({
-        isDebug: true,
-      });
+    const webWorkerConfig = createWebWorkerWebpackConfig({
+      customEntry: webWorkerCustomEntry,
+      isDebug: true,
+    });
 
-      webWorkerOptimizeConfig = createWebWorkerWebpackConfig({
-        isDebug: false,
-      });
-    }
+    const webWorkerOptimizeConfig = createWebWorkerWebpackConfig({
+      customEntry: webWorkerCustomEntry,
+      isDebug: false,
+    });
 
     webpackManager.addConfigs(
       app,

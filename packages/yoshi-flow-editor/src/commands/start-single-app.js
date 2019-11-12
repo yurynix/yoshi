@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const chalk = require('chalk');
 const openBrowser = require('yoshi/src/commands/utils/open-browser');
-const { isWebWorkerBundle } = require('yoshi-helpers/queries');
 const { PORT } = require('yoshi/src/constants');
 const {
   createClientWebpackConfig,
@@ -18,7 +17,10 @@ const ServerProcess = require('yoshi/src/server-process');
 const detect = require('detect-port');
 const { watchPublicFolder } = require('yoshi/src/commands/utils/copy-assets');
 
-const buildEditorEntries = require('../buildEditorEntires');
+const {
+  buildEditorPlatformEntries,
+  buildViewerScriptEntry,
+} = require('../buildEditorEntires');
 
 const host = '0.0.0.0';
 
@@ -40,10 +42,9 @@ module.exports = async (app, options) => {
   // Generate an available port for server HMR
   const hmrPort = await detect();
 
-  const editorEntries = buildEditorEntries();
+  const editorEntries = buildEditorPlatformEntries();
 
   const customEntry = {
-    editorApp: './editorApp/editorApp.js',
     ...editorEntries,
     'wix-private-mock': '../dev/wix-private.mock.js',
   };
@@ -63,14 +64,11 @@ module.exports = async (app, options) => {
     hmrPort,
   });
 
-  let webWorkerConfig;
-
-  if (isWebWorkerBundle) {
-    webWorkerConfig = createWebWorkerWebpackConfig({
-      isDebug: true,
-      isHmr: true,
-    });
-  }
+  const webWorkerConfig = createWebWorkerWebpackConfig({
+    customEntry: buildViewerScriptEntry(),
+    isDebug: true,
+    isHmr: true,
+  });
 
   // Configure compilation
   const multiCompiler = createCompiler(
@@ -102,34 +100,32 @@ module.exports = async (app, options) => {
     app,
   });
 
-  if (isWebWorkerBundle) {
-    webWorkerCompiler.watch(
-      { 'info-verbosity': 'none' },
-      async (error, stats) => {
-        // We save the result of this build to webpack-dev-server's internal state so the last
-        // worker build results are sent to the browser on every refresh.
-        // It also affects the error overlay
-        //
-        // https://github.com/webpack/webpack-dev-server/blob/143762596682d8da4fdc73555880be05255734d7/lib/Server.js#L722
-        devServer._stats = stats;
+  webWorkerCompiler.watch(
+    { 'info-verbosity': 'none' },
+    async (error, stats) => {
+      // We save the result of this build to webpack-dev-server's internal state so the last
+      // worker build results are sent to the browser on every refresh.
+      // It also affects the error overlay
+      //
+      // https://github.com/webpack/webpack-dev-server/blob/143762596682d8da4fdc73555880be05255734d7/lib/Server.js#L722
+      devServer._stats = stats;
 
-        const jsonStats = stats.toJson();
+      const jsonStats = stats.toJson();
 
-        if (!error && !stats.hasErrors()) {
-          // Send the browser an instruction to refresh
-          await devServer.send('hash', jsonStats.hash);
-          await devServer.send('ok');
-        } else {
-          // If there are errors, show them on the browser
-          if (jsonStats.errors.length > 0) {
-            await devServer.send('errors', jsonStats.errors);
-          } else if (jsonStats.warnings.length > 0) {
-            await devServer.send('warnings', jsonStats.warnings);
-          }
+      if (!error && !stats.hasErrors()) {
+        // Send the browser an instruction to refresh
+        await devServer.send('hash', jsonStats.hash);
+        await devServer.send('ok');
+      } else {
+        // If there are errors, show them on the browser
+        if (jsonStats.errors.length > 0) {
+          await devServer.send('errors', jsonStats.errors);
+        } else if (jsonStats.warnings.length > 0) {
+          await devServer.send('warnings', jsonStats.warnings);
         }
-      },
-    );
-  }
+      }
+    },
+  );
 
   const watching = serverCompiler.watch(
     { 'info-verbosity': 'none' },

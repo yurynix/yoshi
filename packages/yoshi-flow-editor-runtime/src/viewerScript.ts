@@ -1,14 +1,11 @@
-import { createController } from '../example/components/todo/controller';
-import initApp from '../example/initApp';
-import {
-  createInstances,
-  objectPromiseAll,
-  fetchFrameworkData,
-} from 'yoshi-flow-editor-runtime/utils';
+import { createInstances, objectPromiseAll, fetchFrameworkData } from './utils';
 
-let frameworkData;
+let frameworkData: any;
 
-export const createControllers = controllerConfigs => {
+export const createControllers = (
+  createController: Function,
+  initApp: Function,
+) => (controllerConfigs: any) => {
   const [controllerConfig] = controllerConfigs;
   const { appParams, platformAPIs, wixCodeApi, csrfToken } = controllerConfig;
 
@@ -25,7 +22,7 @@ export const createControllers = controllerConfigs => {
 
   const { setProps } = controllerConfig;
 
-  const setState = newState => {
+  const setState = (newState: any) => {
     const updatedState = {
       ...context.state,
       ...newState,
@@ -35,7 +32,7 @@ export const createControllers = controllerConfigs => {
     context.state = updatedState;
 
     // Run state change callback
-    wrappedControllerPromise.then(userController => {
+    wrappedControllerPromise.then((userController: any) => {
       userController.stateChange();
     });
 
@@ -55,10 +52,10 @@ export const createControllers = controllerConfigs => {
   });
 
   const wrappedControllerPromise = userControllerPromise.then(
-    userController => {
+    (userController: any) => {
       return {
         ...userController,
-        pageReady: async (...args) => {
+        pageReady: async (...args: Array<any>) => {
           const awaitedFrameworkData = await objectPromiseAll(frameworkData);
           setProps({
             __publicData__: controllerConfig.config.publicData,
@@ -86,7 +83,7 @@ const initializeExperiments = () => {
 
   // TODO: Generalize
   frameworkData.experimentsPromise = frameworkData.experimentsPromise.then(
-    experiments => createInstances({ experiments }).experiments,
+    (experiments: any) => createInstances({ experiments }).experiments,
   );
 };
 

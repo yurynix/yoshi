@@ -26,9 +26,6 @@ module.exports = {
     // 'wix-private-mock': '../dev/wix-private.mock.js',
   },
   webWorker: {
-    entry: {
-      viewerScript: './viewerApp/viewerScript.js',
-    },
     externals: {
       lodash: {
         commonjs: 'lodash',
