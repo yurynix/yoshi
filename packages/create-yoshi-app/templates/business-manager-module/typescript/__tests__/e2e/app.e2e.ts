@@ -9,8 +9,8 @@ describe('React application', () => {
 
   it('should display title', async () => {
     await driver.navigateToApp();
-    await driver.waitForSelector('h2');
+    await driver.waitForSelector('h1');
 
-    expect(await driver.getAppTitleText()).toEqual('Hello World!');
+    expect(await driver.getAppTitleText()).toEqual('Todo!');
   });
 });
