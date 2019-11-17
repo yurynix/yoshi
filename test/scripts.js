@@ -17,10 +17,11 @@ module.exports = class Scripts {
     this.staticsServerPort = 3200;
   }
 
-  async start(env) {
+  async start(env = {}) {
     const startProcess = execa('npx', ['yoshi', 'start'], {
       cwd: this.testDirectory,
       // stdio: 'inherit',
+      extendEnv: false,
       env: {
         PORT: this.serverProcessPort,
         ...defaultOptions,
@@ -49,6 +50,7 @@ module.exports = class Scripts {
   analyze(env = {}) {
     const buildProcess = execa('npx', ['yoshi', 'build', '--analyze'], {
       cwd: this.testDirectory,
+      extendEnv: false,
       env: {
         ...defaultOptions,
         ...env,
@@ -66,6 +68,7 @@ module.exports = class Scripts {
   async build(env = {}, args = []) {
     return execa('npx', ['yoshi', 'build', ...args], {
       cwd: this.testDirectory,
+      extendEnv: false,
       env: {
         ...defaultOptions,
         ...env,
@@ -77,6 +80,7 @@ module.exports = class Scripts {
   async test(env = {}) {
     return execa('npx', ['yoshi', 'test'], {
       cwd: this.testDirectory,
+      extendEnv: false,
       env: {
         ...defaultOptions,
         ...env,
@@ -90,6 +94,7 @@ module.exports = class Scripts {
       'npx',
       ['serve', '-p', this.staticsServerPort, '-s', 'dist/statics/'],
       {
+        extendEnv: false,
         cwd: this.testDirectory,
         // stdio: 'inherit',
       },
@@ -97,6 +102,7 @@ module.exports = class Scripts {
 
     const appServerProcess = execa('node', ['index.js'], {
       cwd: this.testDirectory,
+      extendEnv: false,
       // stdio: 'inherit',
       env: {
         PORT: this.serverProcessPort,

@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const execa = require('execa');
 const chalk = require('chalk');
 const Scripts = require('../../test/scripts');
-const { ciEnv, localEnv } = require('./constants');
+const { ciEnv } = require('./constants');
 
 module.exports = async ({
   templateDirectory,
@@ -75,7 +75,7 @@ module.exports = async ({
       console.log(chalk.blue(`> Starting project for development`));
       console.log();
 
-      const startResult = await scripts.start(localEnv);
+      const startResult = await scripts.start();
 
       try {
         console.log();
@@ -84,7 +84,7 @@ module.exports = async ({
         );
         console.log();
 
-        await scripts.test(localEnv);
+        await scripts.test();
 
         console.log();
         console.log(chalk.blue(`> Running development integration tests`));
