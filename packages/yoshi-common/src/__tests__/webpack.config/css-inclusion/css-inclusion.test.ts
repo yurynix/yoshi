@@ -13,6 +13,20 @@ import { matchCSS } from '../../../../../../test/utils';
 //   silent: true,
 // });
 
+import { createBaseWebpackConfig } from '../../../webpack.config';
+
+const webpackConfig = createBaseWebpackConfig({
+  configName: 'client',
+  target: 'web',
+  isDev: true,
+  separateCss: true,
+  devServerUrl: '',
+  name: 'test',
+  cwd: __dirname,
+});
+
+webpackConfig.entry = 'client';
+
 // it.each(['serve', 'start'])('css inclusion %s', async command => {
 //   await scripts[command](async () => {
 //     await page.goto('http://localhost:3000');
@@ -26,8 +40,6 @@ import { matchCSS } from '../../../../../../test/utils';
 //     ]);
 //   });
 // });
-
-import webpackConfig from './webpack.config';
 
 const compiler = webpack(webpackConfig);
 
