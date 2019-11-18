@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.21.2 (2019-11-18)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1691](https://github.com/wix/yoshi/pull/1691) Support transpiling TypeScript files with Carmi loader ([@yotambarzilay](https://github.com/yotambarzilay))
+
 ## 4.21.1 (2019-11-18)
 
 #### :bug: Bug Fix
