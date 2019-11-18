@@ -832,6 +832,8 @@ export function createBaseWebpackConfig({
                 reAssets,
                 /bootstrap-hot-loader/,
                 /yoshi-server/,
+                // Temporary work-around for thunderbolt
+                /thunderbolt-elements/,
                 ...nodeExternalsWhitelist,
               ],
             }),
