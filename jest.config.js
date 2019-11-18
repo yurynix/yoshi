@@ -10,7 +10,7 @@ module.exports = {
   },
 
   testMatch: [
-    '/Users/ronena/Projects/yoshi/packages/yoshi-common/src/__tests__/webpack.config/css-inclusion/css-inclusion.test.ts',
+    '/Users/ronena/Projects/yoshi/packages/yoshi-common/src/__tests__/webpack/css-inclusion/css-inclusion.test.ts',
   ],
   transformIgnorePatterns: ['/node_modules/'],
   setupFilesAfterEnv: [require.resolve('./jest-setup')],
