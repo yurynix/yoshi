@@ -755,7 +755,7 @@ export function createBaseWebpackConfig({
             },
 
             {
-              test: /\.carmi.js$/,
+              test: /\.carmi.(js|ts)$/,
               exclude: /node_modules/,
               // Not installed by Yoshi and should be installed by the project that needs it.
               loader: 'carmi/loader',
