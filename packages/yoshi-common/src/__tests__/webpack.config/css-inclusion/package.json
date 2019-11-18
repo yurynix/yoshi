@@ -1,0 +1,7 @@
+{
+  "name": "css-inclusion",
+  "private": true,
+  "yoshi": {
+    "projectType": "app"
+  }
+}
