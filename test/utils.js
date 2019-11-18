@@ -80,7 +80,11 @@ async function waitForPort(port, { timeout = 20000 } = {}) {
 }
 
 const initTest = async feature => {
-  await page.goto(`http://localhost:${process.env.PORT}/${feature}`);
+  await page.goto(getUrl(feature));
+};
+
+const getUrl = path => {
+  return `http://localhost:${process.env.PORT}/${path}`;
 };
 
 function isPortTaken(port) {
@@ -107,11 +111,24 @@ function waitForPortToFree(port) {
   });
 }
 
+function waitForStdout(spawnedProcess, stringToMatch) {
+  new Promise(resolve => {
+    spawnedProcess.stdout.on('data', function listener(buffer) {
+      if (buffer.toString().includes(stringToMatch)) {
+        spawnedProcess.stdout.off('data', listener);
+        resolve();
+      }
+    });
+  });
+}
+
 module.exports = {
   request,
   matchJS,
   matchCSS,
   initTest,
+  getUrl,
   waitForPort,
   waitForPortToFree,
+  waitForStdout,
 };
