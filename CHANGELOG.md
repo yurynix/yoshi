@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.21.3 (2019-11-18)
+
+#### :house: Internal
+
+- `yoshi-common`
+  - [#1693](https://github.com/wix/yoshi/pull/1693) Work-around for `thunderbolt-elements` ([@hadarge](https://github.com/hadarge))
+
 ## 4.21.2 (2019-11-18)
 
 #### :bug: Bug Fix
