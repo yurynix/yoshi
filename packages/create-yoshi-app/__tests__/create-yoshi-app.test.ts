@@ -4,7 +4,11 @@ import execa from 'execa';
 import tempy from 'tempy';
 import { bin } from '../package.json';
 
-const createYoshiAppBin = path.resolve(__dirname, '..', bin);
+const createYoshiAppBin = path.resolve(
+  __dirname,
+  '..',
+  bin['create-yoshi-app'],
+);
 
 test('it should throw if the repository name is not validated by npm', async () => {
   expect.assertions(1);
