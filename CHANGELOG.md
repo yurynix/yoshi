@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.21.4 (2019-11-19)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#1688](https://github.com/wix/yoshi/pull/1688) Update Server template with Node Platform types ([@alexandervain](https://github.com/alexandervain))
+
+#### :house: Internal
+
+- `yoshi-flow-monorepo`
+  - [#1671](https://github.com/wix/yoshi/pull/1671) Improve publish script ([@ranyitz](https://github.com/ranyitz))
+- `create-yoshi-app`
+  - [#1685](https://github.com/wix/yoshi/pull/1685) Correctly link Yoshi's CLIs ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.21.3 (2019-11-18)
 
 #### :house: Internal
