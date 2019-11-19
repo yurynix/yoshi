@@ -29,6 +29,8 @@
     "test:bizmgr": "npm run bizmgr --prefix ./packages/create-yoshi-app",
     "test:library": "npm run library --prefix ./packages/create-yoshi-app",
     "test:ooi": "npm run ooi --prefix ./packages/create-yoshi-app",
+    "test:templates:bm": ":",
+    "test:templates:editor": ":",
     "test:integration:build": "npm run test:build --prefix ./packages/yoshi-flow-legacy",
     "test:integration:start": "npm run test:start --prefix ./packages/yoshi-flow-legacy",
     "test:integration:test": "npm run test:test --prefix ./packages/yoshi-flow-legacy",
