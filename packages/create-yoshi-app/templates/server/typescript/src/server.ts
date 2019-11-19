@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import * as wixExpressCsrf from '@wix/wix-express-csrf';
-import * as wixExpressRequireHttps from '@wix/wix-express-require-https';
-import { AppContext } from './config';
+import wixExpressCsrf from '@wix/wix-express-csrf';
+import wixExpressRequireHttps from '@wix/wix-express-require-https';
+import { AppContext } from './types';
 
-module.exports = (app: Router, context: AppContext) => {
+export = (app: Router, context: AppContext) => {
   app.use(wixExpressCsrf());
   app.use(wixExpressRequireHttps);
 

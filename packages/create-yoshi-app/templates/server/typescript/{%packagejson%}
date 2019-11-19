@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "private": true,
+  "main": "dist/index.js",
   "author": {
     "name": "{%authorName%}",
     "email": "{%authorEmail%}"

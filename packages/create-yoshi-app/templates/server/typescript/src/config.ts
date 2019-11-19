@@ -1,6 +1,7 @@
-import { BootstrapContext } from '@wix/wix-bootstrap-ng';
+import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
+import { AppContext } from './types';
 
-module.exports = (context: BootstrapContext) => {
+export = (context: BootstrapContext): AppContext => {
   // load your app-specific configuration values
   const { petriScopes } = context.config.load('{%projectName%}');
 
@@ -12,7 +13,3 @@ module.exports = (context: BootstrapContext) => {
     petriScopes,
   } as AppContext;
 };
-
-export interface AppContext {
-  readonly petriScopes: Array<string>;
-}
