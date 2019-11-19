@@ -7,6 +7,8 @@ import loadConfig from 'yoshi-config/loadConfig';
 
 export type Package = {
   name: string;
+  version: string;
+  get: (key: string) => any;
   location: string;
   private: boolean;
   resolved: Result;
