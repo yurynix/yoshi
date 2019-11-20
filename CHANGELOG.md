@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.21.5 (2019-11-20)
+
+#### :nail_care: Polish
+
+- `yoshi-common`, `yoshi-server`
+  - [#1700](https://github.com/wix/yoshi/pull/1700) Change manifest and ejs templates naming conventions ([@roymiloh](https://github.com/roymiloh))
+
+#### :memo: Documentation
+
+- [#1698](https://github.com/wix/yoshi/pull/1698) Remove `externalUnprocessedModules` option from docs ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#1697](https://github.com/wix/yoshi/pull/1697) Add test scripts for the new templates to come ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.21.4 (2019-11-19)
 
 #### :rocket: New Feature
