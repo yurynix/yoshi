@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.21.6 (2019-11-20)
+
+#### :house: Internal
+
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`, `yoshi-helpers`
+  - [#1612](https://github.com/wix/yoshi/pull/1612) Yoshi flow editor ([@ranyitz](https://github.com/ranyitz))
+- `create-yoshi-app`
+  - [#1613](https://github.com/wix/yoshi/pull/1613) Yoshi BM Flow ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.21.5 (2019-11-20)
 
 #### :nail_care: Polish
