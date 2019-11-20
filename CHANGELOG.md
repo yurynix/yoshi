@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.21.7 (2019-11-20)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1699](https://github.com/wix/yoshi/pull/1699) Wait for server process to listen to a port before opening the browser ([@ronami](https://github.com/ronami))
+
 ## 4.21.6 (2019-11-20)
 
 #### :house: Internal
