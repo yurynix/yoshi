@@ -1,13 +1,8 @@
 import axios from 'axios';
-import React, { ComponentType, FC, useEffect, useMemo } from 'react';
-import {
-  notifyViewFinishedLoading,
-  notifyViewStartLoading,
-} from '@wix/business-manager-api';
+import React, { ComponentType, FC, useMemo } from 'react';
 import { wixAxiosConfig } from '@wix/wix-axios-config';
 import TranslationProvider from './hooks/TranslationProvider';
 import ExperimentsProvider from './hooks/ExperimentsProvider';
-import useOnce from './hooks/useOnce';
 import ModuleProvider, { IBMModuleParams } from './hooks/ModuleProvider';
 import { ExperimentsBag } from '@wix/wix-experiments';
 import SentryProvider from './hooks/SentryProvider';
@@ -25,10 +20,6 @@ const withBM = (
   sentryClient: BrowserClient,
 ) => (Component: ComponentType) => {
   const Wrapped: FC<IBMModuleParams> = ({ children, ...props }) => {
-    useOnce(() => {
-      notifyViewStartLoading(componentId);
-    });
-
     const experimentsOptions = useMemo(() => ({ experiments }), [experiments]);
 
     return (

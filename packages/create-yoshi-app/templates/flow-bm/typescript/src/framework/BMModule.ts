@@ -3,6 +3,7 @@ import {
   ModuleId,
   PageComponentId,
   registerModule,
+  notifyViewStartLoading,
   registerPageComponentMonitors,
 } from '@wix/business-manager-api';
 import { ModuleRegistry, ReactLoadableComponent } from 'react-module-container';
@@ -40,6 +41,8 @@ class BMModule extends BusinessManagerModule {
         ReactLoadableComponent(componentId, async () => {
           const experiments = new Experiments();
           experimentsScopes.forEach(scope => experiments.load(scope));
+
+          notifyViewStartLoading(componentId);
 
           // TODO: Do this the react-loadable way
           const [{ default: Component }] = await Promise.all([
