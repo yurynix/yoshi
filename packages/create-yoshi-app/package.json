@@ -21,7 +21,7 @@
     "server": "npm run templates -- server server-typescript",
     "library": "npm run templates -- library library-typescript",
     "bizmgr": "npm run templates -- business-manager-module business-manager-module-typescript",
-    "flow-bm": "npm run templates -- bm-flow-typescript",
+    "flow-bm": "npm run templates -- flow-bm-typescript",
     "ooi": "npm run templates -- out-of-iframe out-of-iframe-typescript",
     "dev": "ts-node scripts/dev.js"
   },

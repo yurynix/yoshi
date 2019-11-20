@@ -21,8 +21,8 @@ const templates: Array<TemplateDefinition> = [
 
 if (process.env.EXPERIMENTAL_FLOW_BM) {
   templates.push({
-    name: 'bm-flow',
-    path: toTemplatePath('bm-flow'),
+    name: 'flow-bm',
+    path: toTemplatePath('flow-bm'),
   });
 }
 
