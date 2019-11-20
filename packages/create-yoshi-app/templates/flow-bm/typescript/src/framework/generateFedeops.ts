@@ -6,7 +6,7 @@ import path from 'path';
 // const groupId = 'com.wixpress';
 const artifactId = '{%projectName%}';
 
-const generate = (pages: Array<string>) => {
+export default (pages: Array<string>) => {
   return pages.map(filePath => {
     const { name } = path.parse(filePath);
 
@@ -26,11 +26,3 @@ const generate = (pages: Array<string>) => {
     };
   });
 };
-
-console.log(
-  JSON.stringify(
-    generate(['/Users/amitda/dev/{%projectName%}/src/poc/pages/index.tsx']),
-    null,
-    2,
-  ),
-);

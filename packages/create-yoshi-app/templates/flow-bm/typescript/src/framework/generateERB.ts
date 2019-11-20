@@ -4,7 +4,7 @@ import config from '../poc/config.json';
 const groupId = 'com.wixpress';
 const artifactId = '{%projectName%}';
 
-const generate = (pages: Array<string>) => {
+export default (pages: Array<string>) => {
   const pageComponents = pages.map(filePath => {
     const { name } = path.parse(filePath);
 
@@ -50,11 +50,3 @@ const generate = (pages: Array<string>) => {
     ],
   };
 };
-
-console.log(
-  JSON.stringify(
-    generate(['/Users/amitda/dev/{%projectName%}/src/poc/pages/index.tsx']),
-    null,
-    2,
-  ),
-);
