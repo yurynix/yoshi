@@ -25,5 +25,11 @@ if (process.env.EXPERIMENTAL_FLOW_BM === 'true') {
     path: toTemplatePath('flow-bm'),
   });
 }
+if (process.env.EXPERIMENTAL_FLOW_EDITOR === 'true') {
+  templates.push({
+    name: 'flow-editor',
+    path: toTemplatePath('flow-editor'),
+  });
+}
 
 export default templates;

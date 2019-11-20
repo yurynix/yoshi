@@ -18,7 +18,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 185,
@@ -30,7 +32,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "open source",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 187,
@@ -42,7 +46,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 177,
@@ -72,7 +78,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 180,
@@ -84,7 +92,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 179,
@@ -114,7 +124,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 183,
@@ -126,7 +138,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "open source",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 188,
@@ -138,7 +152,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 181,
@@ -150,7 +166,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 186,
@@ -162,7 +180,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 178,
@@ -174,7 +194,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 182,
@@ -186,7 +208,12 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "hebrew", "arabic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "hebrew",
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "tahoma-w01-regular,tahoma-w02-regular,tahoma-w10-regular,tahoma-w15--regular,tahoma-w99-regular",
               "spriteIndex": 77,
@@ -198,7 +225,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["arabic"],
+              "characterSets": [
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 184,
@@ -233,7 +262,9 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 161,
@@ -245,7 +276,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 159,
@@ -257,7 +290,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 173,
@@ -269,7 +304,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 171,
@@ -281,7 +318,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 172,
@@ -311,7 +350,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 168,
@@ -323,7 +364,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 169,
@@ -335,7 +378,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 165,
@@ -365,7 +410,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 158,
@@ -377,7 +424,9 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 164,
@@ -389,7 +438,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 162,
@@ -401,7 +452,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 160,
@@ -413,7 +466,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 174,
@@ -425,7 +480,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 175,
@@ -437,7 +494,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 166,
@@ -449,7 +508,9 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 170,
@@ -461,7 +522,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 167,
@@ -473,7 +536,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["hebrew"],
+              "characterSets": [
+                "hebrew"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 163,
@@ -485,7 +550,12 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "hebrew", "arabic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "hebrew",
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "tahoma-w01-regular,tahoma-w02-regular,tahoma-w10-regular,tahoma-w15--regular,tahoma-w99-regular",
               "spriteIndex": 77,
@@ -520,7 +590,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 218,
@@ -532,7 +604,9 @@
               "cdnName": "Amatic+SC",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 154,
@@ -544,7 +618,10 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "americantypwrteritcw02--737091",
               "spriteIndex": 142,
@@ -556,7 +633,10 @@
               "cdnName": "Anton",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 0,
@@ -586,7 +666,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "arial-w01-black,arial-w02-black,arial-w10 black",
               "spriteIndex": 12,
@@ -598,7 +682,10 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "avenida-w02",
               "spriteIndex": 112,
@@ -610,7 +697,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 215,
@@ -622,7 +711,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 216,
@@ -634,7 +725,10 @@
               "cdnName": "Basic",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 15,
@@ -646,7 +740,9 @@
               "cdnName": "",
               "genericFamily": "script",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 221,
@@ -658,7 +754,10 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "bodoni-poster-w10",
               "spriteIndex": 108,
@@ -670,7 +769,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 117,
@@ -682,7 +783,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 214,
@@ -694,7 +797,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 210,
@@ -706,7 +811,10 @@
               "cdnName": "Caudex",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 17,
@@ -718,7 +826,9 @@
               "cdnName": "Chelsea+Market",
               "genericFamily": "fantasy",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 19,
@@ -730,7 +840,9 @@
               "cdnName": "Cinzel",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 204,
@@ -742,7 +854,10 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "clarendon-w02-medium-693834",
               "spriteIndex": 138,
@@ -754,7 +869,11 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "comic-sans-w01-regular,comic-sans-w02-regular,comic-sans-w10-regular",
               "spriteIndex": 20,
@@ -766,7 +885,10 @@
               "cdnName": "Cookie",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 148,
@@ -778,7 +900,10 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 155,
@@ -790,7 +915,9 @@
               "cdnName": "Corben",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 23,
@@ -820,7 +947,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 224,
@@ -832,7 +961,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "din-next-w02-light,din-next-w10-light",
               "spriteIndex": 121,
@@ -844,7 +977,11 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "droid-serif-w02-regular,droid-serif-w10-regular",
               "spriteIndex": 135,
@@ -856,7 +993,11 @@
               "cdnName": "EB+Garamond",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 24,
@@ -868,7 +1009,10 @@
               "cdnName": "Enriqueta",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 27,
@@ -880,7 +1024,11 @@
               "cdnName": "Forum",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 29,
@@ -892,7 +1040,9 @@
               "cdnName": "Fredericka+the+Great",
               "genericFamily": "fantasy",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 32,
@@ -904,7 +1054,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 212,
@@ -916,7 +1068,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 213,
@@ -928,7 +1082,11 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "palatino,book antiqua,palatino linotype",
               "spriteIndex": 33,
@@ -940,7 +1098,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 115,
@@ -952,7 +1112,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "helvetica-w02-roman,helvetica-lt-w10-roman",
               "spriteIndex": 124,
@@ -964,7 +1128,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "helvetica-w02-bold,helvetica-lt-w10-bold",
               "spriteIndex": 129,
@@ -976,7 +1144,10 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "helvetica-w02-light",
               "spriteIndex": 127,
@@ -988,7 +1159,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 111,
@@ -1000,7 +1173,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "impact-w01-2010,impact-w02-2010,impact-w10-2010",
               "spriteIndex": 36,
@@ -1012,7 +1189,10 @@
               "cdnName": "Jockey+One",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 39,
@@ -1024,7 +1204,9 @@
               "cdnName": "Josefin+Slab",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 41,
@@ -1036,7 +1218,11 @@
               "cdnName": "Jura",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 42,
@@ -1048,7 +1234,11 @@
               "cdnName": "Kelly+Slab",
               "genericFamily": "fantasy",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 45,
@@ -1060,7 +1250,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 219,
@@ -1072,7 +1264,9 @@
               "cdnName": "Libre+Baskerville",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 207,
@@ -1084,7 +1278,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 217,
@@ -1096,7 +1292,11 @@
               "cdnName": "Lobster",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 54,
@@ -1108,7 +1308,10 @@
               "cdnName": "",
               "genericFamily": "monospace",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "lucida-console-w01",
               "spriteIndex": 48,
@@ -1120,7 +1323,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "lucida grande",
               "spriteIndex": 50,
@@ -1132,7 +1337,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 211,
@@ -1144,7 +1351,11 @@
               "cdnName": "Marck+Script",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 51,
@@ -1156,7 +1367,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 116,
@@ -1168,7 +1381,10 @@
               "cdnName": "Monoton",
               "genericFamily": "fantasy",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 144,
@@ -1180,7 +1396,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 220,
@@ -1192,7 +1410,9 @@
               "cdnName": "Mr+De+Haviland",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 57,
@@ -1204,7 +1424,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 140,
@@ -1216,7 +1438,9 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 141,
@@ -1228,7 +1452,9 @@
               "cdnName": "Niconne",
               "genericFamily": "fantasy",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 58,
@@ -1240,7 +1466,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 132,
@@ -1252,7 +1480,10 @@
               "cdnName": "Noticia+Text",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 59,
@@ -1264,7 +1495,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "open source",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 61,
@@ -1276,7 +1511,11 @@
               "cdnName": "Open+Sans+Condensed:300",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 151,
@@ -1288,7 +1527,9 @@
               "cdnName": "Overlock",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 64,
@@ -1300,7 +1541,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 114,
@@ -1312,7 +1555,10 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 65,
@@ -1324,7 +1570,10 @@
               "cdnName": "Patrick+Hand",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 67,
@@ -1336,7 +1585,9 @@
               "cdnName": "",
               "genericFamily": "script",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 223,
@@ -1348,7 +1599,11 @@
               "cdnName": "Play",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 69,
@@ -1360,7 +1615,9 @@
               "cdnName": "Playfair+Display",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 206,
@@ -1372,7 +1629,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 209,
@@ -1384,7 +1643,9 @@
               "cdnName": "Raleway",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 150,
@@ -1396,7 +1657,10 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 118,
@@ -1408,7 +1672,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 157,
@@ -1420,7 +1686,10 @@
               "cdnName": "Sacramento",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 146,
@@ -1432,7 +1701,9 @@
               "cdnName": "Sail",
               "genericFamily": "serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 205,
@@ -1444,7 +1715,10 @@
               "cdnName": "Sarina",
               "genericFamily": "cursive",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 72,
@@ -1456,7 +1730,10 @@
               "cdnName": "Signika",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 74,
@@ -1468,7 +1745,9 @@
               "cdnName": "",
               "genericFamily": "cursive",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 120,
@@ -1480,7 +1759,10 @@
               "cdnName": "",
               "genericFamily": "serif",
               "provider": "monotype",
-              "characterSets": ["latin", "latin-ext"],
+              "characterSets": [
+                "latin",
+                "latin-ext"
+              ],
               "permissions": "all",
               "fallbacks": "soho-w02-thin-condensed",
               "spriteIndex": 133,
@@ -1492,7 +1774,9 @@
               "cdnName": "Spinnaker",
               "genericFamily": "sans-serif",
               "provider": "google",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 76,
@@ -1504,7 +1788,9 @@
               "cdnName": "",
               "genericFamily": "fantasy",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 110,
@@ -1516,7 +1802,12 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "hebrew", "arabic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "hebrew",
+                "arabic"
+              ],
               "permissions": "all",
               "fallbacks": "tahoma-w01-regular,tahoma-w02-regular,tahoma-w10-regular,tahoma-w15--regular,tahoma-w99-regular",
               "spriteIndex": 77,
@@ -1546,7 +1837,9 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "monotype",
-              "characterSets": ["latin"],
+              "characterSets": [
+                "latin"
+              ],
               "permissions": "all",
               "fallbacks": "",
               "spriteIndex": 208,
@@ -1558,7 +1851,11 @@
               "cdnName": "",
               "genericFamily": "sans-serif",
               "provider": "system",
-              "characterSets": ["latin", "latin-ext", "cyrillic"],
+              "characterSets": [
+                "latin",
+                "latin-ext",
+                "cyrillic"
+              ],
               "permissions": "all",
               "fallbacks": "geneva",
               "spriteIndex": 86,
@@ -1847,30 +2144,30 @@
       "booleans": {},
       "fonts": {
         "widgetFontDescription": {
-          "cssFontFamily": "'dinneuzeitgroteskltw01-_812426','sans-serif'",
-          "family": "dinneuzeitgroteskltw01-_812426",
-          "fontStyleParam": true,
-          "preset": "Custom",
-          "size": 25,
-          "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
+          "cssFontFamily" : "'dinneuzeitgroteskltw01-_812426','sans-serif'",
+          "family" : "dinneuzeitgroteskltw01-_812426",
+          "fontStyleParam" : true,
+          "preset" : "Custom",
+          "size" : 25,
+          "style" : {
+            "bold" : false,
+            "italic" : false,
+            "underline" : false
           },
-          "value": "font:normal normal normal 25px/75px dinneuzeitgroteskltw01-_812426,sans-serif;"
+          "value" : "font:normal normal normal 25px/75px dinneuzeitgroteskltw01-_812426,sans-serif;"
         },
         "widgetFontServiceTitle": {
-          "cssFontFamily": "'dinneuzeitgroteskltw01-_812426','sans-serif'",
-          "family": "dinneuzeitgroteskltw01-_812426",
-          "fontStyleParam": true,
-          "preset": "Custom",
-          "size": 25,
-          "style": {
-            "bold": false,
-            "italic": false,
-            "underline": false
+          "cssFontFamily" : "'dinneuzeitgroteskltw01-_812426','sans-serif'",
+          "family" : "dinneuzeitgroteskltw01-_812426",
+          "fontStyleParam" : true,
+          "preset" : "Custom",
+          "size" : 25,
+          "style" : {
+            "bold" : false,
+            "italic" : false,
+            "underline" : false
           },
-          "value": "font:normal normal normal 25px/75px dinneuzeitgroteskltw01-_812426,sans-serif;"
+          "value" : "font:normal normal normal 25px/75px dinneuzeitgroteskltw01-_812426,sans-serif;"
         },
         "widgetFontServiceDetails": {
           "cssFontFamily": "'chips-w26-normal','fantasy'",
