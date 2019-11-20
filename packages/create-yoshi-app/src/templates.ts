@@ -19,4 +19,11 @@ const templates: Array<TemplateDefinition> = [
   },
 ];
 
+if (process.env.EXPERIMENTAL_FLOW_BM === 'true') {
+  templates.push({
+    name: 'flow-bm',
+    path: toTemplatePath('flow-bm'),
+  });
+}
+
 export default templates;
