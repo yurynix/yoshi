@@ -21,7 +21,7 @@ if (focusProjects) {
   process.env.FOCUS_PROJECTS = focusProjects;
 }
 
-process.env.EXPERIMENTAL_FLOW_BM = true;
+process.env.EXPERIMENTAL_FLOW_BM = 'true';
 
 // Instantiate a Mocha instance.
 const mocha = new Mocha({
