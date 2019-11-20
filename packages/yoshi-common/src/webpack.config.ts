@@ -23,7 +23,6 @@ import {
   createBabelConfig,
   toIdentifier,
   getProjectArtifactId,
-  getProjectArtifactVersion,
 } from 'yoshi-helpers/utils';
 import TerserPlugin from 'terser-webpack-plugin';
 import ManifestPlugin from 'webpack-manifest-plugin';
@@ -58,8 +57,6 @@ const reAssets = /\.(png|jpg|jpeg|gif|woff|woff2|ttf|otf|eot|wav|mp3)$/;
 const staticAssetName = 'media/[name].[hash:8].[ext]';
 
 const sassIncludePaths = ['node_modules', 'node_modules/compass-mixins/lib'];
-
-const artifactVersion = getProjectArtifactVersion();
 
 function prependNameWith(filename: string, prefix: string) {
   return filename.replace(/\.[0-9a-z]+$/i, match => `.${prefix}${match}`);
@@ -421,8 +418,8 @@ export function createBaseWebpackConfig({
 
                       return new HtmlWebpackPlugin({
                         filename: isDev
-                          ? prependNameWith(filename, 'debug')
-                          : prependNameWith(filename, 'prod'),
+                          ? filename
+                          : prependNameWith(filename, 'min'),
                         chunks: [basename.replace(/\.[0-9a-z]+$/i, '')],
                         template: `html-loader!${templatePath}`,
                         minify: !isDev as false,
@@ -512,9 +509,7 @@ export function createBaseWebpackConfig({
             }),
 
             new ManifestPlugin({
-              fileName: inTeamCity
-                ? `${artifactVersion}/manifest.${isDev ? 'debug' : 'prod'}.json`
-                : `manifest.dev.json`,
+              fileName: `manifest${isDev ? '' : '.min'}.json`,
               filter: ({
                 isModuleAsset,
                 isInitial,

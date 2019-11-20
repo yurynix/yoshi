@@ -28,10 +28,11 @@ describe('manifest', () => {
 
   describe('build', () => {
     beforeAll(() => global.scripts.build(ciEnv));
+
     it('generates manifest stat file for non optimized', async () => {
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/1.0.0/manifest.debug.json',
+        'dist/statics/manifest.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));
@@ -42,7 +43,7 @@ describe('manifest', () => {
     it('generates manifest stat file for optimized', async () => {
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/1.0.0/manifest.prod.json',
+        'dist/statics/manifest.min.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));
@@ -64,7 +65,7 @@ describe('manifest', () => {
 
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/manifest.dev.json',
+        'dist/statics/manifest.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));

@@ -20,6 +20,7 @@ async function replaceOriginalEntry(relativeFilePath) {
 
 describe('manifest', () => {
   beforeAll(() => replaceOriginalEntry('src/cases/manifest.tsx'));
+
   afterAll(() => {
     // reset state back to normal after every test
     fs.writeFileSync(originalFilePath, originalContent);
@@ -30,7 +31,7 @@ describe('manifest', () => {
     it('generates manifest stat file for non optimized', async () => {
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/1.0.0/manifest.debug.json',
+        'dist/statics/manifest.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));
@@ -41,7 +42,7 @@ describe('manifest', () => {
     it('generates manifest stat file for optimized', async () => {
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/1.0.0/manifest.prod.json',
+        'dist/statics/manifest.min.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));
@@ -63,7 +64,7 @@ describe('manifest', () => {
 
       const statsFilePath = path.join(
         process.env.TEST_DIRECTORY,
-        'dist/statics/manifest.dev.json',
+        'dist/statics/manifest.json',
       );
 
       const json = JSON.parse(fs.readFileSync(statsFilePath, 'utf-8'));

@@ -7,8 +7,8 @@ export default async (templateName: string, data: any = {}) => {
   // and the production environment otherwise.
   const fileName =
     process.env.NODE_ENV === 'development'
-      ? `${templateName}.debug.ejs`
-      : `${templateName}.prod.ejs`;
+      ? `${templateName}.ejs`
+      : `${templateName}.min.ejs`;
 
   const absolutePath = path.resolve(TEMPLATES_BUILD_DIR, fileName);
 
