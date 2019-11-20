@@ -180,7 +180,7 @@ export default class DevEnvironment {
     await this.webpackDevServer.listenPromise();
     await compilationPromise;
 
-    this.serverProcess.initialize();
+    await this.serverProcess.initialize();
   }
 
   static async create({
