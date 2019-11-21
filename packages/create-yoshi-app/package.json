@@ -14,7 +14,6 @@
     "create-yoshi-app": "build/bin/create-yoshi-app.js"
   },
   "scripts": {
-    "test": "jest",
     "templates": "ts-node scripts/runE2E.js",
     "client": "npm run templates -- client client-typescript",
     "fullstack": "npm run templates -- fullstack fullstack-typescript",
@@ -25,17 +24,6 @@
     "ooi": "npm run templates -- out-of-iframe out-of-iframe-typescript",
     "flow-editor": "npm run templates -- flow-editor",
     "dev": "ts-node scripts/dev.js"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/templates/",
-      "__fixtures__"
-    ],
-    "modulePathIgnorePatterns": [
-      "/templates/"
-    ],
-    "testEnvironment": "node"
   },
   "dependencies": {
     "chalk": "^2.4.1",
@@ -60,7 +48,6 @@
     "clipboardy": "^1.2.3",
     "expect": "^23.6.0",
     "find-cache-dir": "^2.0.0",
-    "jest": "^24.1.0",
     "lodash": "^4.17.11",
     "minimist": "^1.2.0",
     "mocha": "^5.2.0",
