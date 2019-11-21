@@ -12,12 +12,12 @@ const viewerScriptWrapper = (
 ) => {
   return userController.reduce(
     (acc: Dictionary<string>, userControllerAbsolutePath) => {
-      const controllerName = path.basename(
+      const widgetName = path.basename(
         path.dirname(userControllerAbsolutePath),
       );
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
-        `${controllerName}ViewerScript.js`,
+        `${widgetName}ViewerScript.js`,
       );
 
       const generateSettingsEntryContent = `
@@ -30,9 +30,8 @@ const viewerScriptWrapper = (
 
       fs.outputFileSync(generatedWidgetEntryPath, generateSettingsEntryContent);
 
-      if (controllerName === 'todo') {
-        acc['viewerScript'] = generatedWidgetEntryPath;
-      }
+      acc[`${widgetName}viewerScript`] = generatedWidgetEntryPath;
+
       return acc;
     },
     {},

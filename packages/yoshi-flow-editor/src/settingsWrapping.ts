@@ -11,10 +11,10 @@ const settingsWrapper = (
 ) => {
   return userSettings.reduce(
     (acc: Dictionary<string>, settingsAbsolutePath: string) => {
-      const settingsName = path.basename(path.dirname(settingsAbsolutePath));
+      const widgetName = path.basename(path.dirname(settingsAbsolutePath));
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
-        `${settingsName}Settings.js`,
+        `${widgetName}Settings.js`,
       );
 
       const generateSettingsEntryContent = `
@@ -27,9 +27,7 @@ const settingsWrapper = (
 
       fs.outputFileSync(generatedWidgetEntryPath, generateSettingsEntryContent);
 
-      if (settingsName === 'todo') {
-        acc['settingsPanel'] = generatedWidgetEntryPath;
-      }
+      acc[`${widgetName}SettingsPanel`] = generatedWidgetEntryPath;
 
       return acc;
     },

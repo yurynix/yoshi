@@ -6,76 +6,79 @@ export const createControllers = (
   createController: Function,
   initApp: Function,
 ) => (controllerConfigs: any) => {
-  const [controllerConfig] = controllerConfigs;
-  const { appParams, platformAPIs, wixCodeApi, csrfToken } = controllerConfig;
+  const wrappedControllers = controllerConfigs.map((controllerConfig: any) => {
+    const { appParams, platformAPIs, wixCodeApi, csrfToken } = controllerConfig;
 
-  initializeExperiments();
+    initializeExperiments();
 
-  const appData = initApp({
-    controllerConfigs,
-    frameworkData,
-    appParams,
-    platformAPIs,
-    wixCodeApi,
-    csrfToken,
-  });
-
-  const { setProps } = controllerConfig;
-
-  const setState = (newState: any) => {
-    const updatedState = {
-      ...context.state,
-      ...newState,
-    };
-
-    // Track state
-    context.state = updatedState;
-
-    // Run state change callback
-    wrappedControllerPromise.then((userController: any) => {
-      userController.stateChange();
+    const appData = initApp({
+      controllerConfigs,
+      frameworkData,
+      appParams,
+      platformAPIs,
+      wixCodeApi,
+      csrfToken,
     });
 
-    // Update render cycle
-    return setProps(updatedState);
-  };
+    const { setProps } = controllerConfig;
 
-  const context = {
-    state: {},
-    setState,
-  };
+    const setState = (newState: any) => {
+      const updatedState = {
+        ...context.state,
+        ...newState,
+      };
 
-  const userControllerPromise = createController.call(context, {
-    controllerConfig,
-    frameworkData,
-    appData,
+      // Track state
+      context.state = updatedState;
+
+      // Run state change callback
+      wrappedController.then((userController: any) => {
+        userController.stateChange();
+      });
+
+      // Update render cycle
+      return setProps(updatedState);
+    };
+
+    const context = {
+      state: {},
+      setState,
+    };
+
+    const userControllerPromise = createController.call(context, {
+      controllerConfig,
+      frameworkData,
+      appData,
+    });
+
+    const wrappedController = Promise.resolve(userControllerPromise).then(
+      (userController: any) => {
+        return {
+          ...userController,
+          pageReady: async (...args: Array<any>) => {
+            const awaitedFrameworkData = await objectPromiseAll(frameworkData);
+
+            setProps({
+              __publicData__: controllerConfig.config.publicData,
+              ...awaitedFrameworkData,
+              // Set initial state
+              ...context.state,
+              // Set methods
+              ...userController.methods,
+            });
+
+            // Optional `pageReady`
+            if (userController.pageReady) {
+              return userController.pageReady(setProps, ...args);
+            }
+          },
+        };
+      },
+    );
+    return wrappedController;
   });
 
-  const wrappedControllerPromise = userControllerPromise.then(
-    (userController: any) => {
-      return {
-        ...userController,
-        pageReady: async (...args: Array<any>) => {
-          const awaitedFrameworkData = await objectPromiseAll(frameworkData);
-          setProps({
-            __publicData__: controllerConfig.config.publicData,
-            ...awaitedFrameworkData,
-            // Set initial state
-            ...context.state,
-            // Set methods
-            ...userController.methods,
-          });
-
-          // Optional `pageReady`
-          if (userController.pageReady) {
-            return userController.pageReady(setProps, ...args);
-          }
-        },
-      };
-    },
-  );
-
-  return [wrappedControllerPromise];
+  return wrappedControllers;
 };
 
 const initializeExperiments = () => {
@@ -83,7 +86,7 @@ const initializeExperiments = () => {
 
   // TODO: Generalize
   frameworkData.experimentsPromise = frameworkData.experimentsPromise.then(
-    (experiments: any) => createInstances({ experiments }).experiments,
+    (experiments: any) => createInstances({ experiments }),
   );
 };
 

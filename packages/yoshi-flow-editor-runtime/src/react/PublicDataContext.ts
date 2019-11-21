@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext } from 'react';
 
 export interface IPublicDataContext {
   ready: boolean;
@@ -15,7 +15,7 @@ export enum PublicDataType {
   EditorPublicData,
 }
 
-export const PublicDataContext = React.createContext<IPublicDataContext>({
+export const PublicDataContext = createContext<IPublicDataContext>({
   ready: false,
   readyPromise: null,
   set: null,

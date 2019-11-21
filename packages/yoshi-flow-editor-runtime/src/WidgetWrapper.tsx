@@ -37,7 +37,7 @@ const WidgetWrapper = (UserComponent: typeof React.Component) => (
   return (
     <div>
       <link
-        href="https://localhost:3200/viewerWidget.css"
+        href="https://localhost:3200/todoViewerWidget.css"
         rel="stylesheet"
         type="text/css"
       />

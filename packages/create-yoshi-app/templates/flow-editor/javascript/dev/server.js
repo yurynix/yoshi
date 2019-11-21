@@ -31,12 +31,22 @@ app.get(
   },
 );
 
-app.use('/editorApp', (req, res) => {
-  res.send(renderVM('./src/templates/editorApp.vm'));
+app.use('/*editorApp', (req, res) => {
+  let editorAppBundle = 'editorApp';
+  const matches = /\/(?<widgetName>.*)EditorApp/.exec(req.baseUrl);
+  if (matches) {
+    editorAppBundle = `${matches.groups.widgetName}EditorMode`;
+  }
+  res.send(renderVM('./src/templates/editorApp.vm', { editorAppBundle }));
 });
 
-app.use('/settingsPanel', (req, res) => {
-  res.send(renderVM('./src/templates/settingsPanel.vm'));
+app.use('/*settingsPanel', (req, res) => {
+  let settingsBundle = 'settingsPanel';
+  const matches = /\/(?<widgetName>.*)SettingsPanel/.exec(req.baseUrl);
+  if (matches) {
+    settingsBundle = `${matches.groups.widgetName}SettingsPanel`;
+  }
+  res.send(renderVM('./src/templates/settingsPanel.vm', { settingsBundle }));
 });
 
 const state = {};
