@@ -9,7 +9,7 @@ import wixPrivateMockWrapping from './wixPrivateMockWrapping';
 const generatedWidgetEntriesPath = path.resolve(__dirname, '../tmp/components');
 
 export const buildEditorPlatformEntries = () => {
-  const userComponents = globby.sync('./src/example/**/Component.js', {
+  const userComponents = globby.sync('./src/components/todo/**/Component.js', {
     absolute: true,
   });
 
@@ -18,10 +18,10 @@ export const buildEditorPlatformEntries = () => {
     userComponents,
   );
 
-  const userController = globby.sync('./src/example/**/controller.js', {
+  const userController = globby.sync('./src/components/todo/**/controller.js', {
     absolute: true,
   });
-  const userInitApp = globby.sync('./src/example/**/initApp.js', {
+  const userInitApp = globby.sync('./src/components/initApp.js', {
     absolute: true,
   });
 
@@ -32,7 +32,7 @@ export const buildEditorPlatformEntries = () => {
     userInitApp[0],
   );
 
-  const userSettings = globby.sync('./src/example/**/Settings.js', {
+  const userSettings = globby.sync('./src/components/todo/**/Settings.js', {
     absolute: true,
   });
 
@@ -52,10 +52,10 @@ export const buildEditorPlatformEntries = () => {
 };
 
 export const buildViewerScriptEntry = () => {
-  const userController = globby.sync('./src/example/**/controller.js', {
+  const userController = globby.sync('./src/components/todo/**/controller.js', {
     absolute: true,
   });
-  const userInitApp = globby.sync('./src/example/**/initApp.js', {
+  const userInitApp = globby.sync('./src/components/initApp.js', {
     absolute: true,
   });
 

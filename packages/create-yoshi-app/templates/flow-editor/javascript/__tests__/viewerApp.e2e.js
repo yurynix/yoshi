@@ -1,4 +1,4 @@
-const { viewerUrl } = require('../../dev/sites');
+const { viewerUrl } = require('../dev/sites');
 
 describe('Viewer App', () => {
   it('should display the title text', async () => {

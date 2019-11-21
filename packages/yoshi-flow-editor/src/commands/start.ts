@@ -85,11 +85,7 @@ const start: cliCommand = async function(argv, config) {
   const clientConfig = createClientWebpackConfig(config, {
     isDev: true,
     isHot: config.hmr as boolean,
-    customEntry: {
-      editorApp: './editorApp/editorApp.js',
-      ...buildEditorPlatformEntries(),
-      'wix-private-mock': '../dev/wix-private.mock.js',
-    },
+    customEntry: buildEditorPlatformEntries(),
   });
 
   const serverConfig = createServerWebpackConfig(config, {
