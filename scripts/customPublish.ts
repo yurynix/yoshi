@@ -25,7 +25,7 @@ const getPackageDetails = memoize((pkg: Package) => {
     if (error.stderr.toString().includes('npm ERR! code E404')) {
       console.error(
         chalk.red(
-          '\nError: package not found. Possibly not published yet, please verify that this package is published to npm.\n\nExit with status 1',
+          `\nError: package "${pkg.name}" not found. \nPossibly not published yet, please verify that this package is published to npm.\n\nExit with status 1`,
         ),
       );
 
