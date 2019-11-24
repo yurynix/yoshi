@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.21.9 (2019-11-24)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-legacy`, `yoshi`
+  - [#1717](https://github.com/wix/yoshi/pull/1717) Upgrade stylable to `1.3.1` ([fixes jest cache invalidation for `.st.css` files](https://github.com/wix/stylable/pull/887)) ([@AviVahl](https://github.com/AviVahl))
+
 ## 4.21.8 (2019-11-24)
 
 #### :house: Internal
