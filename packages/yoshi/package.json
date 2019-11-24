@@ -22,7 +22,7 @@
     "types.d.ts"
   ],
   "dependencies": {
-    "@babel/core": "7.7.2",
+    "@babel/core": "7.7.4",
     "@stylable/webpack-plugin": "1.3.1",
     "yoshi-config": "4.21.8",
     "yoshi-flow-app": "4.21.8",

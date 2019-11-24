@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/fs-extra": "8.0.1",
-    "@types/lodash": "4.14.148",
+    "@types/lodash": "4.14.149",
     "@types/webpack": "4.41.0"
   },
   "dependencies": {

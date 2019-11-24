@@ -19,7 +19,7 @@
     "@wix/wix-bootstrap-require-login": "latest",
     "@wix/wix-express-csrf": "latest",
     "@wix/wix-express-require-https": "latest",
-    "ejs": "2.7.2",
+    "ejs": "2.7.4",
     "express": "4.17.1",
     "fp-ts": "2.1.2",
     "globby": "10.0.1",

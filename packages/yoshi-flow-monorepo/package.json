@@ -30,7 +30,7 @@
     "globby": "^10.0.1",
     "import-cwd": "^3.0.0",
     "lodash": "^4.17.15",
-    "wnpm-ci": "8.0.99",
+    "wnpm-ci": "8.0.104",
     "yoshi-common": "4.21.8",
     "yoshi-config": "4.21.8",
     "yoshi-flow-legacy": "4.21.8",
