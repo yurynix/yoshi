@@ -304,16 +304,12 @@ export function createBaseWebpackConfig({
       path: join(STATICS_DIR),
       publicPath,
       pathinfo: isDev,
-      filename: isDev
-        ? '[name].bundle.js'
-        : contentHash
-        ? '[name].[contenthash:8].bundle.min.js'
-        : '[name].bundle.min.js',
-      chunkFilename: isDev
-        ? '[name].chunk.js'
-        : contentHash
-        ? '[name].[contenthash:8].chunk.min.js'
-        : '[name].chunk.min.js',
+      filename: `[name].${contentHash ? '[contenthash:8].' : ''}bundle.${
+        isDev ? '' : 'min.'
+      }js`,
+      chunkFilename: `[name].${contentHash ? '[contenthash:8].' : ''}chunk.${
+        isDev ? '' : 'min.'
+      }js`,
       hotUpdateMainFilename: 'updates/[hash].hot-update.json',
       hotUpdateChunkFilename: 'updates/[id].[hash].hot-update.js',
 
