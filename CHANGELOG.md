@@ -1,5 +1,18 @@
 # Changelog
 
+## 4.21.8 (2019-11-24)
+
+#### :house: Internal
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#1714](https://github.com/wix/yoshi/pull/1714) Build changes to support custom `editor-elements` build ([@ronami](https://github.com/ronami))
+- `yoshi-helpers`
+  - [#1715](https://github.com/wix/yoshi/pull/1715) [Temporary hack] Always transpile `editor-elements` through `ts-loader` ([@ronami](https://github.com/ronami))
+- `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi-helpers`, `yoshi-server-tools`
+  - [#1705](https://github.com/wix/yoshi/pull/1705) Bump some-what major dev dependencies and refactor `yoshi-config` ([@ronami](https://github.com/ronami))
+- Other
+  - [#1702](https://github.com/wix/yoshi/pull/1702) Show package name when publish fails because of it ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.21.7 (2019-11-20)
 
 #### :bug: Bug Fix
