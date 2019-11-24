@@ -11,8 +11,12 @@
       "version": "latest"
     },
     "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      },
       "eslint-import-resolver-typescript": true
-    }
+    },
+    "import/external-module-folders": ["node_modules", "node_modules/@types"]
   },
   "overrides": [
     {
@@ -20,17 +24,33 @@
       "parser": "@typescript-eslint/parser",
       "plugins": ["@typescript-eslint/eslint-plugin"],
       "rules": {
-        "@typescript-eslint/array-type": ["error", "generic"],
+        "@typescript-eslint/array-type": [
+          "error",
+          { "default": "generic", "readonly": "generic" }
+        ],
         "@typescript-eslint/ban-types": "error",
         "@typescript-eslint/no-unused-vars": [
           "error",
-          {"argsIgnorePattern": "^_"}
+          { "argsIgnorePattern": "^_" }
         ],
-        "import/order": "error",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "builtin",
+              "internal",
+              "external",
+              "parent",
+              "sibling",
+              "index"
+            ]
+          }
+        ],
         "no-dupe-class-members": "off",
         "no-unused-vars": "off",
         "no-useless-constructor": "off",
-        "default-case": "off"
+        "default-case": "off",
+        "no-redeclare": "off"
       }
     },
     {
@@ -47,9 +67,7 @@
       }
     },
     {
-      "files": [
-        "packages/yoshi/test/**/*"
-      ],
+      "files": ["packages/yoshi/test/**/*"],
       "env": {
         "mocha": true
       },
@@ -58,27 +76,21 @@
       }
     },
     {
-      "files": [
-        "test/projects/**/*"
-      ],
+      "files": ["test/projects/**/*"],
       "rules": {
         "import/no-unresolved": 0,
         "import/no-extraneous-dependencies": 0
       }
     },
     {
-      "files": [
-        "website/**/*"
-      ],
+      "files": ["website/**/*"],
       "rules": {
         "import/no-unresolved": 0,
         "import/no-extraneous-dependencies": 0
       }
     },
     {
-      "files": [
-        "packages/create-yoshi-app/templates/**/*"
-      ],
+      "files": ["packages/create-yoshi-app/templates/**/*"],
       "rules": {
         "import/no-unresolved": 0,
         "import/no-extraneous-dependencies": 0

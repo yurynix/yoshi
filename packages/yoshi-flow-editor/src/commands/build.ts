@@ -1,6 +1,5 @@
 import path from 'path';
 import arg from 'arg';
-import fs from 'fs-extra';
 import bfj from 'bfj';
 import { BUILD_DIR, TARGET_DIR, STATS_FILE } from 'yoshi-config/paths';
 import { runWebpack } from 'yoshi-common/webpack-utils';
@@ -10,6 +9,7 @@ import {
 } from 'yoshi-common/print-build-results';
 import { inTeamCity } from 'yoshi-helpers/queries';
 import { copyTemplates } from 'yoshi-common/copy-assets';
+import fs from 'fs-extra';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
@@ -73,7 +73,7 @@ const build: cliCommand = async function(argv, config) {
 
   await copyTemplates();
 
-  if (inTeamCity) {
+  if (inTeamCity()) {
     const petriSpecs = (await import('yoshi-common/sync-petri-specs')).default;
     const wixMavenStatics = (await import('yoshi-common/maven-statics'))
       .default;

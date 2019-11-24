@@ -9,7 +9,7 @@ import detect from 'detect-port';
 import config from 'yoshi-config';
 import { POM_FILE } from 'yoshi-config/paths';
 import xmldoc from 'xmldoc';
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Stats } from 'webpack';
 import { inTeamCity } from './queries';
 import { staticsDomain } from './constants';

@@ -1,6 +1,6 @@
 import path from 'path';
-import { SRC_DIR } from 'yoshi-config/paths';
 import traverse from '@babel/traverse';
+import { SRC_DIR } from 'yoshi-config/paths';
 import { parse } from '@babel/parser';
 
 function collectExportNames(source: string) {

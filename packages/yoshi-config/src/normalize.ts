@@ -1,11 +1,8 @@
 import { PackageJson } from 'read-pkg';
 import { Config, InitialConfig } from './config';
 import { multipleModules, singleModule } from './globs';
-import { getFrom } from './utils';
 
 export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
-  const get = getFrom(initialConfig);
-
   const {
     name,
     unpkg,
@@ -14,16 +11,16 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     jest = {},
   } = pkgJson;
 
-  const cdnPort = get(c => c.servers.cdn.port, 3200);
-  const cdnSsl = get(c => c.servers.cdn.ssl, false);
-  const cdnUrl = get(
-    c => c.servers.cdn.url,
-    `${cdnSsl ? 'https:' : 'http:'}//localhost:${cdnPort}/`,
-  );
+  const cdnPort = initialConfig.servers?.cdn?.port ?? 3200;
+  const cdnSsl = initialConfig.servers?.cdn?.ssl ?? false;
+  const cdnUrl =
+    initialConfig.servers?.cdn?.url ??
+    `${cdnSsl ? 'https:' : 'http:'}//localhost:${cdnPort}/`;
 
-  const clientProjectName = get(c => c.clientProjectName, undefined);
-  const singleDir = get(c => c.servers.cdn.dir, singleModule.clientDist);
-  const multiDir = get(c => c.servers.cdn.dir, multipleModules.clientDist);
+  const clientProjectName = initialConfig.clientProjectName;
+  const singleDir = initialConfig.servers?.cdn?.dir ?? singleModule.clientDist;
+  const multiDir =
+    initialConfig.servers?.cdn?.dir ?? multipleModules.clientDist;
 
   const clientFilesPath = clientProjectName
     ? `node_modules/${clientProjectName}/${multiDir}`
@@ -43,39 +40,37 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
       },
     },
 
-    specs: get(c => c.specs, {}),
-    hooks: get(c => c.hooks, {}),
-    hmr: get(c => c.hmr, true),
-    liveReload: get(c => c.liveReload, true),
-    exports: get(c => c.exports, undefined),
-    entry: get(c => c.entry, undefined),
-    splitChunks: get(c => c.splitChunks, false),
-    separateCss: get(c => c.separateCss, true),
-    cssModules: get(c => c.cssModules, true),
-    tpaStyle: get(c => c.tpaStyle, false),
-    enhancedTpaStyle: get(c => c.enhancedTpaStyle, false),
-    features: get(c => c.features, {}),
-    externals: get(c => c.externals, []),
-    transpileTests: get(c => c.transpileTests, true),
-    externalUnprocessedModules: get(c => c.externalUnprocessedModules, []),
-    externalizeRelativeLodash: get(
-      c => c.features.externalizeRelativeLodash,
-      false,
-    ),
-    petriSpecsConfig: get(c => c.petriSpecs, {}),
-    performanceBudget: get(c => c.performance, false),
-    resolveAlias: get(c => c.resolveAlias, {}),
-    startUrl: get(c => c.startUrl, null),
-    keepFunctionNames: get(c => c.keepFunctionNames, false),
-    umdNamedDefine: get(c => c.umdNamedDefine, true),
-    experimentalBuildHtml: get(c => c.experimentalBuildHtml, false),
-    experimentalMonorepo: get(c => c.experimentalMonorepo, false),
-    experimentalMinimalPRBuild: get(c => c.experimentalBuildHtml, false),
-    experimentalRtlCss: get(c => c.experimentalRtlCss, false),
-    yoshiServer: get(c => c.yoshiServer, false),
-    projectType: get(c => c.projectType, null),
-    webWorkerEntry: get(c => c.webWorker.entry, undefined),
-    webWorkerExternals: get(c => c.webWorker.externals, undefined),
+    specs: initialConfig.specs ?? {},
+    hooks: initialConfig.hooks ?? {},
+    hmr: initialConfig.hmr ?? true,
+    liveReload: initialConfig.liveReload ?? true,
+    exports: initialConfig.exports,
+    entry: initialConfig.entry,
+    splitChunks: initialConfig.splitChunks ?? false,
+    separateCss: initialConfig.separateCss ?? true,
+    cssModules: initialConfig.cssModules ?? true,
+    tpaStyle: initialConfig.tpaStyle ?? false,
+    enhancedTpaStyle: initialConfig.enhancedTpaStyle ?? false,
+    features: initialConfig.features ?? {},
+    externals: initialConfig.externals ?? [],
+    transpileTests: initialConfig.transpileTests ?? true,
+    externalUnprocessedModules: initialConfig.externalUnprocessedModules ?? [],
+    externalizeRelativeLodash:
+      initialConfig.features?.externalizeRelativeLodash ?? false,
+    petriSpecsConfig: initialConfig.petriSpecs ?? {},
+    performanceBudget: initialConfig.performance ?? false,
+    resolveAlias: initialConfig.resolveAlias ?? {},
+    startUrl: initialConfig.startUrl ?? null,
+    keepFunctionNames: initialConfig.keepFunctionNames ?? false,
+    umdNamedDefine: initialConfig.umdNamedDefine ?? true,
+    experimentalBuildHtml: initialConfig.experimentalBuildHtml ?? false,
+    experimentalMonorepo: initialConfig.experimentalMonorepo ?? false,
+    experimentalMinimalPRBuild: initialConfig.experimentalBuildHtml ?? false,
+    experimentalRtlCss: initialConfig.experimentalRtlCss ?? false,
+    yoshiServer: initialConfig.yoshiServer ?? false,
+    projectType: initialConfig.projectType ?? null,
+    webWorkerEntry: initialConfig.webWorker?.entry,
+    webWorkerExternals: initialConfig.webWorker?.externals,
 
     jestConfig: jest,
 

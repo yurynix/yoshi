@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Entry, EntryFunc, ExternalsElement, Options } from 'webpack';
 import { PackageJson } from 'read-pkg';
 

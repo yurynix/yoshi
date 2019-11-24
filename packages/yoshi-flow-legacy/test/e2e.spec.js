@@ -48,7 +48,7 @@ describe('Aggregator: e2e', () => {
         'chromedriver_2.29.zip',
       );
       expect(res.code).to.equal(1);
-      expect(exists(chromedriverPath)).to.be.true;
+      expect(exists(chromedriverPath)).to.equal(true);
     });
 
     it('should download chromedriver according to the environment param CHROMEDRIVER_VERSION in CI, if exist', () => {
@@ -75,7 +75,7 @@ describe('Aggregator: e2e', () => {
       );
 
       expect(res.code).to.equal(1);
-      expect(exists(chromedriverPath)).to.be.true;
+      expect(exists(chromedriverPath)).to.equal(true);
     });
 
     it('should support single module structure by default', () => {
