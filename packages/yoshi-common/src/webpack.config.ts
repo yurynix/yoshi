@@ -25,7 +25,6 @@ import {
   getProjectArtifactId,
 } from 'yoshi-helpers/utils';
 import TerserPlugin from 'terser-webpack-plugin';
-import ManifestPlugin from 'webpack-manifest-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { resolveNamespaceFactory } from '@stylable/node';
 import CopyPlugin from 'copy-webpack-plugin';
@@ -44,6 +43,7 @@ import { localIdentName } from './utils/constants';
 import ExportDefaultPlugin from './export-default-plugin';
 import { calculatePublicPath } from './webpack-utils';
 import HtmlPolyfillPlugin from './html-polyfill-plugin';
+import ManifestPlugin from './manifest-webpack-plugin';
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
@@ -237,6 +237,7 @@ export function createBaseWebpackConfig({
   tpaStyle = false,
   forceEmitSourceMaps = false,
   exportAsLibraryName,
+  useNodeExternals = true,
   nodeExternalsWhitelist = [],
 }: {
   name: string;
@@ -263,6 +264,7 @@ export function createBaseWebpackConfig({
   enhancedTpaStyle?: boolean;
   tpaStyle?: boolean;
   forceEmitSourceMaps?: boolean;
+  useNodeExternals?: boolean;
   exportAsLibraryName?: string;
   nodeExternalsWhitelist?: Array<WhitelistOption>;
 }): webpack.Configuration {
@@ -508,26 +510,12 @@ export function createBaseWebpackConfig({
               resolveNamespace: resolveNamespaceFactory(name),
             }),
 
-            new ManifestPlugin({
-              fileName: `manifest${isDev ? '' : '.min'}.json`,
-              filter: ({
-                isModuleAsset,
-                isInitial,
-                path: filePath,
-              }: {
-                isModuleAsset: boolean;
-                isInitial: boolean;
-                path: string;
-              }) =>
-                // Do not include assets
-                !isModuleAsset &&
-                // Only initial chunks included
-                isInitial &&
-                !filePath.endsWith('.rtl.min.css') &&
-                !filePath.endsWith('.rtl.css') &&
-                !filePath.endsWith('.map'),
-            }),
+            new ManifestPlugin({ fileName: 'manifest', isDev }),
           ]
+        : []),
+
+      ...(target === 'webworker'
+        ? [new ManifestPlugin({ fileName: 'manifest-worker', isDev })]
         : []),
 
       new webpack.DefinePlugin({
@@ -818,7 +806,7 @@ export function createBaseWebpackConfig({
           : false
         : 'inline-source-map',
 
-    ...(target === 'node'
+    ...(target === 'node' && useNodeExternals
       ? {
           externals: [
             nodeExternals({

@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import { runWebpack } from './webpack-utils';
+import { isTruthy } from './utils/helpers';
 
 export type NamedConfiguration = {
   name: string;
@@ -13,8 +14,8 @@ export default class WebpackManager {
     this.namedConfigs = [];
   }
 
-  addConfigs(name: string, configs: Array<webpack.Configuration>) {
-    this.namedConfigs.push({ name, configs });
+  addConfigs(name: string, configs: Array<webpack.Configuration | undefined>) {
+    this.namedConfigs.push({ name, configs: configs.filter(isTruthy) });
   }
 
   async run() {

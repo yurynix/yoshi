@@ -15,6 +15,7 @@ import { cliCommand } from '../bin/yoshi-monorepo';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
+  createWebWorkerWebpackConfig,
 } from '../webpack.config';
 import buildLibraries from '../build-libraries';
 
@@ -116,10 +117,23 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
       isDev: true,
     });
 
+    let webWorkerConfig;
+    let webWorkerOptimizeConfig;
+
+    if (pkg.config.webWorkerEntry) {
+      webWorkerConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
+        isDev: true,
+      });
+
+      webWorkerOptimizeConfig = createWebWorkerWebpackConfig(rootConfig, pkg);
+    }
+
     webpackManager.addConfigs(pkg.name, [
       clientDebugConfig,
       clientOptimizedConfig,
       serverConfig,
+      webWorkerConfig,
+      webWorkerOptimizeConfig,
     ]);
   });
 

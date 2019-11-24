@@ -3,7 +3,6 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import filesize from 'filesize';
 import { sync as gzipSize } from 'gzip-size';
-import { STATICS_DIR, BUILD_DIR } from 'yoshi-config/paths';
 import webpack from 'webpack';
 
 export type Asset = {
@@ -35,8 +34,8 @@ export function printBuildResult({
 }) {
   const [clientStats, serverStats] = webpackStats;
 
-  const clientAssets = prepareAssets(clientStats, path.join(cwd, STATICS_DIR));
-  const serverAssets = prepareAssets(serverStats, path.join(cwd, BUILD_DIR));
+  const clientAssets = prepareAssets(clientStats, cwd);
+  const serverAssets = prepareAssets(serverStats, cwd);
 
   printStatsResult(clientAssets, 'cyan');
   printStatsResult(serverAssets, 'yellow');
@@ -44,9 +43,10 @@ export function printBuildResult({
 
 function prepareAssets(
   optimizedStats: webpack.Stats,
-  assetsDir: string,
   cwd = process.cwd(),
 ): Array<Asset> {
+  const assetsDir = optimizedStats.compilation.outputOptions.path;
+
   return optimizedStats
     .toJson({ all: false, assets: true })
     .assets!.filter(asset => !asset.name.endsWith('.map'))

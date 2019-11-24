@@ -1,3 +1,4 @@
+import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
 import {
@@ -13,6 +14,7 @@ import {
   inTeamCity,
   isProduction,
 } from 'yoshi-helpers/queries';
+import { STATICS_DIR } from 'yoshi-config/paths';
 import { PackageGraphNode } from './load-package-graph';
 
 const useTypeScript = isTypescriptProject();
@@ -84,15 +86,22 @@ export function createServerWebpackConfig(
 ): webpack.Configuration {
   const defaultOptions = createDefaultOptions(rootConfig, pkg);
 
+  const customThunderboltElements = pkg.name === 'thunderbolt-elements';
+
   const serverConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'server',
     target: 'node',
     isDev,
     isHot,
+    useNodeExternals: !customThunderboltElements,
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     ...defaultOptions,
   });
+
+  if (customThunderboltElements) {
+    serverConfig.output!.path = path.join(pkg.location, STATICS_DIR);
+  }
 
   serverConfig.entry = async () => {
     const serverEntry = validateServerEntry({
@@ -113,4 +122,31 @@ export function createServerWebpackConfig(
   };
 
   return serverConfig;
+}
+
+export function createWebWorkerWebpackConfig(
+  rootConfig: Config,
+  pkg: PackageGraphNode,
+  { isDev, isHot }: { isDev?: boolean; isHot?: boolean } = {},
+): webpack.Configuration {
+  const defaultOptions = createDefaultOptions(rootConfig, pkg);
+
+  const workerConfig = createBaseWebpackConfig({
+    cwd: pkg.location,
+    configName: 'web-worker',
+    target: 'webworker',
+    isDev,
+    isHot,
+    ...defaultOptions,
+  });
+
+  workerConfig.output!.library = '[name]';
+  workerConfig.output!.libraryTarget = 'umd';
+  workerConfig.output!.globalObject = 'self';
+
+  workerConfig.entry = pkg.config.webWorkerEntry;
+
+  workerConfig.externals = pkg.config.webWorkerExternals;
+
+  return workerConfig;
 }
