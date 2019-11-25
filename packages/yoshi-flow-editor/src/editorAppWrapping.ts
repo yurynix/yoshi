@@ -30,7 +30,7 @@ const componentWrapper = (
 
     const EditorApp = EditorAppWrapper(Component, createController, initApp);
 
-    ReactDOM.render(<EditorApp />, document.getElementById('root'));`;
+    ReactDOM.render(React.createElement(EditorApp, null), document.getElementById('root'));`;
 
       fs.outputFileSync(generatedWidgetEntryPath, generateWidgetEntryContent);
 

@@ -23,7 +23,7 @@ const settingsWrapper = (
     import SettingsWrapper from '${settingsWrapperPath}';
     import Settings from '${settingsAbsolutePath}';
 
-    ReactDOM.render(<SettingsWrapper><Settings /></SettingsWrapper>, document.getElementById('root'));`;
+    ReactDOM.render(React.createElement(SettingsWrapper, null, React.createElement(Settings)), document.getElementById('root'));`;
 
       fs.outputFileSync(generatedWidgetEntryPath, generateSettingsEntryContent);
 
