@@ -1,11 +1,18 @@
 # Changelog
 
+## 4.22.0 (2019-11-26)
+
+#### :house: Internal
+
+- `yoshi-common`, `yoshi`
+  - [#1722](https://github.com/wix/yoshi/pull/1722) Add telemetry ([@ronami](https://github.com/ronami))
+
 ## 4.21.10 (2019-11-26)
 
 #### :bug: Bug Fix
 
 - `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi-helpers`
-  - [#1720](https://github.com/wix/yoshi/pull/1720) resolve bootstrap env vars according to cwd for monorepo support ([@roymiloh](https://github.com/roymiloh))
+  - [#1720](https://github.com/wix/yoshi/pull/1720) Resolve bootstrap env vars according to cwd for monorepo support ([@roymiloh](https://github.com/roymiloh))
 
 #### :nail_care: Polish
 
