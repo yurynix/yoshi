@@ -1,6 +1,6 @@
 {
   "name": "yoshi-server-react",
-  "version": "4.21.9",
+  "version": "4.22.0",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
@@ -17,7 +17,7 @@
   "devDependencies": {
     "@types/react": "^16.9.0",
     "react": "^16.9.0",
-    "yoshi-server": "4.21.9",
-    "yoshi-server-client": "4.21.9"
+    "yoshi-server": "4.22.0",
+    "yoshi-server-client": "4.22.0"
   }
 }
