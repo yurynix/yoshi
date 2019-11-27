@@ -1,0 +1,28 @@
+{
+  "name": "yoshi-flow-bm",
+  "version": "4.20.6",
+  "bin": {
+    "yoshi-bm": "./build/bin/yoshi-bm.js"
+  },
+  "description": "Yoshi Business-Manager Flow",
+  "author": "Amit Dahan <amitda@wix.com>",
+  "dependencies": {
+    "arg": "4.1.1",
+    "bfj": "7.0.1",
+    "chalk": "3.0.0",
+    "fs-extra": "8.1.0",
+    "react-dev-utils": "9.1.0",
+    "webpack": "4.41.2",
+    "webpack-node-externals": "1.7.2",
+    "yoshi-common": "4.20.8",
+    "yoshi-config": "4.20.0",
+    "yoshi-flow-legacy": "4.20.8",
+    "yoshi-helpers": "4.20.0"
+  },
+  "devDependencies": {
+    "@types/react-dev-utils": "9.0.1",
+    "@types/webpack": "4.41.0",
+    "@types/webpack-dev-server": "3.4.0",
+    "@types/webpack-node-externals": "1.6.3"
+  }
+}

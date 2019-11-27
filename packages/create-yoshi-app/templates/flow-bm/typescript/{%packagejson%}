@@ -8,11 +8,11 @@
     "email": "{%authorEmail%}"
   },
   "scripts": {
-      "start": "PORT=5000 yoshi start --server ./dist/server.js --url http://localhost:5000/business-manager/3fdba72b-c9e7-4529-9219-807ad4b36d91/{%projectName%}",
-      "pretest": "yoshi build",
-      "test": "yoshi test",
-      "posttest": "yoshi lint",
-      "release": "yoshi release"
+      "start": "PORT=5000 yoshi-bm start --server ./dist/server.js --url http://localhost:5000/business-manager/3fdba72b-c9e7-4529-9219-807ad4b36d91/{%projectName%}",
+      "pretest": "yoshi-bm build",
+      "test": "yoshi-bm test",
+      "posttest": "yoshi-bm lint",
+      "release": "yoshi-bm release"
     },
     "husky": {
       "hooks": {
@@ -41,6 +41,7 @@
       "react-module-container": "~1.0.0",
       "typescript": "~3.6.0",
       "yoshi": "^4.1.0",
+      "yoshi-flow-bm": "^4.1.0",
       "yoshi-style-dependencies": "^4.1.0"
     },
     "dependencies": {
