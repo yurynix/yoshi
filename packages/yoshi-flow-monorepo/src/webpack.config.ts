@@ -15,6 +15,7 @@ import {
   isProduction,
 } from 'yoshi-helpers/queries';
 import { STATICS_DIR } from 'yoshi-config/paths';
+import ManifestPlugin from 'yoshi-common/build/manifest-webpack-plugin';
 import { PackageGraphNode } from './load-package-graph';
 
 const useTypeScript = isTypescriptProject();
@@ -55,6 +56,8 @@ export function createClientWebpackConfig(
 
   const defaultOptions = createDefaultOptions(rootConfig, pkg);
 
+  const customSiteAssetsModule = pkg.name === 'thunderbolt-becky';
+
   const clientConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'client',
@@ -68,8 +71,23 @@ export function createClientWebpackConfig(
     tpaStyle: pkg.config.tpaStyle,
     contentHash: pkg.config.experimentalBuildHtml,
     createEjsTemplates: pkg.config.experimentalBuildHtml,
+    ...(customSiteAssetsModule
+      ? {
+          configName: 'site-assets',
+          target: 'node',
+          useNodeExternals: false,
+        }
+      : {}),
     ...defaultOptions,
   });
+
+  if (customSiteAssetsModule) {
+    // Apply manifest since standard `node` webpack configs don't
+    clientConfig.plugins!.push(
+      new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
+    );
+    clientConfig.output!.path = path.join(pkg.location, STATICS_DIR);
+  }
 
   clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
   clientConfig.resolve!.alias = pkg.config.resolveAlias;

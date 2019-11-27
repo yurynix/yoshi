@@ -241,7 +241,7 @@ export function createBaseWebpackConfig({
   nodeExternalsWhitelist = [],
 }: {
   name: string;
-  configName: 'client' | 'server' | 'web-worker';
+  configName: 'client' | 'server' | 'web-worker' | 'site-assets';
   target: 'web' | 'node' | 'webworker';
   isDev?: boolean;
   isHot?: boolean;
