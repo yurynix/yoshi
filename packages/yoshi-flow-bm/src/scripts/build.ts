@@ -69,7 +69,7 @@ const build: cliCommand = async function(argv, config) {
 
   await copyTemplates();
 
-  if (inTeamCity) {
+  if (inTeamCity()) {
     const petriSpecs = (await import('yoshi-common/sync-petri-specs')).default;
     const wixMavenStatics = (await import('yoshi-common/maven-statics'))
       .default;
