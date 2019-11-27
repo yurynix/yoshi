@@ -1,6 +1,31 @@
 # Changelog
 
-## 4.22.0 (2019-11-26)
+## 4.22.0 (2019-11-27)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-helpers`
+  - [#1725](https://github.com/wix/yoshi/pull/1725) Assume only one `pom.xml` exists on monorepo root ([@ronami](https://github.com/ronami))
+- `yoshi`
+  - [#1726](https://github.com/wix/yoshi/pull/1726) Use correct versions for packages inside the Yoshi monorepo ([@ronami](https://github.com/ronami))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#1724](https://github.com/wix/yoshi/pull/1724) Support working on webworker bundle locally in monorepo flow ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- `create-yoshi-app`, `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
+  - [#1701](https://github.com/wix/yoshi/pull/1701) Add `yoshi-flow-bm` and make the template pass while using it ([@amitdahan](https://github.com/amitdahan))
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#1723](https://github.com/wix/yoshi/pull/1723) Build site assets modules with specific webpack config ([@ronami](https://github.com/ronami))
+- `yoshi-common`, `yoshi`
+  - [#1727](https://github.com/wix/yoshi/pull/1727) Resolving telemetry dependency ([@deanshub](https://github.com/deanshub))
+- `yoshi-common`
+  - [#1728](https://github.com/wix/yoshi/pull/1728) Don't collect telemetry on Yoshi's E2E tests ([@ronami](https://github.com/ronami))
+
+## 4.21.11 (2019-11-26)
 
 #### :house: Internal
 
