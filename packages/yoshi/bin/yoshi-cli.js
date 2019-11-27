@@ -2,7 +2,7 @@
 
 const config = require('yoshi-config');
 const { inTeamCity } = require('yoshi-helpers/queries');
-const { collectData } = require('yoshi-common/build/telemetry');
+const { collectData } = require('yoshi-common/telemetry');
 
 const done = inTeamCity() ? collectData() : Promise.resolve();
 
