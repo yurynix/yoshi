@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.22.1 (2019-11-27)
+
+#### :house: Internal
+
+- `yoshi`
+  - [#1730](https://github.com/wix/yoshi/pull/1730) Stop telemetry until we have our own custom server ([@ronami](https://github.com/ronami))
+
 ## 4.22.0 (2019-11-27)
 
 #### :bug: Bug Fix
