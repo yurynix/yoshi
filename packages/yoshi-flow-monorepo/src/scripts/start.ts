@@ -6,6 +6,7 @@ import { cliCommand } from '../bin/yoshi-monorepo';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
+  createWebWorkerWebpackConfig,
 } from '../webpack.config';
 
 const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
@@ -94,8 +95,17 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     isHot: true,
   });
 
+  let webWorkerConfig;
+
+  if (pkg.config.webWorkerEntry) {
+    webWorkerConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
+      isDev: true,
+      isHot: true,
+    });
+  }
+
   const devEnvironment = await DevEnvironment.create({
-    webpackConfigs: [clientConfig, serverConfig],
+    webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
     publicPath: pkg.config.servers.cdn.url,
     https: shouldUseHttps,
     port: pkg.config.servers.cdn.port,
