@@ -71,11 +71,11 @@ export const hasBundleInStaticsDir = (cwd = process.cwd()) => {
   );
 };
 
-export const shouldDeployToCDN = (cwd: string = process.cwd()) => {
+export const shouldDeployToCDN = () => {
   return (
     inTeamCity() &&
     (process.env.ARTIFACT_VERSION || process.env.BUILD_VCS_NUMBER) &&
-    fs.existsSync(path.join(cwd, POM_FILE))
+    fs.existsSync(POM_FILE)
   );
 };
 

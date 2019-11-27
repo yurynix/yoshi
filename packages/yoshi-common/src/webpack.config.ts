@@ -282,7 +282,6 @@ export function createBaseWebpackConfig({
   });
 
   const publicPath = calculatePublicPath({
-    cwd,
     devServerUrl,
   });
 

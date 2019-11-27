@@ -158,13 +158,7 @@ function validateServerEntry({
   return serverEntry;
 }
 
-function calculatePublicPath({
-  cwd = process.cwd(),
-  devServerUrl,
-}: {
-  cwd: string;
-  devServerUrl: string;
-}) {
+function calculatePublicPath({ devServerUrl }: { devServerUrl: string }) {
   // default public path
   let publicPath = '/';
 
@@ -176,7 +170,7 @@ function calculatePublicPath({
 
   // In case we are running in CI and there is a pom.xml file, change the public path according to the path on the cdn
   // The path is created using artifactName from pom.xml and artifact version from an environment param.
-  if (shouldDeployToCDN(cwd)) {
+  if (shouldDeployToCDN()) {
     publicPath = getProjectCDNBasePath();
   }
 
