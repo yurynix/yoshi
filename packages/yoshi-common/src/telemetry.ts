@@ -17,17 +17,20 @@ const version = semver.parse(yoshiVersion)?.major;
 const isTypescriptProject = checkIsTypescriptProject();
 
 export async function collectData() {
-  insight.trackEvent({
-    category: 'version',
-    action: `${version}`,
-    label: config.name,
-  });
+  // Don't fire telemetry events for Yoshi's e2e tests
+  if (process.env.NPM_PACKAGE !== 'yoshi-monorepo') {
+    insight.trackEvent({
+      category: 'version',
+      action: `${version}`,
+      label: config.name,
+    });
 
-  insight.trackEvent({
-    category: 'language',
-    action: isTypescriptProject ? 'ts' : 'js',
-    label: config.name,
-  });
+    insight.trackEvent({
+      category: 'language',
+      action: isTypescriptProject ? 'ts' : 'js',
+      label: config.name,
+    });
+  }
 
   // Since we call `process.exit()` directly we have to wait
   return new Promise(resolve => setImmediate(resolve));
