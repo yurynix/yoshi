@@ -106,7 +106,11 @@ const start: cliCommand = async function(argv, config, model) {
     webpackDevServerPort: config.servers.cdn.port,
     appName: config.name,
     serverFilePath: serverEntry,
-    startUrl: url || config.startUrl,
+    startUrl: url ||
+      config.startUrl || [
+        `https://localhost:3000/todoEditorApp`,
+        'https://localhost:3000/todoSettingsPanel',
+      ],
     enableClientHotUpdates: Boolean(config.hmr),
     createEjsTemplates: config.experimentalBuildHtml,
   });
