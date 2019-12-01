@@ -53,6 +53,20 @@ const testTemplate = mockedAnswers => {
     const testDirectory = `${tempy.directory()}/${mockedAnswers.projectName}`;
     fs.mkdirSync(testDirectory);
 
+    // Executes and logs output if errored
+    const exec = async cmd => {
+      try {
+        return await execa(cmd, {
+          shell: true,
+          all: true,
+          cwd: testDirectory,
+        });
+      } catch (err) {
+        console.error(err.all);
+        return err;
+      }
+    };
+
     // Important Notice: this test case sets up the environment
     // for the following test cases. So test case execution order is important!
     // If you nest a describe here (and the tests are run by mocha) the test cases
@@ -68,43 +82,29 @@ const testTemplate = mockedAnswers => {
     });
 
     if (mockedAnswers.language === 'typescript') {
-      it('should not have errors on typescript strict check', () => {
+      it('should not have errors on typescript strict check', async () => {
         console.log('checking strict typescript...');
-        const { all: tscOutput } = execa.sync(
-          './node_modules/.bin/tsc --noEmit --strict',
-          {
-            shell: true,
-            cwd: testDirectory,
-          },
-        );
 
-        console.log(tscOutput);
+        const result = await exec('./node_modules/.bin/tsc --noEmit --strict');
+
+        if (result.exitCode !== 0) {
+          throw new Error(
+            `"tsc --noEmit --strict" exited with code ${result.exitCode}.\nPlease see above for its output.`,
+          );
+        }
       });
     }
 
-    it(`should run npm test with no configuration warnings`, () => {
+    it('should run npm test with no configuration warnings', async () => {
       console.log('running npm test...');
 
-      let result;
+      const result = await exec('npm test');
 
-      try {
-        result = execa.sync('npm test', {
-          shell: true,
-          cwd: testDirectory,
-        });
-        console.log(result.all);
-      } catch (error) {
-        class NpmTestFailureError extends Error {
-          constructor(m) {
-            super(m);
-            this.message = `\n  ${error.message}\n\n  stdout: ${error.stdout}\n  stderr: ${error.stderr}`;
-            this.stack = '';
-          }
-        }
-
-        throw new NpmTestFailureError();
+      if (result.exitCode !== 0) {
+        throw new Error(
+          `"npm test" exited with code ${result.exitCode}.\nPlease see above for its output.`,
+        );
       }
-
       expect(result.stderr).not.toContain(
         'Warning: Invalid configuration object',
       );
