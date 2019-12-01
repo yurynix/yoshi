@@ -10,7 +10,7 @@
   "author": "Ronen Amiel",
   "license": "ISC",
   "dependencies": {
-    "@types/ejs": "2.6.3",
+    "@types/ejs": "2.7.0",
     "@types/express": "4.17.2",
     "@types/sockjs-client": "1.1.1",
     "@wix/wix-bootstrap-greynode": "latest",
@@ -21,7 +21,7 @@
     "@wix/wix-express-require-https": "latest",
     "ejs": "2.7.4",
     "express": "4.17.1",
-    "fp-ts": "2.1.2",
+    "fp-ts": "2.2.0",
     "globby": "10.0.1",
     "import-fresh": "3.2.1",
     "io-ts": "2.0.1",
