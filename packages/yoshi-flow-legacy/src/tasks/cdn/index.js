@@ -99,7 +99,12 @@ module.exports = async ({
 
       logStats(compiler);
 
-      middlewares = [webpackDevMiddleware(compiler, { logLevel: 'silent' })];
+      middlewares = [
+        webpackDevMiddleware(compiler, {
+          logLevel: 'silent',
+          writeToDisk: true,
+        }),
+      ];
     }
   }
 
