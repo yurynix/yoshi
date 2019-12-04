@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.22.3 (2019-12-04)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1743](https://github.com/wix/yoshi/pull/1743) Override output settings for site assets modules correctly ([@ronami](https://github.com/ronami))
+
 ## 4.22.2 (2019-12-04)
 
 #### :bug: Bug Fix
