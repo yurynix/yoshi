@@ -182,7 +182,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
 
   await devEnvironment.start();
 
-  openBrowser(url || rootConfig.startUrl || `http://localhost:3000`);
+  openBrowser(url || pkg.config.startUrl || `http://localhost:3000`);
 };
 
 export default start;
