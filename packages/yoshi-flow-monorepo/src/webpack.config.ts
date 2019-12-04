@@ -76,6 +76,8 @@ export function createClientWebpackConfig(
           configName: 'site-assets',
           target: 'node',
           useNodeExternals: false,
+          filename: '[name].bundle.js',
+          chunkFilename: '[name].chunk.js',
         }
       : {}),
     ...defaultOptions,
