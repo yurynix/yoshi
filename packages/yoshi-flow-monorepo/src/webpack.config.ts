@@ -76,8 +76,6 @@ export function createClientWebpackConfig(
           configName: 'site-assets',
           target: 'node',
           useNodeExternals: false,
-          filename: '[name].bundle.js',
-          chunkFilename: '[name].chunk.js',
         }
       : {}),
     ...defaultOptions,
@@ -89,6 +87,8 @@ export function createClientWebpackConfig(
       new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
     );
     clientConfig.output!.path = path.join(pkg.location, STATICS_DIR);
+    clientConfig.output!.filename = '[name].bundle.js';
+    clientConfig.output!.chunkFilename = '[name].chunk.js';
   }
 
   clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
