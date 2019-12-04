@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.22.2 (2019-12-04)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1740](https://github.com/wix/yoshi/pull/1740) Open url according to pkg config instead of root config ([@ronami](https://github.com/ronami))
+- `yoshi-flow-legacy`
+  - [#1739](https://github.com/wix/yoshi/pull/1739) Make `yoshi start` on legacy flow emit build to disk ([@amitdahan](https://github.com/amitdahan))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#1741](https://github.com/wix/yoshi/pull/1741) Adjust custom site assets config to use correct naming conventions ([@ronami](https://github.com/ronami))
+
 ## 4.22.1 (2019-11-27)
 
 #### :house: Internal
