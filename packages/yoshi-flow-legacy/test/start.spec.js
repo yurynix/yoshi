@@ -969,8 +969,8 @@ describe('Aggregator: Start', () => {
   }
 
   function checkServerReturnsDifferentContent({
-    backoff = 100,
-    max = 50,
+    backoff = 200,
+    max = 100,
     port = fx.defaultServerPort(),
     file = '',
   } = {}) {

@@ -53,7 +53,9 @@ describe('test --jasmine', () => {
       })
       .execute('test', ['--jasmine']);
     expect(res.code).to.equal(1);
-    expect(res.stderr).to.match(/Unexpected (identifier|token)/);
+    expect(res.stderr).to.contain(
+      'Cannot use import statement outside a module',
+    );
   });
 
   it('should output test coverage when --coverage is passed', () => {
