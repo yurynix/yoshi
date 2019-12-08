@@ -57,6 +57,7 @@ const validConfig: RequiredRecursively<InitialConfig> = {
   experimentalMonorepo: false,
   experimentalMinimalPRBuild: false,
   experimentalRtlCss: false,
+  experimentalUseAssetRelocator: false,
   yoshiServer: false,
   startUrl: multipleValidOptions('http://localhost:3000', [
     'http://localhost:3000/hello',

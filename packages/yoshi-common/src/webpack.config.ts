@@ -239,6 +239,7 @@ export function createBaseWebpackConfig({
   exportAsLibraryName,
   useNodeExternals = true,
   nodeExternalsWhitelist = [],
+  useAssetRelocator = false,
 }: {
   name: string;
   configName: 'client' | 'server' | 'web-worker' | 'site-assets';
@@ -267,6 +268,7 @@ export function createBaseWebpackConfig({
   useNodeExternals?: boolean;
   exportAsLibraryName?: string;
   nodeExternalsWhitelist?: Array<WhitelistOption>;
+  useAssetRelocator?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -564,6 +566,24 @@ export function createBaseWebpackConfig({
       strictExportPresence: true,
 
       rules: [
+        ...(useAssetRelocator && target === 'node'
+          ? [
+              {
+                test: /\.(js|ts|tsx)$/,
+                parser: { amd: false },
+                use: {
+                  loader: '@zeit/webpack-asset-relocator-loader',
+                  options: {
+                    outputAssetBase: 'assets',
+                    existingAssetNames: [],
+                    wrapperCompatibility: true,
+                    escapeNonAnalyzableRequires: true,
+                  },
+                },
+              },
+            ]
+          : []),
+
         ...(includeStyleLoaders ? styleLoaders : []),
 
         ...(externalizeRelativeLodash

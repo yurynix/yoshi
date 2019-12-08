@@ -67,6 +67,8 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     experimentalMonorepo: initialConfig.experimentalMonorepo ?? false,
     experimentalMinimalPRBuild: initialConfig.experimentalBuildHtml ?? false,
     experimentalRtlCss: initialConfig.experimentalRtlCss ?? false,
+    experimentalUseAssetRelocator:
+      initialConfig.experimentalUseAssetRelocator ?? false,
     yoshiServer: initialConfig.yoshiServer ?? false,
     projectType: initialConfig.projectType ?? null,
     webWorkerEntry: initialConfig.webWorker?.entry,

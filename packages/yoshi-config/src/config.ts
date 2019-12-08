@@ -64,6 +64,7 @@ export type InitialConfig = {
   experimentalMonorepo?: boolean;
   experimentalMinimalPRBuild?: boolean;
   experimentalRtlCss?: boolean;
+  experimentalUseAssetRelocator?: boolean;
   yoshiServer: boolean;
   startUrl?: string | Array<string>;
   webWorker?: {
@@ -111,6 +112,7 @@ export type Config = {
   experimentalMonorepo: boolean;
   experimentalMinimalPRBuild: boolean;
   experimentalRtlCss: boolean;
+  experimentalUseAssetRelocator: boolean;
   yoshiServer: boolean;
   projectType: ProjectType | null;
   webWorkerEntry?: WebpackEntry;

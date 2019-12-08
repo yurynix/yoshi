@@ -116,6 +116,7 @@ export function createServerWebpackConfig(
     isHot,
     useNodeExternals: !customThunderboltElements,
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
+    useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
     ...defaultOptions,
   });
 
