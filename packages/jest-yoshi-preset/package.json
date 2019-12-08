@@ -1,6 +1,6 @@
 {
   "name": "jest-yoshi-preset",
-  "version": "4.22.0",
+  "version": "4.23.0",
   "description": "jest configuration for a yoshi fullstack project",
   "main": "index.js",
   "types": "types.d.ts",
@@ -37,14 +37,14 @@
     "ts-jest": "^24.0.0",
     "wait-port": "^0.2.2",
     "yoshi-config": "4.22.0",
-    "yoshi-helpers": "4.22.0",
-    "yoshi-server-tools": "4.22.0"
+    "yoshi-helpers": "4.23.0",
+    "yoshi-server-tools": "4.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@stylable/core": "^1.0.0",
     "@stylable/jest": "^1.0.0",
-    "babel-preset-yoshi": "4.22.0",
+    "babel-preset-yoshi": "4.23.0",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "jest-transform-graphql": "^2.1.0",
