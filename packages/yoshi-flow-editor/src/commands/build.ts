@@ -21,6 +21,7 @@ import {
   buildViewerScriptEntry,
   webWorkerExternals,
 } from '../buildEditorEntires';
+import { generateCiConfig } from './ciConfigGenerator';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
@@ -74,6 +75,8 @@ const build: cliCommand = async function(argv, config) {
   await copyTemplates();
 
   if (inTeamCity()) {
+    // TODO: make the parameters dynamic
+    generateCiConfig('', 'todo', 'wixstores-client-todo', []);
     const petriSpecs = (await import('yoshi-common/sync-petri-specs')).default;
     const wixMavenStatics = (await import('yoshi-common/maven-statics'))
       .default;
