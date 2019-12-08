@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.23.0 (2019-12-08)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-legacy`
+  - [#1711](https://github.com/wix/yoshi/pull/1711) Update Yoshi to Node 12 ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.22.3 (2019-12-04)
 
 #### :bug: Bug Fix
