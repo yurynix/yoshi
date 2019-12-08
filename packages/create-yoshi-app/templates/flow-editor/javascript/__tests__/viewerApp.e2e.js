@@ -1,6 +1,6 @@
 const { viewerUrl } = require('../dev/sites');
 
-describe('Viewer App', () => {
+describe.skip('Viewer App', () => {
   it('should display the title text', async () => {
     await page.goto(viewerUrl);
     await page.waitForSelector('button[type="submit"]');

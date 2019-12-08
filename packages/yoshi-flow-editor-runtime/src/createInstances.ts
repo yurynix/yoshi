@@ -6,7 +6,5 @@ export function createInstances({
 }: {
   experiments: Record<string, any>;
 }) {
-  return {
-    experiments: new Experiments({ experiments }),
-  };
+  return new Experiments({ experiments });
 }

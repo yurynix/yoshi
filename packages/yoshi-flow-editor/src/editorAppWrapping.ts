@@ -8,7 +8,7 @@ const editorAppWrapperPath =
 const componentWrapper = (
   generatedWidgetEntriesPath: string,
   userComponents: Array<string>,
-  userController: string,
+  userControllers: Array<string>,
   userInitApp: string,
 ) => {
   return userComponents.reduce(
@@ -17,6 +17,10 @@ const componentWrapper = (
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
         `${widgetName}EditorApp.js`,
+      );
+
+      const userController = userControllers.find(
+        controller => path.basename(path.dirname(controller)) === widgetName,
       );
 
       const generateWidgetEntryContent = `
@@ -34,9 +38,7 @@ const componentWrapper = (
 
       fs.outputFileSync(generatedWidgetEntryPath, generateWidgetEntryContent);
 
-      if (widgetName === 'todo') {
-        acc['editorApp'] = generatedWidgetEntryPath;
-      }
+      acc[`${widgetName}EditorMode`] = generatedWidgetEntryPath;
 
       return acc;
     },

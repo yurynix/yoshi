@@ -11,10 +11,10 @@
     "start": "yoshi-flow-editor start --entry-point=dist/server.js",
     "precommit": "lint-staged",
     "pretest": "yoshi-flow-editor build",
-    "test": "yoshi test --jest",
+    "test": "yoshi-flow-editor test",
     "test:ssr": "jest --config jest-ssr.config.js",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "posttest": "yoshi-flow-editor lint",
+    "release": "yoshi-flow-editor release"
   },
   "devDependencies": {
     "@testing-library/react": "^9.3.0",
@@ -28,7 +28,6 @@
     "puppeteer": "^1.1.0",
     "react-test-renderer": "~15.6.0",
     "velocity": "~0.7.0",
-    "yoshi": "^4.6.3",
     "yoshi-flow-editor": "latest",
     "yoshi-style-dependencies": "^4.6.0"
   },

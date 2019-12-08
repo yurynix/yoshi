@@ -24,11 +24,7 @@ const componentWrapper = (
 
       fs.outputFileSync(generatedWidgetEntryPath, generateWidgetEntryContent);
 
-      if (widgetName === 'todo') {
-        acc['viewerWidget'] = generatedWidgetEntryPath;
-      }
-
-      acc[widgetName] = generatedWidgetEntryPath;
+      acc[`${widgetName}ViewerWidget`] = generatedWidgetEntryPath;
 
       return acc;
     },
