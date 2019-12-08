@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.23.1 (2019-12-08)
+
+#### :nail_care: Polish
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-monorepo`
+  - [#1747](https://github.com/wix/yoshi/pull/1747) Add `asset-relocate-loader` for node bundles ([@ronami](https://github.com/ronami))
+
 ## 4.23.0 (2019-12-08)
 
 #### :rocket: New Feature
