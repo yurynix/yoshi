@@ -14,8 +14,8 @@
     "test": "yoshi test"
   },
   "dependencies": {
-    "@wix/wix-bootstrap-testkit": "latest",
-    "@wix/wix-config-emitter": "latest",
+    "@wix/wix-bootstrap-testkit": "^1.0.0",
+    "@wix/wix-config-emitter": "^1.0.0",
     "react": "16.12.0",
     "react-dom": "16.12.0"
   },
