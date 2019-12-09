@@ -1,11 +1,14 @@
 {
   "name": "yoshi-monorepo",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wix/yoshi.git"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap --no-ci",
     "build": "ts-node -T scripts/build.ts",
     "watch": "ts-node -T scripts/build.ts --watch",
     "bumpDocs": "npm run version --prefix './website' --",
@@ -13,7 +16,6 @@
     "create-yoshi-app:dev": "npm run dev --prefix ./packages/create-yoshi-app",
     "customPublish": "ts-node -T ./scripts/customPublish.ts",
     "changelog": "lerna-changelog",
-    "postinstall": "npm run bootstrap",
     "test": ":",
     "lint": "eslint . --ext js,ts --max-warnings 0",
     "build-clean": "rm -rf ./packages/*/build ./packages/*/tsconfig.tsbuildinfo",
@@ -114,8 +116,9 @@
     "tslint-plugin-wix-style-react": "^1.0.6",
     "tslint-react-hooks": "^2.1.0",
     "type-fest": "^0.8.1",
-    "typescript": "~3.7.0",
+    "typescript": "3.7.2",
     "verdaccio": "^4.0.4",
+    "vfile-message": "^2.0.2",
     "wait-for-expect": "^1.2.0",
     "wait-port": "^0.2.2"
   },

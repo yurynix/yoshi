@@ -40,8 +40,7 @@ describe('Aggregator: e2e', () => {
           }),
         );
       const chromedriverPath = path.resolve(
-        'node_modules',
-        'protractor',
+        '../../',
         'node_modules',
         'webdriver-manager',
         'selenium',
@@ -66,8 +65,7 @@ describe('Aggregator: e2e', () => {
           }),
         );
       const chromedriverPath = path.resolve(
-        'node_modules',
-        'protractor',
+        '../../',
         'node_modules',
         'webdriver-manager',
         'selenium',
@@ -84,7 +82,6 @@ describe('Aggregator: e2e', () => {
         .execute('test', ['--protractor'], outsideTeamCity);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('protractor');
       // note: we've setup a real integration, keep it in order
       // to see the full integration between server and client.
       expect(res.stdout).to.contain('1 spec, 0 failures');
@@ -96,7 +93,6 @@ describe('Aggregator: e2e', () => {
         .execute('test', ['--protractor'], outsideTeamCity, { silent: true }); // run in silent so that TC won't fail with the screenshot log
 
       expect(res.code).to.equal(1);
-      expect(res.stdout).to.contain('protractor');
       expect(res.stdout).to.contain('1 spec, 1 failure');
       expect(res.stdout).to.contain('Screenshot link:');
     });
@@ -106,7 +102,6 @@ describe('Aggregator: e2e', () => {
         .setup(multipleModuleWithJasmine())
         .execute('test', ['--protractor'], outsideTeamCity);
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('protractor');
       expect(res.stdout).to.contain('1 spec, 0 failures');
     });
 
@@ -116,7 +111,6 @@ describe('Aggregator: e2e', () => {
         .execute('test', ['--protractor'], outsideTeamCity);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('protractor');
       expect(res.stdout).to.contain('1 passing (');
     });
 
@@ -126,7 +120,6 @@ describe('Aggregator: e2e', () => {
         .execute('test', ['--protractor'], insideTeamCity);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('protractor');
       expect(res.stdout).to.contain('##teamcity[');
     });
 
@@ -147,7 +140,6 @@ describe('Aggregator: e2e', () => {
         .execute('test', ['--protractor'], outsideTeamCity);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('protractor');
       expect(res.stdout).to.contain('1 spec, 0 failures');
       // a dummy import in order to use es6 feature that is not supported by node env ootb
       expect(fx.e2eTestJasmineES6Imports()).to.contain(
@@ -206,7 +198,6 @@ describe('Aggregator: e2e', () => {
       .execute('test', ['--protractor'], outsideTeamCity);
 
     expect(res.code).to.equal(0);
-    expect(res.stdout).to.contain('protractor');
     expect(res.stdout).to.contain('1 spec, 0 failures');
   });
 
@@ -220,7 +211,6 @@ describe('Aggregator: e2e', () => {
       });
 
     expect(res.code).to.equal(0);
-    expect(res.stdout).to.contain('protractor');
     expect(res.stdout).to.contain('1 passing (');
   });
 

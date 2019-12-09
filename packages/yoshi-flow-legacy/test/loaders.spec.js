@@ -330,7 +330,9 @@ describe('Loaders', () => {
             }
           }`,
             'pom.xml': fx.pom(),
-            'tsconfig.json': fx.tsconfig(),
+            'tsconfig.json': fx.tsconfig({
+              compilerOptions: { skipLibCheck: true },
+            }),
           },
           [installHaml],
         )
@@ -552,6 +554,9 @@ describe('Loaders', () => {
           .setup({
             'src/client.ts': `import * as React from 'react'; \nimport { ReactComponent as Image } from './image.svg';\n console.log(Image);`,
             'tsconfig.json': fx.tsconfig({
+              compilerOptions: {
+                skipLibCheck: true,
+              },
               include: ['external-types.d.ts'],
             }),
             'external-types.d.ts': `

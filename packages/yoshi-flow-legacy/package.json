@@ -161,7 +161,7 @@
     "shmock": "0.8.1",
     "strip-ansi": "4.0.0",
     "tempy": "0.3.0",
-    "typescript": "3.5.3",
+    "typescript": "3.7.2",
     "yoshi-angular-dependencies": "4.23.0",
     "yoshi-style-dependencies": "4.22.0"
   }

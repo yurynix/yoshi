@@ -17,7 +17,7 @@ module.exports.symlinkModules = repoDirectory => {
 
   // Link yoshi's node_modules to the parent directory of the tested module
   fs.ensureSymlinkSync(
-    path.join(__dirname, '../../packages/yoshi-flow-legacy/node_modules'),
+    path.join(__dirname, '../../node_modules'),
     path.join(parentDirectory, 'node_modules'),
   );
 

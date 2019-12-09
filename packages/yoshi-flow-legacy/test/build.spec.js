@@ -473,6 +473,7 @@ describe('Aggregator: Build', () => {
           'tsconfig.json': fx.tsconfig({
             compilerOptions: {
               lib: ['esnext'],
+              skipLibCheck: true,
             },
           }),
           'src/a.ts': `import {xxx} from './b'; import('./c').then(() => console.log(xxx));`,
@@ -627,7 +628,9 @@ describe('Aggregator: Build', () => {
           'something/something.js': fx.angularJs(),
           'something.js': fx.angularJs(),
           'src/styles/style.scss': `.a {.b {color: red;}} .c{margin: 10px 20px 10px 20px;}`,
-          'tsconfig.json': fx.tsconfig(),
+          'tsconfig.json': fx.tsconfig({
+            compilerOptions: { skipLibCheck: true },
+          }),
           'package.json': fx.packageJson(
             {
               entry: './client',
@@ -757,7 +760,9 @@ describe('Aggregator: Build', () => {
           'src/something.ts': fx.angularJs(),
           'something/something.js': fx.angularJs(),
           'something.js': fx.angularJs(),
-          'tsconfig.json': fx.tsconfig({ compilerOptions: { module: 'es6' } }),
+          'tsconfig.json': fx.tsconfig({
+            compilerOptions: { module: 'es6', skipLibCheck: true },
+          }),
           'package.json': fx.packageJson({
             separateCss: 'prod',
             cssModules: true,
@@ -946,7 +951,10 @@ describe('Aggregator: Build', () => {
       it('should exit with code 0 and not create bundle.js when there is no custom entry configures and default entry does not exist', () => {
         const res = test
           .setup({
-            'tsconfig.json': fx.tsconfig({ files: ['src/example.ts'] }),
+            'tsconfig.json': fx.tsconfig({
+              files: ['src/example.ts'],
+              compilerOptions: { skipLibCheck: true },
+            }),
             'package.json': fx.packageJson(),
             'pom.xml': fx.pom(),
             'src/example.ts': `console.log('hooray')`,

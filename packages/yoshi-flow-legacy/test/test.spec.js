@@ -146,7 +146,6 @@ describe('Aggregator: Test', () => {
         .execute('test', ['--protractor']);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contains('protractor');
       // note: we've setup a real integration, keep it in order
       // to see the full integration between server and client.
       expect(res.stdout).to.contain('1 spec, 0 failures');
@@ -192,7 +191,6 @@ describe('Aggregator: Test', () => {
       // Test should not fail although the `console.error`
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contains('protractor');
       expect(res.stdout).to.contain('1 spec, 0 failures');
     });
 

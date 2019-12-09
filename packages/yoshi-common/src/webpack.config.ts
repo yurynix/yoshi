@@ -351,10 +351,11 @@ export function createBaseWebpackConfig({
 
     resolveLoader: {
       modules: [
+        // Search in `yoshi-common`'s node_modules first
         path.join(__dirname, '../node_modules'),
-        // Since Yoshi does not depend on every loader it uses directly, we first look
-        // for loaders in `yoshi-common`'s `node_modules` and then look at the root `node_modules`
-        path.join(__dirname, '../../yoshi-flow-legacy/node_modules'),
+
+        // Normal node module resolution
+        // https://webpack.js.org/configuration/resolve/#resolvemodules
         'node_modules',
       ],
     },
