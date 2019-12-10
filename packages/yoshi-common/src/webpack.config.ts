@@ -285,6 +285,7 @@ export function createBaseWebpackConfig({
 
   const publicPath = calculatePublicPath({
     devServerUrl,
+    useUnversionedBaseUrl: contentHash,
   });
 
   const babelConfig = createBabelConfig({

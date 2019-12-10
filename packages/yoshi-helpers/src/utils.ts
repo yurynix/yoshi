@@ -246,12 +246,12 @@ export const getProjectArtifactVersion = () => {
 };
 
 // Gets the CDN base path for the project at the current working dir
-export const getProjectCDNBasePath = () => {
+export const getProjectCDNBasePath = (useUnversionedBaseUrl: boolean) => {
   const artifactName = getProjectArtifactId();
 
   let artifactPath = '';
 
-  if (config.experimentalBuildHtml) {
+  if (useUnversionedBaseUrl) {
     // Not to be confused with Yoshi's `dist` directory.
     //
     // Static assets are deployed to two locations on the CDN:

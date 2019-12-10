@@ -67,7 +67,7 @@ const merged = ld.mergeWith(
 
       if (shouldDeployToCDN()) {
         startRewriteForwardProxy({
-          search: getProjectCDNBasePath(),
+          search: getProjectCDNBasePath(config.experimentalBuildHtml),
           rewrite: config.servers.cdn.url,
           port: forwardProxyPort,
         });

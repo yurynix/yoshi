@@ -158,7 +158,13 @@ function validateServerEntry({
   return serverEntry;
 }
 
-function calculatePublicPath({ devServerUrl }: { devServerUrl: string }) {
+function calculatePublicPath({
+  devServerUrl,
+  useUnversionedBaseUrl,
+}: {
+  devServerUrl: string;
+  useUnversionedBaseUrl: boolean;
+}) {
   // default public path
   let publicPath = '/';
 
@@ -171,7 +177,7 @@ function calculatePublicPath({ devServerUrl }: { devServerUrl: string }) {
   // In case we are running in CI and there is a pom.xml file, change the public path according to the path on the cdn
   // The path is created using artifactName from pom.xml and artifact version from an environment param.
   if (shouldDeployToCDN()) {
-    publicPath = getProjectCDNBasePath();
+    publicPath = getProjectCDNBasePath(useUnversionedBaseUrl);
   }
 
   return publicPath;

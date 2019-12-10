@@ -1,12 +1,12 @@
 const startRewriteForwardProxy = require('yoshi-helpers/rewrite-forward-proxy');
 const { getProjectCDNBasePath } = require('yoshi-helpers/utils');
-const { servers } = require('yoshi-config');
+const { servers, experimentalBuildHtml } = require('yoshi-config');
 
 let closeProxy;
 
 module.exports.start = async function start(port) {
   closeProxy = await startRewriteForwardProxy({
-    search: getProjectCDNBasePath(),
+    search: getProjectCDNBasePath(experimentalBuildHtml),
     rewrite: servers.cdn.url,
     port,
   });
