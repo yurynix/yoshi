@@ -1,6 +1,7 @@
 {
   "name": "yoshi-monorepo",
   "private": true,
+  "customPublish": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wix/yoshi.git"
