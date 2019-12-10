@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.23.2 (2019-12-10)
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`, `yoshi-common`, `yoshi-flow-legacy`, `yoshi-helpers`
+  - [#1751](https://github.com/wix/yoshi/pull/1751) Construct CDN URL according to the package's `experimentalBuildHtml` ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- `create-yoshi-app`, `jest-yoshi-preset`, `yoshi-common`, `yoshi-flow-legacy`, `yoshi-helpers`, `yoshi`
+  - [#1733](https://github.com/wix/yoshi/pull/1733) Change npm to Yarn ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.23.1 (2019-12-08)
 
 #### :nail_care: Polish
