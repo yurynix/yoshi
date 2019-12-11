@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.23.3 (2019-12-11)
+
+#### :bug: Bug Fix
+
+- `yoshi-config`, `yoshi-flow-monorepo`, `yoshi`
+  - [#1753](https://github.com/wix/yoshi/pull/1753) Distinguish between apps and libs by `projectType` config option ([@roymiloh](https://github.com/roymiloh))
+
 ## 4.23.2 (2019-12-10)
 
 #### :bug: Bug Fix
