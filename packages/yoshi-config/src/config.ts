@@ -2,7 +2,7 @@
 import { Entry, EntryFunc, ExternalsElement, Options } from 'webpack';
 import { PackageJson } from 'read-pkg';
 
-type ProjectType = 'app';
+type ProjectType = 'app' | 'library';
 
 type PetriOptions = {
   onlyForLoggedInUsers?: boolean;

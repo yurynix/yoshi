@@ -7,10 +7,10 @@ const config = require('yoshi-config');
 // const done = inTeamCity() ? collectData() : Promise.resolve();
 
 // done.then(() => {
-if (config.projectType === 'app') {
-  require('yoshi-flow-app/build/bin/yoshi-app');
-} else if (config.experimentalMonorepo) {
+if (config.experimentalMonorepo) {
   require('yoshi-flow-monorepo/build/bin/yoshi-monorepo');
+} else if (config.projectType === 'app') {
+  require('yoshi-flow-app/build/bin/yoshi-app');
 } else {
   require('yoshi-flow-legacy/bin/yoshi-legacy');
 }
