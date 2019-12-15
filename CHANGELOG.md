@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.23.4 (2019-12-15)
+
+#### :house: Internal
+
+- `yoshi-common`, `yoshi-style-dependencies`
+  - [#1750](https://github.com/wix/yoshi/pull/1750) updating css-loader ([@deanshub](https://github.com/deanshub))
+- Other
+  - [#1757](https://github.com/wix/yoshi/pull/1757) fixing yarn install issue (website) ([@deanshub](https://github.com/deanshub))
+
 ## 4.23.3 (2019-12-11)
 
 #### :bug: Bug Fix
