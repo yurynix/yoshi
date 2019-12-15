@@ -1,3 +1,1 @@
-export enum FileNames {
-  CI_CONFIG = '.ci_config',
-}
+export const CI_CONFIG = '.ci_config';

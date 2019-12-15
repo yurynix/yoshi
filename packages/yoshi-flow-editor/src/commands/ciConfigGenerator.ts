@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { FileNames } from '../constants';
+import { CI_CONFIG } from '../constants';
 
 type Widget = { id: string; name: string };
 
@@ -47,5 +47,5 @@ export function generateCiConfig(
     ],
   };
 
-  fs.outputJson(FileNames.CI_CONFIG, ciConfig, { spaces: 2 });
+  fs.outputJson(CI_CONFIG, ciConfig, { spaces: 2 });
 }
