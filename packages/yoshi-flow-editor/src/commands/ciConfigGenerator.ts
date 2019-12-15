@@ -7,6 +7,10 @@ function generatePlatformBaseUrl(appName: string, baseUrl: string): string {
   return `appFields.platform.baseUrls.${appName}BaseUrl=>https://static.parastorage.com/services/${baseUrl}/{version}/`;
 }
 
+function generateViewerScriptUrl(baseUrl: string): string {
+  return `appFields.platform.viewerScriptUrl=>https://static.parastorage.com/services/${baseUrl}/{version}/viewerScript.bundle.min.js`;
+}
+
 function generateWidgetsUrls(
   widgets: Array<Widget>,
   baseUrl: string,
@@ -43,6 +47,7 @@ export function generateCiConfig(
     ignore_dependencies: 'clear',
     tpa_url_templates: [
       generatePlatformBaseUrl(appName, baseUrl),
+      generateViewerScriptUrl(baseUrl),
       ...generateWidgetsUrls(widgets, baseUrl),
     ],
   };
