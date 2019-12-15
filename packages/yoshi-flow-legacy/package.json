@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.23.3",
+  "version": "4.23.4",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -110,7 +110,7 @@
     "wnpm-ci": "8.0.115",
     "word-wrap": "1.2.3",
     "xmldoc": "1.1.2",
-    "yoshi-common": "4.23.3",
+    "yoshi-common": "4.23.4",
     "yoshi-config": "4.23.3",
     "yoshi-helpers": "4.23.3",
     "yoshi-runtime": "1.0.367",
@@ -163,6 +163,6 @@
     "tempy": "0.3.0",
     "typescript": "3.7.2",
     "yoshi-angular-dependencies": "4.23.0",
-    "yoshi-style-dependencies": "4.22.0"
+    "yoshi-style-dependencies": "4.23.4"
   }
 }
