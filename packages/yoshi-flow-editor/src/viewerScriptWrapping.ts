@@ -10,6 +10,30 @@ const viewerScriptWrapper = (
   userController: Array<string>,
   userInitApp: string,
 ) => {
+  const generatedViewerScriptEntryPath = path.join(
+    generatedWidgetEntriesPath,
+    `viewerScript.js`,
+  );
+
+  const generateViewerScriptEntryContent = `
+    import {getControllerFactory, initController} from '${viewerScriptWrapperPath}';
+
+    const createControllers = (controllerConfigs, controllerInstances) => {
+      return controllerConfigs.map(props => {
+        const ctrlFactory = getControllerFactory(controllerInstances, props.type);
+        const ctrl = initController(ctrlFactory, props);
+        return Promise.resolve(ctrl);
+      });
+    };
+    export default createControllers;
+  `;
+
+  fs.outputFileSync(
+    generatedViewerScriptEntryPath,
+    generateViewerScriptEntryContent,
+  );
+  const viewerScript = generatedViewerScriptEntryPath;
+
   return userController.reduce(
     (acc: Dictionary<string>, userControllerAbsolutePath) => {
       const widgetName = path.basename(
@@ -20,7 +44,7 @@ const viewerScriptWrapper = (
         `${widgetName}ViewerScript.js`,
       );
 
-      const generateSettingsEntryContent = `
+      const generateControllerEntryContent = `
     import {createControllers as createControllersWrapper, initAppForPage as initAppForPageWrapper} from '${viewerScriptWrapperPath}';
     import userController from '${userControllerAbsolutePath}';
     import userInitApp from '${userInitApp}';
@@ -28,13 +52,16 @@ const viewerScriptWrapper = (
     export const initAppForPage = initAppForPageWrapper;
     export const createControllers = createControllersWrapper(userController, userInitApp);`;
 
-      fs.outputFileSync(generatedWidgetEntryPath, generateSettingsEntryContent);
+      fs.outputFileSync(
+        generatedWidgetEntryPath,
+        generateControllerEntryContent,
+      );
 
       acc[`${widgetName}viewerScript`] = generatedWidgetEntryPath;
 
       return acc;
     },
-    {},
+    { viewerScript },
   );
 };
 
