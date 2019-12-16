@@ -122,6 +122,11 @@ export function createServerWebpackConfig(
 
   if (customThunderboltElements) {
     serverConfig.output!.path = path.join(pkg.location, STATICS_DIR);
+    serverConfig.plugins!.push(
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1,
+      }),
+    );
   }
 
   serverConfig.entry = async () => {
