@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.23.5 (2019-12-16)
+
+#### :bug: Bug Fix
+
+- `yoshi-helpers`
+  - [#1762](https://github.com/wix/yoshi/pull/1762) Fix thunderbolt/elements hacky transpilation ([@ronami](https://github.com/ronami))
+- `yoshi-flow-monorepo`
+  - [#1761](https://github.com/wix/yoshi/pull/1761) Build site-assets modules with content hashes in production ([@ronami](https://github.com/ronami))
+
+#### :nail_care: Polish
+
+- `yoshi-helpers`
+  - [#1758](https://github.com/wix/yoshi/pull/1758) Editor Elements fix - transpile `node-modules` only for TB App ([@NitayRabi](https://github.com/NitayRabi))
+- `yoshi-flow-monorepo`
+  - [#1759](https://github.com/wix/yoshi/pull/1759) Disable chunks on server bundle on `thunderbolt-elements` only ([@roymiloh](https://github.com/roymiloh))
+
 ## 4.23.4 (2019-12-15)
 
 #### :house: Internal
