@@ -1,7 +1,7 @@
 {
   "name": "yoshi-flow-editor",
   "version": "4.23.5",
-  "description": "",
+  "description": "Yoshi Editor-Platform Flow",
   "main": "index.js",
   "bin": {
     "yoshi-flow-editor": "./build/bin/yoshi-flow-editor.js"
