@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-editor",
-  "version": "4.23.5",
+  "version": "4.23.6",
   "description": "Yoshi Editor-Platform Flow",
   "main": "index.js",
   "bin": {
