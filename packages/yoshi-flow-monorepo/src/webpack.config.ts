@@ -87,8 +87,12 @@ export function createClientWebpackConfig(
       new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
     );
     clientConfig.output!.path = path.join(pkg.location, STATICS_DIR);
-    clientConfig.output!.filename = '[name].bundle.js';
-    clientConfig.output!.chunkFilename = '[name].chunk.js';
+    clientConfig.output!.filename = isDev
+      ? '[name].bundle.js'
+      : '[name].[contenthash:8].bundle.min.js';
+    clientConfig.output!.chunkFilename = isDev
+      ? '[name].chunk.js'
+      : '[name].[contenthash:8].chunk.min.js';
   }
 
   clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
