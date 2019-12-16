@@ -1,3 +1,7 @@
+process.on('unhandledRejection', error => {
+  throw error;
+});
+
 import execa from 'execa';
 import chalk from 'chalk';
 import semver from 'semver';
