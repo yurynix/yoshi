@@ -31,7 +31,9 @@ export const unprocessedModules = (p: string) => {
 
   // Hacky until `editor-elements`' build is ready
   const isEditorElements = (filePath: string) => {
-    return filePath.includes('editor-elements');
+    return (
+      config.name === 'thunderbolt-app' && filePath.includes('editor-elements')
+    );
   };
 
   const externalUnprocessedModules = ['wix-style-react/src'].concat(
