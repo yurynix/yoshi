@@ -32,7 +32,7 @@ export const unprocessedModules = (p: string) => {
   // Hacky until `editor-elements`' build is ready
   const isEditorElements = (filePath: string) => {
     return (
-      config.name === 'thunderbolt-app' && filePath.includes('editor-elements')
+      config.name === 'thunderbolt' && filePath.includes('editor-elements')
     );
   };
 
