@@ -1,15 +1,15 @@
 import { BusinessManagerModule } from '@wix/business-manager-api';
-import { IBMModuleParams } from '../framework/hooks/ModuleProvider';
+import { IBMModuleParams } from 'yoshi-flow-bm-runtime';
 
-export default (
+export default function init(
+  this: any,
   module: BusinessManagerModule,
   moduleParams: IBMModuleParams,
-  { set }: any,
-) => {
+) {
   console.log('🤖 MODULE INITIALIZING 🤖');
   console.log('Module Params:', moduleParams);
 
-  set({
+  this.setState({
     todos: [
       { id: '0', text: 'Go to work', done: true },
       { id: '1', text: 'Go home' },
@@ -18,4 +18,4 @@ export default (
   });
 
   // module.registerPageComponent(...);
-};
+}

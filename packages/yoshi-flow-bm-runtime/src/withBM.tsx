@@ -1,13 +1,13 @@
 import axios from 'axios';
-import React, { ComponentType, FC, useMemo } from 'react';
+import React, { ComponentType, FC } from 'react';
 import { wixAxiosConfig } from '@wix/wix-axios-config';
+import { ExperimentsBag } from '@wix/wix-experiments';
+import { BrowserClient } from '@sentry/browser';
 import TranslationProvider from './hooks/TranslationProvider';
 import ExperimentsProvider from './hooks/ExperimentsProvider';
 import ModuleProvider, { IBMModuleParams } from './hooks/ModuleProvider';
-import { ExperimentsBag } from '@wix/wix-experiments';
 import SentryProvider from './hooks/SentryProvider';
 import FedopsProvider from './hooks/FedopsProvider';
-import { BrowserClient } from '@sentry/browser';
 
 wixAxiosConfig(axios, {
   baseURL: '/',
@@ -19,9 +19,9 @@ const withBM = (
   translations: Record<string, string>,
   sentryClient: BrowserClient,
 ) => (Component: ComponentType) => {
-  const Wrapped: FC<IBMModuleParams> = ({ children, ...props }) => {
-    const experimentsOptions = useMemo(() => ({ experiments }), [experiments]);
+  const experimentsOptions = { experiments };
 
+  const Wrapped: FC<IBMModuleParams> = props => {
     return (
       <ModuleProvider moduleParams={props}>
         <TranslationProvider translations={translations}>

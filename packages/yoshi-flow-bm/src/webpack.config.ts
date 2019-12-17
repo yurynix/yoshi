@@ -4,14 +4,14 @@ import {
   createServerEntries,
 } from 'yoshi-common/webpack-utils';
 import { createBaseWebpackConfig } from 'yoshi-common/webpack.config';
-import { defaultEntry } from 'yoshi-helpers/constants';
 import { Config } from 'yoshi-config/build/config';
 import {
   isTypescriptProject,
-  isSingleEntry,
   inTeamCity,
   isProduction,
 } from 'yoshi-helpers/queries';
+import renderModule from './renderModule';
+import bmExternalModules from './bmExternalModules';
 
 const useTypeScript = isTypescriptProject();
 
@@ -22,7 +22,7 @@ const createDefaultOptions = (config: Config) => {
       : config.separateCss;
 
   return {
-    name: config.name as string,
+    name: config.name!,
     useTypeScript,
     typeCheckTypeScript: useTypeScript,
     useAngular: config.isAngularProject,
@@ -45,8 +45,6 @@ export function createClientWebpackConfig(
     forceEmitSourceMaps?: boolean;
   } = {},
 ): Configuration {
-  const entry = config.entry || defaultEntry;
-
   const defaultOptions = createDefaultOptions(config);
 
   const clientConfig = createBaseWebpackConfig({
@@ -56,14 +54,13 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
-    exportAsLibraryName: config.exports,
     cssModules: config.cssModules,
     ...defaultOptions,
   });
 
-  clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
+  clientConfig.externals = bmExternalModules;
+  clientConfig.entry = { module: renderModule() };
   clientConfig.resolve!.alias = config.resolveAlias;
-  clientConfig.externals = config.externals;
 
   return clientConfig;
 }
@@ -100,29 +97,4 @@ export function createServerWebpackConfig(
   };
 
   return serverConfig;
-}
-
-export function createWebWorkerWebpackConfig(
-  config: Config,
-  { isDev, isHot }: { isDev?: boolean; isHot?: boolean } = {},
-): Configuration {
-  const defaultOptions = createDefaultOptions(config);
-
-  const workerConfig = createBaseWebpackConfig({
-    configName: 'web-worker',
-    target: 'webworker',
-    isDev,
-    isHot,
-    ...defaultOptions,
-  });
-
-  workerConfig.output!.library = '[name]';
-  workerConfig.output!.libraryTarget = 'umd';
-  workerConfig.output!.globalObject = 'self';
-
-  workerConfig.entry = config.webWorkerEntry;
-
-  workerConfig.externals = config.webWorkerExternals;
-
-  return workerConfig;
 }

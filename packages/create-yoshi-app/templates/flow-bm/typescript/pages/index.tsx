@@ -1,10 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import { notifyViewFinishedLoading } from '@wix/business-manager-api';
+import {
+  useFedops,
+  useExperiments,
+  useTranslate,
+  useSentry,
+} from 'yoshi-flow-bm-runtime';
 import TodoList from '../src/TodoList';
-import useFedops from '../../framework/hooks/useFedops';
-import useExperiments from '../../framework/hooks/useExperiments';
-import useTranslate from '../../framework/hooks/useTranslate';
-import useSentry from '../../framework/hooks/useSentry';
 
 const Todo: FC = () => {
   const fedops = useFedops();
@@ -21,7 +23,7 @@ const Todo: FC = () => {
   return (
     <div>
       <h1>{t('app.title')}</h1>
-      {enabled('specs.yoshi.IsNew') ? 'A' : 'B'}
+      A/B Test Result: {enabled('specs.yoshi.IsNew') ? 'A' : 'B'}
       <TodoList />
     </div>
   );

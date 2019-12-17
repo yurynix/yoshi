@@ -1,5 +1,7 @@
 import path from 'path';
-import config from '../poc/config.json';
+
+const moduleId = ''; // require('./package.json').name or artifactId
+const { routeNamespace = moduleId, topology = {}, config = {} } = {}; // require('./src/config.json') OR somewhere
 
 const groupId = 'com.wixpress';
 const artifactId = '{%projectName%}';
@@ -13,7 +15,7 @@ export default (pages: Array<string>) => {
     const relativePath = path.relative(pagesDir, filePath);
 
     const route = path.join(
-      config.routeNamespace,
+      routeNamespace,
       ...relativePath.split(path.delimiter).slice(0, -1),
       name !== 'index' ? name : '',
     );
@@ -38,9 +40,9 @@ export default (pages: Array<string>) => {
     config: {
       topology: {
         staticsUrl: "<%= static_url('com.wixpress.{%projectName%}') %>",
-        ...(config.topology || {}),
+        ...topology,
       },
-      ...(config.config || {}),
+      ...config,
     },
     bundles: [
       {

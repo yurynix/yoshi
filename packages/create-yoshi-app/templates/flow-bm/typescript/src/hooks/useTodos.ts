@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ModuleRegistry } from 'react-module-container';
-import { getModuleId } from '../../../framework/utils';
 
-const getTodos = () =>
-  ModuleRegistry.invoke(`${getModuleId()}.methods.getTodos`, undefined);
+const getTodos = (): Promise<Array<Todo>> =>
+  ModuleRegistry.invoke(`{%projectName%}.methods.getTodos`, undefined);
 
 export interface Todo {
   id: string;

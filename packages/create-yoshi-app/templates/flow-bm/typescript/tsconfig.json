@@ -14,16 +14,16 @@
   },
   "include": [
     "./__tests__/**/*.ts",
-    "./src/**/*.spec.tsx",
-    "./src/framework/**/*.*",
-    "./src/poc/pages/**/*.*",
-    "./src/poc/components/**/*.*"
+    "./src/**/*.*",
+    "./components/**/*.*",
+    "./pages/**/*.*",
+    "./methods/**/*.*"
   ],
   "files": [
     "./jest-yoshi.config.js",
     "./node_modules/yoshi/types.d.ts",
+    "./node_modules/yoshi-flow-bm/types.d.ts",
     "./node_modules/jest-yoshi-preset/types.d.ts",
-    "./src/external-types.d.ts",
     "./dev/server.ts"
   ]
 }

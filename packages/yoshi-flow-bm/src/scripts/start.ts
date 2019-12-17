@@ -5,12 +5,10 @@ import chalk from 'chalk';
 import { TARGET_DIR, BUILD_DIR } from 'yoshi-config/paths';
 import DevEnvironment from 'yoshi-common/dev-environment';
 import openBrowser from 'yoshi-common/open-browser';
-import { isWebWorkerBundle } from 'yoshi-helpers/queries';
 import { cliCommand } from '../bin/yoshi-bm';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
-  createWebWorkerWebpackConfig,
 } from '../webpack.config';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
@@ -88,17 +86,8 @@ const start: cliCommand = async function(argv, config) {
     isHot: true,
   });
 
-  let webWorkerConfig;
-
-  if (isWebWorkerBundle) {
-    webWorkerConfig = createWebWorkerWebpackConfig(config, {
-      isDev: true,
-      isHot: true,
-    });
-  }
-
   const devEnvironment = await DevEnvironment.create({
-    webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
+    webpackConfigs: [clientConfig, serverConfig],
     publicPath: config.servers.cdn.url,
     https: shouldUseHttps,
     port: config.servers.cdn.port,

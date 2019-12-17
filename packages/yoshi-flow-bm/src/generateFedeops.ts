@@ -1,5 +1,4 @@
 // tslint:disable-next-line:no-reference
-/// <reference path="../external-types.d.ts" />
 
 import path from 'path';
 

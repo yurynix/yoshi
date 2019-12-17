@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
+import { useExperiments, useModuleParams } from 'yoshi-flow-bm-runtime';
 import TodoItem from './TodoItem';
 import AddTodo from './AddTodo';
 import useTodos from './hooks/useTodos';
-import useExperiments from '../../framework/hooks/useExperiments';
-import useModuleParams from '../../framework/hooks/useModuleParams';
 
 const TodoList: FC = () => {
   const { todos, addTodo, checkTodo } = useTodos();

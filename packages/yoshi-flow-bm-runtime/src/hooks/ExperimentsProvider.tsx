@@ -7,6 +7,8 @@ import {
 } from '@wix/wix-experiments-react';
 import Experiments from '@wix/wix-experiments';
 
+export { ExperimentsProviderProps } from '@wix/wix-experiments-react';
+
 export const ExperimentsContext = createContext<Experiments | null>(null);
 
 const Adapter = withExperiments<InjectedExperimentsProps>(
