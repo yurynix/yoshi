@@ -1,14 +1,14 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { Dictionary } from './types';
+import { FlowEditorModel } from './model';
 
 const viewerScriptWrapperPath =
   'yoshi-flow-editor-runtime/build/viewerScript.js';
 
 const viewerScriptWrapper = (
   generatedWidgetEntriesPath: string,
-  userController: Array<string>,
-  userInitApp: string,
+  model: FlowEditorModel,
 ) => {
   const generatedViewerScriptEntryPath = path.join(
     generatedWidgetEntriesPath,
@@ -34,20 +34,17 @@ const viewerScriptWrapper = (
   );
   const viewerScript = generatedViewerScriptEntryPath;
 
-  return userController.reduce(
-    (acc: Dictionary<string>, userControllerAbsolutePath) => {
-      const widgetName = path.basename(
-        path.dirname(userControllerAbsolutePath),
-      );
+  return model.components.reduce(
+    (acc: Dictionary<string>, component: FlowEditorModel['components'][0]) => {
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
-        `${widgetName}ViewerScript.js`,
+        `${component.name}ViewerScript.js`,
       );
 
       const generateControllerEntryContent = `
     import {createControllers as createControllersWrapper, initAppForPage as initAppForPageWrapper} from '${viewerScriptWrapperPath}';
-    import userController from '${userControllerAbsolutePath}';
-    import userInitApp from '${userInitApp}';
+    import userController from '${component.controller}';
+    import userInitApp from '${model.initApp}';
 
     export const initAppForPage = initAppForPageWrapper;
     export const createControllers = createControllersWrapper(userController, userInitApp);`;
@@ -57,7 +54,7 @@ const viewerScriptWrapper = (
         generateControllerEntryContent,
       );
 
-      acc[`${widgetName}viewerScript`] = generatedWidgetEntryPath;
+      acc[`${component.name}viewerScript`] = generatedWidgetEntryPath;
 
       return acc;
     },
