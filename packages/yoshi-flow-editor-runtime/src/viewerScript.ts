@@ -97,17 +97,6 @@ export const initAppForPage = async () =>
   // platformServicesApis,
   {};
 
-// TODO add sentry
-const getControllerSentryConfig = (ctrlName: string) => {
-  console.log(ctrlName);
-  return '';
-};
-const createMonitoring = (sentryDsn: string) => {
-  return (ex: any, options?: any) => {
-    console.error(ex, sentryDsn, options);
-    throw ex;
-  };
-};
 function emptyCtrl() {
   return {
     pageReady: (): any => {
@@ -121,39 +110,26 @@ export const getControllerFactory = (
   controllerInstances: any,
   type: string,
 ) => {
-  let ctrlFactory;
   if (controllerInstances && controllerInstances[type]) {
     const controllerFunction = Object.keys(controllerInstances[type]).filter(
       k => k.toLowerCase().indexOf('controller') > -1,
     )[0];
-    ctrlFactory = {
-      factory: controllerInstances[type][controllerFunction],
-      sentryDSN: getControllerSentryConfig(type),
-    };
+    return controllerInstances[type][controllerFunction];
   }
-  return ctrlFactory;
 };
 
 export const initController = (ctrlFactory: any, props: any) => {
-  let ctrl;
   if (ctrlFactory) {
-    const reportError = createMonitoring(ctrlFactory.sentryDSN);
-    // const setPropsWithErrorsReporting = p =>
-    //   props.setProps(withErrorReporting(reportError)(p));
-    ctrl = ctrlFactory.factory({
+    return ctrlFactory({
       config: props.config,
       compId: props.compId,
-      // setProps: setPropsWithErrorsReporting,
       setProps: props.setProps,
       platformAPIs: props.platformAPIs,
-      reportError,
       type: props.type,
       warmupData: props.warmupData,
       wixCodeApi: props.wixCodeApi,
     });
-    // ctrl = withErrorReporting(reportError)(ctrl);
   } else {
-    ctrl = emptyCtrl();
+    return emptyCtrl();
   }
-  return ctrl;
 };

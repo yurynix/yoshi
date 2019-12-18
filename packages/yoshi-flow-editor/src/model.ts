@@ -1,13 +1,15 @@
 import path from 'path';
 import globby from 'globby';
+import cosmiconfig from 'cosmiconfig';
 import { getProjectArtifactId } from 'yoshi-helpers/utils';
 
 export interface FlowEditorModel {
   appDefId: string;
-  projectName: string;
+  artifactId: string;
   initApp: string;
   components: Array<ComponentModel>;
   settings: Array<{ path: string; name: string }>;
+  splitControllers: boolean;
 }
 
 export enum COMPONENT_TYPE {
@@ -21,6 +23,10 @@ export interface ComponentModel {
   component: string;
   controller: string;
   id: string;
+}
+
+export interface InitialConfig {
+  splitControllers?: boolean;
 }
 
 function getComponentsModel(
@@ -62,8 +68,16 @@ function getPagesModel(
   return getComponentsModel(pages, controllers, COMPONENT_TYPE.PAGE);
 }
 
+const explorer = cosmiconfig('platform', {
+  searchPlaces: ['package.json', 'platform.config.js'],
+});
+
 export function generateFlowEditorModel(): FlowEditorModel {
-  const projectName = getProjectArtifactId();
+  // TODO: refactor to re-use yoshi-config's loadConfig
+  const result = explorer.searchSync(process.cwd());
+  const initialConfig = <InitialConfig>(result ? result.config : {});
+
+  const artifactId = getProjectArtifactId();
 
   const pages = globby.sync('./src/components/*/Page.js', {
     absolute: true,
@@ -84,20 +98,21 @@ export function generateFlowEditorModel(): FlowEditorModel {
   const widgetsModel = getWidgetsModel(widgets, controllers);
   const pagesModel = getPagesModel(pages, controllers);
 
-  if (!projectName) {
+  if (!artifactId) {
     throw new Error(`artifact id not provided.
     Please insert <artifactId>yourArtifactId</artifactId> in your "pom.xml"`);
   }
 
   return {
-    // TODO: figure out where appDefId should go
     appDefId: '',
-    projectName,
+    splitControllers: false,
+    artifactId,
     initApp,
     components: pagesModel.concat(widgetsModel),
     settings: settings.map(settingPath => ({
       path: settingPath,
       name: path.basename(path.dirname(settingPath)),
     })),
+    ...initialConfig,
   };
 }
