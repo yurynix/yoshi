@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.23.7 (2019-12-18)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-style-dependencies`
+  - [#1769](https://github.com/wix/yoshi/pull/1769) Revert `css-loader` upgrade ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#1763](https://github.com/wix/yoshi/pull/1763) Throw when publish fails ([@ranyitz](https://github.com/ranyitz))
+- [#1756](https://github.com/wix/yoshi/pull/1756) Decrease amount of audit warnings during installation ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
 ## 4.23.6 (2019-12-16)
 
 #### :bug: Bug Fix
