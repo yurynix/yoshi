@@ -82,13 +82,12 @@ export const getStyleLoaders = ({
   tpaStyle?: boolean;
 }): Array<webpack.Rule> => {
   const cssLoaderOptions = {
-    localsConvention: 'camelCase',
+    camelCase: true,
     sourceMap: separateCss,
-    modules: cssModules && {
-      localIdentName: isProduction ? localIdentName.short : localIdentName.long,
-      // Make sure every package has unique class names
-      hashPrefix: name,
-    },
+    localIdentName: isProduction ? localIdentName.short : localIdentName.long,
+    // Make sure every package has unique class names
+    hashPrefix: name,
+    modules: cssModules,
     // PostCSS, less-loader, sass-loader and resolve-url-loader, so
     // composition will work with import
     importLoaders: 4 + Number(tpaStyle),
@@ -179,7 +178,7 @@ export const getStyleLoaders = ({
                 options: {
                   ...cssLoaderOptions,
                   importLoaders: 2 + Number(tpaStyle),
-                  onlyLocals: true,
+                  exportOnlyLocals: true,
                   sourceMap: false,
                 },
               },
