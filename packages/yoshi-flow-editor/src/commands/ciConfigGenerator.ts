@@ -13,15 +13,20 @@ function generateViewerScriptUrl(baseUrl: string): string {
 function generateWidgetsUrls(
   components: FlowEditorModel['components'],
   baseUrl: string,
+  splitControllers: boolean,
 ): Array<string> {
-  return [
-    ...components.map(component =>
-      generateWidgetComponentUrl(component, baseUrl),
-    ),
-    ...components.map(component =>
+  let controllerConfig;
+  if (splitControllers) {
+    controllerConfig = components.map(component =>
       generateWidgetControllerUrl(component, baseUrl),
-    ),
-  ];
+    );
+  } else {
+    controllerConfig = [generateViewerScriptUrl(baseUrl)];
+  }
+
+  return controllerConfig.concat(
+    components.map(component => generateWidgetComponentUrl(component, baseUrl)),
+  );
 }
 
 function generateWidgetControllerUrl(
@@ -40,14 +45,13 @@ function generateWidgetComponentUrl(
 
 export function generateCiConfig(model: FlowEditorModel) {
   const appName = model.components[0].name;
-  const baseUrl = model.projectName;
+  const baseUrl = model.artifactId;
   const ciConfig = {
     app_def_id: model.appDefId,
     ignore_dependencies: 'clear',
     tpa_url_templates: [
       generatePlatformBaseUrl(appName, baseUrl),
-      generateViewerScriptUrl(baseUrl),
-      ...generateWidgetsUrls(model.components, baseUrl),
+      ...generateWidgetsUrls(model.components, baseUrl, model.splitControllers),
     ],
   };
 
