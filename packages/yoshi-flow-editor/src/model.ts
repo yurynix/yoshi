@@ -1,6 +1,5 @@
 import path from 'path';
 import globby from 'globby';
-import cosmiconfig from 'cosmiconfig';
 import { getProjectArtifactId } from 'yoshi-helpers/utils';
 
 export interface FlowEditorModel {
@@ -68,15 +67,7 @@ function getPagesModel(
   return getComponentsModel(pages, controllers, COMPONENT_TYPE.PAGE);
 }
 
-const explorer = cosmiconfig('platform', {
-  searchPlaces: ['package.json', 'platform.config.js'],
-});
-
 export function generateFlowEditorModel(): FlowEditorModel {
-  // TODO: refactor to re-use yoshi-config's loadConfig
-  const result = explorer.searchSync(process.cwd());
-  const initialConfig = <InitialConfig>(result ? result.config : {});
-
   const artifactId = getProjectArtifactId();
 
   const pages = globby.sync('./src/components/*/Page.js', {
@@ -113,6 +104,5 @@ export function generateFlowEditorModel(): FlowEditorModel {
       path: settingPath,
       name: path.basename(path.dirname(settingPath)),
     })),
-    ...initialConfig,
   };
 }

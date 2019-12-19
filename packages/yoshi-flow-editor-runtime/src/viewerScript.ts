@@ -97,15 +97,6 @@ export const initAppForPage = async () =>
   // platformServicesApis,
   {};
 
-function emptyCtrl() {
-  return {
-    pageReady: (): any => {
-      //
-    },
-    exports: () => ({}),
-  };
-}
-
 export const getControllerFactory = (
   controllerInstances: any,
   type: string,
@@ -119,17 +110,13 @@ export const getControllerFactory = (
 };
 
 export const initController = (ctrlFactory: any, props: any) => {
-  if (ctrlFactory) {
-    return ctrlFactory({
-      config: props.config,
-      compId: props.compId,
-      setProps: props.setProps,
-      platformAPIs: props.platformAPIs,
-      type: props.type,
-      warmupData: props.warmupData,
-      wixCodeApi: props.wixCodeApi,
-    });
-  } else {
-    return emptyCtrl();
-  }
+  return ctrlFactory({
+    config: props.config,
+    compId: props.compId,
+    setProps: props.setProps,
+    platformAPIs: props.platformAPIs,
+    type: props.type,
+    warmupData: props.warmupData,
+    wixCodeApi: props.wixCodeApi,
+  });
 };
