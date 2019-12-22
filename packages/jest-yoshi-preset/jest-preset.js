@@ -40,12 +40,6 @@ const supportedGlobalOverrideKeys = [
 const globalValidOverrides = pick(jestYoshiConfig, supportedGlobalOverrideKeys);
 
 const config = {
-  globalSetup: require.resolve(
-    './jest-environment-yoshi-puppeteer/globalSetup',
-  ),
-  globalTeardown: require.resolve(
-    './jest-environment-yoshi-puppeteer/globalTeardown',
-  ),
   watchPlugins: [
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
@@ -72,6 +66,12 @@ const config = {
           ),
           require.resolve('regenerator-runtime/runtime'),
         ],
+        globalSetup: require.resolve(
+          './jest-environment-yoshi-puppeteer/globalSetup',
+        ),
+        globalTeardown: require.resolve(
+          './jest-environment-yoshi-puppeteer/globalTeardown',
+        ),
       },
     ]
       .filter(({ displayName }) => {
