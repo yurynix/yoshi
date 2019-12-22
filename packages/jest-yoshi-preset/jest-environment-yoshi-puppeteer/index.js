@@ -38,6 +38,27 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
       console.warn(`Puppeteer page error: ${error.message}`);
       console.warn(error.stack);
     });
+
+    this.global.page.on('requestfailed', request => {
+      if (request.url().includes('//localhost:3200')) {
+        console.warn(
+          `We found that some of your static assets failed to load:
+
+          url: ${request.url()}, errText: ${
+            request.failure().errorText
+          }, method: ${request.method()}
+
+          Please try running 'npm start' in another terminal in order to start your CDN server.
+          `,
+        );
+      } else {
+        console.warn(
+          `url: ${request.url()}, errText: ${
+            request.failure().errorText
+          }, method: ${request.method()}`,
+        );
+      }
+    });
   }
 
   async teardown() {

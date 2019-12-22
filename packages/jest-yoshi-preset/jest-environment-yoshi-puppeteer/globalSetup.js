@@ -77,15 +77,10 @@ module.exports = async () => {
       false,
     );
 
-    if (!webpackDevServerProcess) {
-      throw new Error(
-        `Running E2E tests requires a server to serve static files. Could not find any dev server on port ${chalk.cyan(
-          servers.cdn.port,
-        )}. Please run 'npm start' from a different terminal window.`,
-      );
-    }
-
-    if (webpackDevServerProcess.cwd !== process.cwd()) {
+    if (
+      webpackDevServerProcess &&
+      webpackDevServerProcess.cwd !== process.cwd()
+    ) {
       throw new Error(
         `A different process (${chalk.cyan(
           webpackDevServerProcess.cwd,
