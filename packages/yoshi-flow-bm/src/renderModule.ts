@@ -1,39 +1,17 @@
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
+import { FlowBMModel } from './createFlowBMModel';
 
-const renderModule = () => {
-  const tempPath = path.resolve(__dirname, '../tmp');
-  const filePath = path.join(tempPath, 'module.ts');
-
-  const moduleId = require(path.join(process.cwd(), 'package.json'))
-    .name.split('/')
-    .pop();
-
-  const localePath = path.join(process.cwd(), 'translations');
-
-  const pages = ['index'].map(filename => ({
-    componentId: `${moduleId}.pages.${filename}`,
-    componentPath: path.join(process.cwd(), `pages/${filename}`),
-  })); // ./src/pages/**/*.{ts,tsx}
-
-  const components = ['LegacyTodoList'].map(filename => ({
-    componentId: `${moduleId}.components.${filename}`,
-    componentPath: path.join(process.cwd(), `components/${filename}`),
-  })); // ./src/components/**/*.{ts,tsx}
-
-  const methods = ['getTodos'].map(filename => ({
-    methodId: `${moduleId}.methods.${filename}`,
-    methodPath: path.join(process.cwd(), `methods/${filename}`),
-  })); // ./src/methods/**/*.{ts,tsx}
-
-  const moduleInitPath = path.join(process.cwd(), 'moduleInit'); // require('./src/moduleInit.ts')
-
-  const moduleConfig = {}; // require('./src/config.json') OR somewhere
-
-  fs.mkdirSync(tempPath, { recursive: true });
-  fs.writeFileSync(
-    filePath,
-    `import { createModule } from 'yoshi-flow-bm-runtime';
+const generateModuleCode = ({
+  moduleId,
+  components,
+  methods,
+  pages,
+  moduleInitPath,
+  localePath,
+  moduleConfig,
+}: FlowBMModel) => `
+import { createModule } from 'yoshi-flow-bm-runtime';
 
 createModule({
   moduleId: '${moduleId}',
@@ -66,11 +44,15 @@ createModule({
       }`,
     )}
   ], // ${JSON.stringify(methods)},
-  moduleInit: require('${moduleInitPath}').default,
+  ${moduleInitPath ? `moduleInit: require('${moduleInitPath}').default,` : ''}
   loadLocale: locale => import(\`${localePath}/\${locale}\`),
   config: ${JSON.stringify(moduleConfig)},
-});`,
-  );
+});`;
+
+const renderModule = (model: FlowBMModel) => {
+  const filePath = path.resolve(__dirname, '../tmp/module.ts');
+
+  fs.outputFileSync(filePath, generateModuleCode(model));
 
   return filePath;
 };

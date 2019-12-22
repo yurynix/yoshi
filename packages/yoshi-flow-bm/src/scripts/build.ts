@@ -13,11 +13,13 @@ import {
   createClientWebpackConfig,
   createServerWebpackConfig,
 } from '../webpack.config';
-import { cliCommand } from '../bin/yoshi-bm';
+import { CliCommand } from '../bin/yoshi-bm';
+import createFlowBMModel from '../createFlowBMModel';
+import renderModule from '../renderModule';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
-const build: cliCommand = async function(argv, config) {
+const build: CliCommand = async function(argv, config) {
   const args = arg(
     {
       // Types
@@ -64,6 +66,8 @@ const build: cliCommand = async function(argv, config) {
     fs.emptyDir(join(TARGET_DIR)),
   ]);
 
+  const model = createFlowBMModel();
+
   if (inTeamCity()) {
     const petriSpecs = (await import('yoshi-common/sync-petri-specs')).default;
     const wixMavenStatics = (await import('yoshi-common/maven-statics'))
@@ -84,11 +88,13 @@ const build: cliCommand = async function(argv, config) {
     isDev: true,
     forceEmitSourceMaps,
   });
+  clientDebugConfig.entry = { module: renderModule(model) };
 
   const clientOptimizedConfig = createClientWebpackConfig(config, {
     isAnalyze,
     forceEmitSourceMaps,
   });
+  clientOptimizedConfig.entry = { module: renderModule(model) };
 
   const serverConfig = createServerWebpackConfig(config, {
     isDev: true,

@@ -10,7 +10,6 @@ import {
   inTeamCity,
   isProduction,
 } from 'yoshi-helpers/queries';
-import renderModule from './renderModule';
 import bmExternalModules from './bmExternalModules';
 
 const useTypeScript = isTypescriptProject();
@@ -59,7 +58,6 @@ export function createClientWebpackConfig(
   });
 
   clientConfig.externals = bmExternalModules;
-  clientConfig.entry = { module: renderModule() };
   clientConfig.resolve!.alias = config.resolveAlias;
 
   return clientConfig;

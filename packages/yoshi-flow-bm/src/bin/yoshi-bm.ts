@@ -13,10 +13,10 @@ import verifyNodeVersion from 'yoshi-common/verify-node-version';
 
 const defaultCommand = 'start';
 
-export type cliCommand = (argv: Array<string>, config: Config) => Promise<void>;
+export type CliCommand = (argv: Array<string>, config: Config) => Promise<void>;
 
 const commands: {
-  [command: string]: () => Promise<{ default: cliCommand }>;
+  [command: string]: () => Promise<{ default: CliCommand }>;
 } = {
   build: () => import('../scripts/build'),
   start: () => import('../scripts/start'),
