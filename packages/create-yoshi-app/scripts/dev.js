@@ -183,7 +183,7 @@ async function init() {
   }
 
   // symlink yoshi's packages
-  symlinkModules(workingDir);
+  await symlinkModules(workingDir);
 
   upsertProjectInCache(templateModel, workingDir);
 

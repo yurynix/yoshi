@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const execa = require('execa');
+const virtualDirectory = require('virtual-directory').default;
 
 const getYoshiPackages = () => {
   const { stdout: rawPackages } = execa.sync('npx lerna list --all --json', {
@@ -12,13 +13,14 @@ const getYoshiPackages = () => {
 
 module.exports.getYoshiModulesList = () => getYoshiPackages().map(x => x.name);
 
-module.exports.symlinkModules = repoDirectory => {
+module.exports.symlinkModules = async repoDirectory => {
   const parentDirectory = path.dirname(repoDirectory);
 
   // Link yoshi's node_modules to the parent directory of the tested module
-  fs.ensureSymlinkSync(
+  await virtualDirectory(
     path.join(__dirname, '../../node_modules'),
     path.join(parentDirectory, 'node_modules'),
+    ['@types/react', '@types/react-dom'],
   );
 
   const symlinkPackage = packageName => {

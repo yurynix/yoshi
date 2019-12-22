@@ -120,6 +120,7 @@
     "typescript": "3.7.2",
     "verdaccio": "^4.3.5",
     "vfile-message": "^2.0.2",
+    "virtual-directory": "^1.0.13",
     "wait-for-expect": "^1.2.0",
     "wait-port": "^0.2.2"
   },
