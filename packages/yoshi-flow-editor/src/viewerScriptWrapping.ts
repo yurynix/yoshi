@@ -16,17 +16,8 @@ const viewerScriptWrapper = (
   );
 
   const generateViewerScriptEntryContent = `
-    import {getControllerFactory, initController} from '${viewerScriptWrapperPath}';
-
-    const createControllers = (controllerConfigs, controllerInstances) => {
-      return controllerConfigs.map(props => {
-        const ctrlFactory = getControllerFactory(controllerInstances, props.type);
-        const ctrl = initController(ctrlFactory, props);
-        return Promise.resolve(ctrl);
-      });
-    };
-    export default createControllers;
-  `;
+    import {createUnifiedControllers} from '${viewerScriptWrapperPath}';
+    export default createUnifiedControllers;`;
 
   fs.outputFileSync(
     generatedViewerScriptEntryPath,

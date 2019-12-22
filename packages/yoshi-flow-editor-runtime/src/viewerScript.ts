@@ -97,10 +97,7 @@ export const initAppForPage = async () =>
   // platformServicesApis,
   {};
 
-export const getControllerFactory = (
-  controllerInstances: any,
-  type: string,
-) => {
+const getCreateController = (controllerInstances: any, type: string) => {
   if (controllerInstances && controllerInstances[type]) {
     const controllerFunction = Object.keys(controllerInstances[type]).filter(
       k => k.toLowerCase().indexOf('controller') > -1,
@@ -109,14 +106,25 @@ export const getControllerFactory = (
   }
 };
 
-export const initController = (ctrlFactory: any, props: any) => {
-  return ctrlFactory({
-    config: props.config,
-    compId: props.compId,
-    setProps: props.setProps,
-    platformAPIs: props.platformAPIs,
-    type: props.type,
-    warmupData: props.warmupData,
-    wixCodeApi: props.wixCodeApi,
+export const createUnifiedControllers = (
+  controllerConfigs: any,
+  controllerInstances: any,
+) => {
+  return controllerConfigs.map((props: any) => {
+    const createController = getCreateController(
+      controllerInstances,
+      props.type,
+    );
+    return Promise.resolve(
+      createController({
+        config: props.config,
+        compId: props.compId,
+        setProps: props.setProps,
+        platformAPIs: props.platformAPIs,
+        type: props.type,
+        warmupData: props.warmupData,
+        wixCodeApi: props.wixCodeApi,
+      }),
+    );
   });
 };
