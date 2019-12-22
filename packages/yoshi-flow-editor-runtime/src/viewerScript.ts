@@ -1,3 +1,4 @@
+import { IWidgetControllerConfig } from '@wix/native-components-infra/dist/es/src/types/types';
 import { createInstances, objectPromiseAll, fetchFrameworkData } from './utils';
 
 let frameworkData: any;
@@ -5,78 +6,81 @@ let frameworkData: any;
 export const createControllers = (
   createController: Function,
   initApp: Function,
-) => (controllerConfigs: any) => {
-  const wrappedControllers = controllerConfigs.map((controllerConfig: any) => {
-    const { appParams, platformAPIs, wixCodeApi, csrfToken } = controllerConfig;
+) => (controllerConfigs: Array<IWidgetControllerConfig>) => {
+  const wrappedControllers = controllerConfigs.map(
+    (controllerConfig: IWidgetControllerConfig) => {
+      const { appParams, platformAPIs, wixCodeApi } = controllerConfig;
 
-    initializeExperiments();
+      initializeExperiments();
 
-    const appData = initApp({
-      controllerConfigs,
-      frameworkData,
-      appParams,
-      platformAPIs,
-      wixCodeApi,
-      csrfToken,
-    });
-
-    const { setProps } = controllerConfig;
-
-    const setState = (newState: any) => {
-      const updatedState = {
-        ...context.state,
-        ...newState,
-      };
-
-      // Track state
-      context.state = updatedState;
-
-      // Run state change callback
-      wrappedController.then((userController: any) => {
-        userController.stateChange();
+      const appData = initApp({
+        controllerConfigs,
+        frameworkData,
+        appParams,
+        platformAPIs,
+        wixCodeApi,
       });
 
-      // Update render cycle
-      return setProps(updatedState);
-    };
+      const { setProps } = controllerConfig;
 
-    const context = {
-      state: {},
-      setState,
-    };
-
-    const userControllerPromise = createController.call(context, {
-      controllerConfig,
-      frameworkData,
-      appData,
-    });
-
-    const wrappedController = Promise.resolve(userControllerPromise).then(
-      (userController: any) => {
-        return {
-          ...userController,
-          pageReady: async (...args: Array<any>) => {
-            const awaitedFrameworkData = await objectPromiseAll(frameworkData);
-
-            setProps({
-              __publicData__: controllerConfig.config.publicData,
-              ...awaitedFrameworkData,
-              // Set initial state
-              ...context.state,
-              // Set methods
-              ...userController.methods,
-            });
-
-            // Optional `pageReady`
-            if (userController.pageReady) {
-              return userController.pageReady(setProps, ...args);
-            }
-          },
+      const setState = (newState: any) => {
+        const updatedState = {
+          ...context.state,
+          ...newState,
         };
-      },
-    );
-    return wrappedController;
-  });
+
+        // Track state
+        context.state = updatedState;
+
+        // Run state change callback
+        wrappedController.then((userController: any) => {
+          userController.stateChange();
+        });
+
+        // Update render cycle
+        return setProps(updatedState);
+      };
+
+      const context = {
+        state: {},
+        setState,
+      };
+
+      const userControllerPromise = createController.call(context, {
+        controllerConfig,
+        frameworkData,
+        appData,
+      });
+
+      const wrappedController = Promise.resolve(userControllerPromise).then(
+        (userController: any) => {
+          return {
+            ...userController,
+            pageReady: async (...args: Array<any>) => {
+              const awaitedFrameworkData = await objectPromiseAll(
+                frameworkData,
+              );
+
+              setProps({
+                __publicData__: controllerConfig.config.publicData,
+                ...awaitedFrameworkData,
+                // Set initial state
+                ...context.state,
+                // Set methods
+                ...userController.methods,
+              });
+
+              // Optional `pageReady`
+              if (userController.pageReady) {
+                return userController.pageReady(setProps, ...args);
+              }
+            },
+          };
+        },
+      );
+      return wrappedController;
+    },
+  );
 
   return wrappedControllers;
 };
@@ -107,10 +111,10 @@ const getCreateController = (controllerInstances: any, type: string) => {
 };
 
 export const createUnifiedControllers = (
-  controllerConfigs: any,
+  controllerConfigs: Array<IWidgetControllerConfig>,
   controllerInstances: any,
 ) => {
-  return controllerConfigs.map((props: any) => {
+  return controllerConfigs.map(props => {
     const createController = getCreateController(
       controllerInstances,
       props.type,
