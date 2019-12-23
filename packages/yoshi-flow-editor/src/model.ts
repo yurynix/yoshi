@@ -1,7 +1,7 @@
 import path from 'path';
 import globby from 'globby';
 import { getProjectArtifactId } from 'yoshi-helpers/utils';
-import resolveFrom from 'resolve-from';
+import resolve from 'resolve';
 import { Config } from 'yoshi-config/build/config';
 
 export interface FlowEditorModel {
@@ -23,25 +23,28 @@ export interface ComponentModel {
   id: string;
 }
 
+const extensions = ['.tsx', '.ts', '.js'];
+function resolveFrom(dir: string, fileName: string) {
+  try {
+    return resolve.sync(path.join(dir, fileName), {
+      extensions,
+    });
+  } catch (error) {}
+}
+
 export async function generateFlowEditorModel(
   config: Config,
 ): Promise<FlowEditorModel> {
-  if (!config.name) {
-    throw new Error(`Package name not provided.
-      Please fill in "name" property in your "package.json" file`);
-  }
   const artifactId = getProjectArtifactId();
   if (!artifactId) {
     throw new Error(`artifact id not provided.
     Please insert <artifactId>yourArtifactId</artifactId> in your "pom.xml"`);
   }
 
-  const initApp = resolveFrom.silent('src/components', './app');
+  const initApp = resolveFrom(path.join(process.cwd(), 'src'), 'app');
   if (!initApp) {
     throw new Error(`Missing app file.
-    Please create "app.js/ts" file in "${path.resolve(
-      './src/componets',
-    )}" directory`);
+    Please create "app.js/ts" file in "${path.resolve('./src')}" directory`);
   }
 
   const componentsDirectories = await globby('./src/components/*', {
@@ -52,15 +55,11 @@ export async function generateFlowEditorModel(
   const componentsModel: Array<ComponentModel> = componentsDirectories.map(
     componentDirectory => {
       const componentName = path.basename(componentDirectory);
-      const resovleFromComponentDir = resolveFrom.silent.bind(
-        null,
-        componentDirectory,
-      );
 
-      const widgetFileName = resovleFromComponentDir('./Widget');
-      const pageFileName = resovleFromComponentDir('./Page');
-      const controllerFileName = resovleFromComponentDir('./controller');
-      const settingsFileName = resovleFromComponentDir('./Settings');
+      const widgetFileName = resolveFrom(componentDirectory, 'Widget');
+      const pageFileName = resolveFrom(componentDirectory, 'Page');
+      const controllerFileName = resolveFrom(componentDirectory, 'controller');
+      const settingsFileName = resolveFrom(componentDirectory, 'Settings');
 
       if (!controllerFileName) {
         throw new Error(`Missing controller file for the component in "${componentDirectory}".
@@ -68,7 +67,7 @@ export async function generateFlowEditorModel(
       }
       if (!widgetFileName && !pageFileName) {
         throw new Error(`Missing widget or page file for the component in "${componentDirectory}".
-        Please create either Widget.js/ts or Page.js/ts file in "${componentDirectory}" directory`);
+        Please create either Widget.js/ts/tsx or Page.js/ts/tsx file in "${componentDirectory}" directory`);
       }
 
       return {
@@ -84,7 +83,7 @@ export async function generateFlowEditorModel(
   );
 
   return {
-    appName: config.name,
+    appName: config.name!,
     // TODO: import from named export
     appDefId: '',
     artifactId,

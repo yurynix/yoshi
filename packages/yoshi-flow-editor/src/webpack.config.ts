@@ -1,9 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
-import {
-  validateServerEntry,
-  createServerEntries,
-} from 'yoshi-common/webpack-utils';
+import { createServerEntries } from 'yoshi-common/webpack-utils';
 import { createBaseWebpackConfig } from 'yoshi-common/webpack.config';
 import { Config } from 'yoshi-config/build/config';
 import {
@@ -27,6 +24,7 @@ const createDefaultOptions = (config: Config) => {
     useAngular: config.isAngularProject,
     devServerUrl: config.servers.cdn.url,
     separateCss,
+    enhancedTpaStyle: true,
   };
 };
 
@@ -55,14 +53,29 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
-    exportAsLibraryName: config.exports,
+    exportAsLibraryName: '[name]',
     cssModules: config.cssModules,
     ...defaultOptions,
   });
 
   clientConfig.entry = customEntry;
   clientConfig.resolve!.alias = config.resolveAlias;
-  clientConfig.externals = config.externals;
+  clientConfig.externals = {
+    react: {
+      amd: 'react',
+      umd: 'react',
+      commonjs: 'react',
+      commonjs2: 'react',
+      root: 'React',
+    },
+    'react-dom': {
+      amd: 'reactDOM',
+      umd: 'react-dom',
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      root: 'ReactDOM',
+    },
+  };
 
   return clientConfig;
 }
@@ -82,18 +95,13 @@ export function createServerWebpackConfig(
   });
 
   serverConfig.entry = async () => {
-    const serverEntry = validateServerEntry({
-      extensions: serverConfig.resolve!.extensions as Array<string>,
-      yoshiServer: config.yoshiServer,
-    });
+    const serverEntry = '../node_modules/yoshi-flow-editor/build/server/server';
 
     let entryConfig = config.yoshiServer
       ? createServerEntries(serverConfig.context as string)
       : {};
 
-    if (serverEntry) {
-      entryConfig = { ...entryConfig, server: serverEntry };
-    }
+    entryConfig = { ...entryConfig, server: serverEntry };
 
     return entryConfig;
   };

@@ -29,18 +29,12 @@ const start: cliCommand = async function(argv, config, model) {
       '--https': Boolean,
       '--debug': Boolean,
       '--debug-brk': Boolean,
-
-      // Aliases
-      '--entry-point': '--server',
-      '-e': '--server',
-      '--ssl': '--https',
     },
     { argv },
   );
 
   const {
     '--help': help,
-    '--server': serverEntry = 'index.js',
     '--url': url,
     '--production': shouldRunAsProduction,
     '--https': shouldUseHttps = config.servers.cdn.ssl,
@@ -57,7 +51,6 @@ const start: cliCommand = async function(argv, config, model) {
 
       Options
         --help, -h      Displays this message
-        --server        The main file to start your server
         --url           Opens the browser with the supplied URL
         --production    Start using unminified production build
         --https         Serve the app bundle on https
@@ -104,8 +97,12 @@ const start: cliCommand = async function(argv, config, model) {
     https: shouldUseHttps,
     webpackDevServerPort: config.servers.cdn.port,
     appName: config.name,
-    serverFilePath: serverEntry,
-    startUrl: url || config.startUrl,
+    serverFilePath: require.resolve('yoshi-flow-editor/build/server/server.js'),
+    startUrl: url ||
+      config.startUrl || [
+        `https://localhost:3000/editor/todo`,
+        'https://localhost:3000/settings/todo',
+      ],
     enableClientHotUpdates: Boolean(config.hmr),
     createEjsTemplates: config.experimentalBuildHtml,
   });

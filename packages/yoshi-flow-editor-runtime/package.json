@@ -11,7 +11,7 @@
   "author": "Ran Yitzhaki",
   "license": "ISC",
   "dependencies": {
-    "@wix/native-components-infra": "^1.0.571",
+    "@wix/native-components-infra": "^1.0.668",
     "@wix/wix-experiments": "^3.0.218",
     "prop-types": "^15.7.2",
     "tpa-style-webpack-plugin": "^1.3.11"

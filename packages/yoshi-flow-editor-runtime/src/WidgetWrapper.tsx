@@ -1,21 +1,18 @@
 import React, { Suspense } from 'react';
-import { getProcessedCss } from 'tpa-style-webpack-plugin/runtime';
-import {
-  IWixAPI,
-  IHostProps,
-} from '@wix/native-components-infra/dist/src/types/types';
+import { IHostProps } from '@wix/native-components-infra/dist/src/types/types';
+import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
 import { createInstances } from './createInstances';
 import { ControllerProvider } from './react/ControllerProvider';
 import { PublicDataProviderEditor } from './react/PublicDataProviderEditor';
 import { PublicDataProviderViewer } from './react/PublicDataProviderViewer';
 import { ErrorBoundary } from './react/ErrorBoundary';
+import { IControllerContext } from './react/ControllerContext';
 
 declare global {
   interface Window {
-    Wix: undefined | IWixAPI;
+    Wix: IWixStatic;
   }
 }
-
 // TODO - improve this type or bring from controller wrapper
 interface IFrameworkProps {
   __publicData__: any;
@@ -28,12 +25,8 @@ const PublicDataProvider: typeof React.Component =
     : PublicDataProviderEditor;
 
 const WidgetWrapper = (UserComponent: typeof React.Component) => (
-  props: IHostProps & IFrameworkProps,
+  props: IHostProps & IFrameworkProps & IControllerContext,
 ) => {
-  console.log(props.style);
-  const css = getProcessedCss(props.style);
-  console.log(css);
-
   return (
     <div>
       <link
@@ -41,7 +34,7 @@ const WidgetWrapper = (UserComponent: typeof React.Component) => (
         rel="stylesheet"
         type="text/css"
       />
-      <style dangerouslySetInnerHTML={{ __html: css }} />
+
       <ErrorBoundary handleException={error => console.log(error)}>
         <Suspense fallback={<div>Loading...</div>}>
           <PublicDataProvider data={props.__publicData__} Wix={window.Wix}>

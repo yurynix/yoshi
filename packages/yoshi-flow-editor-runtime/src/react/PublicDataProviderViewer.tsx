@@ -1,21 +1,21 @@
 import React from 'react';
-import PropTypes, { InferProps } from 'prop-types';
 import { PublicDataContext, PublicDataType } from './PublicDataContext';
 
 // Later it can be passed into a hook as `usePublicData(scope)`
 const scope = 'COMPONENT';
 
-export class PublicDataProviderViewer extends React.Component<
-  InferProps<typeof PublicDataProviderViewer.propTypes>
-> {
-  static propTypes = {
-    data: PropTypes.any.isRequired,
-  };
+export interface PublicDataProviderViewerProps {
+  data: Record<string, any>;
+}
 
+export class PublicDataProviderViewer extends React.Component<
+  PublicDataProviderViewerProps
+> {
   handleGetParam = (key: string): any => {
     try {
       return this.props.data[scope][key];
     } catch (e) {
+      console.error(new Error(`key "${key}" wasn't found on public data:`));
       console.error(e);
       return undefined;
     }

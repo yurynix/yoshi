@@ -1,5 +1,5 @@
 import React from 'react';
-import { InferProps, shape, func, string } from 'prop-types';
+import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
 import { PublicDataContext, PublicDataType } from './PublicDataContext';
 
 // Later it can be passed into a hook as `usePublicData(scope)`
@@ -8,27 +8,17 @@ const scope = 'COMPONENT';
 interface IState {
   ready: boolean;
   data: Record<string, any> | null;
-  readyPromise: Promise<boolean> | null;
+  readyPromise?: Promise<boolean>;
+}
+
+export interface PublicDataProviderEditorProps {
+  Wix: IWixStatic;
 }
 
 export class PublicDataProviderEditor extends React.Component<
-  InferProps<typeof PublicDataProviderEditor.propTypes>
+  PublicDataProviderEditorProps,
+  IState
 > {
-  static propTypes = {
-    Wix: shape({
-      addEventListener: func.isRequired,
-      Events: shape({
-        PUBLIC_DATA_CHANGED: string.isRequired,
-      }).isRequired,
-      Data: shape({
-        Public: shape({
-          set: func.isRequired,
-          getAll: func.isRequired,
-        }).isRequired,
-      }).isRequired,
-    }).isRequired,
-  };
-
   state: IState = {
     ready: false,
     data: null,

@@ -24,6 +24,6 @@
       window.__STATICS_BASE_URL__ = '${clientTopology.staticsBaseUrl}';
     </script>
 
-    <script src="${clientTopology.staticsBaseUrl}${editorAppBundle}.bundle#if(!${debug}).min#{end}.js"></script>
+    <script src="${clientTopology.staticsBaseUrl}${widgetName}EditorMode.bundle#if(!${debug}).min#{end}.js"></script>
   </body>
 </html>
