@@ -35,13 +35,13 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
     this.global.page.setDefaultNavigationTimeout(10 * 1000);
 
     this.global.page.on('pageerror', error => {
-      console.warn(`Puppeteer page error: ${error.message}`);
-      console.warn(error.stack);
+      this.global.console.warn(`Puppeteer page error: ${error.message}`);
+      this.global.console.warn(error.stack);
     });
 
     this.global.page.on('requestfailed', request => {
       if (request.url().includes('//localhost:3200')) {
-        console.warn(
+        this.global.console.warn(
           `We found that some of your static assets failed to load:
 
           url: ${request.url()}, errText: ${
@@ -52,7 +52,7 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
           `,
         );
       } else {
-        console.warn(
+        this.global.console.warn(
           `url: ${request.url()}, errText: ${
             request.failure().errorText
           }, method: ${request.method()}`,

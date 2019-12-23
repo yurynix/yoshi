@@ -8,6 +8,10 @@ app.get('/other', async (req, res) => {
   res.send(await ejs.renderFile('./src/other.ejs'));
 });
 
+app.get('/request-errors', async (req, res) => {
+  res.send(await ejs.renderFile('./src/request-errors.ejs'));
+});
+
 app.get('/web-worker-bundle.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'statics/worker.bundle.js'));
 });
