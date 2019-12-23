@@ -20,7 +20,11 @@ module.exports.symlinkModules = async repoDirectory => {
   await virtualDirectory(
     path.join(__dirname, '../../node_modules'),
     path.join(parentDirectory, 'node_modules'),
-    ['@types/react', '@types/react-dom'],
+    [
+      '@types/react',
+      '@types/react-dom',
+      'node_modules/yoshi-flow-legacy/node_modules/@types/react',
+    ],
   );
 
   const symlinkPackage = packageName => {
