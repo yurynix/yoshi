@@ -74,7 +74,8 @@ const build: cliCommand = async function(argv, config, model) {
   ]);
 
   await copyTemplates();
-  const model = generateFlowEditorModel();
+
+  const model = await generateFlowEditorModel();
 
   if (inTeamCity()) {
     await writeCiConfig(model);
