@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.24.0 (2019-12-25)
+
+#### :rocket: New Feature
+
+- `yoshi-common`
+  - [#1765](https://github.com/wix/yoshi/pull/1765) HtmlWebpackPlugin: Inline CSS chunks / don't inject chunks ([@ronami](https://github.com/ronami))
+- `jest-yoshi-preset`
+  - [#1775](https://github.com/wix/yoshi/pull/1775) Move global setup/teardown to e2e test environment ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1782](https://github.com/wix/yoshi/pull/1782) Support split chunks config in monorepos ([@ronami](https://github.com/ronami))
+- `yoshi-common`
+  - [#1774](https://github.com/wix/yoshi/pull/1774) Ignore browser mainField when target `node` ([@tompere](https://github.com/tompere))
+
 ## 4.23.7 (2019-12-18)
 
 #### :bug: Bug Fix
