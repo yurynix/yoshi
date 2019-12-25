@@ -34,7 +34,7 @@
       "@wix/business-manager-api": "latest",
       "husky": "^1.3.1",
       "jest-yoshi-preset": "^4.1.0",
-      "lint-staged": "^8.1.5",
+      "lint-staged": "^9.5.0",
       "puppeteer": "^1.10.0",
       "react": "16.8.3",
       "react-dom": "16.8.3",
@@ -52,12 +52,7 @@
       "@wix/wix-axios-config": "latest"
     },
     "lint-staged": {
-      "linters": {
-        "*.{js,ts,tsx,scss,less}": "yoshi lint"
-      },
-      "ignore": [
-        "**/*.d.ts"
-      ]
+      "*.{js,ts,tsx,scss,less}": "yoshi lint"
     },
     "jest": {
       "preset": "jest-yoshi-preset"
