@@ -10,7 +10,7 @@ import {
   createServerWebpackConfig,
   createWebWorkerWebpackConfig,
 } from '../webpack.config';
-import { generateFlowEditorModel } from '../model';
+import { FlowEditorModel } from '../model';
 import {
   buildEditorPlatformEntries,
   buildViewerScriptEntry,
@@ -81,8 +81,6 @@ const start: cliCommand = async function(argv, config, model) {
     fs.emptyDir(join(BUILD_DIR)),
     fs.emptyDir(join(TARGET_DIR)),
   ]);
-
-  const model = await generateFlowEditorModel();
 
   const clientConfig = createClientWebpackConfig(config, {
     isDev: true,
