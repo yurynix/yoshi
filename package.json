@@ -38,7 +38,8 @@
     "test:integration:start": "npm run test:start --prefix ./packages/yoshi-flow-legacy",
     "test:integration:test": "npm run test:test --prefix ./packages/yoshi-flow-legacy",
     "test:integration:others": "npm run test:others --prefix ./packages/yoshi-flow-legacy",
-    "website:dev": "npm start --prefix './website'"
+    "website:dev": "npm start --prefix './website'",
+    "pr-postbuild": "npm run build --prefix ./website && teamcity-surge-autorelease --dist=./website/build"
   },
   "husky": {
     "hooks": {
@@ -109,6 +110,7 @@
     "shelljs": "^0.8.2",
     "string-length": "^3.1.0",
     "strip-ansi": "^4.0.0",
+    "teamcity-surge-autorelease": "^1.0.299",
     "tempy": "^0.3.0",
     "terminate": "^2.1.0",
     "ts-jest": "^24.0.2",
