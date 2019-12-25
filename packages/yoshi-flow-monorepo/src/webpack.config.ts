@@ -16,9 +16,16 @@ import {
 } from 'yoshi-helpers/queries';
 import { STATICS_DIR } from 'yoshi-config/paths';
 import ManifestPlugin from 'yoshi-common/build/manifest-webpack-plugin';
+import { isObject } from 'lodash';
 import { PackageGraphNode } from './load-package-graph';
 
 const useTypeScript = isTypescriptProject();
+
+const defaultSplitChunksConfig = {
+  chunks: 'all',
+  name: 'commons',
+  minChunks: 2,
+};
 
 const createDefaultOptions = (rootConfig: Config, pkg: PackageGraphNode) => {
   const separateCss =
@@ -98,6 +105,16 @@ export function createClientWebpackConfig(
   clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
   clientConfig.resolve!.alias = pkg.config.resolveAlias;
   clientConfig.externals = pkg.config.externals;
+
+  const useSplitChunks = pkg.config.splitChunks;
+
+  if (useSplitChunks) {
+    const splitChunksConfig = isObject(useSplitChunks)
+      ? useSplitChunks
+      : defaultSplitChunksConfig;
+
+    clientConfig!.optimization!.splitChunks = splitChunksConfig as webpack.Options.SplitChunksOptions;
+  }
 
   return clientConfig;
 }
