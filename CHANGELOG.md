@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.25.0 (2019-12-26)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#1755](https://github.com/wix/yoshi/pull/1755) [create-yoshi-app] Upgrade `lint-staged` for templates to `9.5.0` ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1784](https://github.com/wix/yoshi/pull/1784) Change when a chunk is inlined to be based on its name (.inline) ([@ronami](https://github.com/ronami))
+
 ## 4.24.0 (2019-12-25)
 
 #### :rocket: New Feature
