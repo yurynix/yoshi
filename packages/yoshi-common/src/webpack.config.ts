@@ -435,7 +435,7 @@ export function createBaseWebpackConfig({
                           ? filename
                           : prependNameWith(filename, 'min'),
                         template: `${customLoader}!${templatePath}`,
-                        minify: !isDev as false,
+                        minify: false,
                         inject: false,
                         templateParameters: (
                           compilation,
@@ -443,27 +443,23 @@ export function createBaseWebpackConfig({
                           assetTags,
                           options,
                         ) => {
+                          // Add `async` attribute to all non-inline scripts
+                          assetTags.bodyTags.forEach(tag => {
+                            if (
+                              tag.tagName === 'script' &&
+                              tag.attributes.src
+                            ) {
+                              tag.attributes.async = '';
+                            }
+                          });
+
+                          // Values available for injection in EJS template
                           return {
                             compilation: compilation,
                             webpackConfig: compilation.options,
                             tags: {
-                              head: assetTags.headTags,
-                              body: assetTags.bodyTags.map(tag => {
-                                if (
-                                  tag.tagName === 'script' &&
-                                  tag.attributes.src
-                                ) {
-                                  return {
-                                    ...tag,
-                                    attributes: {
-                                      ...tag.attributes,
-                                      defer: '',
-                                    },
-                                  };
-                                }
-
-                                return tag;
-                              }),
+                              css: assetTags.headTags,
+                              js: assetTags.bodyTags,
                             },
                             files: assets,
                             options: options,
