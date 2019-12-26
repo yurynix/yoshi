@@ -39,7 +39,7 @@
     "test:integration:test": "npm run test:test --prefix ./packages/yoshi-flow-legacy",
     "test:integration:others": "npm run test:others --prefix ./packages/yoshi-flow-legacy",
     "website:dev": "npm start --prefix './website'",
-    "pr-postbuild": "npm run build --prefix ./website && teamcity-surge-autorelease --dist=./website/build"
+    "website:surge": "ts-node -T scripts/publishWebsiteSurge.ts"
   },
   "husky": {
     "hooks": {
