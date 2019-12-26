@@ -36,12 +36,10 @@ export async function generateFlowEditorModel(
     Please insert <artifactId>yourArtifactId</artifactId> in your "pom.xml"`);
   }
 
-  const initApp = resolveFrom.silent('src/components', './app');
+  const initApp = resolveFrom.silent('src', './app');
   if (!initApp) {
     throw new Error(`Missing app file.
-    Please create "app.js/ts" file in "${path.resolve(
-      './src/componets',
-    )}" directory`);
+    Please create "app.js/ts" file in "${path.resolve('./src')}" directory`);
   }
 
   const componentsDirectories = await globby('./src/components/*', {
