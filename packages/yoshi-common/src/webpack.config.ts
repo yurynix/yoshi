@@ -461,6 +461,8 @@ export function createBaseWebpackConfig({
                                     },
                                   };
                                 }
+
+                                return tag;
                               }),
                             },
                             files: assets,
@@ -470,7 +472,9 @@ export function createBaseWebpackConfig({
                       });
                     }),
 
-                  new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/css/]),
+                  new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [
+                    /\.css|\.inline/,
+                  ]),
 
                   new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
                     PUBLIC_PATH: publicPath,

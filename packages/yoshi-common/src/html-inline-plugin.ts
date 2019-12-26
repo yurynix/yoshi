@@ -1,5 +1,4 @@
 import webpack from 'webpack';
-import { sync as gzipSize } from 'gzip-size';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 class HtmlInlinePlugin implements webpack.Plugin {
@@ -31,17 +30,11 @@ class HtmlInlinePlugin implements webpack.Plugin {
       return null;
     }
 
-    // Inline this chunk if it matches a given regex
-    if (this.tests.some(test => scriptName.match(test))) {
-      return asset;
+    if (!this.tests.some(test => scriptName.match(test))) {
+      return null;
     }
 
-    // Inline this chunk if it weights less than 14kb
-    if (gzipSize(asset.source()) < 14 * 1000) {
-      return asset;
-    }
-
-    return null;
+    return asset;
   }
 
   private getInlinedTag(
