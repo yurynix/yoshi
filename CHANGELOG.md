@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.25.1 (2019-12-26)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1786](https://github.com/wix/yoshi/pull/1786) Use more verbose names, don't add a redundant comma between script tags ([@ronami](https://github.com/ronami))
+
 ## 4.25.0 (2019-12-26)
 
 #### :rocket: New Feature
