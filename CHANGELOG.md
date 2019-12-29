@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.25.2 (2019-12-29)
+
+#### :rocket: New Feature
+
+- `yoshi-common`
+  - [#1793](https://github.com/wix/yoshi/pull/1793) Add `mdsvex` svelte preprocessor ([@giladsegal](https://github.com/giladsegal))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-legacy`
+  - [#1792](https://github.com/wix/yoshi/pull/1792) Remove check for verbose on `UncaughtError` ([@NitayRabi](https://github.com/NitayRabi))
+- Other
+  - [#1789](https://github.com/wix/yoshi/pull/1789) Fix travis website publishing ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :house: Internal
+
+- [#1787](https://github.com/wix/yoshi/pull/1787) Publish website on PRs using `teamcity-surge-autorelease` ([@NitayRabi](https://github.com/NitayRabi))
+
 ## 4.25.1 (2019-12-26)
 
 #### :bug: Bug Fix
