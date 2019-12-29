@@ -38,6 +38,7 @@ import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin';
 import nodeExternals, { WhitelistOption } from 'webpack-node-externals';
 import RtlCssPlugin from 'rtlcss-webpack-plugin';
 import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
+import { mdsvex } from 'mdsvex';
 import InlineChunkHtmlPlugin from './html-inline-plugin';
 import { localIdentName } from './utils/constants';
 import ExportDefaultPlugin from './export-default-plugin';
@@ -637,13 +638,18 @@ export function createBaseWebpackConfig({
             onwarn: (warning: any, onwarn: any) => {
               warning.code === 'css-unused-selector' || onwarn(warning);
             },
-            preprocess: {
-              style:
-                importCwd.silent('svelte-preprocess-sass') &&
-                (importCwd.silent('svelte-preprocess-sass') as any).sass({
-                  includePaths: sassIncludePaths,
-                }),
-            },
+            preprocess: [
+              {
+                style:
+                  importCwd.silent('svelte-preprocess-sass') &&
+                  (importCwd.silent('svelte-preprocess-sass') as any).sass({
+                    includePaths: sassIncludePaths,
+                  }),
+              },
+              mdsvex({
+                extension: '.svx',
+              }),
+            ],
             dev: isDev,
             emitCss: target !== 'node',
             generate: target === 'node' ? 'ssr' : 'dom',
