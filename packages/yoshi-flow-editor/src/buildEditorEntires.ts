@@ -1,44 +1,25 @@
 import path from 'path';
-import globby from 'globby';
-import componentWrapping from './componentWrapping';
-import editorAppWrapping from './editorAppWrapping';
-import settingsWrapping from './settingsWrapping';
-import viewerScriptWrapping from './viewerScriptWrapping';
+import writeComponentWrapping from './componentWrapping';
+import writeEditorAppWrapping from './editorAppWrapping';
+import writeSettingsWrapping from './settingsWrapping';
+import writeViewerScriptWrapping from './viewerScriptWrapping';
 import wixPrivateMockWrapping from './wixPrivateMockWrapping';
+import { FlowEditorModel } from './model';
 
 const generatedWidgetEntriesPath = path.resolve(__dirname, '../tmp/components');
 
-export const buildEditorPlatformEntries = () => {
-  const userComponents = globby.sync('./src/components/*/Component.js', {
-    absolute: true,
-  });
-
-  const componentEntries = componentWrapping(
+export const buildEditorPlatformEntries = (model: FlowEditorModel) => {
+  const componentEntries = writeComponentWrapping(
     generatedWidgetEntriesPath,
-    userComponents,
+    model,
   );
-
-  const userControllers = globby.sync('./src/components/*/controller.js', {
-    absolute: true,
-  });
-  const userInitApp = globby.sync('./src/components/initApp.js', {
-    absolute: true,
-  });
-
-  const editorAppEntries = editorAppWrapping(
+  const editorAppEntries = writeEditorAppWrapping(
     generatedWidgetEntriesPath,
-    userComponents,
-    userControllers,
-    userInitApp[0],
+    model,
   );
-
-  const userSettings = globby.sync('./src/components/*/Settings.js', {
-    absolute: true,
-  });
-
-  const settingsEntries = settingsWrapping(
+  const settingsEntries = writeSettingsWrapping(
     generatedWidgetEntriesPath,
-    userSettings,
+    model,
   );
 
   const wixPrivateMockEntry = wixPrivateMockWrapping();
@@ -51,19 +32,8 @@ export const buildEditorPlatformEntries = () => {
   };
 };
 
-export const buildViewerScriptEntry = () => {
-  const userController = globby.sync('./src/components/*/controller.js', {
-    absolute: true,
-  });
-  const userInitApp = globby.sync('./src/components/initApp.js', {
-    absolute: true,
-  });
-
-  return viewerScriptWrapping(
-    generatedWidgetEntriesPath,
-    userController,
-    userInitApp[0],
-  );
+export const buildViewerScriptEntry = (model: FlowEditorModel) => {
+  return writeViewerScriptWrapping(generatedWidgetEntriesPath, model);
 };
 
 export const webWorkerExternals = {

@@ -19,7 +19,7 @@ import {
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
-const start: cliCommand = async function(argv, config) {
+const start: cliCommand = async function(argv, config, model) {
   const args = arg(
     {
       // Types
@@ -85,7 +85,7 @@ const start: cliCommand = async function(argv, config) {
   const clientConfig = createClientWebpackConfig(config, {
     isDev: true,
     isHot: config.hmr as boolean,
-    customEntry: buildEditorPlatformEntries(),
+    customEntry: buildEditorPlatformEntries(model),
   });
 
   const serverConfig = createServerWebpackConfig(config, {
@@ -96,7 +96,7 @@ const start: cliCommand = async function(argv, config) {
   const webWorkerConfig = createWebWorkerWebpackConfig(config, {
     isDev: true,
     isHot: true,
-    customEntry: buildViewerScriptEntry(),
+    customEntry: buildViewerScriptEntry(model),
     webWorkerExternals,
   });
 
