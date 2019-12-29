@@ -15,9 +15,11 @@ module.exports = async globalConfig => {
   if (isPublish) {
     global.teardown = publishMonorepo();
     const tempDir = tempy.directory();
-    global.testDirectory = path.join(tempDir, 'project');
-    const yoshiPublishDir = path.join(__dirname, './yoshi-publish');
-    await fs.copy(yoshiPublishDir, global.testDirectory);
+    global.yoshiPublishDir = path.join(tempDir, 'project');
+    await fs.copy(
+      path.join(__dirname, './yoshi-publish'),
+      global.yoshiPublishDir,
+    );
 
     console.log(
       `Running ${chalk.magenta(
@@ -25,9 +27,9 @@ module.exports = async globalConfig => {
       )}, that might take a few minutes... ⌛ \n`,
     );
 
-    authenticateToRegistry(global.testDirectory);
+    authenticateToRegistry(global.yoshiPublishDir);
     await execa('npm install', {
-      cwd: global.testDirectory,
+      cwd: global.yoshiPublishDir,
       shell: true,
       stdio: 'inherit',
       extendEnv: false,

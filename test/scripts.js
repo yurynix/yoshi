@@ -20,7 +20,7 @@ module.exports = class Scripts {
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
     this.yoshiPublishDir = isPublish
-      ? `${global.testDirectory}/node_modules`
+      ? `${global.yoshiPublishDir}/node_modules`
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
   }
 
