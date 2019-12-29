@@ -5,7 +5,6 @@ const runCLI = require('../src/cli');
 const { version } = require('../package');
 const infoCommand = require('../src/commands/info');
 const chalk = require('chalk');
-const { inTeamCity } = require('yoshi-helpers/queries');
 
 // IDEs start debugging with '--inspect' or '--inspect-brk' option. We are setting --debug instead
 require('yoshi-common/normalize-debugging-args')();
@@ -87,23 +86,13 @@ prog
   .action(infoCommand);
 
 function handleUncaughtError(error) {
-  if (prog.verbose || inTeamCity()) {
-    console.error(
-      chalk.red(
-        `  Yoshi has encountered the following fatal error. Here is the full stacktrace:`,
-      ),
-    );
-    console.error();
-    console.error(chalk.red(error.stack || error));
-  } else {
-    console.error(
-      chalk.red(
-        `  Yoshi has encountered the following fatal error. You can add the --verbose flag to view the full stacktrace.`,
-      ),
-    );
-    console.error();
-    console.error(chalk.red(`  ${error.message ? error.message : error}`));
-  }
+  console.error(
+    chalk.red(
+      `  Yoshi has encountered the following fatal error. Here is the full stacktrace:`,
+    ),
+  );
+  console.error();
+  console.error(chalk.red(error.stack || error));
 
   process.exit(1);
 }
