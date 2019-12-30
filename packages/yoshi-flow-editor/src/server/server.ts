@@ -9,15 +9,17 @@ import velocityDataPrivate from './velocity.private.data.json';
 import velocityData from './velocity.data.json';
 import renderVM from './vm';
 
+const serverDirectory = 'node_modules/yoshi-flow-editor/build/server';
+
 const server = httpTestkit.server({
   port: process.env.PORT ? Number(process.env.PORT) : undefined,
   ssl: {
     cert: fs.readFileSync(
-      path.join(__dirname, './certificates/cert.pem'),
+      path.join(serverDirectory, './certificates/cert.pem'),
       'utf-8',
     ),
     key: fs.readFileSync(
-      path.join(__dirname, './certificates/key.pem'),
+      path.join(serverDirectory, './certificates/key.pem'),
       'utf-8',
     ),
     passphrase: '1234',
