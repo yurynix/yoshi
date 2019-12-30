@@ -626,7 +626,7 @@ export function createBaseWebpackConfig({
           : []),
 
         {
-          test: /\.svelte$/,
+          test: /\.(svelte|svx)$/,
           // Both, `svelte-loader` and `svelte-preprocess-sass` should be installed
           // by the project that needs it.
           //
