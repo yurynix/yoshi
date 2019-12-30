@@ -7,17 +7,13 @@ const scripts = new Scripts({
 });
 
 it.each(['serveWithCallback', 'startWithCallback'])(
-  'json inclusion %s',
+  'externals %s',
   async command => {
     await scripts[command](async () => {
       await page.goto('http://localhost:3000');
+      const result = await page.$eval('#externals', elm => elm.textContent);
 
-      const result = await page.$eval(
-        '#json-inclusion',
-        elm => elm.textContent,
-      );
-
-      expect(result).toBe('This is an abstract.');
+      expect(result).toBe('Some external text.');
     });
   },
 );
