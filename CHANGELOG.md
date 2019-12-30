@@ -1,5 +1,17 @@
 # Changelog
 
+# 4.25.3 (2019-12-30)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1794](https://github.com/wix/yoshi/pull/1794) Update `svelte-loader` test regex to match `svx` files ([@giladsegal](https://github.com/giladsegal))
+
+#### :nail_care: Polish
+
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-monorepo`
+  - [#1796](https://github.com/wix/yoshi/pull/1796) Use one hot entry for the entire app instead of one per entry ([@ronami](https://github.com/ronami))
+
 ## 4.25.2 (2019-12-29)
 
 #### :rocket: New Feature
