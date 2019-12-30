@@ -33,8 +33,8 @@ export const Widget = withExperiments(
           <h2 data-testid="app-title">
             {t('app.hello')} {name}!
           </h2>
-          <Button className={styles.mainButton}>click me</Button>
         </div>
+        <Button className={styles.mainButton}>click me</Button>
       </div>
     );
   }),
