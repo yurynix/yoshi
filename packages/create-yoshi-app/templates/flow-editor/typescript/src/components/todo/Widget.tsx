@@ -1,5 +1,5 @@
 import React, { MouseEventHandler, FC } from 'react';
-import { PublicData, Controller, Translation } from 'yoshi-flow-editor-runtime';
+import { PublicData, Controller } from 'yoshi-flow-editor-runtime';
 import styles from './styles.scss';
 
 interface TodoProps {
@@ -134,23 +134,18 @@ export default () => {
   console.log('in component');
   return (
     <div className={styles.wrapper}>
-      <Translation>
-        {t => (
-          <PublicData>
-            {publicData => {
-              return (
-                <div>
-                  <h1>{publicData.get('title')}</h1>
-                  <small>{t('translation')}</small>
-                  <AddTodo />
-                  <TodoList />
-                  <Footer />
-                </div>
-              );
-            }}
-          </PublicData>
-        )}
-      </Translation>
+      <PublicData>
+        {publicData => {
+          return (
+            <div>
+              <h1>{publicData.get('title')}</h1>
+              <AddTodo />
+              <TodoList />
+              <Footer />
+            </div>
+          );
+        }}
+      </PublicData>
     </div>
   );
 };
