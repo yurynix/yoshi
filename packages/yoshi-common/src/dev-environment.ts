@@ -191,6 +191,7 @@ export default class DevEnvironment {
     port,
     enableClientHotUpdates,
     cwd = process.cwd(),
+    createEjsTemplates = false,
   }: {
     webpackConfigs: [
       webpack.Configuration,
@@ -203,6 +204,7 @@ export default class DevEnvironment {
     port: number;
     enableClientHotUpdates: boolean;
     cwd?: string;
+    createEjsTemplates?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
 
@@ -217,12 +219,23 @@ export default class DevEnvironment {
         throw new Error('client webpack config was created without an entry');
       }
 
-      clientConfig.entry = addEntry(clientConfig.entry, [
+      const hotEntries = [
         require.resolve('webpack/hot/dev-server'),
         // Adding the query param with the CDN URL allows HMR when working with a production site
         // because the bundle is requested from "parastorage" we need to specify to open the socket to localhost
         `${require.resolve('webpack-dev-server/client')}?${publicPath}`,
-      ]);
+      ];
+
+      // Add hot entries as a separate entry if using experimental build html
+      if (createEjsTemplates) {
+        clientConfig.entry = {
+          // @ts-ignore
+          ...clientConfig.entry,
+          hot: hotEntries,
+        };
+      } else {
+        clientConfig.entry = addEntry(clientConfig.entry, hotEntries);
+      }
     }
 
     if (!serverConfig.entry) {

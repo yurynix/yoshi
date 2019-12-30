@@ -112,6 +112,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     serverFilePath: serverEntry,
     enableClientHotUpdates: Boolean(pkg.config.hmr),
     cwd: pkg.location,
+    createEjsTemplates: pkg.config.experimentalBuildHtml,
   });
 
   devEnvironment.store.subscribe(state => {

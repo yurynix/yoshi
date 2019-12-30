@@ -226,7 +226,6 @@ export function createBaseWebpackConfig({
   experimentalRtlCss = false,
   cssModules = true,
   cwd = process.cwd(),
-  contentHash = false,
   devServerUrl,
   externalizeRelativeLodash = false,
   isAnalyze = false,
@@ -255,7 +254,6 @@ export function createBaseWebpackConfig({
   experimentalRtlCss?: boolean;
   cssModules?: boolean;
   cwd?: string;
-  contentHash?: boolean;
   devServerUrl: string;
   externalizeRelativeLodash?: boolean;
   isAnalyze?: boolean;
@@ -285,7 +283,7 @@ export function createBaseWebpackConfig({
 
   const publicPath = calculatePublicPath({
     devServerUrl,
-    useUnversionedBaseUrl: contentHash,
+    useUnversionedBaseUrl: createEjsTemplates,
   });
 
   const babelConfig = createBabelConfig({
@@ -308,12 +306,12 @@ export function createBaseWebpackConfig({
       pathinfo: isDev,
       filename: isDev
         ? '[name].bundle.js'
-        : contentHash
+        : createEjsTemplates
         ? '[name].[contenthash:8].bundle.min.js'
         : '[name].bundle.min.js',
       chunkFilename: isDev
         ? '[name].chunk.js'
-        : contentHash
+        : createEjsTemplates
         ? '[name].[contenthash:8].chunk.min.js'
         : '[name].chunk.min.js',
       hotUpdateMainFilename: 'updates/[hash].hot-update.json',
@@ -388,6 +386,14 @@ export function createBaseWebpackConfig({
               new OptimizeCSSAssetsPlugin(),
             ],
 
+            ...(createEjsTemplates
+              ? {
+                  runtimeChunk: {
+                    name: `webpack-runtime`,
+                  },
+                }
+              : {}),
+
             splitChunks: false,
           }
         : {
@@ -450,7 +456,7 @@ export function createBaseWebpackConfig({
                               tag.tagName === 'script' &&
                               tag.attributes.src
                             ) {
-                              tag.attributes.async = '';
+                              tag.attributes.defer = '';
                             }
                           });
 
@@ -470,7 +476,7 @@ export function createBaseWebpackConfig({
                     }),
 
                   new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [
-                    /\.css|\.inline/,
+                    /\.css|\.inline|webpack-runtime/,
                   ]),
 
                   new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
@@ -496,12 +502,12 @@ export function createBaseWebpackConfig({
                   new MiniCssExtractPlugin({
                     filename: isDev
                       ? '[name].css'
-                      : contentHash
+                      : createEjsTemplates
                       ? '[name].[contenthash:8].min.css'
                       : '[name].min.css',
                     chunkFilename: isDev
                       ? '[name].chunk.css'
-                      : contentHash
+                      : createEjsTemplates
                       ? '[name].[contenthash:8].chunk.min.css'
                       : '[name].chunk.min.css',
                   }),

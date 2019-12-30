@@ -107,6 +107,7 @@ const start: cliCommand = async function(argv, config, model) {
     port: config.servers.cdn.port,
     serverFilePath: serverEntry,
     enableClientHotUpdates: Boolean(config.hmr),
+    createEjsTemplates: config.experimentalBuildHtml,
   });
 
   devEnvironment.store.subscribe(state => {
