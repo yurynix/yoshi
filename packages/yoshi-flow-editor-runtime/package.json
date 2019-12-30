@@ -25,6 +25,7 @@
   "devDependencies": {
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.9",
+    "react-i18next": "^7.11.0",
     "react": "^16.9.0"
   }
 }
