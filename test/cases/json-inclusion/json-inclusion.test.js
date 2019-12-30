@@ -3,7 +3,7 @@ const Scripts = require('../../scripts');
 
 const scripts = new Scripts({
   testDirectory: path.join(__dirname),
-  silent: true,
+  silent: !process.env.DEBUG,
 });
 
 it.each(['serveWithCallback', 'startWithCallback'])(

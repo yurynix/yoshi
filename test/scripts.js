@@ -64,7 +64,7 @@ module.exports = class Scripts {
         ...defaultOptions,
         ...env,
       },
-      // stdio: 'inherit',
+      stdio: this.silent ? 'pipe' : 'inherit',
     });
 
     return {
@@ -139,7 +139,7 @@ module.exports = class Scripts {
 
     const appServerProcess = execa('node', ['index.js'], {
       cwd: this.testDirectory,
-      // stdio: 'inherit',
+      stdio: this.silent ? 'pipe' : 'inherit',
       env: {
         PORT: this.serverProcessPort,
       },
@@ -175,7 +175,7 @@ module.exports = class Scripts {
 
     const appServerProcess = execa('node', ['dist/server.js'], {
       cwd: this.testDirectory,
-      // stdio: 'inherit',
+      stdio: this.silent ? 'pipe' : 'inherit',
       env: {
         NODE_PATH: this.yoshiPublishDir,
         PORT: this.serverProcessPort,
