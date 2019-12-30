@@ -22,9 +22,9 @@ describe('Settings', () => {
     },
   };
 
-  (window as any).Wix = {
+  window.Wix = {
     Styles: {
-      getStyleParams: (callback: Function) => callback(styleParams),
+      getStyleParams: callback => callback(styleParams),
       setFontParam: () => {},
     } as any,
   } as any;

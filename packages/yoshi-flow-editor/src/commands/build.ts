@@ -16,7 +16,6 @@ import {
   createWebWorkerWebpackConfig,
 } from '../webpack.config';
 import { cliCommand } from '../bin/yoshi-flow-editor';
-import { FlowEditorModel } from '../model';
 import {
   buildEditorPlatformEntries,
   buildViewerScriptEntry,

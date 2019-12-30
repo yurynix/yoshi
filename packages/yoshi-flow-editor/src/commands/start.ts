@@ -10,7 +10,6 @@ import {
   createServerWebpackConfig,
   createWebWorkerWebpackConfig,
 } from '../webpack.config';
-import { FlowEditorModel } from '../model';
 import {
   buildEditorPlatformEntries,
   buildViewerScriptEntry,

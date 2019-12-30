@@ -4,7 +4,6 @@ import {
   IWixAPI,
   IHostProps,
 } from '@wix/native-components-infra/dist/src/types/types';
-// import { withStyles } from '@wix/native-components-infra';
 import { createInstances } from './createInstances';
 import { ControllerProvider } from './react/ControllerProvider';
 import { PublicDataProviderEditor } from './react/PublicDataProviderEditor';
@@ -32,9 +31,7 @@ const PublicDataProvider: typeof React.Component =
 const WidgetWrapper = (UserComponent: typeof React.Component) => (
   props: IHostProps & IFrameworkProps,
 ) => {
-  // console.log(props.style);
   const css = getProcessedCss(props.style);
-  // console.log(css);
 
   return (
     <div>
