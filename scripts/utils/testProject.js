@@ -47,7 +47,7 @@ module.exports = async ({
       );
       console.log();
 
-      await scripts.test(ciEnv);
+      await scripts.test('prod');
 
       console.log();
       console.log(chalk.blue(`> Running production integration tests`));
@@ -84,7 +84,7 @@ module.exports = async ({
         );
         console.log();
 
-        await scripts.test(localEnv);
+        await scripts.test('dev');
 
         console.log();
         console.log(chalk.blue(`> Running development integration tests`));

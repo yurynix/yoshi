@@ -1,9 +1,9 @@
 module.exports = {
   preset: 'jest-puppeteer',
-  rootDir: './test/cases',
+  rootDir: './test/javascript/features',
   testMatch: ['**/*.test.js'],
-  globalSetup: require.resolve('./test/cases/globalSetup'),
-  globalTeardown: require.resolve('./test/cases/globalTeardown'),
+  globalSetup: require.resolve('./test/javascript/globalSetup'),
+  globalTeardown: require.resolve('./test/javascript/globalTeardown'),
   transformIgnorePatterns: ['/node_modules/'],
   setupFilesAfterEnv: [require.resolve('./jest-setup')],
 };

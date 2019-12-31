@@ -1,0 +1,13 @@
+{
+  "name": "externals",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "externals": {
+      "externals": "externals"
+    }
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

@@ -1,8 +1,10 @@
 const path = require('path');
 const execa = require('execa');
+const fs = require('fs-extra');
 const terminate = require('terminate');
 const { promisify } = require('util');
 const { waitForPort, waitForStdout } = require('./utils');
+const { ciEnv, localEnv } = require('../scripts/utils/constants');
 
 const terminateAsync = promisify(terminate);
 const isPublish = !!process.env.WITH_PUBLISH;
@@ -24,7 +26,28 @@ module.exports = class Scripts {
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
   }
 
-  async startWithCallback(callback = () => {}) {
+  static setupProjectFromTemplate({ templateDir }) {
+    debugger;
+    const featureDir = path.join(
+      __dirname,
+      '..',
+      '.tmp',
+      path.basename(templateDir),
+    );
+    fs.ensureDirSync(featureDir);
+    fs.emptyDirSync(featureDir);
+    fs.copySync(
+      path.join(templateDir, '..', '..', 'fixtures', 'base-template'),
+      featureDir,
+    );
+    fs.copySync(path.join(templateDir), featureDir, {
+      overwrite: true,
+      filter: file => !file.includes('.test.js'),
+    });
+    return new Scripts({ testDirectory: featureDir });
+  }
+
+  async dev(callback = () => {}) {
     const startProcess = execa(
       'node',
       [yoshiBin, 'start', '--server', 'dist/server.js'],
@@ -85,7 +108,8 @@ module.exports = class Scripts {
     });
   }
 
-  async test(env = {}) {
+  async test(mode) {
+    const env = mode === 'prod' ? ciEnv : localEnv;
     return execa('node', [yoshiBin, 'test'], {
       cwd: this.testDirectory,
       env: {
@@ -161,8 +185,8 @@ module.exports = class Scripts {
       },
     };
   }
-  async serveWithCallback(callback = () => {}) {
-    await this.build();
+  async prod(callback = () => {}) {
+    await this.build(ciEnv);
 
     const staticsServerProcess = execa(
       'npx',
