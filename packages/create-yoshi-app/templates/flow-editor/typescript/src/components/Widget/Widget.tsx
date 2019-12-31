@@ -33,17 +33,13 @@ export const Widget = withExperiments<
   { name: string } & InjectedExperimentsProps
 >(({ name, ...rest }) => {
   return (
-    <Translation>
-      {t => (
-        <div {...styles('root', {}, rest)}>
-          <div className={styles.header}>
-            <h2 data-testid="app-title">
-              {t('app.hello')} {name}!
-            </h2>
-          </div>
-          <Button className={styles.mainButton}>click me</Button>
-        </div>
-      )}
-    </Translation>
+    <div {...styles('root', {}, rest)}>
+      <div className={styles.header}>
+        <h2 data-testid="app-title">
+          {'app.hello'} {name}!
+        </h2>
+      </div>
+      <Button className={styles.mainButton}>click me</Button>
+    </div>
   );
 });
