@@ -3,11 +3,18 @@ import createStore, { Store } from 'unistore';
 import clearConsole from 'react-dev-utils/clearConsole';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
+import openBrowser from './open-browser';
 import { PORT } from './utils/constants';
 import ServerProcess from './server-process';
 import { WebpackDevServer, host } from './webpack-dev-server';
 import { addEntry, createCompiler } from './webpack-utils';
 import { isTruthy } from './utils/helpers';
+import {
+  getUrl as getTunnelUrl,
+  getDevServerSocketPath,
+} from './utils/suricate';
+
+import devEnvironmentLogger from './dev-environment-logger';
 
 const isInteractive = process.stdout.isTTY;
 
@@ -16,7 +23,9 @@ type WebpackStatus = {
   warnings: Array<string>;
 };
 
-type State =
+type StartUrl = string | Array<string> | null | undefined;
+
+export type State =
   | {
       status: 'compiling';
     }
@@ -28,24 +37,26 @@ type State =
   | ({ status: 'errors' } & WebpackStatus)
   | ({ status: 'warnings' } & WebpackStatus);
 
+type DevEnvironmentProps = {
+  webpackDevServer: WebpackDevServer;
+  serverProcess: ServerProcess;
+  multiCompiler: webpack.MultiCompiler;
+  appName: string;
+  suricate: boolean;
+  startUrl?: StartUrl;
+};
+
 export default class DevEnvironment {
-  private webpackDevServer: WebpackDevServer;
-  private serverProcess: ServerProcess;
+  private props: DevEnvironmentProps;
   public store: Store<State>;
-  private multiCompiler: webpack.MultiCompiler;
 
-  constructor(
-    webpackDevServer: WebpackDevServer,
-    serverProcess: ServerProcess,
-    multiCompiler: webpack.MultiCompiler,
-  ) {
-    this.webpackDevServer = webpackDevServer;
-    this.serverProcess = serverProcess;
-    this.multiCompiler = multiCompiler;
-
+  constructor(props: DevEnvironmentProps) {
+    this.props = props;
     this.store = createStore<State>();
 
-    this.multiCompiler.hooks.invalid.tap('recompile-log', () => {
+    const { multiCompiler, webpackDevServer } = props;
+
+    this.props.multiCompiler.hooks.invalid.tap('recompile-log', () => {
       if (isInteractive) {
         clearConsole();
       }
@@ -55,7 +66,7 @@ export default class DevEnvironment {
       });
     });
 
-    this.multiCompiler.hooks.done.tap('finished-log', stats => {
+    multiCompiler.hooks.done.tap('finished-log', stats => {
       if (isInteractive) {
         clearConsole();
       }
@@ -68,9 +79,9 @@ export default class DevEnvironment {
         const serverUrls = prepareUrls('http', host, PORT);
 
         const devServerUrls = prepareUrls(
-          this.webpackDevServer.https ? 'https' : 'http',
+          webpackDevServer.https ? 'https' : 'http',
           host,
-          this.webpackDevServer.port,
+          webpackDevServer.port,
         );
 
         this.store.setState({
@@ -98,15 +109,19 @@ export default class DevEnvironment {
   }
 
   private async triggerBrowserRefresh(jsonStats: webpack.Stats.ToJsonOutput) {
-    await this.webpackDevServer.send('hash', jsonStats.hash);
-    await this.webpackDevServer.send('ok', {});
+    const { webpackDevServer } = this.props;
+
+    await webpackDevServer.send('hash', jsonStats.hash);
+    await webpackDevServer.send('ok', {});
   }
 
   private async showErrorsOnBrowser(jsonStats: webpack.Stats.ToJsonOutput) {
+    const { webpackDevServer } = this.props;
+
     if (jsonStats.errors.length > 0) {
-      await this.webpackDevServer.send('errors', jsonStats.errors);
+      await webpackDevServer.send('errors', jsonStats.errors);
     } else if (jsonStats.warnings.length > 0) {
-      await this.webpackDevServer.send('warnings', jsonStats.warnings);
+      await webpackDevServer.send('warnings', jsonStats.warnings);
     }
   }
 
@@ -130,6 +145,8 @@ export default class DevEnvironment {
   }
 
   startServerHotUpdate(compiler: webpack.Compiler) {
+    const { serverProcess } = this.props;
+
     compiler.watch({}, async (error, stats) => {
       // We save the result of this build to webpack-dev-server's internal state so the last
       // server build results are sent to the browser on every refresh
@@ -137,30 +154,29 @@ export default class DevEnvironment {
       // https://github.com/webpack/webpack-dev-server/blob/master/lib/Server.js#L144
       // @ts-ignore
       this._stats = stats;
-
       const jsonStats = stats.toJson();
 
       // If the spawned server process has died, restart it
       if (
-        this.serverProcess.child &&
+        serverProcess.child &&
         // @ts-ignore
-        this.serverProcess.child.exitCode !== null
+        serverProcess.child.exitCode !== null
       ) {
-        await this.serverProcess.restart();
+        await serverProcess.restart();
         await this.triggerBrowserRefresh(jsonStats);
       }
       // If it's alive, send it a message to trigger HMR
       else {
         // If there are no errors and the server can be refreshed
         // then send it a signal and wait for a responsne
-        if (this.serverProcess.child && !error && !stats.hasErrors()) {
-          const { success } = (await this.serverProcess.send({})) as {
+        if (serverProcess.child && !error && !stats.hasErrors()) {
+          const { success } = (await serverProcess.send({})) as {
             success: boolean;
           };
 
           // HMR wasn't successful, restart the server process
           if (!success) {
-            await this.serverProcess.restart();
+            await serverProcess.restart();
           }
 
           await this.triggerBrowserRefresh(jsonStats);
@@ -172,26 +188,44 @@ export default class DevEnvironment {
   }
 
   async start() {
+    const {
+      multiCompiler,
+      webpackDevServer,
+      serverProcess,
+      suricate,
+      appName,
+      startUrl,
+    } = this.props;
+
     const compilationPromise = new Promise(resolve => {
-      this.multiCompiler.hooks.done.tap('done', resolve);
+      multiCompiler.hooks.done.tap('done', resolve);
     });
 
     // Start Webpack compilation
-    await this.webpackDevServer.listenPromise();
+    await webpackDevServer.listenPromise();
     await compilationPromise;
 
-    await this.serverProcess.initialize();
+    // start app server
+    await serverProcess.initialize();
+
+    const actualStartUrl = suricate
+      ? getTunnelUrl(appName)
+      : startUrl || 'http://localhost:3000';
+
+    openBrowser(actualStartUrl);
   }
 
   static async create({
     webpackConfigs,
     serverFilePath,
-    publicPath,
     https,
-    port,
+    webpackDevServerPort,
     enableClientHotUpdates,
     cwd = process.cwd(),
     createEjsTemplates = false,
+    appName,
+    startUrl,
+    suricate = false,
   }: {
     webpackConfigs: [
       webpack.Configuration,
@@ -199,18 +233,24 @@ export default class DevEnvironment {
       webpack.Configuration?,
     ];
     serverFilePath: string;
-    publicPath: string;
     https: boolean;
-    port: number;
+    webpackDevServerPort: number;
     enableClientHotUpdates: boolean;
     cwd?: string;
     createEjsTemplates?: boolean;
+    appName: string;
+    startUrl?: StartUrl;
+    suricate?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
+
+    const publicPath = clientConfig.output!.publicPath!;
 
     const serverProcess = await ServerProcess.create({
       serverFilePath,
       cwd,
+      suricate,
+      appName,
     });
 
     // Add client hot entries
@@ -219,11 +259,15 @@ export default class DevEnvironment {
         throw new Error('client webpack config was created without an entry');
       }
 
+      const hmrSocketPath = suricate
+        ? getDevServerSocketPath(appName)
+        : publicPath;
+
       const hotEntries = [
         require.resolve('webpack/hot/dev-server'),
         // Adding the query param with the CDN URL allows HMR when working with a production site
         // because the bundle is requested from "parastorage" we need to specify to open the socket to localhost
-        `${require.resolve('webpack-dev-server/client')}?${publicPath}`,
+        `${require.resolve('webpack-dev-server/client')}?${hmrSocketPath}`,
       ];
 
       // Add hot entries as a separate entry if using experimental build html
@@ -264,20 +308,29 @@ export default class DevEnvironment {
     const webpackDevServer = new WebpackDevServer(clientCompiler, {
       publicPath,
       https,
-      port,
+      port: webpackDevServerPort,
+      appName,
+      suricate,
     });
 
-    const devEnvironment = new DevEnvironment(
+    const devEnvironment = new DevEnvironment({
       webpackDevServer,
       serverProcess,
       multiCompiler,
-    );
+      appName,
+      suricate,
+      startUrl,
+    });
 
     devEnvironment.startServerHotUpdate(serverCompiler);
 
     if (webWorkerCompiler) {
       devEnvironment.startWebWorkerHotUpdate(webWorkerCompiler);
     }
+
+    devEnvironment.store.subscribe((state: State) =>
+      devEnvironmentLogger({ state, appName, suricate }),
+    );
 
     return devEnvironment;
   }
