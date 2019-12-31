@@ -11,7 +11,7 @@
     "start": "yoshi-flow-editor start",
     "precommit": "lint-staged",
     "pretest": "yoshi-flow-editor build",
-    "test": "yoshi-flow-editor test --jest",
+    "test": "yoshi-flow-editor test",
     "test:ssr": "jest --config jest-ssr.config.js",
     "posttest": "yoshi-flow-editor lint",
     "release": "yoshi-flow-editor release"
