@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.26.0 (2019-12-31)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-monorepo`
+  - [#1764](https://github.com/wix/yoshi/pull/1764) Integrate Suricate (tunneling) ([@ranyitz](https://github.com/ranyitz))
+
 # 4.25.3 (2019-12-30)
 
 #### :bug: Bug Fix
