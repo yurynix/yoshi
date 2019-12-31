@@ -14,7 +14,7 @@ describe('css-inclusion', () => {
     async command => {
       await scripts[command](async () => {
         await initTest('css-inclusion');
-        await page.waitFor(1000);
+
         const className = await page.$eval('#css-inclusion', elm =>
           elm.getAttribute('class'),
         );
