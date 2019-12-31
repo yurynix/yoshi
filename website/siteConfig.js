@@ -6,7 +6,7 @@ const siteConfig = {
   tagline: 'A Toolkit that supports building all kinds of applications in wix',
 
   url: 'https://wix.github.io',
-  baseUrl: '/',
+  baseUrl: '/yoshi',
 
   editUrl: 'https://github.com/wix/yoshi/edit/master/docs/',
   repoUrl: 'https://github.com/wix/yoshi',
