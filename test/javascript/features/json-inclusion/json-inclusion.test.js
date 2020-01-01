@@ -22,19 +22,3 @@ describe.each(['prod', 'dev'])('json inclusion %s', mode => {
     scripts.test(mode);
   });
 });
-
-// it.each(['serveWithCallback', 'startWithCallback'])(
-//   'json inclusion %s',
-//   async command => {
-//     await scripts[command](async () => {
-//       await page.goto('http://localhost:3000');
-
-//       const result = await page.$eval(
-//         '#json-inclusion',
-//         elm => elm.textContent,
-//       );
-
-//       expect(result).toBe('This is an abstract.');
-//     });
-//   },
-// );
