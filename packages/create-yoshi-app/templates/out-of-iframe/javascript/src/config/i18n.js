@@ -9,14 +9,14 @@ export default memoize(function i18n(initialLanguage) {
       type: 'backend',
       read: async (language, namespace, callback) => {
         // We configure how i18next should fetch a translation resource when it
-        // needs it: We use Webpack's dynamic imports to fetch resources without
-        // increasing our bundle size.
-        //
-        // See https://webpack.js.org/guides/code-splitting/#dynamic-imports for
-        // more information.
-        return import(`../assets/locales/messages_${language}.json`)
-          .then(translation => callback(null, translation))
-          .catch(error => callback(error));
+        // needs it: We use Webpack's sync require because
+        // dynamic import will break SSR, see https://github.com/wix/yoshi/pull/1779 for moving translations to the worker.
+        try {
+          const translation = require(`../assets/locales/messages_${language}.json`);
+          return callback(null, translation);
+        } catch (error) {
+          return callback(error);
+        }
       },
     })
     .init({
