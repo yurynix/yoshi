@@ -23,7 +23,7 @@ const getTunnelId = (namespace: string) => {
     return undefined;
   }
 
-  const normalizedNamespace = namespace.replace('/', '-');
+  const normalizedNamespace = (namespace || '').replace('/', '-');
 
   return `${uniqueTunnelId}.${normalizedNamespace}`;
 };
