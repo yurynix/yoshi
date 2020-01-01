@@ -17,7 +17,7 @@ module.exports = async globalConfig => {
     const tempDir = tempy.directory();
     global.yoshiPublishDir = path.join(tempDir, 'project');
     await fs.copy(
-      path.join(__dirname, 'fixtures', 'yoshi-publish'),
+      path.join(__dirname, 'yoshi-publish'),
       global.yoshiPublishDir,
     );
 
@@ -31,7 +31,7 @@ module.exports = async globalConfig => {
     await execa('npm install', {
       cwd: global.yoshiPublishDir,
       shell: true,
-      stdio: 'inherit',
+      stdio: !process.env.DEBUG ? 'pipe' : 'inherit',
       extendEnv: false,
       env: {
         PATH: process.env.PATH,
