@@ -287,7 +287,8 @@ export function createBaseWebpackConfig({
     suricate,
     appName: name,
     devServerUrl,
-    useUnversionedBaseUrl: createEjsTemplates,
+    // https://github.com/wix/yoshi/pull/1803
+    useUnversionedBaseUrl: createEjsTemplates && !isDev,
   });
 
   const babelConfig = createBabelConfig({
