@@ -17,7 +17,7 @@ module.exports = async globalConfig => {
     const tempDir = tempy.directory();
     global.yoshiPublishDir = path.join(tempDir, 'project');
     await fs.copy(
-      path.join(__dirname, './yoshi-publish'),
+      path.join(__dirname, 'fixtures', 'yoshi-publish'),
       global.yoshiPublishDir,
     );
 
