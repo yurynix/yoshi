@@ -16,8 +16,8 @@ const defaultOptions = {
 const yoshiBin = require.resolve('../packages/yoshi/bin/yoshi-cli');
 
 module.exports = class Scripts {
-  constructor({ silent = false, testDirectory }) {
-    this.silent = silent;
+  constructor({ testDirectory }) {
+    this.silent = !process.env.DEBUG;
     this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
@@ -27,7 +27,6 @@ module.exports = class Scripts {
   }
 
   static setupProjectFromTemplate({ templateDir }) {
-    debugger;
     const featureDir = path.join(
       __dirname,
       '..',
