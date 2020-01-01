@@ -891,7 +891,7 @@ export function createBaseWebpackConfig({
             }),
             // Local integration tests as Yoshi's `node_modules` are symlinked locally
             nodeExternals({
-              modulesDir: path.resolve(__dirname, '../node_modules'),
+              modulesDir: path.resolve(__dirname, '../../../node_modules'),
             }),
           ],
         }
