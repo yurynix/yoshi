@@ -6,7 +6,7 @@ const tempy = require('tempy');
 const {
   publishMonorepo,
   authenticateToRegistry,
-} = require('../../scripts/utils/publishMonorepo');
+} = require('../scripts/utils/publishMonorepo');
 const { setup: setupPuppeteer } = require('jest-environment-puppeteer');
 
 module.exports = async globalConfig => {
