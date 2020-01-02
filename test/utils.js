@@ -112,11 +112,14 @@ function waitForPortToFree(port) {
 }
 
 function waitForStdout(spawnedProcess, stringToMatch) {
+  let data = '';
+
   return new Promise(resolve => {
     spawnedProcess.stdout.on('data', function listener(buffer) {
+      data += buffer.toString();
       if (buffer.toString().includes(stringToMatch)) {
         spawnedProcess.stdout.off('data', listener);
-        resolve();
+        resolve(data);
       }
     });
   });

@@ -63,16 +63,21 @@ module.exports = class Scripts {
 
     // `startProcess` will never resolve but if it fails this
     // promise will reject immediately
-    await Promise.race([
-      Promise.all([
-        waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),
-        waitForPort(this.staticsServerPort, { timeout: 60 * 1000 }),
-        waitForStdout(startProcess, 'Compiled successfully!'),
-      ]),
-      startProcess,
-    ]);
-
     try {
+      await Promise.race([
+        waitForStdout(startProcess, 'Compiled with warnings').then(data => {
+          throw new Error(`Yoshi start was compiled with warnings ${data}`);
+        }),
+        Promise.all([
+          waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),
+          waitForPort(this.staticsServerPort, { timeout: 60 * 1000 }),
+          waitForStdout(startProcess, 'Compiled successfully!'),
+        ]),
+        startProcess,
+      ]);
+
+      await terminateAsync(startProcess.pid);
+
       await callback();
     } finally {
       await terminateAsync(startProcess.pid);
