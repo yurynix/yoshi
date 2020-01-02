@@ -71,6 +71,7 @@
     "postcss-rtl": "1.5.0",
     "raw-loader": "1.0.0",
     "react-dev-utils": "7.0.5",
+    "read-pkg": "5.2.0",
     "resolve-cwd": "3.0.0",
     "rtlcss-webpack-plugin": "4.0.3",
     "ruby-haml-loader": "1.0.0",

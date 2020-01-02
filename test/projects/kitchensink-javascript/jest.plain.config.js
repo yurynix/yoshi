@@ -3,6 +3,7 @@ module.exports = {
   testMatch: [
     '**/analyze.test.js',
     '**/manifest.test.js',
+    '**/verify-dependencies.test.js',
     '**/output.test.js',
     '**/stats.test.js',
   ],
