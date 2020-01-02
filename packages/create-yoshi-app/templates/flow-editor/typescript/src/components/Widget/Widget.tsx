@@ -1,5 +1,4 @@
 import React from 'react';
-import { Translation } from 'yoshi-flow-editor-runtime';
 import {
   ExperimentsProvider,
   withExperiments,

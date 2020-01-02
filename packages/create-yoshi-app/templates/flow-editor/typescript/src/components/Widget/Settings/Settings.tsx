@@ -19,7 +19,7 @@ export default class Settings extends React.Component {
   state = defaultSettingsValues;
 
   componentDidMount() {
-    (window as any).Wix.Styles.getStyleParams((styleParams: any) => {
+    window.Wix.Styles.getStyleParams((styleParams: any) => {
       this.setState({
         backgroundColor: get(
           styleParams,
@@ -37,21 +37,21 @@ export default class Settings extends React.Component {
   }
 
   updateHeaderBackgroundColor = (backgroundColor: string) => {
-    (window as any).Wix.Styles.setColorParam('backgroundColor', {
+    window.Wix.Styles.setColorParam('backgroundColor', {
       value: { color: false, opacity: 1, rgba: backgroundColor },
     });
     this.setState({ backgroundColor });
   };
 
   updateButtonBackgroundColor = (buttonBackgroundColor: string) => {
-    (window as any).Wix.Styles.setColorParam('buttonBackgroundColor', {
+    window.Wix.Styles.setColorParam('buttonBackgroundColor', {
       value: { color: false, opacity: 1, rgba: buttonBackgroundColor },
     });
     this.setState({ buttonBackgroundColor });
   };
 
   updateHeaderFontSize = (fontSize: string) => {
-    (window as any).Wix.Styles.setFontParam('fontSize', {
+    window.Wix.Styles.setFontParam('fontSize', {
       value: {
         family: 'roboto-bold',
         fontStyleParam: true,
