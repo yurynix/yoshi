@@ -41,7 +41,7 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
     });
 
     this.global.page.on('requestfailed', request => {
-      if (request.url().includes(servers.cdnUrl)) {
+      if (request.url().includes(servers.cdn.url)) {
         this.global.console.warn(
           `We found that some of your static assets failed to load:
 
