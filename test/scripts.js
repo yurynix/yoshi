@@ -76,8 +76,6 @@ module.exports = class Scripts {
         startProcess,
       ]);
 
-      await terminateAsync(startProcess.pid);
-
       await callback();
     } finally {
       await terminateAsync(startProcess.pid);
