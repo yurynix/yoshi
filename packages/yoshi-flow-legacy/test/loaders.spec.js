@@ -3,9 +3,6 @@ const fx = require('../../../test-helpers/fixtures');
 const expect = require('chai').expect;
 const _ = require('lodash');
 const getMockedCI = require('../../../test-helpers/get-mocked-ci');
-const fs = require('fs');
-const path = require('path');
-const { spawnSync } = require('child_process');
 
 function createAboveTheLimitFile() {
   return _.repeat('a', 10001);
@@ -15,15 +12,6 @@ function fileAboveTheLimit(name) {
   return new RegExp(
     `__webpack_require__\\.p \\+ "media\\/${name.replace('.', '\\..{8}\\.')}`,
   );
-}
-
-function installHaml(cwd) {
-  fs.writeFileSync(
-    cwd + '/Gemfile',
-    "source 'https://rubygems.org'\ngem 'haml'",
-  );
-  spawnSync('bundle', ['config', 'path', cwd + '/.bundle'], { cwd });
-  spawnSync('bundle', ['install'], { cwd });
 }
 
 describe('Loaders', () => {
@@ -288,7 +276,7 @@ describe('Loaders', () => {
     });
   });
 
-  describe('[ts,json,html,haml]-loaders with `yoshi.separateCss: false`', () => {
+  describe('[ts,json,html]-loaders with `yoshi.separateCss: false`', () => {
     let test;
     let resp;
 
@@ -301,7 +289,6 @@ describe('Loaders', () => {
             import './some.css';
             import './some.json';
             import './some.html';
-            import './some.haml';
             import './some.md';
             import './getData1.graphql';
             import 'my-unprocessed-module/getDataExternal1.graphql';
@@ -310,7 +297,6 @@ describe('Loaders', () => {
             declare var angular: any; angular.module('fakeModule', []).config(function($typescript){});`,
             'src/some.json': '{"json-content": 42}',
             'src/some.html': '<div>This is a HTML file</div>',
-            'src/some.haml': '.foo This is a HAML file',
             'src/some.md': '### title',
             'src/some.css': '.a {color: green;}',
             'src/getData1.graphql': 'query GetData1 { id, name }',
@@ -334,19 +320,10 @@ describe('Loaders', () => {
               compilerOptions: { skipLibCheck: true },
             }),
           },
-          [installHaml],
+          [],
         )
         .execute('build', [], {
           ...getMockedCI({ ci: false }),
-          PATH:
-            spawnSync('bundle', ['show', 'haml'], { cwd: test.tmp })
-              .stdout.toString()
-              .trim() +
-            '/bin' +
-            path.delimiter +
-            process.env.PATH,
-          GEM_PATH:
-            process.env.GEM_PATH + path.delimiter + test.tmp + '/.bundle',
         });
     });
 
@@ -402,13 +379,6 @@ describe('Loaders', () => {
       it('should embed html file into bundle', () =>
         expect(test.content('dist/statics/app.bundle.js')).to.contain(
           '<div>This is a HTML file</div>',
-        ));
-    });
-
-    describe('HAML', () => {
-      it('should embed haml file into bundle', () =>
-        expect(test.content('dist/statics/app.bundle.js')).to.contain(
-          "<div class='foo'>This is a HAML file</div>",
         ));
     });
 
