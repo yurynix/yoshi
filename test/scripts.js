@@ -97,7 +97,7 @@ module.exports = class Scripts {
   }
 
   async build(env = {}, args = []) {
-    return execa('node', [yoshiBin, 'build', ...args], {
+    const buildResult = await execa('node', [yoshiBin, 'build', ...args], {
       cwd: this.testDirectory,
       env: {
         ...defaultOptions,
@@ -105,6 +105,14 @@ module.exports = class Scripts {
       },
       stdio: this.silent ? 'pipe' : 'inherit',
     });
+
+    if (buildResult.stdout.includes('Compiled with warnings')) {
+      throw new Error(
+        `Yoshi build was compiled with warnings: \n ${buildResult.stdout}`,
+      );
+    }
+
+    return buildResult;
   }
 
   async test(mode) {
