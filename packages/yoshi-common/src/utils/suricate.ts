@@ -1,4 +1,5 @@
 import url from 'url';
+// @ts-ignore - missing types
 import { socket } from '@wix/suricate-client';
 import getGitConfig from 'parse-git-config';
 

@@ -328,7 +328,7 @@ export default class DevEnvironment {
       devEnvironment.startWebWorkerHotUpdate(webWorkerCompiler);
     }
 
-    devEnvironment.store.subscribe((state: State) =>
+    devEnvironment.store.subscribe(state =>
       devEnvironmentLogger({ state, appName, suricate }),
     );
 

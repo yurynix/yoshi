@@ -16,6 +16,7 @@ import {
   isProduction as checkIsProduction,
   inTeamCity as checkInTeamCity,
 } from 'yoshi-helpers/queries';
+// @ts-ignore - missing types
 import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import {
@@ -29,6 +30,7 @@ import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { resolveNamespaceFactory } from '@stylable/node';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+// @ts-ignore - missing types
 import StylableWebpackPlugin from '@stylable/webpack-plugin';
 import importCwd from 'import-cwd';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -36,8 +38,10 @@ import globby from 'globby';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin';
 import nodeExternals, { WhitelistOption } from 'webpack-node-externals';
+// @ts-ignore - missing types
 import RtlCssPlugin from 'rtlcss-webpack-plugin';
 import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
+// @ts-ignore - missing types
 import { mdsvex } from 'mdsvex';
 import InlineChunkHtmlPlugin from './html-inline-plugin';
 import { localIdentName } from './utils/constants';

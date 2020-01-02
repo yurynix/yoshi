@@ -1,4 +1,5 @@
 import path from 'path';
+// @ts-ignore - missing types
 import petriSpecs from 'petri-specs';
 import { STATICS_DIR } from 'yoshi-config/paths';
 
