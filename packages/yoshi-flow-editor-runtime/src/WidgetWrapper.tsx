@@ -31,8 +31,6 @@ const PublicDataProvider: typeof React.Component =
 const WidgetWrapper = (UserComponent: typeof React.Component) => (
   props: IHostProps & IFrameworkProps,
 ) => {
-  const css = getProcessedCss(props.style);
-
   return (
     <div>
       <link
@@ -40,7 +38,6 @@ const WidgetWrapper = (UserComponent: typeof React.Component) => (
         rel="stylesheet"
         type="text/css"
       />
-      <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <ErrorBoundary handleException={error => console.log(error)}>
         <Suspense fallback={<div>Loading...</div>}>
