@@ -20,7 +20,11 @@ type BootstrapOptions = {
   teardown?: (options: BootstrapTeardownOptions) => Promise<any>;
 };
 
-type WhitelistedProjectOptions = Pick<InitialOptions, 'globals' | 'testURL'>;
+type WhitelistedSpecOptions = Pick<
+  InitialOptions,
+  'globals' | 'testURL' | 'moduleNameMapper'
+>;
+type WhitelistedE2EOptions = Pick<InitialOptions, 'moduleNameMapper'>;
 
 type WhitelistedGlobalOptions = Pick<
   InitialOptions,
@@ -39,6 +43,6 @@ export type Config = Partial<WhitelistedGlobalOptions> & {
     command: string;
     port: number;
   };
-  specOptions?: WhitelistedProjectOptions;
-  e2eOptions?: WhitelistedProjectOptions;
+  specOptions?: WhitelistedSpecOptions;
+  e2eOptions?: WhitelistedE2EOptions;
 };

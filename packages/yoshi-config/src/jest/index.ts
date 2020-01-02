@@ -31,7 +31,7 @@ export default (): Config => {
       'puppeteer',
       'specOptions.globals',
       'specOptions.moduleNameMapper',
-      'e2eOptions.globals',
+      'e2eOptions.moduleNameMapper',
       'coverageThreshold',
     ],
   });

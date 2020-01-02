@@ -13,10 +13,10 @@ const validConfig: Required<Config> = {
   specOptions: {
     globals: {},
     testURL: '',
+    moduleNameMapper: {},
   },
   e2eOptions: {
-    globals: {},
-    testURL: '',
+    moduleNameMapper: {},
   },
   collectCoverage: true,
   collectCoverageFrom: ['__tests__'],
