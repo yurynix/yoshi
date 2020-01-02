@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.26.1 (2020-01-02)
+
+#### :bug: Bug Fix
+
+- `create-yoshi-app`
+  - [#1801](https://github.com/wix/yoshi/pull/1801) Moving to sync requiring for ssr ([@deanshub](https://github.com/deanshub))
+- `yoshi-common`
+  - [#1803](https://github.com/wix/yoshi/pull/1803) Use unversioned public path on prod bundle only ([@roymiloh](https://github.com/roymiloh))
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#1802](https://github.com/wix/yoshi/pull/1802) Do not emit runtime chunk on tb elements build ([@roymiloh](https://github.com/roymiloh))
+- Other
+  - [#1798](https://github.com/wix/yoshi/pull/1798) Fix PR website publishing ([@NitayRabi](https://github.com/NitayRabi))
+  - [#1797](https://github.com/wix/yoshi/pull/1797) Fix website publishing (Fix baseUrl) ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :house: Internal
+
+- [#1791](https://github.com/wix/yoshi/pull/1791) Fix website publishing on master ([@NitayRabi](https://github.com/NitayRabi))
+
 ## 4.26.0 (2019-12-31)
 
 #### :rocket: New Feature
