@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const { WS_ENDPOINT_PATH } = require('./constants');
 const { setupRequireHooks } = require('yoshi-helpers/require-hooks');
 const loadJestYoshiConfig = require('yoshi-config/jest');
+const { servers } = require('yoshi-config');
 
 // the user's config is loaded outside of a jest runtime and should be transpiled
 // with babel/typescript, this may be run separately for every worker
@@ -40,7 +41,7 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
     });
 
     this.global.page.on('requestfailed', request => {
-      if (request.url().includes('//localhost:3200')) {
+      if (request.url().includes(servers.cdnUrl)) {
         this.global.console.warn(
           `We found that some of your static assets failed to load:
 
