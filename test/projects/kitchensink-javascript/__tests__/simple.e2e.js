@@ -1,3 +1,5 @@
+const stubContent = require('./someModule.foo');
+
 it('should pass', async () => {
   await page.goto('http://localhost:3100/css-inclusion');
   const result = await page.$eval('#css-inclusion', elm => elm.textContent);
@@ -5,6 +7,6 @@ it('should pass', async () => {
   expect(result).toEqual('CSS Modules are working!');
 });
 
-it('should NOT support overrides for "global", from jest-yoshi.config', async () => {
-  expect(global['foo']).not.toEqual('bar');
+it('should use moduleNameMapper in e2eOptions', () => {
+  expect(stubContent).toEqual('Stub module content');
 });
