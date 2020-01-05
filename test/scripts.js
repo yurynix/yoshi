@@ -133,15 +133,21 @@ module.exports = class Scripts {
 
   async test(mode) {
     const env = mode === 'prod' ? ciEnv : localEnv;
-    return execa('node', [yoshiBin, 'test'], {
-      cwd: this.testDirectory,
-      env: {
-        NODE_PATH: this.yoshiPublishDir,
-        ...defaultOptions,
-        ...env,
-      },
-      stdio: this.silent ? 'pipe' : 'inherit',
-    });
+    let res;
+    try {
+      res = await execa('node', [yoshiBin, 'test'], {
+        cwd: this.testDirectory,
+        all: true,
+        env: {
+          NODE_PATH: this.yoshiPublishDir,
+          ...defaultOptions,
+          ...env,
+        },
+      });
+    } catch (e) {
+      throw new Error(e.all);
+    }
+    return res;
   }
 
   // Used in "old" kitchensync tests
