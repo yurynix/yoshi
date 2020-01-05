@@ -18,7 +18,7 @@ describe.each(['prod', 'dev'])('json inclusion %s', mode => {
     });
   });
 
-  it('component tests', () => {
-    scripts.test(mode);
+  it('component tests', async () => {
+    await scripts.test(mode);
   });
 });
