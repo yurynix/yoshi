@@ -42,10 +42,11 @@ module.exports = class Scripts {
       featureDir,
     );
     // Copy the specific feature template, with override
-    fs.copySync(path.join(templateDir), featureDir, {
+    fs.copySync(templateDir, featureDir, {
       overwrite: true,
       filter: file => !file.includes('.test.js'),
     });
+
     return new Scripts({ testDirectory: featureDir });
   }
 
