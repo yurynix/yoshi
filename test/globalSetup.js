@@ -1,5 +1,4 @@
 const path = require('path');
-const chalk = require('chalk');
 const execa = require('execa');
 const fs = require('fs-extra');
 const tempy = require('tempy');
@@ -18,12 +17,6 @@ module.exports = async globalConfig => {
     await fs.copy(
       path.join(__dirname, 'yoshi-publish'),
       global.yoshiPublishDir,
-    );
-
-    console.log(
-      `Running ${chalk.magenta(
-        'npm install',
-      )}, that might take a few minutes... ⌛ \n`,
     );
 
     authenticateToRegistry(global.yoshiPublishDir);
