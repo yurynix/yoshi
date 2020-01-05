@@ -55,7 +55,6 @@ module.exports = class Scripts {
       [yoshiBin, 'start', '--server', 'dist/server.js'],
       {
         cwd: this.testDirectory,
-        //stdio: 'inherit',
         env: {
           PORT: this.serverProcessPort,
           NODE_PATH: this.yoshiPublishDir,
@@ -69,7 +68,12 @@ module.exports = class Scripts {
     try {
       await Promise.race([
         waitForStdout(startProcess, 'Compiled with warnings').then(data => {
-          throw new Error(`Yoshi start was compiled with warnings ${data}`);
+          throw new Error(
+            `Yoshi start was compiled with warnings \n \n ${data}`,
+          );
+        }),
+        waitForStdout(startProcess, 'Failed to compile').then(data => {
+          throw new Error(`Yoshi start failed to compile: \n \n ${data}`);
         }),
         Promise.all([
           waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),
@@ -103,14 +107,20 @@ module.exports = class Scripts {
   }
 
   async build(env = {}, args = []) {
-    const buildResult = await execa('node', [yoshiBin, 'build', ...args], {
-      cwd: this.testDirectory,
-      env: {
-        ...defaultOptions,
-        ...env,
-      },
-      stdio: this.silent ? 'pipe' : 'inherit',
-    });
+    let buildResult;
+
+    try {
+      buildResult = await execa('node', [yoshiBin, 'build', ...args], {
+        cwd: this.testDirectory,
+        env: {
+          ...defaultOptions,
+          ...env,
+        },
+        all: true,
+      });
+    } catch (e) {
+      throw new Error(e.all);
+    }
 
     if (buildResult.stdout.includes('Compiled with warnings')) {
       throw new Error(
@@ -202,7 +212,11 @@ module.exports = class Scripts {
   }
 
   async prod(callback = () => {}) {
-    await this.build(ciEnv);
+    try {
+      await this.build(ciEnv);
+    } catch (e) {
+      throw new Error(e);
+    }
 
     const staticsServerProcess = execa(
       'npx',
