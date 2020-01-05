@@ -14,8 +14,7 @@ module.exports = async globalConfig => {
   const isPublish = !!process.env.WITH_PUBLISH;
   if (isPublish) {
     global.teardown = publishMonorepo();
-    const tempDir = tempy.directory();
-    global.yoshiPublishDir = path.join(tempDir, 'project');
+    global.yoshiPublishDir = tempy.directory();
     await fs.copy(
       path.join(__dirname, 'yoshi-publish'),
       global.yoshiPublishDir,
