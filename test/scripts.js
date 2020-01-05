@@ -29,16 +29,19 @@ module.exports = class Scripts {
   static setupProjectFromTemplate({ templateDir }) {
     const featureDir = path.join(
       __dirname,
-      '..',
-      '.tmp',
+      '../.tmp',
       path.basename(templateDir),
     );
+    // Create a folder for the specific feature, if does not exist
     fs.ensureDirSync(featureDir);
+    // Empty the folder
     fs.emptyDirSync(featureDir);
+    // Copy the base template
     fs.copySync(
-      path.join(templateDir, '..', '..', 'fixtures', 'base-template'),
+      path.join(templateDir, '../../fixtures/base-template'),
       featureDir,
     );
+    // Copy the specific feature template, with override
     fs.copySync(path.join(templateDir), featureDir, {
       overwrite: true,
       filter: file => !file.includes('.test.js'),
@@ -131,6 +134,7 @@ module.exports = class Scripts {
     });
   }
 
+  // Used in "old" kitchensync tests
   async start(env) {
     const startProcess = execa('npx', ['yoshi', 'start'], {
       cwd: this.testDirectory,
@@ -161,6 +165,7 @@ module.exports = class Scripts {
     };
   }
 
+  // Used in "old" kitchensync tests
   async serve() {
     const staticsServerProcess = execa(
       'npx',
@@ -195,6 +200,7 @@ module.exports = class Scripts {
       },
     };
   }
+
   async prod(callback = () => {}) {
     await this.build(ciEnv);
 
