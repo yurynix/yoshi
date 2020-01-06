@@ -27,7 +27,12 @@ const projectOverrideMapping = {
   e2e: 'e2eOptions',
   spec: 'specOptions',
 };
-const supportedProjectOverrideKeys = ['globals', 'testURL', 'moduleNameMapper'];
+
+const supportedProjectOverrideKeys = {
+  [projectOverrideMapping.spec]: ['globals', 'testURL', 'moduleNameMapper'],
+  [projectOverrideMapping.e2e]: ['moduleNameMapper'],
+};
+
 const supportedGlobalOverrideKeys = [
   'collectCoverage',
   'collectCoverageFrom',
@@ -86,7 +91,10 @@ const config = {
         const projectOverrides = jestYoshiConfig[projectOverrideKey];
 
         const projectValidOverrides = projectOverrides
-          ? pick(projectOverrides, supportedProjectOverrideKeys)
+          ? pick(
+              projectOverrides,
+              supportedProjectOverrideKeys[projectOverrideKey],
+            )
           : {};
 
         // We recommend projects use the `__tests__` directory But we support `test`

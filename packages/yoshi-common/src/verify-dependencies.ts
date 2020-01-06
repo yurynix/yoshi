@@ -2,17 +2,18 @@ import path from 'path';
 import chalk from 'chalk';
 import semver from 'semver';
 import resolveCwd from 'resolve-cwd';
+import readPkg from 'read-pkg';
 import { isTruthy } from './utils/helpers';
 
 const { version: yoshiVersion } = require('../package.json');
 
-const relatedPackages = [
-  'jest-yoshi-preset',
-  'yoshi-style-dependencies',
-  'yoshi-angular-dependencies',
-];
+async function verifyDependenciesVersions() {
+  const relatedPackages = [
+    'jest-yoshi-preset',
+    'yoshi-style-dependencies',
+    'yoshi-angular-dependencies',
+  ];
 
-export default async () => {
   const outdatedPackages = relatedPackages
     .map(packageName => path.join(packageName, 'package.json'))
     .map(packageJsonPath => resolveCwd.silent(packageJsonPath))
@@ -56,4 +57,28 @@ export default async () => {
 
     process.exit(1);
   }
+}
+
+async function verifyDevDependencies() {
+  const devOnlyDependencies = ['yoshi'];
+  const { dependencies } = readPkg.sync({ cwd: process.cwd() });
+  if (dependencies) {
+    const depNames = Object.keys(dependencies);
+    devOnlyDependencies.forEach(devOnlyDep => {
+      if (depNames.includes(devOnlyDep)) {
+        console.warn(
+          chalk.yellow(
+            `You have stated ${devOnlyDep} in 'dependencies', this may cause issues with consumers. please move ${devOnlyDep} to devDependencies`,
+          ),
+        );
+      }
+    });
+  }
+}
+
+export default async () => {
+  return Promise.all([
+    await verifyDependenciesVersions(),
+    await verifyDevDependencies(),
+  ]);
 };
