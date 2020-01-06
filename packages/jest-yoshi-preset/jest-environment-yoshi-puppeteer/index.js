@@ -1,9 +1,9 @@
 const fs = require('fs-extra');
 const puppeteer = require('puppeteer');
-const { WS_ENDPOINT_PATH } = require('./constants');
+const { WS_ENDPOINT_PATH, IS_DEBUG_MODE } = require('./constants');
 const { setupRequireHooks } = require('yoshi-helpers/require-hooks');
 const loadJestYoshiConfig = require('yoshi-config/jest');
-
+const { getBrowserDebugFunction } = require('./utils');
 // the user's config is loaded outside of a jest runtime and should be transpiled
 // with babel/typescript, this may be run separately for every worker
 setupRequireHooks();
@@ -20,6 +20,12 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
 
     const browserWSEndpoint = await fs.readFile(WS_ENDPOINT_PATH, 'utf8');
 
+    let isDebugMode = false;
+
+    try {
+      isDebugMode = JSON.parse(await fs.readFile(IS_DEBUG_MODE, 'utf8'));
+    } catch (e) {}
+
     if (!browserWSEndpoint) {
       throw new Error('wsEndpoint not found');
     }
@@ -28,7 +34,11 @@ module.exports = class PuppeteerEnvironment extends ParentEnvironment {
       browserWSEndpoint,
     });
 
+    this.global.isDebugMode = isDebugMode;
+
     this.global.page = await this.global.browser.newPage();
+
+    this.global.debugBrowser = getBrowserDebugFunction(this.global.page);
 
     this.global.page.setDefaultTimeout(10 * 1000);
 
