@@ -1,12 +1,14 @@
 const path = require('path');
 const execa = require('execa');
 const fs = require('fs-extra');
-const terminate = require('terminate');
-const { promisify } = require('util');
-const { waitForPort, waitForStdout } = require('./utils');
+const {
+  waitForPort,
+  waitForStdout,
+  terminateAsyncSafe,
+  terminateAsync,
+} = require('./utils');
 const { ciEnv, localEnv } = require('../scripts/utils/constants');
 
-const terminateAsync = promisify(terminate);
 const isPublish = !!process.env.WITH_PUBLISH;
 
 const defaultOptions = {
@@ -29,13 +31,7 @@ module.exports = class Scripts {
   static setupProjectFromTemplate({ templateDir }) {
     // The test will run in '.tmp' folder. For example: '.tmp/javascript/css-inclusion'
     const testType = templateDir.split('test/')[1].replace('features/', '');
-    const featureDir = path.join(
-      __dirname,
-      '..',
-      '.tmp',
-      testType,
-      path.basename(templateDir),
-    );
+    const featureDir = path.join(__dirname, '..', '.tmp', testType);
     // Create a folder for the specific feature, if does not exist
     fs.ensureDirSync(featureDir);
     // Empty the folder
@@ -90,7 +86,7 @@ module.exports = class Scripts {
 
       await callback();
     } finally {
-      await terminateAsync(startProcess.pid);
+      await terminateAsyncSafe(startProcess.pid);
     }
   }
 
@@ -215,8 +211,8 @@ module.exports = class Scripts {
       appServerProcessPort: this.serverProcessPort,
       done() {
         return Promise.all([
-          terminateAsync(staticsServerProcess.pid),
-          terminateAsync(appServerProcess.pid),
+          terminateAsyncSafe(staticsServerProcess.pid),
+          terminateAsyncSafe(appServerProcess.pid),
         ]);
       },
     };
@@ -254,12 +250,10 @@ module.exports = class Scripts {
     try {
       await callback();
     } finally {
-      try {
-        await Promise.all([
-          terminateAsync(staticsServerProcess.pid),
-          terminateAsync(appServerProcess.pid),
-        ]);
-      } catch (e) {}
+      await Promise.all([
+        terminateAsyncSafe(staticsServerProcess.pid),
+        terminateAsyncSafe(appServerProcess.pid),
+      ]);
     }
   }
 };

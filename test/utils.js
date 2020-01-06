@@ -3,6 +3,10 @@ const http = require('http');
 const retry = require('async-retry');
 const waitPort = require('wait-port');
 const { parastorageCdnUrl, localCdnUrl } = require('./constants');
+const terminate = require('terminate');
+const { promisify } = require('util');
+
+const terminateAsync = promisify(terminate);
 
 const makeRequest = url => {
   return new Promise(resolve => {
@@ -125,6 +129,16 @@ function waitForStdout(spawnedProcess, stringToMatch) {
   });
 }
 
+async function terminateAsyncSafe(pid) {
+  try {
+    await terminateAsync(pid);
+  } catch (e) {
+    if (!e.message.includes('kill ESRCH')) {
+      throw new Error(e);
+    }
+  }
+}
+
 module.exports = {
   request,
   matchJS,
@@ -134,4 +148,6 @@ module.exports = {
   waitForPort,
   waitForPortToFree,
   waitForStdout,
+  terminateAsync,
+  terminateAsyncSafe,
 };
