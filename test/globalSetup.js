@@ -7,8 +7,12 @@ const {
   authenticateToRegistry,
 } = require('../scripts/utils/publishMonorepo');
 const { setup: setupPuppeteer } = require('jest-environment-puppeteer');
+const { tmpDirectory } = require('./utils');
 
 module.exports = async globalConfig => {
+  // Empty the folder
+  fs.emptyDirSync(tmpDirectory);
+
   await setupPuppeteer(globalConfig);
   const isPublish = !!process.env.WITH_PUBLISH;
   if (isPublish) {

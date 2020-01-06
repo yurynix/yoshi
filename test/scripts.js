@@ -6,6 +6,7 @@ const {
   waitForStdout,
   terminateAsyncSafe,
   terminateAsync,
+  tmpDirectory,
 } = require('./utils');
 const { ciEnv, localEnv } = require('../scripts/utils/constants');
 
@@ -29,13 +30,13 @@ module.exports = class Scripts {
   }
 
   static setupProjectFromTemplate({ templateDir }) {
-    // The test will run in '.tmp' folder. For example: '.tmp/javascript/css-inclusion'
-    const testType = templateDir.split('test/')[1].replace('features/', '');
-    const featureDir = path.join(__dirname, '..', '.tmp', testType);
+    // The test will run in '.tmp' folder. For example: '.tmp/javascript/features/css-inclusion'
+    const featureDir = path.join(
+      tmpDirectory,
+      templateDir.replace(__dirname, ''),
+    );
     // Create a folder for the specific feature, if does not exist
     fs.ensureDirSync(featureDir);
-    // Empty the folder
-    fs.emptyDirSync(featureDir);
     // Copy the base template
     fs.copySync(
       path.join(templateDir, '../../fixtures/base-template'),

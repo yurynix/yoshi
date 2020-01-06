@@ -1,5 +1,6 @@
 const net = require('net');
 const http = require('http');
+const path = require('path');
 const retry = require('async-retry');
 const waitPort = require('wait-port');
 const { parastorageCdnUrl, localCdnUrl } = require('./constants');
@@ -7,6 +8,8 @@ const terminate = require('terminate');
 const { promisify } = require('util');
 
 const terminateAsync = promisify(terminate);
+
+const tmpDirectory = path.join(__dirname, '../.tmp');
 
 const makeRequest = url => {
   return new Promise(resolve => {
@@ -150,4 +153,5 @@ module.exports = {
   waitForStdout,
   terminateAsync,
   terminateAsyncSafe,
+  tmpDirectory,
 };
