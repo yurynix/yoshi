@@ -1,6 +1,6 @@
 {
   "name": "yoshi-common",
-  "version": "4.26.1",
+  "version": "4.27.0",
   "keywords": [
     "yoshi",
     "common"
@@ -98,7 +98,7 @@
     "wix-tpa-style-loader": "1.0.13",
     "worker-loader": "2.0.0",
     "xmldoc": "1.1.2",
-    "yoshi-config": "4.26.0",
-    "yoshi-helpers": "4.26.0"
+    "yoshi-config": "4.27.0",
+    "yoshi-helpers": "4.27.0"
   }
 }
