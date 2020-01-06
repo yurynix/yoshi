@@ -1,5 +1,33 @@
 # Changelog
 
+## 4.27.0 (2020-01-06)
+
+#### :boom: Breaking Change
+
+- `jest-yoshi-preset`, `yoshi-config`
+  - [#1788](https://github.com/wix/yoshi/pull/1788) Separate jest overrides supported type by jest project type. ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :rocket: New Feature
+
+- `yoshi-common`
+  - [#1795](https://github.com/wix/yoshi/pull/1795) Show A warning log in case a `devDependency` (`yoshi`) is in the `dependencies` array ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1810](https://github.com/wix/yoshi/pull/1810) Move suricate (private) dependency to be loaded by the consumer ([@ranyitz](https://github.com/ranyitz))
+  - [#1818](https://github.com/wix/yoshi/pull/1818) Replace `@` with `_` in tunnel ids ([@netanelgilad](https://github.com/netanelgilad))
+
+#### :house: Internal
+
+- Other
+  - [#1737](https://github.com/wix/yoshi/pull/1737) Advise to install dependencies when there is a change in `package.json/yarn.lock` after pulling/merging changes ([@deanshub](https://github.com/deanshub))
+  - [#1808](https://github.com/wix/yoshi/pull/1808) Fix a bug - missing a return statement in one of the tests ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-flow-legacy`
+  - [#1809](https://github.com/wix/yoshi/pull/1809) drop `haml` tests ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`
+  - [#1807](https://github.com/wix/yoshi/pull/1807) Fix `.tsbuildinfo` (TypeScript cache file) bug with external types. ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.26.1 (2020-01-02)
 
 #### :bug: Bug Fix
