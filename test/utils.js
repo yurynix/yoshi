@@ -1,8 +1,15 @@
 const net = require('net');
 const http = require('http');
+const path = require('path');
 const retry = require('async-retry');
 const waitPort = require('wait-port');
 const { parastorageCdnUrl, localCdnUrl } = require('./constants');
+const terminate = require('terminate');
+const { promisify } = require('util');
+
+const terminateAsync = promisify(terminate);
+
+const tmpDirectory = path.join(__dirname, '../.tmp');
 
 const makeRequest = url => {
   return new Promise(resolve => {
@@ -112,14 +119,27 @@ function waitForPortToFree(port) {
 }
 
 function waitForStdout(spawnedProcess, stringToMatch) {
+  let data = '';
+
   return new Promise(resolve => {
     spawnedProcess.stdout.on('data', function listener(buffer) {
+      data += buffer.toString();
       if (buffer.toString().includes(stringToMatch)) {
         spawnedProcess.stdout.off('data', listener);
-        resolve();
+        resolve(data);
       }
     });
   });
+}
+
+async function terminateAsyncSafe(pid) {
+  try {
+    await terminateAsync(pid);
+  } catch (e) {
+    if (!e.message.includes('kill ESRCH')) {
+      throw new Error(e);
+    }
+  }
 }
 
 module.exports = {
@@ -131,4 +151,7 @@ module.exports = {
   waitForPort,
   waitForPortToFree,
   waitForStdout,
+  terminateAsync,
+  terminateAsyncSafe,
+  tmpDirectory,
 };

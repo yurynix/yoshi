@@ -46,7 +46,7 @@ describe('output', () => {
     try {
       await global.scripts.build();
     } catch (error) {
-      expect(error.stderr).toMatch('Unexpected token (1:9)');
+      expect(error.message).toMatch('Unexpected token (1:9)');
     }
   });
 
@@ -58,7 +58,7 @@ describe('output', () => {
     try {
       await global.scripts.build();
     } catch (error) {
-      expect(error.stderr).toMatch('Unclosed block');
+      expect(error.message).toMatch('Unclosed block');
     }
   });
 
@@ -71,12 +71,12 @@ describe('output', () => {
       await global.scripts.build();
     } catch (error) {
       if (process.platform === 'darwin') {
-        expect(error.stderr).toMatch(
+        expect(error.message).toMatch(
           "Cannot find file: 'clientcasesensitive.js' does not match the " +
             "corresponding name on disk: './src/errors/clientCaseSensitive.js'.",
         );
       } else {
-        expect(error.stderr).toMatch(
+        expect(error.message).toMatch(
           "Module not found: Can't resolve './errors/clientcasesensitive'",
         );
       }
@@ -91,7 +91,7 @@ describe('output', () => {
     try {
       await global.scripts.build();
     } catch (error) {
-      expect(error.stderr).toMatch(
+      expect(error.message).toMatch(
         "(client) Entry module not found: Error: Can't resolve './client'",
       );
     }
@@ -105,7 +105,7 @@ describe('output', () => {
     try {
       await global.scripts.build();
     } catch (error) {
-      expect(error.stderr).toMatch("We couldn't find your server entry");
+      expect(error.message).toMatch("We couldn't find your server entry");
     }
   });
 });
