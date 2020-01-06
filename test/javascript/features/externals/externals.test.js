@@ -2,7 +2,6 @@ const Scripts = require('../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  testType: Scripts.testTypes.JS,
 });
 
 describe.each(['prod', 'dev'])('externals [%s]', mode => {

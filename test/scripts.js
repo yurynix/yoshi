@@ -26,7 +26,9 @@ module.exports = class Scripts {
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
   }
 
-  static setupProjectFromTemplate({ templateDir, testType }) {
+  static setupProjectFromTemplate({ templateDir }) {
+    // The test will run in '.tmp' folder. For example: '.tmp/javascript/css-inclusion'
+    const testType = templateDir.split('test/')[1].replace('features/', '');
     const featureDir = path.join(
       __dirname,
       '..',
@@ -191,7 +193,7 @@ module.exports = class Scripts {
       ['serve', '-p', this.staticsServerPort, '-s', 'dist/statics/'],
       {
         cwd: this.testDirectory,
-        // stdio: 'inherit',
+        stdio: this.silent ? 'pipe' : 'inherit',
       },
     );
 
@@ -260,9 +262,4 @@ module.exports = class Scripts {
       } catch (e) {}
     }
   }
-};
-
-module.exports.testTypes = {
-  JS: 'javascript',
-  TS: 'typescript',
 };
