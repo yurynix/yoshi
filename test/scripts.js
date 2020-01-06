@@ -26,10 +26,12 @@ module.exports = class Scripts {
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
   }
 
-  static setupProjectFromTemplate({ templateDir }) {
+  static setupProjectFromTemplate({ templateDir, testType }) {
     const featureDir = path.join(
       __dirname,
-      '../.tmp',
+      '..',
+      '.tmp',
+      testType,
       path.basename(templateDir),
     );
     // Create a folder for the specific feature, if does not exist
@@ -53,7 +55,7 @@ module.exports = class Scripts {
   async dev(callback = () => {}) {
     const startProcess = execa(
       'node',
-      [yoshiBin, 'start', '--server', 'dist/server.js'],
+      [yoshiBin, 'start', '--server', './dist/server.js'],
       {
         cwd: this.testDirectory,
         env: {
@@ -234,7 +236,7 @@ module.exports = class Scripts {
       },
     );
 
-    const appServerProcess = execa('node', ['dist/server.js'], {
+    const appServerProcess = execa('node', ['./dist/server.js'], {
       cwd: this.testDirectory,
       stdio: this.silent ? 'pipe' : 'inherit',
       env: {
@@ -251,10 +253,17 @@ module.exports = class Scripts {
     try {
       await callback();
     } finally {
-      await Promise.all([
-        terminateAsync(staticsServerProcess.pid),
-        terminateAsync(appServerProcess.pid),
-      ]);
+      try {
+        await Promise.all([
+          terminateAsync(staticsServerProcess.pid),
+          terminateAsync(appServerProcess.pid),
+        ]);
+      } catch (e) {}
     }
   }
+};
+
+module.exports.testTypes = {
+  JS: 'javascript',
+  TS: 'typescript',
 };

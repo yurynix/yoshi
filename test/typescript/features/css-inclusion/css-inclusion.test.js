@@ -3,6 +3,7 @@ const Scripts = require('../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
+  testType: Scripts.testTypes.TS,
 });
 
 describe.each(['prod', 'dev'])('css inclusion [%s]', mode => {
