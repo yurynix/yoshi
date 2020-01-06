@@ -49,6 +49,23 @@ export const lintFix = (dir: string) => {
   });
 };
 
+export const gitCommit = (dir: string) => {
+  console.log(`\nRunning ${chalk.magenta('initial commit')}`);
+  execa.sync('git add -A', {
+    shell: true,
+    cwd: dir,
+    stdio: 'ignore',
+  });
+  execa.sync(
+    'git commit -m "Initial commit from Create Yoshi App" --no-verify',
+    {
+      shell: true,
+      cwd: dir,
+      stdio: 'ignore',
+    },
+  );
+};
+
 export const gitInit = (dir: string) => {
   console.log(`\nRunning ${chalk.magenta('git init')}\n`);
 
