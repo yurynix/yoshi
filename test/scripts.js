@@ -232,7 +232,6 @@ module.exports = class Scripts {
       ['serve', '-p', this.staticsServerPort, '-s', 'dist/statics/'],
       {
         cwd: this.testDirectory,
-        stdio: 'inherit',
       },
     );
 
