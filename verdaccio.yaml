@@ -31,4 +31,4 @@ packages:
     proxy: npmjs
 
 logs:
-  - {type: stdout, format: pretty, level: http}
+  - {type: stdout, format: pretty, level: warn}
