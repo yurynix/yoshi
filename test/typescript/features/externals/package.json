@@ -1,5 +1,5 @@
 {
-  "name": "externals-js",
+  "name": "externals-ts",
   "private": true,
   "yoshi": {
     "projectType": "app",

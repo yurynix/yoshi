@@ -1,5 +1,3 @@
-declare module 'externals';
-
 interface Window {
   __LOCALE__: string;
   __BASEURL__: string;

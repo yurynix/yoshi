@@ -142,6 +142,23 @@ async function terminateAsyncSafe(pid) {
   }
 }
 
+const templateRegex = /{%\w+%}/g;
+
+const replaceTemplates = (content, map) =>
+  content.replace(templateRegex, match => {
+    const key = match.slice(2, -2);
+
+    if (!map.hasOwnProperty(key)) {
+      throw new Error(
+        `the key ${key} suppose to be one of the following: ${Object.keys(
+          map,
+        )}`,
+      );
+    }
+
+    return map[key];
+  });
+
 module.exports = {
   request,
   matchJS,
@@ -154,4 +171,5 @@ module.exports = {
   terminateAsync,
   terminateAsyncSafe,
   tmpDirectory,
+  replaceTemplates,
 };

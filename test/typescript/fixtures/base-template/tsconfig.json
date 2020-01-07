@@ -9,7 +9,7 @@
     "skipLibCheck": true
   },
   "files": [
-    "../../../../packages/yoshi/types.d.ts"
+    "{%yoshiRootPath%}/types.d.ts"
   ],
   "include": [
     "src"

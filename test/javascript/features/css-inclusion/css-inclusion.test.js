@@ -1,4 +1,3 @@
-// const path = require('path');
 const { matchCSS } = require('../../../utils');
 const Scripts = require('../../../scripts');
 

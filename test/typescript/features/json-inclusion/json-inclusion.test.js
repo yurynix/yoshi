@@ -4,7 +4,7 @@ const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
 });
 
-describe.each(['prod', 'dev'])('json inclusion %s', mode => {
+describe.each(['prod', 'dev'])('json inclusion [%s]', mode => {
   it('integration', async () => {
     await scripts[mode](async () => {
       await page.goto('http://localhost:3000');

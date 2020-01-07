@@ -2,18 +2,6 @@ const { matchCSS, initTest } = require('../../../utils');
 
 describe('webpack', () => {
   describe('css', () => {
-    it('css inclusion', async () => {
-      await initTest('css-inclusion');
-
-      const className = await page.$eval('#css-inclusion', elm =>
-        elm.getAttribute('class'),
-      );
-
-      await matchCSS('css-inclusion', page, [
-        new RegExp(`.${className}{background:#ccc;color:#000;*}`),
-      ]);
-    });
-
     it('global css inclusion', async () => {
       await initTest('global-css-inclusion');
 
@@ -309,19 +297,6 @@ describe('webpack', () => {
       await matchCSS('svg-inclusion-css', page, [
         /background:url\("data:image\/svg.+\)/,
       ]);
-    });
-  });
-
-  describe('json', () => {
-    it('json inclusion', async () => {
-      await initTest('json-inclusion');
-
-      const result = await page.$eval(
-        '#json-inclusion',
-        elm => elm.textContent,
-      );
-
-      expect(result).toBe('This is an abstract.');
     });
   });
 

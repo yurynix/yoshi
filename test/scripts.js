@@ -7,6 +7,7 @@ const {
   terminateAsyncSafe,
   terminateAsync,
   tmpDirectory,
+  replaceTemplates,
 } = require('./utils');
 const { ciEnv, localEnv } = require('../scripts/utils/constants');
 
@@ -47,6 +48,17 @@ module.exports = class Scripts {
       overwrite: true,
       filter: file => !file.includes('.test.js'),
     });
+
+    //Process tsconfig template for dynamic content
+    const tsConfigPath = path.join(featureDir, 'tsconfig.json');
+    if (fs.pathExistsSync(tsConfigPath)) {
+      const templateData = {
+        yoshiRootPath: path.join(__dirname, '../packages/yoshi'),
+      };
+      const fileContents = fs.readFileSync(tsConfigPath, 'utf-8');
+      const transformedContents = replaceTemplates(fileContents, templateData);
+      fs.outputFileSync(tsConfigPath, transformedContents);
+    }
 
     return new Scripts({ testDirectory: featureDir });
   }

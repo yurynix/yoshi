@@ -1,6 +1,7 @@
 module.exports = {
   preset: 'jest-puppeteer',
   rootDir: './test',
+  verbose: true,
   testResultsProcessor: 'jest-teamcity-reporter',
   testMatch: ['**/*.test.js'],
   testPathIgnorePatterns: ['/node_modules/', '/projects/'],
