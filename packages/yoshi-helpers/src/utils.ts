@@ -23,7 +23,6 @@ export function logIfAny(log: any) {
 export const unprocessedModules = (p: string) => {
   const allSourcesButExternalModules = (filePath: string) => {
     filePath = path.normalize(filePath);
-
     return (
       filePath.startsWith(process.cwd()) && !filePath.includes('node_modules')
     );
