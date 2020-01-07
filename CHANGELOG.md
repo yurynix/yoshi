@@ -1,5 +1,26 @@
 # Changelog
 
+## 4.28.0 (2020-01-07)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#1822](https://github.com/wix/yoshi/pull/1822) `create-yoshi-app` - perform initial commit ([@NitayRabi](https://github.com/NitayRabi))
+- `eslint-config-yoshi-base`, `jest-yoshi-preset`
+  - [#1805](https://github.com/wix/yoshi/pull/1805) `jest-yoshi-preset` - Jest debug watch mode plugin ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#1811](https://github.com/wix/yoshi/pull/1811) Generate `stats.json` during build and start into `dist/statics` ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- Other
+  - [#1823](https://github.com/wix/yoshi/pull/1823) Reduce Verdaccio logger output ([@juanpicado](https://github.com/juanpicado))
+- `yoshi-common`
+  - [#1780](https://github.com/wix/yoshi/pull/1780) New testing infra ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.27.0 (2020-01-06)
 
 #### :boom: Breaking Change
