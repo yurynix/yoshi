@@ -61,6 +61,23 @@ export const gitInit = (dir: string) => {
   console.log(stdout + '\n');
 };
 
+export const gitCommit = (dir: string) => {
+  console.log(`\nRunning ${chalk.magenta('initial commit')}`);
+  execa.sync('git add -A', {
+    shell: true,
+    cwd: dir,
+    stdio: 'ignore',
+  });
+  execa.sync(
+    'git commit -m "Initial commit from Create Yoshi App" --no-verify',
+    {
+      shell: true,
+      cwd: dir,
+      stdio: 'ignore',
+    },
+  );
+};
+
 export const isInsideGitRepo = (dir: string) => {
   try {
     execa.sync('git rev-parse --is-inside-work-tree', {

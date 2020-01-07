@@ -39,6 +39,12 @@ test('it should generate a git repo', async () => {
       cwd: tempDir,
     });
   }).not.toThrow();
+  const { stdout: gitLastCommit } = execa.sync(`git show -s '--format=%s'`, {
+    shell: true,
+    cwd: tempDir,
+    stdio: 'pipe',
+  });
+  expect(gitLastCommit).toEqual('Initial commit from Create Yoshi App');
 });
 
 test('it should not create a git repo if the target directory is contained in a git repo', async () => {
