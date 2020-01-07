@@ -15,16 +15,22 @@ module.exports = async globalConfig => {
 
   await setupPuppeteer(globalConfig);
   const isPublish = !!process.env.WITH_PUBLISH;
+
   if (isPublish) {
+    console.log('Starting monorepo publish');
     global.teardown = publishMonorepo();
     global.yoshiPublishDir = tempy.directory();
+
     await fs.copy(
       path.join(__dirname, 'yoshi-publish'),
       global.yoshiPublishDir,
     );
 
+    console.log('Authenticating to registry');
     authenticateToRegistry(global.yoshiPublishDir);
-    await execa('npm install', {
+
+    console.log('Running yarn install');
+    await execa('yarn install --no-lockfile', {
       cwd: global.yoshiPublishDir,
       shell: true,
       stdio: !process.env.DEBUG ? 'pipe' : 'inherit',
