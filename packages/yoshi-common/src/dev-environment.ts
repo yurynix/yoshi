@@ -311,6 +311,7 @@ export default class DevEnvironment {
       port: webpackDevServerPort,
       appName,
       suricate,
+      cwd,
     });
 
     const devEnvironment = new DevEnvironment({
