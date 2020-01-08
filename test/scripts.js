@@ -60,6 +60,13 @@ module.exports = class Scripts {
       fs.outputFileSync(tsConfigPath, transformedContents);
     }
 
+    if (fs.pathExistsSync(path.join(featureDir, '__node_modules__'))) {
+      fs.moveSync(
+        path.join(featureDir, '__node_modules__'),
+        path.join(featureDir, 'node_modules'),
+      );
+    }
+
     return new Scripts({ testDirectory: featureDir });
   }
 

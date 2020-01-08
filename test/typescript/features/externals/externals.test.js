@@ -14,7 +14,7 @@ describe.each(['prod', 'dev'])('externals [%s]', mode => {
     });
   });
 
-  // it('component tests', async () => {
-  //   await scripts.test(mode);
-  // });
+  it('component tests', async () => {
+    await scripts.test(mode);
+  });
 });
