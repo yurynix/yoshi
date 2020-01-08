@@ -100,6 +100,13 @@ function prepareForPublish(pkg: Package): Package | undefined {
   return pkg;
 }
 
+// Do not try to publish if running on pullrequest CI
+if (process.env.agentType === 'pullrequest') {
+  console.log('running on pull-request CI');
+  console.log('aborting publish...');
+  process.exit(0);
+}
+
 getPackages(process.cwd()).then((packagesList: Array<Package>) => {
   console.log('> prepare packages for publish');
   console.log();
