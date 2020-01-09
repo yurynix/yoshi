@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.28.2 (2020-01-09)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-bm`, `yoshi-flow-editor`
+  - [#1842](https://github.com/wix/yoshi/pull/1842) Fix externals not resolving correctly with monorepos ([@ronami](https://github.com/ronami))
+
 ## 4.28.1 (2020-01-09)
 
 #### :bug: Bug Fix
