@@ -2,6 +2,6 @@ import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-s
 
 declare global {
   interface Window {
-    Wix: any;
+    Wix: IWixStatic;
   }
 }
