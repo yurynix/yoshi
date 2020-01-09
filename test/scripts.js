@@ -21,10 +21,11 @@ const yoshiBin = require.resolve('../packages/yoshi/bin/yoshi-cli');
 
 module.exports = class Scripts {
   constructor({ testDirectory }) {
-    this.silent = !process.env.DEBUG;
-    this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
+    this.serverUrl = `http://localhost:${this.serverProcessPort}`;
+    this.silent = !process.env.DEBUG;
+    this.testDirectory = testDirectory;
     this.yoshiPublishDir = isPublish
       ? `${global.yoshiPublishDir}/node_modules`
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
