@@ -19,6 +19,7 @@
     "@types/mini-css-extract-plugin": "0.8.0",
     "@types/optimize-css-assets-webpack-plugin": "5.0.1",
     "@types/react-dev-utils": "9.0.1",
+    "@types/resolve": "1.14.0",
     "@types/semver": "6.2.0",
     "@types/sockjs": "0.3.31",
     "@types/terser-webpack-plugin": "^1.2.1",
@@ -26,7 +27,6 @@
     "@types/webpack": "4.41.0",
     "@types/webpack-bundle-analyzer": "2.13.3",
     "@types/webpack-manifest-plugin": "2.1.0",
-    "@types/webpack-node-externals": "1.7.0",
     "@types/xmldoc": "1.1.4"
   },
   "dependencies": {
@@ -71,6 +71,7 @@
     "raw-loader": "1.0.0",
     "react-dev-utils": "7.0.5",
     "read-pkg": "5.2.0",
+    "resolve": "1.14.2",
     "resolve-cwd": "3.0.0",
     "rtlcss-webpack-plugin": "4.0.3",
     "ruby-haml-loader": "1.0.0",
@@ -93,7 +94,6 @@
     "webpack-dev-server": "3.2.1",
     "webpack-hot-middleware": "2.25.0",
     "webpack-manifest-plugin": "2.2.0",
-    "webpack-node-externals": "1.7.2",
     "webpack-sources": "1.4.3",
     "wix-tpa-style-loader": "1.0.13",
     "worker-loader": "2.0.0",

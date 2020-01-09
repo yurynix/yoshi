@@ -29,7 +29,6 @@
   "devDependencies": {
     "@types/fs-extra": "^8.0.1",
     "@types/react-dev-utils": "^9.0.1",
-    "@types/webpack": "^4.39.8",
-    "@types/webpack-node-externals": "^1.6.3"
+    "@types/webpack": "^4.39.8"
   }
 }

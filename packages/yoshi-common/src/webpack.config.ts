@@ -12,6 +12,7 @@ import {
   TEMPLATES_DIR,
   TEMPLATES_BUILD_DIR,
 } from 'yoshi-config/paths';
+import resolve from 'resolve';
 import {
   isProduction as checkIsProduction,
   inTeamCity as checkInTeamCity,
@@ -37,7 +38,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import globby from 'globby';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import InterpolateHtmlPlugin from 'react-dev-utils/InterpolateHtmlPlugin';
-import nodeExternals, { WhitelistOption } from 'webpack-node-externals';
 // @ts-ignore - missing types
 import RtlCssPlugin from 'rtlcss-webpack-plugin';
 import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
@@ -271,7 +271,7 @@ export function createBaseWebpackConfig({
   forceEmitSourceMaps?: boolean;
   useNodeExternals?: boolean;
   exportAsLibraryName?: string;
-  nodeExternalsWhitelist?: Array<WhitelistOption>;
+  nodeExternalsWhitelist?: Array<RegExp>;
   useAssetRelocator?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
@@ -299,6 +299,16 @@ export function createBaseWebpackConfig({
     modules: false,
     targets: target === 'node' ? 'current node' : undefined,
   });
+
+  const notExternalModules: Array<RegExp> = [
+    reStyle,
+    reAssets,
+    /bootstrap-hot-loader/,
+    /yoshi-server/,
+    // Temporary work-around for thunderbolt
+    /thunderbolt-elements/,
+    ...nodeExternalsWhitelist,
+  ];
 
   const config: webpack.Configuration = {
     context: join(SRC_DIR),
@@ -878,21 +888,48 @@ export function createBaseWebpackConfig({
     ...(target === 'node' && useNodeExternals
       ? {
           externals: [
-            nodeExternals({
-              whitelist: [
-                reStyle,
-                reAssets,
-                /bootstrap-hot-loader/,
-                /yoshi-server/,
-                // Temporary work-around for thunderbolt
-                /thunderbolt-elements/,
-                ...nodeExternalsWhitelist,
-              ],
-            }),
-            // Local integration tests as Yoshi's `node_modules` are symlinked locally
-            nodeExternals({
-              modulesDir: path.resolve(__dirname, '../../../node_modules'),
-            }),
+            (
+              context,
+              request,
+              callback: (error?: any, result?: any) => void,
+            ) => {
+              let res: string;
+              try {
+                res = resolve.sync(request, { basedir: `${context}/` });
+              } catch (err) {
+                // If the request cannot be resolved, we need to tell webpack to
+                // "bundle" it so that webpack shows an error (that it cannot be
+                // resolved).
+                return callback();
+              }
+
+              // Same as above, if the request cannot be resolved we need to have
+              // webpack "bundle" it so it surfaces the not found error.
+              if (!res) {
+                return callback();
+              }
+
+              // Webpack itself has to be compiled because it doesn't always use module relative paths
+              if (
+                res.match(/node_modules[/\\]webpack/) ||
+                res.match(/node_modules[/\\]css-loader/)
+              ) {
+                return callback();
+              }
+
+              // Bundle any white listed dependencies
+              if (notExternalModules.some(regex => regex.test(res))) {
+                return callback();
+              }
+
+              // Anything else that is within `node_modules` is externalized.
+              if (res.match(/node_modules/)) {
+                return callback(undefined, `commonjs ${request}`);
+              }
+
+              // Default behavior: bundle the code!
+              callback();
+            },
           ],
         }
       : {}),
