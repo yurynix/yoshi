@@ -1,0 +1,11 @@
+{
+  "name": "ts-untranspiled-dependency-js",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "externalUnprocessedModules": ["untranspiled-dependency"]
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}
