@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.28.1 (2020-01-09)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1835](https://github.com/wix/yoshi/pull/1835) Serve statics from dev server in monorepo flow. ([@roymiloh](https://github.com/roymiloh))
+
+#### :house: Internal
+
+- [#1836](https://github.com/wix/yoshi/pull/1836) Do not try to publish on pullrequest CI. ([@yanivefraim](https://github.com/yanivefraim))
+- [#1830](https://github.com/wix/yoshi/pull/1830) Test infra - move more tests to the new infra. ([@yanivefraim](https://github.com/yanivefraim))
+- [#1825](https://github.com/wix/yoshi/pull/1825) Install with yarn in e2e tests. ([@ranyitz](https://github.com/ranyitz))
+- [#1834](https://github.com/wix/yoshi/pull/1834) Reduce lerna's log level from default (notice) to 'warn'. ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.28.0 (2020-01-07)
 
 #### :rocket: New Feature
