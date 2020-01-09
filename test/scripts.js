@@ -86,6 +86,18 @@ module.exports = class Scripts {
       },
     );
 
+    startProcess.stdout.on('data', buffer => {
+      if (!this.silent) {
+        console.log(buffer.toString());
+      }
+    });
+
+    startProcess.stderr.on('data', buffer => {
+      if (!this.silent) {
+        console.log(buffer.toString());
+      }
+    });
+
     // `startProcess` will never resolve but if it fails this
     // promise will reject immediately
     try {
@@ -141,6 +153,11 @@ module.exports = class Scripts {
         },
         all: true,
       });
+
+      if (!this.silent) {
+        console.log(buildResult.stdout);
+        console.log(buildResult.stderr);
+      }
     } catch (e) {
       throw new Error(e.all);
     }
