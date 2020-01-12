@@ -25,7 +25,7 @@ const commands: {
 } = {
   build: () => import('../commands/build'),
   start: () => import('../commands/start'),
-  test: () => import('yoshi-flow-legacy/bin/yoshi-legacy'),
+  test: () => import('../commands/test'),
   lint: () => import('yoshi-flow-legacy/bin/yoshi-legacy'),
   info: () => import('yoshi-flow-legacy/bin/yoshi-legacy'),
   release: () => import('yoshi-flow-legacy/bin/yoshi-legacy'),
