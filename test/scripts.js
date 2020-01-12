@@ -24,7 +24,7 @@ module.exports = class Scripts {
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
     this.serverUrl = `http://localhost:${this.serverProcessPort}`;
-    this.silent = !process.env.DEBUG;
+    this.verbose = !!process.env.DEBUG;
     this.testDirectory = testDirectory;
     this.yoshiPublishDir = isPublish
       ? `${global.yoshiPublishDir}/node_modules`
@@ -87,13 +87,13 @@ module.exports = class Scripts {
     );
 
     startProcess.stdout.on('data', buffer => {
-      if (!this.silent) {
+      if (this.verbose) {
         console.log(buffer.toString());
       }
     });
 
     startProcess.stderr.on('data', buffer => {
-      if (!this.silent) {
+      if (this.verbose) {
         console.log(buffer.toString());
       }
     });
@@ -154,9 +154,8 @@ module.exports = class Scripts {
         all: true,
       });
 
-      if (!this.silent) {
-        console.log(buildResult.stdout);
-        console.log(buildResult.stderr);
+      if (this.verbose) {
+        console.log(buildResult.all);
       }
     } catch (e) {
       throw new Error(e.all);
