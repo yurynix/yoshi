@@ -93,6 +93,12 @@ Promise.resolve().then(async () => {
   }
 
   const config = loadConfig();
+  // This line is because the default ssl config is false,
+  // and since we use yoshi-flow-legacy test command,
+  // we need to configure ssl to true becase we did implement build and start commands
+  // with ssl true as default (this should be removed when test cmd is implemented)
+  config.servers.cdn.ssl = true;
+
   const model = await generateFlowEditorModel(config);
 
   const runCommand = (await commands[command]()).default;

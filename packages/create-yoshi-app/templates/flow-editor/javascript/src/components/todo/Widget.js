@@ -33,13 +33,15 @@ const TodoList = () => {
     <Controller>
       {ctrl => (
         <ul>
-          {getVisibleTodos(ctrl.todos, ctrl.visibilityFilter).map(todo => (
-            <Todo
-              key={todo.id}
-              {...todo}
-              onClick={() => ctrl.toggleTodo(todo.id)}
-            />
-          ))}
+          {getVisibleTodos(ctrl.state.todos, ctrl.state.visibilityFilter).map(
+            todo => (
+              <Todo
+                key={todo.id}
+                {...todo}
+                onClick={() => ctrl.methods.toggleTodo(todo.id)}
+              />
+            ),
+          )}
         </ul>
       )}
     </Controller>
@@ -67,20 +69,20 @@ const Footer = () => {
         <div>
           <span>Show: </span>
           <Link
-            active={'SHOW_ALL' === ctrl.visibilityFilter}
-            onClick={() => ctrl.setVisibilityFilter('SHOW_ALL')}
+            active={'SHOW_ALL' === ctrl.state.visibilityFilter}
+            onClick={() => ctrl.methods.setVisibilityFilter('SHOW_ALL')}
           >
             All
           </Link>
           <Link
-            active={'SHOW_ACTIVE' === ctrl.visibilityFilter}
-            onClick={() => ctrl.setVisibilityFilter('SHOW_ACTIVE')}
+            active={'SHOW_ACTIVE' === ctrl.state.visibilityFilter}
+            onClick={() => ctrl.methods.setVisibilityFilter('SHOW_ACTIVE')}
           >
             Active
           </Link>
           <Link
-            active={'SHOW_COMPLETED' === ctrl.visibilityFilter}
-            onClick={() => ctrl.setVisibilityFilter('SHOW_COMPLETED')}
+            active={'SHOW_COMPLETED' === ctrl.state.visibilityFilter}
+            onClick={() => ctrl.methods.setVisibilityFilter('SHOW_COMPLETED')}
           >
             Completed
           </Link>
@@ -103,7 +105,7 @@ const AddTodo = () => {
               if (!input.value.trim()) {
                 return;
               }
-              ctrl.addTodo(input.value);
+              ctrl.methods.addTodo(input.value);
               input.value = '';
             }}
           >

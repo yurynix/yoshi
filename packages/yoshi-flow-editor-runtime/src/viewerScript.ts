@@ -33,11 +33,13 @@ export const createControllers = (
 
       // Run state change callback
       wrappedController.then((userController: any) => {
-        userController.stateChange();
+        if (userController.stateChange) {
+          userController.stateChange();
+        }
       });
 
       // Update render cycle
-      return setProps(updatedState);
+      return setProps({ state: updatedState });
     };
 
     const context = {
@@ -58,13 +60,14 @@ export const createControllers = (
           pageReady: async (...args: Array<any>) => {
             const awaitedFrameworkData = await objectPromiseAll(frameworkData);
 
+            // TODO: export by property (methods, state) so we won't have conflicting props
             setProps({
               __publicData__: controllerConfig.config.publicData,
               ...awaitedFrameworkData,
               // Set initial state
-              ...context.state,
+              state: context.state,
               // Set methods
-              ...userController.methods,
+              methods: userController.methods,
             });
 
             // Optional `pageReady`
@@ -72,6 +75,7 @@ export const createControllers = (
               return userController.pageReady(setProps, ...args);
             }
           },
+          exports: userController.corvid,
         };
       },
     );

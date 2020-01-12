@@ -39,6 +39,6 @@ describe('createControllers', () => {
       widgetConfig,
     );
     expect(result).resolves.toHaveProperty('methods');
-    expect(result).resolves.toHaveProperty('exports');
+    expect(result).resolves.toHaveProperty('corvid');
   });
 });

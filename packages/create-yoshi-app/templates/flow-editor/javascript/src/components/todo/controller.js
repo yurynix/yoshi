@@ -62,11 +62,11 @@ const createController = async function({
       },
     },
     // Hook for state changes
-    stateChange: () => {
-      // saveState(this.state, userId);
+    pageReady: () => {
+      console.log('page is ready!');
     },
     // Expose Corvid API
-    exports: {
+    corvid: {
       getTodos: () => this.state.todos,
     },
   };
