@@ -73,6 +73,8 @@ module.exports = class Scripts {
   }
 
   async dev(callback = () => {}) {
+    let startProcessOutput;
+
     const startProcess = execa(
       'node',
       [yoshiBin, 'start', '--server', './dist/server.js'],
@@ -87,12 +89,14 @@ module.exports = class Scripts {
     );
 
     startProcess.stdout.on('data', buffer => {
+      startProcessOutput += buffer.toString();
       if (this.verbose) {
         console.log(buffer.toString());
       }
     });
 
     startProcess.stderr.on('data', buffer => {
+      startProcessOutput += buffer.toString();
       if (this.verbose) {
         console.log(buffer.toString());
       }
@@ -119,6 +123,11 @@ module.exports = class Scripts {
       ]);
 
       await callback();
+    } catch (e) {
+      console.log('--------------- Yoshi Start Output ---------------');
+      console.log(startProcessOutput);
+      console.log('--------------- End of Yoshi Start Output ---------------');
+      throw e;
     } finally {
       await terminateAsyncSafe(startProcess.pid);
     }
@@ -257,8 +266,9 @@ module.exports = class Scripts {
   }
 
   async prod(callback = () => {}) {
+    let buildResult;
     try {
-      await this.build(ciEnv);
+      buildResult = await this.build(ciEnv);
     } catch (e) {
       throw new Error(e);
     }
@@ -286,7 +296,12 @@ module.exports = class Scripts {
     ]);
 
     try {
-      await callback();
+      await callback(buildResult);
+    } catch (e) {
+      console.log('--------------- Yoshi Build Output ---------------');
+      console.log(buildResult.all);
+      console.log('--------------- End of Yoshi Build Output ---------------');
+      throw e;
     } finally {
       await Promise.all([
         terminateAsyncSafe(staticsServerProcess.pid),
