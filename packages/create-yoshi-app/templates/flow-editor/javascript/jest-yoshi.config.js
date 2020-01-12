@@ -1,6 +1,6 @@
 module.exports = {
   server: {
-    command: 'node dev/server.js',
+    command: 'node dist/server.js',
     port: 3100,
   },
   puppeteer: {
