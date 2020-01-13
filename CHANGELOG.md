@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.28.4 (2020-01-13)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-legacy`
+  - [#1781](https://github.com/wix/yoshi/pull/1781) Fix eslint not finding `ts` files on TypeScript project ([@eranshabi](https://github.com/eranshabi))
+
+#### :house: Internal
+
+- [#1848](https://github.com/wix/yoshi/pull/1848) Reconfigure renovate with minor and patch updates ([@ranyitz](https://github.com/ranyitz))
+- [#1843](https://github.com/wix/yoshi/pull/1843) New testing infra - add more tests ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.28.3 (2020-01-13)
 
 #### :bug: Bug Fix
