@@ -246,32 +246,20 @@ describe('Aggregator: Lint', () => {
 
     it('should run eslint if using typescript but no tslint config file', () => {
       const res = setup({
-        'app/a.ts': `parseInt("1");`,
-        'app/a.tsx': `parseInt("1");`,
+        'src/foo.ts': `parseInt("1");`,
+        'src/bar.tsx': `parseInt("1");`,
         'rootFile.tsx': `parseInt("1");`,
-        'not-in-glob/b.ts': 'parseInt("1");',
+        'not-in-glob/baz.ts': 'parseInt("1");',
         'package.json': fx.packageJson(),
-        'tsconfig.json': fx.tsconfig({ files: ['app/a.ts'] }),
+        'tsconfig.json': fx.tsconfig({ files: [] }),
       }).execute('lint');
-      console.log(res.stdout);
-      expect(res.code).to.equal(1);
-      expect(res.stderr).to.contain('Missing radix parameter  radix');
-      expect(res.stderr).to.contain('a.ts');
-      expect(res.stderr).to.contain('a.tsx');
-      expect(res.stderr).to.contain('rootFile.tsx');
-    });
 
-    it('eslint should work when having only .ts files', () => {
-      const res = setup({
-        'app/a.ts': `parseInt("1");`,
-        'not-in-glob/b.ts': 'parseInt("1");',
-        'package.json': fx.packageJson(),
-        'tsconfig.json': fx.tsconfig({ files: ['app/a.ts'] }),
-      }).execute('lint');
-      console.log(res.stdout);
       expect(res.code).to.equal(1);
       expect(res.stderr).to.contain('Missing radix parameter  radix');
-      expect(res.stderr).to.contain('a.ts');
+      expect(res.stderr).to.contain('foo.ts');
+      expect(res.stderr).to.contain('bar.tsx');
+      expect(res.stderr).to.contain('rootFile.tsx');
+      expect(res.stderr).to.not.contain('baz.tsx');
     });
   });
 
