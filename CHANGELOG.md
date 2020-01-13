@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.28.3 (2020-01-13)
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`, `yoshi-common`, `yoshi-config`, `yoshi-flow-legacy`, `yoshi-helpers`
+  - [#1847](https://github.com/wix/yoshi/pull/1847) change `babel-preset-yoshi` to be loaded from `yoshi-common` and fixing bug with monorepos installed via yarn ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#1838](https://github.com/wix/yoshi/pull/1838) Move tests to new testing infra ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.28.2 (2020-01-09)
 
 #### :bug: Bug Fix
