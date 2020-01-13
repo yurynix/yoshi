@@ -20,12 +20,8 @@ import {
 // @ts-ignore - missing types
 import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import {
-  unprocessedModules,
-  createBabelConfig,
-  toIdentifier,
-  getProjectArtifactId,
-} from 'yoshi-helpers/utils';
+import { toIdentifier, getProjectArtifactId } from 'yoshi-helpers/utils';
+
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { resolveNamespaceFactory } from '@stylable/node';
@@ -43,11 +39,13 @@ import RtlCssPlugin from 'rtlcss-webpack-plugin';
 import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
 // @ts-ignore - missing types
 import { mdsvex } from 'mdsvex';
+import shouldTranspileFile from './utils/should-transpile-file';
 import InlineChunkHtmlPlugin from './html-inline-plugin';
 import { localIdentName } from './utils/constants';
 import ExportDefaultPlugin from './export-default-plugin';
 import { calculatePublicPath } from './webpack-utils';
 import ManifestPlugin from './manifest-webpack-plugin';
+import createBabelConfig from './create-babel-config';
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
@@ -686,7 +684,7 @@ export function createBaseWebpackConfig({
               {
                 test: reScript,
                 loader: 'yoshi-angular-dependencies/ng-annotate-loader',
-                include: unprocessedModules,
+                include: shouldTranspileFile,
               },
             ]
           : []),
@@ -705,7 +703,7 @@ export function createBaseWebpackConfig({
 
         {
           test: /\.(ts|tsx)$/,
-          include: unprocessedModules,
+          include: shouldTranspileFile,
           use: [
             {
               loader: 'thread-loader',
@@ -741,7 +739,7 @@ export function createBaseWebpackConfig({
 
         {
           test: reScript,
-          include: unprocessedModules,
+          include: shouldTranspileFile,
           // Optimize JS processing worker stuff excluded due to
           // https://github.com/webpack-contrib/worker-loader/issues/177
           exclude: /\.inline\.worker\.js/,
@@ -757,7 +755,7 @@ export function createBaseWebpackConfig({
 
         {
           test: reScript,
-          include: unprocessedModules,
+          include: shouldTranspileFile,
           use: [
             {
               loader: 'babel-loader',

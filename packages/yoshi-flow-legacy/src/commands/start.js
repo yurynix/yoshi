@@ -46,10 +46,10 @@ const {
   shouldTransformHMRRuntime,
   suffix,
   watch,
-  createBabelConfig,
 } = require('yoshi-helpers/utils');
 const { debounce } = require('lodash');
 const wixAppServer = require('../tasks/app-server');
+const createBabelConfig = require('yoshi-common/create-babel-config');
 const openBrowser = require('yoshi-common/open-browser');
 
 const runner = createRunner({

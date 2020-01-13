@@ -78,7 +78,6 @@ export type Config = {
   name: string;
   unpkg: string | unknown;
   pkgJson: PackageJson;
-
   specs: SpecsConfig;
   hmr: boolean | 'auto';
   hooks: HooksConfig;

@@ -22,7 +22,7 @@ const {
   shouldRunLess,
   shouldRunSass,
 } = require('yoshi-helpers/queries');
-const { createBabelConfig } = require('yoshi-helpers/utils');
+const createBabelConfig = require('yoshi-common/create-babel-config');
 const { printAndExitOnErrors } = require('../error-handler');
 
 const runner = createRunner({

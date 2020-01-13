@@ -1,5 +1,5 @@
 import config from 'yoshi-config';
-import { isTypescriptProject } from '../queries';
+import { isTypescriptProject } from '../utils/heuristics';
 
 export const setupRequireHooks = () => {
   if (isTypescriptProject()) {
