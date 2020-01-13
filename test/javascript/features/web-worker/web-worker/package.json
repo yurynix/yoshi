@@ -1,0 +1,15 @@
+{
+  "name": "web-worker-feature-js",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "webWorker": {
+      "entry": {
+        "worker": "./worker"
+      }
+    }
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

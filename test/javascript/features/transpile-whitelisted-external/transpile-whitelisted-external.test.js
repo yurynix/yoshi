@@ -2,6 +2,7 @@ const Scripts = require('../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
+  projectType: Scripts.projectType.JS,
 });
 
 describe.each(['prod', 'dev'])('transpile whitelisted external [%s]', mode => {

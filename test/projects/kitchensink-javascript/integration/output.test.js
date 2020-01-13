@@ -31,25 +31,6 @@ describe('output', () => {
     fs.writeFileSync(originalServerFilePath, originalServerContent);
   });
 
-  it('runs successfully', async () => {
-    const result = await global.scripts.build();
-
-    expect(result.stdout).toMatch('Compiled successfully.');
-    expect(result.stdout).toMatch('Interested in reducing your bundle size?');
-  });
-
-  it('fails with babel syntax errors', async () => {
-    expect.assertions(1);
-
-    await replaceOriginalEntry('src/errors/clientBabel.js');
-
-    try {
-      await global.scripts.build();
-    } catch (error) {
-      expect(error.message).toMatch('Unexpected token (1:9)');
-    }
-  });
-
   it('fails with css syntax errors', async () => {
     expect.assertions(1);
 

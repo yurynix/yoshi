@@ -21,7 +21,7 @@ const yoshiBin = require.resolve('../packages/yoshi/bin/yoshi-cli');
 
 module.exports = class Scripts {
   constructor({ testDirectory }) {
-    this.silent = !process.env.DEBUG;
+    this.verbose = !!process.env.DEBUG;
     this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
@@ -30,7 +30,7 @@ module.exports = class Scripts {
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
   }
 
-  static setupProjectFromTemplate({ templateDir }) {
+  static setupProjectFromTemplate({ templateDir, projectType }) {
     // The test will run in '.tmp' folder. For example: '.tmp/javascript/features/css-inclusion'
     const featureDir = path.join(
       tmpDirectory,
@@ -40,7 +40,7 @@ module.exports = class Scripts {
     fs.ensureDirSync(featureDir);
     // Copy the base template
     fs.copySync(
-      path.join(templateDir, '../../fixtures/base-template'),
+      path.join(__dirname, 'fixtures', projectType, 'base-template'),
       featureDir,
     );
     // Copy the specific feature template, with override
@@ -72,6 +72,7 @@ module.exports = class Scripts {
   }
 
   async dev(callback = () => {}) {
+    let startProcessOutput;
     const startProcess = execa(
       'node',
       [yoshiBin, 'start', '--server', './dist/server.js'],
@@ -84,6 +85,20 @@ module.exports = class Scripts {
         },
       },
     );
+
+    startProcess.stdout.on('data', buffer => {
+      startProcessOutput += buffer.toString();
+      if (this.verbose) {
+        console.log(buffer.toString());
+      }
+    });
+
+    startProcess.stderr.on('data', buffer => {
+      startProcessOutput += buffer.toString();
+      if (this.verbose) {
+        console.log(buffer.toString());
+      }
+    });
 
     // `startProcess` will never resolve but if it fails this
     // promise will reject immediately
@@ -106,6 +121,11 @@ module.exports = class Scripts {
       ]);
 
       await callback();
+    } catch (e) {
+      console.log('--------------- Yoshi Start Output ---------------');
+      console.log(startProcessOutput);
+      console.log('--------------- End of Yoshi Start Output ---------------');
+      throw e;
     } finally {
       await terminateAsyncSafe(startProcess.pid);
     }
@@ -118,7 +138,7 @@ module.exports = class Scripts {
         ...defaultOptions,
         ...env,
       },
-      stdio: this.silent ? 'pipe' : 'inherit',
+      stdio: !this.verbose ? 'pipe' : 'inherit',
     });
 
     return {
@@ -142,6 +162,10 @@ module.exports = class Scripts {
       });
     } catch (e) {
       throw new Error(e.all);
+    }
+
+    if (this.verbose) {
+      console.log(buildResult.all);
     }
 
     if (buildResult.stdout.includes('Compiled with warnings')) {
@@ -210,13 +234,13 @@ module.exports = class Scripts {
       ['serve', '-p', this.staticsServerPort, '-s', 'dist/statics/'],
       {
         cwd: this.testDirectory,
-        stdio: this.silent ? 'pipe' : 'inherit',
+        stdio: !this.verbose ? 'pipe' : 'inherit',
       },
     );
 
     const appServerProcess = execa('node', ['index.js'], {
       cwd: this.testDirectory,
-      stdio: this.silent ? 'pipe' : 'inherit',
+      stdio: !this.verbose ? 'pipe' : 'inherit',
       env: {
         PORT: this.serverProcessPort,
       },
@@ -240,8 +264,9 @@ module.exports = class Scripts {
   }
 
   async prod(callback = () => {}) {
+    let buildResult;
     try {
-      await this.build(ciEnv);
+      buildResult = await this.build(ciEnv);
     } catch (e) {
       throw new Error(e);
     }
@@ -256,7 +281,7 @@ module.exports = class Scripts {
 
     const appServerProcess = execa('node', ['./dist/server.js'], {
       cwd: this.testDirectory,
-      stdio: this.silent ? 'pipe' : 'inherit',
+      stdio: !this.verbose ? 'pipe' : 'inherit',
       env: {
         NODE_PATH: this.yoshiPublishDir,
         PORT: this.serverProcessPort,
@@ -269,7 +294,12 @@ module.exports = class Scripts {
     ]);
 
     try {
-      await callback();
+      await callback(buildResult);
+    } catch (e) {
+      console.log('--------------- Yoshi Build Output ---------------');
+      console.log(buildResult.all);
+      console.log('--------------- End of Yoshi Build Output ---------------');
+      throw e;
     } finally {
       await Promise.all([
         terminateAsyncSafe(staticsServerProcess.pid),
@@ -277,4 +307,9 @@ module.exports = class Scripts {
       ]);
     }
   }
+};
+
+module.exports.projectType = {
+  TS: 'typescript',
+  JS: 'javascript',
 };
