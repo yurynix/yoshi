@@ -28,5 +28,8 @@
     "enabled": true,
     "groupName": "lockfile (weekly)",
     "schedule": ["after 3:00am and before 7:00am on tuesday"]
+  },
+  "encrypted": {
+    "npmToken": "w4zasgDButRItFG22o/0SVAaAVXLH2MLy39hj5DLHytKeBW6CfXRtTY94Vl7P0tDN4IwXoMjxncNDc0AxHWBiQTOAihzn7oZofle7to12lW/Wky8DOGXH4VzeCnyFI5h5jlc1jESVhq607LVAfDyfiwU/EjuOn2OQN6oY9Otoommt+EpBJQWL2YuIiFPIXOqW+O1iJ1yvj8Jhl21yuga7d3MpolbuPvRT+rNQpnpXtO8KiGYSIhk+oKG4fNb3w8cuvpy3ujT0dKDl8uYL/nwc5iqH+37i/f+9+vudJlXUe7JSt97Hci1ugNclqDIqXU2MbRrl9AMalMkMqHiLayKNw=="
   }
 }
