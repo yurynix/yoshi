@@ -46,6 +46,7 @@ import ExportDefaultPlugin from './export-default-plugin';
 import { calculatePublicPath } from './webpack-utils';
 import ManifestPlugin from './manifest-webpack-plugin';
 import createBabelConfig from './create-babel-config';
+import SveltePreprocessSSR from './svelte-server-side-preprocess';
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
@@ -672,6 +673,9 @@ export function createBaseWebpackConfig({
               mdsvex({
                 extension: '.svx',
               }),
+              ...(target === 'node'
+                ? [SveltePreprocessSSR({ packageName: name })]
+                : []),
             ],
             dev: isDev,
             emitCss: target !== 'node',
