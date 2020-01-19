@@ -65,7 +65,6 @@ export function createClientWebpackConfig(
 
   const defaultOptions = createDefaultOptions(rootConfig, pkg);
 
-  const customThunderboltApp = pkg.name === 'thunderbolt-app';
   const customSiteAssetsModule = pkg.name === 'thunderbolt-becky';
   const customThunderboltElementsModule = pkg.name === 'thunderbolt-elements';
 
@@ -115,21 +114,15 @@ export function createClientWebpackConfig(
 
   const useSplitChunks = pkg.config.splitChunks;
 
-  // Write stats file to `dist/statics` during start and build instead of only during build and into
-  // `target`
-  //
-  // In a following major version we will only generate stats into `dist/statics`
-  if (customThunderboltApp) {
-    clientConfig.plugins!.push(
-      new StatsWriterPlugin({
-        filename: `stats${isDev ? '' : '.min'}.json`,
-        stats: {
-          all: true,
-          maxModules: Infinity,
-        },
-      }),
-    );
-  }
+  clientConfig.plugins!.push(
+    new StatsWriterPlugin({
+      filename: `stats${isDev ? '' : '.min'}.json`,
+      stats: {
+        all: true,
+        maxModules: Infinity,
+      },
+    }),
+  );
 
   if (useSplitChunks) {
     const splitChunksConfig = isObject(useSplitChunks)
