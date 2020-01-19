@@ -474,7 +474,7 @@ export function createBaseWebpackConfig({
                               tag.tagName === 'script' &&
                               tag.attributes.src
                             ) {
-                              tag.attributes.defer = '';
+                              tag.attributes.async = '';
                             }
                           });
 
