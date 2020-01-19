@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`manifest [dev] generates manifest stat file for non optimized 1`] = `
+Object {
+  "app.css": "http://localhost:3200/app.css",
+  "app.js": "http://localhost:3200/app.bundle.js",
+}
+`;
+
+exports[`manifest [prod] generates manifest stat file for non optimized 1`] = `
+Object {
+  "app.css": "https://static.parastorage.com/services/kitchensink/1.0.0/app.css",
+  "app.js": "https://static.parastorage.com/services/kitchensink/1.0.0/app.bundle.js",
+}
+`;
+
+exports[`manifest [prod] generates manifest stat file for optimized 1`] = `
+Object {
+  "app.css": "https://static.parastorage.com/services/kitchensink/1.0.0/app.min.css",
+  "app.js": "https://static.parastorage.com/services/kitchensink/1.0.0/app.bundle.min.js",
+}
+`;

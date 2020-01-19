@@ -1,0 +1,16 @@
+{
+  "name": "hmr-web-worker-feature-js",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "webWorker": {
+      "entry": {
+        "worker": "./worker"
+      }
+    },
+    "hmr": "auto"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

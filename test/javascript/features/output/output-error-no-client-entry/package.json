@@ -1,0 +1,13 @@
+{
+  "name": "output-error-no-client-entry-js",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "entry": {
+      "nonExists": "./nonExists"
+    }
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

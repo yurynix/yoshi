@@ -1,0 +1,11 @@
+{
+  "name": "optimize-js",
+  "private": true,
+  "sideEffects": false,
+  "yoshi": {
+    "projectType": "app"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

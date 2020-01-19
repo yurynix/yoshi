@@ -1,0 +1,11 @@
+{
+  "name": "hmr-feature-js",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "hmr": "auto"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

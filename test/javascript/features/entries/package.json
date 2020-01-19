@@ -1,0 +1,14 @@
+{
+  "name": "entries-js",
+  "private": true,
+  "sideEffects": false,
+  "yoshi": {
+    "projectType": "app",
+    "entry": {
+      "other": "./other"
+    }
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

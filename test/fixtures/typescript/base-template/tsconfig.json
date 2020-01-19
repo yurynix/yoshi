@@ -9,7 +9,8 @@
     "skipLibCheck": true
   },
   "files": [
-    "{%yoshiRootPath%}/types.d.ts"
+    "{%rootPath%}/packages/yoshi/types.d.ts",
+    "{%rootPath%}/node_modules/jest-yoshi-preset/types.d.ts"
   ],
   "include": [
     "src"

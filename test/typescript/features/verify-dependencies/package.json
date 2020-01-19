@@ -1,0 +1,13 @@
+{
+  "name": "verify-dependencies-ts",
+  "private": true,
+  "yoshi": {
+    "projectType": "app"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  },
+  "dependencies": {
+    "yoshi": "1.0.0"
+  }
+}

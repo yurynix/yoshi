@@ -53,7 +53,7 @@ module.exports = class Scripts {
     const tsConfigPath = path.join(featureDir, 'tsconfig.json');
     if (fs.pathExistsSync(tsConfigPath)) {
       const templateData = {
-        yoshiRootPath: path.join(__dirname, '../packages/yoshi'),
+        rootPath: path.join(__dirname, '..'),
       };
       const fileContents = fs.readFileSync(tsConfigPath, 'utf-8');
       const transformedContents = replaceTemplates(fileContents, templateData);
@@ -82,6 +82,7 @@ module.exports = class Scripts {
           PORT: this.serverProcessPort,
           NODE_PATH: this.yoshiPublishDir,
           ...defaultOptions,
+          ...localEnv,
         },
       },
     );
@@ -131,21 +132,40 @@ module.exports = class Scripts {
     }
   }
 
-  analyze(env = {}) {
+  async analyze(callback = () => {}) {
+    let buildProcessOutput;
     const buildProcess = execa('node', [yoshiBin, 'build', '--analyze'], {
       cwd: this.testDirectory,
       env: {
         ...defaultOptions,
-        ...env,
+        ...localEnv,
       },
-      stdio: !this.verbose ? 'pipe' : 'inherit',
     });
 
-    return {
-      done() {
-        return terminateAsync(buildProcess.pid);
-      },
-    };
+    buildProcess.stdout.on('data', buffer => {
+      buildProcessOutput += buffer.toString();
+      if (this.verbose) {
+        console.log(buffer.toString());
+      }
+    });
+
+    buildProcess.stderr.on('data', buffer => {
+      buildProcessOutput += buffer.toString();
+      if (this.verbose) {
+        console.log(buffer.toString());
+      }
+    });
+
+    try {
+      await callback();
+    } catch (e) {
+      console.log('--------------- Yoshi Build Output ---------------');
+      console.log(buildProcessOutput);
+      console.log('--------------- End of Yoshi Build Output ---------------');
+      throw e;
+    } finally {
+      terminateAsync(buildProcess.pid);
+    }
   }
 
   async build(env = {}, args = []) {
@@ -196,77 +216,10 @@ module.exports = class Scripts {
     return res;
   }
 
-  // Used in "old" kitchensync tests
-  async start(env) {
-    const startProcess = execa('npx', ['yoshi', 'start'], {
-      cwd: this.testDirectory,
-      // stdio: 'inherit',
-      env: {
-        PORT: this.serverProcessPort,
-        ...defaultOptions,
-        ...env,
-      },
-    });
-
-    // `startProcess` will never resolve but if it fails this
-    // promise will reject immediately
-    await Promise.race([
-      Promise.all([
-        waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),
-        waitForPort(this.staticsServerPort, { timeout: 60 * 1000 }),
-        waitForStdout(startProcess, 'Compiled successfully!'),
-      ]),
-      startProcess,
-    ]);
-
-    return {
-      port: this.serverProcessPort,
-      done() {
-        return terminateAsync(startProcess.pid);
-      },
-    };
-  }
-
-  // Used in "old" kitchensync tests
-  async serve() {
-    const staticsServerProcess = execa(
-      'npx',
-      ['serve', '-p', this.staticsServerPort, '-s', 'dist/statics/'],
-      {
-        cwd: this.testDirectory,
-        stdio: !this.verbose ? 'pipe' : 'inherit',
-      },
-    );
-
-    const appServerProcess = execa('node', ['index.js'], {
-      cwd: this.testDirectory,
-      stdio: !this.verbose ? 'pipe' : 'inherit',
-      env: {
-        PORT: this.serverProcessPort,
-      },
-    });
-
-    await Promise.all([
-      waitForPort(this.staticsServerPort),
-      waitForPort(this.serverProcessPort),
-    ]);
-
-    return {
-      staticsServerPort: this.staticsServerPort,
-      appServerProcessPort: this.serverProcessPort,
-      done() {
-        return Promise.all([
-          terminateAsyncSafe(staticsServerProcess.pid),
-          terminateAsyncSafe(appServerProcess.pid),
-        ]);
-      },
-    };
-  }
-
-  async prod(callback = () => {}) {
+  async prod(callback = () => {}, args = []) {
     let buildResult;
     try {
-      buildResult = await this.build(ciEnv);
+      buildResult = await this.build(ciEnv, args);
     } catch (e) {
       throw new Error(e);
     }
