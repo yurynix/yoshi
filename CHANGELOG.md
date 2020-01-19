@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.28.5 (2020-01-19)
+
+#### :rocket: New Feature
+
+- `yoshi-common`
+  - [#1812](https://github.com/wix/yoshi/pull/1812) Svelte SSR transform ([@ronami](https://github.com/ronami))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#1860](https://github.com/wix/yoshi/pull/1860) Always generate Webpack's stats for monorepo flow ([@roymiloh](https://github.com/roymiloh))
+
+#### :memo: Documentation
+
+- [#1851](https://github.com/wix/yoshi/pull/1851) Migration readme - Babel config clarification ([@koriguy](https://github.com/koriguy))
+
 ## 4.28.4 (2020-01-13)
 
 #### :bug: Bug Fix
