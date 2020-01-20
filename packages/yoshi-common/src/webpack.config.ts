@@ -304,8 +304,6 @@ export function createBaseWebpackConfig({
     reAssets,
     /bootstrap-hot-loader/,
     /yoshi-server/,
-    // Temporary work-around for thunderbolt
-    /thunderbolt-elements/,
     ...nodeExternalsWhitelist,
   ];
 
@@ -887,7 +885,7 @@ export function createBaseWebpackConfig({
           : false
         : 'inline-source-map',
 
-    ...(target === 'node' && useNodeExternals
+    ...(target === 'node'
       ? {
           externals: [
             (
@@ -908,6 +906,18 @@ export function createBaseWebpackConfig({
               // Same as above, if the request cannot be resolved we need to have
               // webpack "bundle" it so it surfaces the not found error.
               if (!res) {
+                return callback();
+              }
+
+              // Svelte should always be external on the server side. Only relevant when more than one
+              // instance of Svelte exists. Normally, with two different Webpack bundles. Currently only
+              // relevant for Thunderbolt's use-case.
+              if (res.match(/node_modules\/svelte/)) {
+                return callback(undefined, `commonjs ${request}`);
+              }
+
+              // If `useNodeExternals` is turned off, bundle everything.
+              if (!useNodeExternals) {
                 return callback();
               }
 
