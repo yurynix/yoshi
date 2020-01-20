@@ -1,5 +1,27 @@
 # Changelog
 
+## 4.28.6 (2020-01-20)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1865](https://github.com/wix/yoshi/pull/1865) Fix a bug with regex lookbehind not supported in Node v8 ([@ronami](https://github.com/ronami))
+
+#### :nail_care: Polish
+
+- `yoshi-common`
+  - [#1864](https://github.com/wix/yoshi/pull/1864) Always use Svelte as an external dependency in server bundle ([@ronami](https://github.com/ronami))
+  - [#1858](https://github.com/wix/yoshi/pull/1858) Use `async` attribute instead of `defer` for injected script tags ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- `create-yoshi-app`
+  - [#1866](https://github.com/wix/yoshi/pull/1866) During create-yoshi-app:dev perform initial commit only on first time generation ([@ranyitz](https://github.com/ranyitz))
+- Other
+  - [#1857](https://github.com/wix/yoshi/pull/1857) Update stale-bot config to extend time until stale and time until close ([@ranyitz](https://github.com/ranyitz))
+  - [#1850](https://github.com/wix/yoshi/pull/1850) New test infra - move all tests and kill kitchensink ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1862](https://github.com/wix/yoshi/pull/1862) Add new status checks for new test infra ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.28.5 (2020-01-19)
 
 #### :rocket: New Feature
