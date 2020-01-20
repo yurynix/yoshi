@@ -1,6 +1,9 @@
-const scriptRegex = /(?<=<script>)((.|\n|\r)*)(?=<\/script>)/;
-
 export default function({ packageName }: { packageName: string }) {
+  // Lookbehind assertions are supported in node v9.x.x and above.
+  // By putting the regex inside the preprocessor, this isn't going to throw
+  // errors for those that use Node v8.x.x.
+  const scriptRegex = /(?<=<script>)((.|\n|\r)*)(?=<\/script>)/;
+
   const injectedCode = `
 
   const modulesContext = require('svelte').getContext('__modules__')
