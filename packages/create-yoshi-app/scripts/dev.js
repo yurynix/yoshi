@@ -159,21 +159,25 @@ async function init() {
   }
 
   if (!!chosenProject) {
+    // using a project from cache
     workingDir = chosenProject.workingDir;
     templateModel = chosenProject.templateModel;
 
     await createApp({
       workingDir,
       templateModel,
+      commit: false,
       install: false,
       lint: false,
     });
   } else {
+    // first time generation
     workingDir = path.join(tempy.directory(), 'generated');
 
     templateModel = await createApp({
       workingDir,
       install: false,
+      commit: true,
       lint: false,
     });
 
