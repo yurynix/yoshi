@@ -4,7 +4,7 @@
   "description": "Yoshi Editor-Platform Flow",
   "main": "index.js",
   "bin": {
-    "yoshi-flow-editor": "./build/bin/yoshi-flow-editor.js"
+    "yoshi-flow-editor": "./bin/yoshi-flow-editor.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
