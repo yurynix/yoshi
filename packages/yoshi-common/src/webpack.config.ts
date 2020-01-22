@@ -302,8 +302,8 @@ export function createBaseWebpackConfig({
   const notExternalModules: Array<RegExp> = [
     reStyle,
     reAssets,
-    /bootstrap-hot-loader/,
-    /yoshi-server/,
+    /node_modules\/bootstrap-hot-loader/,
+    /node_modules\/yoshi-server/,
     ...nodeExternalsWhitelist,
   ];
 
