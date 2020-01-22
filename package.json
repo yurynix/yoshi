@@ -140,6 +140,11 @@
     "wait-for-expect": "^1.2.0",
     "wait-port": "^0.2.2"
   },
+  "resolutions": {
+    "@types/node": "^12.0.0",
+    "@types/webpack": "4.41.0",
+    "@types/react": "16.9.15"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }
