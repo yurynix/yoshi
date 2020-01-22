@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.28.7 (2020-01-22)
+
+#### :bug: Bug Fix
+
+- `create-yoshi-app`
+  - [#1872](https://github.com/wix/yoshi/pull/1872) Fix server template's `environment.ts` ([@hugebdu](https://github.com/hugebdu))
+
+#### :house: Internal
+
+- `eslint-config-yoshi-base`
+  - [#1871](https://github.com/wix/yoshi/pull/1871) Add basic linting guidelines ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-flow-editor-runtime`
+  - [#1868](https://github.com/wix/yoshi/pull/1868) Add a rule to disallow enums ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-flow-editor`
+  - [#1869](https://github.com/wix/yoshi/pull/1869) [editor-flow] disconnect `CLI` and `bin` files ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.28.6 (2020-01-20)
 
 #### :bug: Bug Fix
