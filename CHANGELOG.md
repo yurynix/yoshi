@@ -1,5 +1,28 @@
 # Changelog
 
+## 4.28.8 (2020-01-23)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1878](https://github.com/wix/yoshi/pull/1878) Fix a bug in notExternalModules regex patterns ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `yoshi-common`
+  - [#1880](https://github.com/wix/yoshi/pull/1880) Add `immutable` true to Svelte's options ([@nirnatan](https://github.com/nirnatan))
+
+#### :memo: Documentation
+
+- [#1852](https://github.com/wix/yoshi/pull/1852) Fix broken link ([@EgoziE](https://github.com/EgoziE))
+
+#### :house: Internal
+
+- `create-yoshi-app`
+  - [#1877](https://github.com/wix/yoshi/pull/1877) Change npm scripts names ([@ranyitz](https://github.com/ranyitz))
+- Other
+  - [#1863](https://github.com/wix/yoshi/pull/1863) Clean old tests status checks ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.28.7 (2020-01-22)
 
 #### :bug: Bug Fix
