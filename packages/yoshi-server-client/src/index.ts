@@ -34,6 +34,7 @@ export default class implements HttpClient {
     ...args: Args
   ): Promise<UnpackPromise<Result>> {
     const url = joinUrls(this.baseUrl, '/_api_');
+
     const body: RequestPayload = { fileName, functionName, args };
 
     const res = await fetch(url, {

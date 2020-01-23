@@ -7,7 +7,7 @@ import { isLeft } from 'fp-ts/lib/Either';
 import serializeError from 'serialize-error';
 import { BUILD_DIR } from 'yoshi-config/paths';
 import { requestPayloadCodec, DSL } from '../types';
-import { relativeFilePath, get } from '../utils';
+import { relativeFilePath } from '../utils';
 import { route } from '..';
 
 const buildDir = path.resolve(BUILD_DIR);
@@ -42,7 +42,7 @@ export default route(async function() {
   }
 
   const { fileName, functionName, args } = validation.right;
-  const fn = get(functions, fileName, functionName, '__fn__');
+  const fn = functions?.[fileName]?.[functionName]?.__fn__;
 
   if (!fn) {
     return send(this.res, 406, {
