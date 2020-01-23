@@ -303,7 +303,7 @@ export function createBaseWebpackConfig({
     reStyle,
     reAssets,
     /node_modules\/bootstrap-hot-loader/,
-    /node_modules\/yoshi-server/,
+    ///node_modules\/yoshi-server/,
     ...nodeExternalsWhitelist,
   ];
 
@@ -686,6 +686,27 @@ export function createBaseWebpackConfig({
             generate: target === 'node' ? 'ssr' : 'dom',
           },
         },
+
+        ...(target === 'web'
+          ? [
+              {
+                test: /\.api\.(js|ts)$/,
+                loader: require.resolve('yoshi-server-tools/loader'),
+              },
+            ]
+          : []),
+
+        ...(target === 'node'
+          ? [
+              {
+                test: /\.api\.(js|ts)$/,
+                // The loader shouldn't be applied to entry files, only to files that
+                // are imported by other files and passed to `yoshi-server/client`
+                issuer: () => true,
+                loader: require.resolve('yoshi-server-tools/loader'),
+              },
+            ]
+          : []),
 
         ...(useAngular
           ? [
