@@ -25,6 +25,7 @@ module.exports = class Scripts {
     this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
+    this.serverUrl = `http://localhost:${this.serverProcessPort}`;
     this.yoshiPublishDir = isPublish
       ? `${global.yoshiPublishDir}/node_modules`
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
