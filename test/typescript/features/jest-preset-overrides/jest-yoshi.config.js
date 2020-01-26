@@ -1,7 +1,7 @@
 module.exports = {
   e2eOptions: {
     moduleNameMapper: {
-      '^[./a-zA-Z0-9$_-]+\\.foo$': '<rootDir>/src/stub.js',
+      '^[./a-zA-Z0-9$_-]+\\.foo$': '<rootDir>/src/stub.tsx',
     },
   },
   specOptions: {
@@ -9,7 +9,7 @@ module.exports = {
       foo: 'bar',
     },
     moduleNameMapper: {
-      '^[./a-zA-Z0-9$_-]+\\.foo$': '<rootDir>/src/stub.js',
+      '^[./a-zA-Z0-9$_-]+\\.foo$': '<rootDir>/src/stub.tsx',
       '^(?!.+\\.st\\.css$)^.+\\.(?:sass|s?css|less)$': 'identity-obj-proxy',
     },
     testURL: 'http://localhost:3000/?query=param',
