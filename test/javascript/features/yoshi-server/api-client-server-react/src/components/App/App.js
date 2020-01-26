@@ -3,10 +3,7 @@ import { useRequest } from 'yoshi-server-react';
 import { greet } from '../../api/greeting.api';
 
 const App = () => {
-  console.log('------------------------------------');
-  console.log(greet);
-  console.log('------------------------------------');
-  const req = useRequest(greet, 12);
+  const req = useRequest(greet, 'Yaniv');
 
   if (req.loading) {
     return <p data-testid="loading">Loading...</p>;
@@ -18,7 +15,7 @@ const App = () => {
 
   return (
     <div>
-      <h2 data-testid="title">hello {req.data.name}</h2>
+      <h2>{req.data.greeting}</h2>
     </div>
   );
 };
