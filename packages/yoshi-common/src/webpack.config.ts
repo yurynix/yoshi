@@ -303,7 +303,6 @@ export function createBaseWebpackConfig({
     reStyle,
     reAssets,
     /node_modules\/bootstrap-hot-loader/,
-    ///node_modules\/yoshi-server/,
     ...nodeExternalsWhitelist,
   ];
 

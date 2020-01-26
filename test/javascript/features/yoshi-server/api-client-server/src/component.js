@@ -13,7 +13,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>{this.state.text}</h2>
+        <h2 id="my-text">{this.state.text}</h2>
       </div>
     );
   }

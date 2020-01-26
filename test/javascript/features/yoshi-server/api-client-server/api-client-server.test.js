@@ -6,11 +6,14 @@ const scripts = Scripts.setupProjectFromTemplate({
 });
 
 describe.each(['prod', 'dev'])(
-  'yoshi-server api server to server [%s]',
+  'yoshi-server api client to server [%s]',
   mode => {
     it('run tests', async () => {
       await scripts[mode](async () => {
         await page.goto(`http://localhost:3000/app`);
+        await page.waitForFunction(
+          `document.getElementById('my-text').innerText !== ''`,
+        );
         const title = await page.$eval('h2', elm => elm.innerText);
         expect(title).toBe('hello Yaniv');
       });
