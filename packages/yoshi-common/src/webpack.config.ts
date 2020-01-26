@@ -673,7 +673,12 @@ export function createBaseWebpackConfig({
                 extension: '.svx',
               }),
               ...(target === 'node'
-                ? [SveltePreprocessSSR({ packageName: name })]
+                ? [
+                    SveltePreprocessSSR({
+                      packageName: name,
+                      cwd,
+                    }),
+                  ]
                 : []),
             ],
             dev: isDev,
