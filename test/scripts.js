@@ -76,7 +76,7 @@ module.exports = class Scripts {
     let startProcessOutput;
     const startProcess = execa(
       'node',
-      [yoshiBin, 'start', '--server', './dist/server.js'],
+      [yoshiBin, 'start', '--server', './index.js'],
       {
         cwd: this.testDirectory,
         env: {
@@ -233,7 +233,7 @@ module.exports = class Scripts {
       },
     );
 
-    const appServerProcess = execa('node', ['./dist/server.js'], {
+    const appServerProcess = execa('node', ['./index.js'], {
       cwd: this.testDirectory,
       stdio: !this.verbose ? 'pipe' : 'inherit',
       env: {

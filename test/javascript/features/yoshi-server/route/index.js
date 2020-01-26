@@ -1,4 +1,4 @@
-const { bootstrapServer, emitConfigs } = require('../environment');
+const { bootstrapServer, emitConfigs } = require('./environment');
 
 (async () => {
   const app = bootstrapServer();
