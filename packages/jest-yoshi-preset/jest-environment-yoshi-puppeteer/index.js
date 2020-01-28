@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const puppeteer = require('puppeteer');
 const { WS_ENDPOINT_PATH, IS_DEBUG_MODE } = require('./constants');
-const { setupRequireHooks } = require('yoshi-common/require-hooks');
+const { setupRequireHooks } = require('yoshi-common/build/require-hooks');
 const loadJestYoshiConfig = require('yoshi-config/jest');
 const { getBrowserDebugFunction } = require('./utils');
 // the user's config is loaded outside of a jest runtime and should be transpiled
