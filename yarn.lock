@@ -2113,6 +2113,11 @@
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@newrelic/aws-sdk/-/aws-sdk-1.0.0.tgz#9e109ba5f1d2fc96ce0547c18ee67216a13a633c"
   integrity sha1-nhCbpfHS/JbOBUfBjuZyFqE6Yzw=
 
+"@newrelic/aws-sdk@^1.1.1":
+  version "1.1.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@newrelic/aws-sdk/-/aws-sdk-1.1.1.tgz#465ccd57a190b04b90aef5067e91ffdeb18e5c14"
+  integrity sha1-RlzNV6GQsEuQrvUGfpH/3rGOXBQ=
+
 "@newrelic/koa@^3.0.0":
   version "3.0.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@newrelic/koa/-/koa-3.0.0.tgz#048f636c6c06ab4e823674a2ed3d67677a22ed50"
@@ -2838,10 +2843,25 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@12.12.17", "@types/node@8.10.59", "@types/node@>= 8", "@types/node@^10.1.0", "@types/node@^12.0.0", "@types/node@^12.7.7":
+"@types/node@*", "@types/node@>= 8", "@types/node@^12.7.7":
   version "12.12.25"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.25.tgz#792c0afb798f1dd681dce9c4b4c431f7245a0a42"
   integrity sha1-eSwK+3mPHdaB3OnEtMQx9yRaCkI=
+
+"@types/node@12.12.17":
+  version "12.12.17"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.17.tgz#191b71e7f4c325ee0fb23bc4a996477d92b8c39b"
+  integrity sha1-GRtx5/TDJe4PsjvEqZZHfZK4w5s=
+
+"@types/node@8.10.59":
+  version "8.10.59"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-8.10.59.tgz#9e34261f30183f9777017a13d185dfac6b899e04"
+  integrity sha1-njQmHzAYP5d3AXoT0YXfrGuJngQ=
+
+"@types/node@^10.1.0":
+  version "10.17.13"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-10.17.13.tgz#ccebcdb990bd6139cd16e84c39dc2fb1023ca90c"
+  integrity sha1-zOvNuZC9YTnNFuhMOdwvsQI8qQw=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -3486,6 +3506,17 @@
     lodash "4.17.10"
     raven-js "3.27.0"
 
+"@wix/serverless-api@^1.0.407":
+  version "1.0.407"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/serverless-api/-/@wix/serverless-api-1.0.407.tgz#725c5ac516f57225bf662845901bb2813dd3a010"
+  integrity sha1-clxaxRb1ciW/ZihFkBuygT3ToBA=
+  dependencies:
+    "@wix/wix-aspects" latest
+    "@wix/wix-server-to-server-signer" latest
+    "@wix/wix-session-aspect" latest
+    long "4.0.0"
+    newrelic "^6.2.0"
+
 "@wix/web-bi-logger@2.0.195":
   version "2.0.195"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/web-bi-logger/-/@wix/web-bi-logger-2.0.195.tgz#d2c105ec6435da08ffaee65d0c6bcf58deac7b84"
@@ -3529,6 +3560,13 @@
   dependencies:
     "@wix/wix-errors" "~1.0.171"
     xmldoc "1.1.2"
+
+"@wix/wix-aspects@latest":
+  version "1.0.1241"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-aspects/-/@wix/wix-aspects-1.0.1241.tgz#096d24a8262cd4e259cfd3a82909037486b34e0d"
+  integrity sha1-CW0kqCYs1OJZz9OoKQkDdIazTg0=
+  dependencies:
+    lodash "4.17.15"
 
 "@wix/wix-aspects@~1.0.640":
   version "1.0.1235"
@@ -3980,6 +4018,14 @@
     jayson "3.2.0"
     lodash "4.17.15"
 
+"@wix/wix-jws-signer@~1.0.0":
+  version "1.0.373"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-jws-signer/-/@wix/wix-jws-signer-1.0.373.tgz#7b26792843a2095fb4e621e0a505910477e31ced"
+  integrity sha1-eyZ5KEOiCV+05iHgpQWRBHfjHO0=
+  dependencies:
+    jws "3.2.2"
+    lodash "4.17.15"
+
 "@wix/wix-measured-metering@~1.0.253":
   version "1.0.935"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-measured-metering/-/@wix/wix-measured-metering-1.0.935.tgz#da1946d504a1fd89ec419d3b10940f272c78c993"
@@ -4102,6 +4148,22 @@
   version "2.0.626"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-run-mode/-/@wix/wix-run-mode-2.0.626.tgz#b90079699e6ef1abe0d9e51af7f9fea3314299f6"
   integrity sha1-uQB5aZ5u8avg2eUa9/n+ozFCmfY=
+
+"@wix/wix-server-to-server-signer@latest":
+  version "1.0.434"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-server-to-server-signer/-/@wix/wix-server-to-server-signer-1.0.434.tgz#220833fcea939dfa329c9120459a6abb0f9769f0"
+  integrity sha1-Iggz/OqTnfoynJEgRZpquw+XafA=
+  dependencies:
+    "@wix/wix-jws-signer" "~1.0.0"
+
+"@wix/wix-session-aspect@latest":
+  version "1.0.2152"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-session-aspect/-/@wix/wix-session-aspect-1.0.2152.tgz#3851749fd79a2b9a7b01265bf936e942d9501d69"
+  integrity sha1-OFF0n9eaK5p7ASZb+TbpQtlQHWk=
+  dependencies:
+    "@wix/wix-aspects" "~1.0.640"
+    "@wix/wix-debug" "~1.0.1"
+    "@wix/wix-session-crypto" "~2.0.159"
 
 "@wix/wix-session-aspect@~1.0.1057":
   version "1.0.2108"
@@ -15788,6 +15850,26 @@ newrelic@6.2.0:
   integrity sha1-c1DLRwchvJ9BuY7r5VtsTMaCwBo=
   dependencies:
     "@newrelic/aws-sdk" "^1.0.0"
+    "@newrelic/koa" "^3.0.0"
+    "@newrelic/superagent" "^2.0.0"
+    "@tyriar/fibonacci-heap" "^2.0.7"
+    async "^2.1.4"
+    concat-stream "^2.0.0"
+    escodegen "^1.11.1"
+    esprima "^4.0.1"
+    https-proxy-agent "^3.0.0"
+    json-stringify-safe "^5.0.0"
+    readable-stream "^3.1.1"
+    semver "^5.3.0"
+  optionalDependencies:
+    "@newrelic/native-metrics" "^5.0.0"
+
+newrelic@^6.2.0:
+  version "6.3.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/newrelic/-/newrelic-6.3.0.tgz#db45a4b16ec77468350a5a74253b1464a2a0f254"
+  integrity sha1-20WksW7HdGg1Clp0JTsUZKKg8lQ=
+  dependencies:
+    "@newrelic/aws-sdk" "^1.1.1"
     "@newrelic/koa" "^3.0.0"
     "@newrelic/superagent" "^2.0.0"
     "@tyriar/fibonacci-heap" "^2.0.7"

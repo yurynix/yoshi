@@ -31,42 +31,41 @@ const functions: {
   };
 }, {});
 
+// console.log('-------------------1');
+// console.log(functions['api/greeting.api']?.greet?.__fn__.toString());
+// console.log('-------------------');
 export default route(async function() {
-  const body = await parseBodyAsJson(this.req);
-  const validation = requestPayloadCodec.decode(body);
+  const validation = requestPayloadCodec.decode(this.req.body);
 
   if (isLeft(validation)) {
-    return send(this.res, 406, {
-      errors: PathReporter.report(validation),
-    });
+    throw new Error('validation error');
   }
 
   const { fileName, functionName, args } = validation.right;
   const fn = functions?.[fileName]?.[functionName]?.__fn__;
 
   if (!fn) {
-    return send(this.res, 406, {
-      errors: `Function ${functionName}() was not found in file ${fileName}`,
-    });
+    throw new Error('222');
   }
 
   try {
     const fnThis = {
       context: this.context,
       req: this.req,
-      res: this.res,
     };
 
     return await fn.apply(fnThis, args);
   } catch (error) {
     if (process.env.NODE_ENV === 'production') {
-      return send(this.res, 500, {
-        errors: ['internal server error'],
-      });
+      throw new Error('internal server error');
+      // return send(this.res, 500, {
+      //   errors: ['internal server error'],
+      // });
     }
 
-    return send(this.res, 500, {
-      errors: [serializeError(error)],
-    });
+    throw new Error('internal server error');
+    // return send(this.res, 500, {
+    //   errors: [serializeError(error)],
+    // });
   }
 });

@@ -37,6 +37,8 @@ export default class implements HttpClient {
 
     const body: RequestPayload = { fileName, functionName, args };
 
+    console.log(url, body)
+
     const res = await fetch(url, {
       credentials: 'same-origin',
       method: 'POST',

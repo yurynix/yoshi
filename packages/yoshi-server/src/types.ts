@@ -24,10 +24,15 @@ export type FunctionContext = {
   context: any;
 };
 
+export type FunctionContext2 = {
+  req: Request;
+  context: any;
+};
+
 export type ServerFunction<
   Result extends FunctionResult,
   Args extends FunctionArgs
-> = (this: FunctionContext, ...args: Args) => Result;
+> = (this: FunctionContext2, ...args: Args) => Result;
 
 export type DSL<Result extends FunctionResult, Args extends FunctionArgs> = {
   fileName: string;
@@ -38,7 +43,6 @@ export type DSL<Result extends FunctionResult, Args extends FunctionArgs> = {
 // Route function types
 export type RouteContext = {
   req: Request;
-  res: Response;
   context: any;
   params: { [name: string]: any | undefined };
 };

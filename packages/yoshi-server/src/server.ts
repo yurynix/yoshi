@@ -51,7 +51,6 @@ export default class Server {
 
       for (const { handler, route } of this.routes) {
         const params = pathMatch(route, pathname as string);
-
         if (params) {
           return await handler(req, res, params);
         }
@@ -93,6 +92,9 @@ export default class Server {
             params,
           };
 
+          console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+          console.log(chunk.toString());
+          console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
           return send(res, 200, await chunk.call(fnThis));
         },
       };
