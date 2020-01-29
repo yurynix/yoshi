@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased (2020-01-29)
+
+#### :rocket: New Feature & :bug: Bug Fix
+
+- `jest-yoshi-preset`
+  - [#1885](https://github.com/wix/yoshi/pull/1885) `jest-environment-yoshi-puppeteer` Detect network errors + add a message for missing cdn server ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :house: Internal
+
+- `jest-yoshi-preset`, `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`
+  - [#1895](https://github.com/wix/yoshi/pull/1895) Remove files from the root of `yoshi-common` ([@ranyitz](https://github.com/ranyitz))
+- Other
+  - [#1901](https://github.com/wix/yoshi/pull/1901) Configure renovate to work with wix registry ([@netanelgilad](https://github.com/netanelgilad))
+  - [#1898](https://github.com/wix/yoshi/pull/1898) Remove `.npmrc` ([@netanelgilad](https://github.com/netanelgilad))
+  - [#1890](https://github.com/wix/yoshi/pull/1890) Prompt when running integration tests with publish locally ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1892](https://github.com/wix/yoshi/pull/1892) Align integration tests to use new infra ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1889](https://github.com/wix/yoshi/pull/1889) Remove redundant files ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1886](https://github.com/wix/yoshi/pull/1886) Add tests for `babel-preset-yoshi` ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.28.9 (2020-01-26)
 
 #### :bug: Bug Fix
