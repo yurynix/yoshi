@@ -6,6 +6,10 @@
     "projectType": "app",
     "entry": {
       "other": "./other"
+    },
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
     }
   },
   "jest": {

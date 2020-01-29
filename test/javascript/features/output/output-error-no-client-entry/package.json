@@ -5,6 +5,10 @@
     "projectType": "app",
     "entry": {
       "nonExists": "./nonExists"
+    },
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
     }
   },
   "jest": {
