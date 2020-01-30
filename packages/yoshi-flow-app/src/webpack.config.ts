@@ -78,6 +78,7 @@ export function createClientWebpackConfig(
     experimentalRtlCss: config.experimentalRtlCss,
     externalizeRelativeLodash: config.externalizeRelativeLodash,
     createEjsTemplates: config.experimentalBuildHtml,
+    useYoshiServer: config.yoshiServer,
     ...defaultOptions,
   });
 
@@ -109,6 +110,7 @@ export function createServerWebpackConfig(
     target: 'node',
     isDev,
     isHot,
+    useYoshiServer: config.yoshiServer,
     ...defaultOptions,
   });
 

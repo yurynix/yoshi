@@ -13,7 +13,11 @@
     "ejs": "^2.6.1",
     "express": "^4.15.0",
     "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "react-dom": "15.6.2",
+    "yoshi-server": "latest",
+    "yoshi-server-client": "latest",
+    "yoshi-server-react": "latest",
+    "yoshi-server-testing": "latest"
   },
   "devDependencies": {
     "@types/ejs": "^2.6.2",

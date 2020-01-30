@@ -243,6 +243,7 @@ export function createBaseWebpackConfig({
   useNodeExternals = true,
   nodeExternalsWhitelist = [],
   useAssetRelocator = false,
+  useYoshiServer = false,
 }: {
   name: string;
   configName: 'client' | 'server' | 'web-worker' | 'site-assets';
@@ -272,6 +273,7 @@ export function createBaseWebpackConfig({
   exportAsLibraryName?: string;
   nodeExternalsWhitelist?: Array<RegExp>;
   useAssetRelocator?: boolean;
+  useYoshiServer?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -303,7 +305,6 @@ export function createBaseWebpackConfig({
     reStyle,
     reAssets,
     /node_modules\/bootstrap-hot-loader/,
-    /node_modules\/yoshi-server/,
     ...nodeExternalsWhitelist,
   ];
 
@@ -686,6 +687,22 @@ export function createBaseWebpackConfig({
             generate: target === 'node' ? 'ssr' : 'dom',
           },
         },
+
+        ...(useYoshiServer
+          ? [
+              {
+                test: /\.api\.(js|ts)$/,
+                // The loader shouldn't be applied to entry files, only to files that
+                // are imported by other files and passed to `yoshi-server/client`
+                ...(target === 'node'
+                  ? {
+                      issuer: () => true,
+                    }
+                  : {}),
+                loader: require.resolve('yoshi-server-tools/loader'),
+              },
+            ]
+          : []),
 
         ...(useAngular
           ? [
