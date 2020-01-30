@@ -47,6 +47,7 @@ import { calculatePublicPath } from './webpack-utils';
 import ManifestPlugin from './manifest-webpack-plugin';
 import createBabelConfig from './create-babel-config';
 import SveltePreprocessSSR from './svelte-server-side-preprocess';
+import { asyncWebWorkerTarget } from './AsyncWebWorkerTarget/AsyncWebWorkerTarget';
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
@@ -247,7 +248,7 @@ export function createBaseWebpackConfig({
 }: {
   name: string;
   configName: 'client' | 'server' | 'web-worker' | 'site-assets';
-  target: 'web' | 'node' | 'webworker';
+  target: 'web' | 'node' | 'webworker' | 'async-webworker';
   isDev?: boolean;
   isHot?: boolean;
   useTypeScript?: boolean;
@@ -312,8 +313,6 @@ export function createBaseWebpackConfig({
     context: join(SRC_DIR),
 
     name: configName,
-
-    target,
 
     mode: isProduction ? 'production' : 'development',
 
@@ -568,7 +567,7 @@ export function createBaseWebpackConfig({
           ]
         : []),
 
-      ...(target === 'webworker'
+      ...(target === 'webworker' || target === 'async-webworker'
         ? [new ManifestPlugin({ fileName: 'manifest-worker', isDev })]
         : []),
 
@@ -981,6 +980,9 @@ export function createBaseWebpackConfig({
         }
       : {}),
   };
+
+  config.target =
+    target === 'async-webworker' ? asyncWebWorkerTarget(config) : target;
 
   return config;
 }

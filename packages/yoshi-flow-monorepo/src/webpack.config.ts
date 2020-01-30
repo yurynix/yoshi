@@ -46,6 +46,12 @@ const createDefaultOptions = (rootConfig: Config, pkg: PackageGraphNode) => {
   };
 };
 
+const isThunderboltElementModule = (pkg: PackageGraphNode) =>
+  pkg.name === 'thunderbolt-elements';
+
+const isSiteAssetsModule = (pkg: PackageGraphNode) =>
+  pkg.name === 'thunderbolt-becky';
+
 export function createClientWebpackConfig(
   rootConfig: Config,
   pkg: PackageGraphNode,
@@ -65,9 +71,6 @@ export function createClientWebpackConfig(
 
   const defaultOptions = createDefaultOptions(rootConfig, pkg);
 
-  const customSiteAssetsModule = pkg.name === 'thunderbolt-becky';
-  const customThunderboltElementsModule = pkg.name === 'thunderbolt-elements';
-
   const clientConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'client',
@@ -80,7 +83,7 @@ export function createClientWebpackConfig(
     enhancedTpaStyle: pkg.config.enhancedTpaStyle,
     tpaStyle: pkg.config.tpaStyle,
     createEjsTemplates: pkg.config.experimentalBuildHtml,
-    ...(customSiteAssetsModule
+    ...(isSiteAssetsModule(pkg)
       ? {
           configName: 'site-assets',
           target: 'node',
@@ -90,7 +93,7 @@ export function createClientWebpackConfig(
     ...defaultOptions,
   });
 
-  if (customSiteAssetsModule) {
+  if (isSiteAssetsModule(pkg)) {
     // Apply manifest since standard `node` webpack configs don't
     clientConfig.plugins!.push(
       new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
@@ -104,7 +107,7 @@ export function createClientWebpackConfig(
       : '[name].[contenthash:8].chunk.min.js';
   }
 
-  if (customThunderboltElementsModule) {
+  if (isThunderboltElementModule(pkg)) {
     clientConfig.optimization!.runtimeChunk = false;
   }
 
@@ -197,8 +200,8 @@ export function createWebWorkerWebpackConfig(
   const workerConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'web-worker',
-    target: 'webworker',
     createEjsTemplates: pkg.config.experimentalBuildHtml,
+    target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
     isDev,
     isHot,
     ...defaultOptions,
