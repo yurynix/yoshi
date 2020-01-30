@@ -1,13 +1,6 @@
 {
   "name": "feature-js",
   "private": true,
-  "yoshi": {
-    "projectType": "app",
-    "externals": {
-      "react": "React",
-      "react-dom": "ReactDOM"
-    }
-  },
   "jest": {
     "preset": "jest-yoshi-preset"
   }
