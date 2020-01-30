@@ -3,7 +3,11 @@
   "private": true,
   "yoshi": {
     "projectType": "app",
-    "externalUnprocessedModules": ["untranspiled-dependency"]
+    "externalUnprocessedModules": ["untranspiled-dependency"],
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
   },
   "jest": {
     "preset": "jest-yoshi-preset"

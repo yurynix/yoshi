@@ -10,6 +10,10 @@
       "externals": {
         "worker-externals": "worker-externals"
       }
+    },
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
     }
   },
   "jest": {

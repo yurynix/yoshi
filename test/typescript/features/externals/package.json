@@ -4,7 +4,9 @@
   "yoshi": {
     "projectType": "app",
     "externals": {
-      "externals": "externals"
+      "externals": "externals",
+      "react": "React",
+      "react-dom": "ReactDOM"
     }
   },
   "jest": {

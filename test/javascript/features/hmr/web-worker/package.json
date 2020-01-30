@@ -8,7 +8,11 @@
         "worker": "./worker"
       }
     },
-    "hmr": "auto"
+    "hmr": "auto",
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
   },
   "jest": {
     "preset": "jest-yoshi-preset"
