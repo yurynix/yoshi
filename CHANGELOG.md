@@ -1,6 +1,28 @@
 # Changelog
 
-## Unreleased (2020-01-29)
+## 4.30.0 (2020-02-02)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-template-intro`
+  - [#1912](https://github.com/wix/yoshi/pull/1912) Upgrade `lint-staged` to new major v`10.0.7` ([@sidoruk-sv](https://github.com/sidoruk-sv))
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#1894](https://github.com/wix/yoshi/pull/1894) Transpile webworker `importScripts` into `fetch` and `eval` ([@giladsegal](https://github.com/giladsegal))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1909](https://github.com/wix/yoshi/pull/1909) Add content hash to webworker output for `experimentalBuildHtml` ([@giladsegal](https://github.com/giladsegal))
+
+#### :house: Internal
+
+- Other
+  - [#1906](https://github.com/wix/yoshi/pull/1906) Remove the restriction from `mini-css-extract-plugin` ([@ranyitz](https://github.com/ranyitz))
+  - [#1908](https://github.com/wix/yoshi/pull/1908) Improve test performance ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-server-client`, `yoshi-server`
+  - [#1888](https://github.com/wix/yoshi/pull/1888) Yoshi server refactor + tests ([@yanivefraim](https://github.com/yanivefraim))
+
+## 4.29.0 (2020-01-29)
 
 #### :rocket: New Feature & :bug: Bug Fix
 
