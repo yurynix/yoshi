@@ -1,7 +1,8 @@
 import path from 'path';
 import config from 'yoshi-config';
 
-export default (p: string): boolean => {
+// accepts a file path and return true if it needs to be transpiled
+export default (fileName: string): boolean => {
   const allSourcesButExternalModules = (filePath: string) => {
     filePath = path.normalize(filePath);
 
@@ -26,9 +27,9 @@ export default (p: string): boolean => {
   );
 
   return (
-    externalRegexList.some(regex => regex.test(p)) ||
-    allSourcesButExternalModules(p) ||
-    isWixStyleReactSource(p) ||
-    isEditorElements(p)
+    externalRegexList.some(regex => regex.test(fileName)) ||
+    allSourcesButExternalModules(fileName) ||
+    isWixStyleReactSource(fileName) ||
+    isEditorElements(fileName)
   );
 };
