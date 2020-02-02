@@ -1,3 +1,7 @@
-const config = require('./baseConfig');
-
-module.exports = config;
+module.exports = {
+  projectType: 'app',
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+  },
+};
