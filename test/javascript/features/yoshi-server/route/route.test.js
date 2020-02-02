@@ -8,7 +8,7 @@ const scripts = Scripts.setupProjectFromTemplate({
 describe.each(['prod', 'dev'])('yoshi-server route [%s]', mode => {
   it('run tests', async () => {
     await scripts[mode](async () => {
-      await page.goto(`http://localhost:3000/app`);
+      await page.goto(`${scripts.serverUrl}/app`);
       const title = await page.$eval('h1', elm => elm.innerText);
       expect(title).toBe('hello from yoshi server');
     });

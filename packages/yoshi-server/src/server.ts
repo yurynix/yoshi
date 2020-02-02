@@ -93,7 +93,21 @@ export default class Server {
             params,
           };
 
-          return send(res, 200, await chunk.call(fnThis));
+          const result = await chunk.call(fnThis);
+          if (result) {
+            // In case that the user is adding both custom response and return value:
+            // ```
+            // this.res.send('hello');
+            // return 'hello2';
+            // ```
+            if (res.headersSent) {
+              console.log(
+                'Cannot return a response since `this.req` has been used to sent back the request',
+              );
+            } else {
+              return send(res, 200, result);
+            }
+          }
         },
       };
     });

@@ -57,7 +57,7 @@ export default route(async function() {
       res: this.res,
     };
 
-    return await fn.apply(fnThis, args);
+    return { payload: await fn.apply(fnThis, args) };
   } catch (error) {
     if (process.env.NODE_ENV === 'production') {
       return send(this.res, 500, {

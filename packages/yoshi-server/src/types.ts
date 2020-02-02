@@ -15,7 +15,7 @@ export type RequestPayload = t.TypeOf<typeof requestPayloadCodec>;
 export type UnpackPromise<T> = T extends Promise<infer U> ? U : T;
 export type OptionalPromise<T> = T | Promise<T>;
 export type FunctionArgs = Array<JsonValue>;
-export type FunctionResult = OptionalPromise<JsonValue>;
+export type FunctionResult = OptionalPromise<JsonValue | void | undefined>;
 
 // Server function types
 export type FunctionContext = {

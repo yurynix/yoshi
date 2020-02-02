@@ -1,16 +1,16 @@
-const Scripts = require('../../../../scripts');
+const Scripts = require('../../../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
   projectType: Scripts.projectType.TS,
 });
 
-describe.each(['prod', 'dev'])('yoshi-server route [%s]', mode => {
+describe.each(['prod', 'dev'])('return a string [%s]', mode => {
   it('run tests', async () => {
     await scripts[mode](async () => {
       await page.goto(`${scripts.serverUrl}/app`);
       const title = await page.$eval('h1', elm => elm.innerText);
-      expect(title).toBe('hello from yoshi server');
+      expect(title).toBe('hello Yaniv');
     });
   });
 });

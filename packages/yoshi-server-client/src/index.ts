@@ -56,6 +56,8 @@ export default class implements HttpClient {
       throw new Error(JSON.stringify(error));
     }
 
-    return res.json();
+    const result = await res.json();
+
+    return result.payload;
   }
 }

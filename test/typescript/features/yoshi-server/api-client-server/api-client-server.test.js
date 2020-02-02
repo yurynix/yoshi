@@ -10,7 +10,7 @@ describe.each(['prod', 'dev'])(
   mode => {
     it('run tests', async () => {
       await scripts[mode](async () => {
-        await page.goto(`http://localhost:3000/app`);
+        await page.goto(`${scripts.serverUrl}/app`);
         await page.waitForFunction(
           `document.getElementById('my-text').innerText !== ''`,
         );

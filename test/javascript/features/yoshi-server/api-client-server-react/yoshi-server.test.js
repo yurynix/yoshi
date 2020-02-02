@@ -10,7 +10,7 @@ describe.each(['prod', 'dev'])(
   mode => {
     it('run tests', async () => {
       await scripts[mode](async () => {
-        await page.goto(`http://localhost:3000/app`);
+        await page.goto(`${scripts.serverUrl}/app`);
         await page.waitForSelector('h2');
         const title = await page.$eval('h2', elm => elm.innerText);
         expect(title).toBe('hello Yaniv');
