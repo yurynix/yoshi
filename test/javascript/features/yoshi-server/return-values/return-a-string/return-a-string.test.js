@@ -2,7 +2,7 @@ const Scripts = require('../../../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  projectType: Scripts.projectType.JS,
+  projectType: Scripts.projectType.YOSHI_SERVER_JS,
 });
 
 describe.each(['prod', 'dev'])('return a string [%s]', mode => {
