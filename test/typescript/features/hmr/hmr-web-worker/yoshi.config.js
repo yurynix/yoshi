@@ -1,4 +1,4 @@
-const config = require('../../../fixtures/typescript/base-template/yoshi.config');
+const config = require('../../../../../test/fixtures/javascript/base-template/yoshi.config');
 
 config.projectType = 'app';
 module.exports = config;
