@@ -2,7 +2,7 @@ const Scripts = require('../../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  projectType: Scripts.projectType.YOSHI_SERVER_JS,
+  projectType: Scripts.projectType.JS,
 });
 
 describe.each(['prod', 'dev'])(
