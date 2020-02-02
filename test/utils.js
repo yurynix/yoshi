@@ -72,6 +72,26 @@ const matchJS = async (chunkName, page, regexes) => {
   }
 };
 
+const notToMatchJS = async (chunkName, page, regexes) => {
+  const url = await page.$$eval(
+    'script',
+    (scripts, name) => {
+      return scripts.map(script => script.src).find(src => src.includes(name));
+    },
+    chunkName,
+  );
+
+  if (!url) {
+    throw new Error(`Couldn't find script with the name "${chunkName}"`);
+  }
+
+  const content = (await request(url)).replace(/\s/g, '');
+
+  for (const regex of regexes) {
+    expect(content).not.toMatch(regex);
+  }
+};
+
 async function waitForPort(port, { timeout = 20000 } = {}) {
   const portNumber = parseInt(port, 10);
 
@@ -162,6 +182,7 @@ const replaceTemplates = (content, map) =>
 module.exports = {
   request,
   matchJS,
+  notToMatchJS,
   matchCSS,
   initTest,
   getUrl,

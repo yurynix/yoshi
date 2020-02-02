@@ -1,4 +1,4 @@
-const { matchJS } = require('../../../utils');
+const { matchJS, notToMatchJS } = require('../../../utils');
 const Scripts = require('../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
@@ -11,7 +11,7 @@ describe.each(['prod', 'dev'])('moment [%s]', mode => {
     await scripts[mode](async () => {
       await page.goto(scripts.serverUrl);
       // should not include the `en` locale
-      await matchJS('app', page, [/^((?!hello).)*$/]);
+      await notToMatchJS('app', page, [/hello/]);
     });
   });
 
