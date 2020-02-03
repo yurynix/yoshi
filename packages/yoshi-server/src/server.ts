@@ -84,7 +84,7 @@ export default class Server {
       const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
 
       return {
-        route: routePath,
+        route: routePath === '/index' ? '/' : routePath,
         handler: async (req, res, params) => {
           const fnThis = {
             context: this.context,
