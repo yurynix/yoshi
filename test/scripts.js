@@ -266,4 +266,6 @@ module.exports = class Scripts {
 module.exports.projectType = {
   TS: 'typescript',
   JS: 'javascript',
+  YOSHI_SERVER_JS: 'yoshi-server-javascript',
+  YOSHI_SERVER_TS: 'yoshi-server-typescript',
 };
