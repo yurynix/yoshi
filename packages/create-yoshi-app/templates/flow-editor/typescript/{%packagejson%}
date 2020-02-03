@@ -9,12 +9,19 @@
   },
   "scripts": {
     "start": "yoshi-flow-editor start",
-    "precommit": "lint-staged",
     "pretest": "yoshi-flow-editor build",
     "test": "yoshi-flow-editor test",
     "test:ssr": "jest --config jest-ssr.config.js",
     "posttest": "yoshi-flow-editor lint",
     "release": "yoshi-flow-editor release"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,scss,less}": "yoshi-flow-editor lint"
   },
   "devDependencies": {
     "@testing-library/react": "^9.3.0",
@@ -27,7 +34,7 @@
     "@types/react-i18next": "^7.8.2",
     "@types/testing-library__react": "^9.1.2",
     "@types/uuid": "^3.4.6",
-    "husky": "~0.14.0",
+    "husky": "^4.2.1",
     "isomorphic-fetch": "^2.2.1",
     "jest-yoshi-preset": "^4.6.3",
     "lint-staged": "^10.0.7",
@@ -55,9 +62,6 @@
     "wix-ui-tpa": "^1.0.123",
     "typescript": "~3.6.0",
     "yoshi-flow-editor-runtime": "*"
-  },
-  "lint-staged": {
-    "*.{js,scss,less}": "yoshi-flow-editor lint"
   },
   "jest": {
     "preset": "jest-yoshi-preset"
