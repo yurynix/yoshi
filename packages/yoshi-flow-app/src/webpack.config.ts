@@ -5,16 +5,15 @@ import {
   createServerEntries,
 } from 'yoshi-common/build/webpack-utils';
 import { createBaseWebpackConfig } from 'yoshi-common/build/webpack.config';
-import { defaultEntry } from 'yoshi-helpers/constants';
+import { defaultEntry } from 'yoshi-helpers/build/constants';
 import { Config } from 'yoshi-config/build/config';
-
 import {
   isTypescriptProject,
   isSingleEntry,
   inTeamCity,
   isProduction,
-} from 'yoshi-helpers/queries';
-import { SERVER_ENTRY } from 'yoshi-config/paths';
+} from 'yoshi-helpers/build/queries';
+import { SERVER_ENTRY } from 'yoshi-config/build/paths';
 import { isObject } from 'lodash';
 
 const useTypeScript = isTypescriptProject();

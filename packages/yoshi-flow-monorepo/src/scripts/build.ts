@@ -1,21 +1,21 @@
 import path from 'path';
 import arg from 'arg';
 import fs from 'fs-extra';
+import chalk from 'chalk';
+import bfj from 'bfj';
 import {
   printBuildResult,
   printBundleSizeSuggestion,
 } from 'yoshi-common/build/print-build-results';
-import bfj from 'bfj';
 import WebpackManager from 'yoshi-common/build/webpack-manager';
 import {
   STATICS_DIR,
   TARGET_DIR,
-  STATS_FILE,
   SERVER_CHUNKS_BUILD_DIR,
   SERVER_BUNDLE,
-} from 'yoshi-config/paths';
-import chalk from 'chalk';
-import { inTeamCity as checkInTeamCity } from 'yoshi-helpers/queries';
+  STATS_FILE,
+} from 'yoshi-config/build/paths';
+import { inTeamCity as checkInTeamCity } from 'yoshi-helpers/build/queries';
 import { copyTemplates } from 'yoshi-common/build/copy-assets';
 import { cliCommand } from '../bin/yoshi-monorepo';
 import {

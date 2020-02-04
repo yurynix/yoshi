@@ -10,9 +10,9 @@ const {
   isProduction: checkIsProduction,
   inTeamCity: checkInTeamCity,
   isTypescriptProject: checkIsTypescriptProject,
-} = require('yoshi-helpers/queries');
-const { SERVER_ENTRY } = require('yoshi-config/paths');
-const { defaultEntry } = require('yoshi-helpers/constants');
+} = require('yoshi-helpers/build/queries');
+const { SERVER_ENTRY } = require('yoshi-config/build/paths');
+const { defaultEntry } = require('yoshi-helpers/build/constants');
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();

@@ -12,12 +12,12 @@ import {
   TEMPLATES_DIR,
   TEMPLATES_BUILD_DIR,
   SERVER_CHUNKS_DIR,
-} from 'yoshi-config/paths';
+} from 'yoshi-config/build/paths';
 import resolve from 'resolve';
 import {
   isProduction as checkIsProduction,
   inTeamCity as checkInTeamCity,
-} from 'yoshi-helpers/queries';
+} from 'yoshi-helpers/build/queries';
 // @ts-ignore - missing types
 import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
@@ -699,7 +699,7 @@ export function createBaseWebpackConfig({
                       issuer: () => true,
                     }
                   : {}),
-                loader: require.resolve('yoshi-server-tools/loader'),
+                loader: require.resolve('yoshi-server-tools/build/loader'),
               },
             ]
           : []),
