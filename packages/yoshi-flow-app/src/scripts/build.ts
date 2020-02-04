@@ -9,6 +9,7 @@ import {
 import { copyTemplates } from 'yoshi-common/build/copy-assets';
 import { BUILD_DIR, TARGET_DIR, STATS_FILE } from 'yoshi-config/build/paths';
 import { inTeamCity, isWebWorkerBundle } from 'yoshi-helpers/build/queries';
+import * as telemetry from 'yoshi-common/build/telemetry';
 import fs from 'fs-extra';
 import {
   createClientWebpackConfig,
@@ -20,6 +21,8 @@ import { cliCommand } from '../bin/yoshi-app';
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
 const build: cliCommand = async function(argv, config) {
+  await telemetry.buildStart(config);
+
   const args = arg(
     {
       // Types

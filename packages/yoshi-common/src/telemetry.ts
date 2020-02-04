@@ -1,37 +1,41 @@
-import Insight from 'insight';
-import config from 'yoshi-config';
 import semver from 'semver';
-import { isTypescriptProject as checkIsTypescriptProject } from 'yoshi-helpers/build/queries';
+import biLoggerClient, { BiLoggerFactory } from 'wix-bi-logger-client';
+import initSchemaLogger, { getLoggerConf } from 'bi-logger-yoshi';
+import { isTypescriptProject, inTeamCity } from 'yoshi-helpers/build/queries';
+import { Config } from 'yoshi-config/build/config';
+import { requestHttps } from './utils/helpers';
 
-const insight = new Insight({
-  trackingCode: 'UA-120893726-1',
-  // @ts-ignore
-  clientId: config.name,
-  packageName: 'yoshi',
-});
+// Create BI factory
+const biLoggerFactory = biLoggerClient.factory() as BiLoggerFactory<
+  ReturnType<typeof getLoggerConf>
+>;
 
-const { version: yoshiVersion } = require('../package.json');
-
-const version = semver.parse(yoshiVersion)?.major;
-
-const isTypescriptProject = checkIsTypescriptProject();
-
-export async function collectData() {
-  // Don't fire telemetry events for Yoshi's e2e tests
-  if (process.env.NPM_PACKAGE !== 'yoshi-monorepo') {
-    insight.trackEvent({
-      category: 'version',
-      action: `${version}`,
-      label: config.name,
-    });
-
-    insight.trackEvent({
-      category: 'language',
-      action: isTypescriptProject ? 'ts' : 'js',
-      label: config.name,
-    });
+// Register a custom publisher that uses Node's HTTPS API
+biLoggerFactory.addPublisher(async (eventParams, context) => {
+  // Collect telemetry only on CI builds
+  if (!inTeamCity()) {
+    return;
   }
 
-  // Since we call `process.exit()` directly we have to wait
-  return new Promise(resolve => setImmediate(resolve));
+  try {
+    await requestHttps(`frog.wix.com/${context.endpoint}`, eventParams);
+  } catch (error) {
+    // Swallow errors
+  }
+});
+
+// Create logger
+const biLogger = initSchemaLogger(biLoggerFactory)();
+
+// Function to fire an event
+export async function buildStart(config: Config) {
+  const { version: yoshiVersion } = require('../package.json');
+
+  await biLogger.buildStart({
+    nodeVersion: `${semver.parse(process.version)?.major}`,
+    yoshiVersion: `${semver.parse(yoshiVersion)?.major}`,
+    projectName: config.name,
+    projectLanguage: isTypescriptProject() ? 'ts' : 'js',
+    isTestEvent: process.env.NPM_PACKAGE === 'yoshi-monorepo',
+  });
 }
