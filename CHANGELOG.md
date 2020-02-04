@@ -1,5 +1,28 @@
 # Changelog
 
+## 4.31.0 (2020-02-04)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-template-intro`
+  - [#1919](https://github.com/wix/yoshi/pull/1919) Upgrade `husky` to new major v`4.2.1` ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1922](https://github.com/wix/yoshi/pull/1922) Remove content hash from webworker output for experimentalBuildHtml ([@ronami](https://github.com/ronami))
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`
+  - [#1856](https://github.com/wix/yoshi/pull/1856) Fix TypeScript caching issues on build command ([@roymiloh](https://github.com/roymiloh))
+
+#### :house: Internal
+
+- Other
+  - [#1916](https://github.com/wix/yoshi/pull/1916) Refactor Yoshi Server's tests, use common base fixture ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1915](https://github.com/wix/yoshi/pull/1915) Refactor test utils, remove code duplication ([@yanivefraim](https://github.com/yanivefraim))
+  - [#1911](https://github.com/wix/yoshi/pull/1911) Simplify moment exclusion test (Stabler CI) ([@NitayRabi](https://github.com/NitayRabi))
+- `yoshi-server-client`, `yoshi-server`
+  - [#1914](https://github.com/wix/yoshi/pull/1914) `yoshi-server` bug fix: return of different types ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.30.0 (2020-02-02)
 
 #### :rocket: New Feature
