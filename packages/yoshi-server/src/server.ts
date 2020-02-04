@@ -112,7 +112,6 @@ export default class Server {
       const relativePath = `/${relativeFilePath(routesBuildDir, absolutePath)}`;
       // Change `/users/[userid]` to `/users/:userid`
       const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
-
       return {
         route: routePath === '/index' ? '/' : routePath,
         handler: async (req, res, params) => {
