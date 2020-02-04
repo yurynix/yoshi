@@ -200,7 +200,6 @@ export function createWebWorkerWebpackConfig(
   const workerConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'web-worker',
-    createEjsTemplates: pkg.config.experimentalBuildHtml,
     target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
     isDev,
     isHot,
