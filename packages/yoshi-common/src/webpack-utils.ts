@@ -115,6 +115,10 @@ function createServerEntries(context: string, cwd: string = process.cwd()) {
   // Add custom entries for `yoshi-server`
   entries['routes/_api_'] = 'yoshi-server/build/routes/api';
 
+  if (fs.pathExistsSync(path.join(cwd, SRC_DIR, '_middleware_.js'))) {
+    entries['_middleware_'] = path.join(cwd, SRC_DIR, '_middleware_.js');
+  }
+
   return entries;
 }
 
