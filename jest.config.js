@@ -3,10 +3,13 @@ module.exports = {
   rootDir: './test',
   verbose: true,
   testResultsProcessor: 'jest-teamcity-reporter',
-  testMatch: ['**/*.test.js'],
+  testMatch: ['**/*.test.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/projects/'],
-  globalSetup: require.resolve('./test/globalSetup'),
-  globalTeardown: require.resolve('./test/globalTeardown'),
+  globalSetup: require.resolve('./test/globalSetup.ts'),
+  globalTeardown: require.resolve('./test/globalTeardown.ts'),
   transformIgnorePatterns: ['/node_modules/'],
-  setupFilesAfterEnv: [require.resolve('./jest-setup')],
+  setupFilesAfterEnv: [require.resolve('./jest-setup.ts')],
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
 };
