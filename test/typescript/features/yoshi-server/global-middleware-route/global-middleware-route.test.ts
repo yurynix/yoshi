@@ -2,7 +2,7 @@ const Scripts = require('../../../../scripts');
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  projectType: Scripts.projectType.YOSHI_SERVER_TS,
+  projectType: 'yoshi-server-typescript',
 });
 
 describe.each(['prod', 'dev'])('yoshi-server global middleware [%s]', mode => {
