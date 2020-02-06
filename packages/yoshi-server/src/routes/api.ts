@@ -18,16 +18,13 @@ const serverChunks = globby.sync('**/*.api.js', {
 });
 
 const functions: {
-  [filename: string]:
-    | { [functionName: string]: DSL<any, any> | undefined }
-    | undefined;
+  [filename: string]: () => { [functionName: string]: DSL<any, any> };
 } = serverChunks.reduce((acc, absolutePath) => {
-  const chunk = importFresh(absolutePath);
   const filename = relativeFilePath(buildDir, absolutePath);
 
   return {
     ...acc,
-    [filename]: chunk,
+    [filename]: () => importFresh(absolutePath),
   };
 }, {});
 
@@ -42,7 +39,7 @@ export default route(async function() {
   }
 
   const { fileName, functionName, args } = validation.right;
-  const fn = functions?.[fileName]?.[functionName]?.__fn__;
+  const fn = functions?.[fileName]()[functionName]?.__fn__;
 
   if (!fn) {
     return send(this.res, 406, {
