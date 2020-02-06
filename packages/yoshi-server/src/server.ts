@@ -19,6 +19,7 @@ export type Route = {
     res: Response,
     params: { [param: string]: any },
   ) => void;
+  middlewares: Array<NextHandleFunction> | undefined;
 };
 
 export default class Server {
@@ -74,7 +75,11 @@ export default class Server {
 
       const { pathname } = parseUrl(req.url as string, true);
 
-      for (const { handler, route } of this.routes) {
+      for (const { handler, route, middlewares } of this.routes) {
+        if (middlewares) {
+          await this.applyMiddlewares(middlewares, req, res);
+        }
+
         const params = pathMatch(route, pathname as string);
 
         if (params) {
@@ -98,9 +103,10 @@ export default class Server {
   private createGlobalMiddleware(): Array<NextHandleFunction> | undefined {
     let middlewares;
     try {
-      middlewares = importFresh(
-        path.resolve(BUILD_DIR, '_middleware_.js'),
-      ) as Array<NextHandleFunction>;
+      const res = importFresh(path.resolve(BUILD_DIR, '_middleware_.js')) as {
+        default: Array<NextHandleFunction>;
+      };
+      middlewares = res.default;
     } catch (e) {}
     return middlewares;
   }
@@ -114,7 +120,10 @@ export default class Server {
     });
 
     return serverChunks.map(absolutePath => {
-      const chunk = importFresh(absolutePath) as RouteFunction<any>;
+      const { default: chunk, middlewares } = importFresh(absolutePath) as {
+        default: RouteFunction<any>;
+        middlewares: Array<NextHandleFunction> | undefined;
+      };
       const relativePath = `/${relativeFilePath(routesBuildDir, absolutePath)}`;
       // Change `/users/[userid]` to `/users/:userid`
       const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
@@ -144,6 +153,7 @@ export default class Server {
             }
           }
         },
+        middlewares,
       };
     });
   }

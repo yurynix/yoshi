@@ -592,8 +592,7 @@ export function createBaseWebpackConfig({
 
       ...(target === 'node'
         ? [
-            new ExportDefaultPlugin(),
-
+            ...(useYoshiServer ? [] : [new ExportDefaultPlugin()]),
             new webpack.BannerPlugin({
               banner: fs.readFileSync(
                 path.join(__dirname, 'utils/source-map-support.js'),
