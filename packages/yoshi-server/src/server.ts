@@ -24,7 +24,7 @@ export type Route = {
 export default class Server {
   private context: any;
   private routes: Array<Route>;
-  private globalMiddlewares: Array<NextHandleFunction>;
+  private globalMiddlewares: Array<NextHandleFunction> | undefined;
 
   constructor(context: any) {
     this.context = context;
@@ -68,7 +68,9 @@ export default class Server {
 
   public handle: RequestHandler = async (req, res): Promise<void> => {
     try {
-      await this.applyMiddlewares(this.globalMiddlewares, req, res);
+      if (this.globalMiddlewares) {
+        await this.applyMiddlewares(this.globalMiddlewares, req, res);
+      }
 
       const { pathname } = parseUrl(req.url as string, true);
 
@@ -93,10 +95,14 @@ export default class Server {
     return send(res, 404, 'not found');
   };
 
-  private createGlobalMiddleware(): Array<NextHandleFunction> {
-    return importFresh(path.resolve(BUILD_DIR, '_middleware_.js')) as Array<
-      NextHandleFunction
-    >;
+  private createGlobalMiddleware(): Array<NextHandleFunction> | undefined {
+    let middlewares;
+    try {
+      middlewares = importFresh(
+        path.resolve(BUILD_DIR, '_middleware_.js'),
+      ) as Array<NextHandleFunction>;
+    } catch (e) {}
+    return middlewares;
   }
 
   private createRoutes(): Array<Route> {
