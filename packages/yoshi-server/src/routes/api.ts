@@ -1,5 +1,8 @@
 import path from 'path';
 import globby from 'globby';
+import { Request, Response } from 'express';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { NextHandleFunction } from 'connect';
 import importFresh from 'import-fresh';
 import { send, json as parseBodyAsJson } from 'micro';
 import { PathReporter } from 'io-ts/lib/PathReporter';
@@ -18,9 +21,9 @@ const serverChunks = globby.sync('**/*.api.js', {
 });
 
 const functions: {
-  [filename: string]:
-    | { [functionName: string]: DSL<any, any> | undefined }
-    | undefined;
+  [filename: string]: {
+    [functionName: string]: DSL<any, any> | Array<NextHandleFunction>;
+  };
 } = serverChunks.reduce((acc, absolutePath) => {
   const chunk = importFresh(absolutePath);
   const filename = relativeFilePath(buildDir, absolutePath);
@@ -30,6 +33,19 @@ const functions: {
     [filename]: chunk,
   };
 }, {});
+
+async function applyMiddlewares(
+  middleware: Array<NextHandleFunction>,
+  req: Request,
+  res: Response,
+) {
+  await middleware.reduce(async (acc, middleware): Promise<void> => {
+    await acc;
+    return new Promise((resolve, reject) => {
+      middleware(req, res, (error: any) => (error ? reject(error) : resolve()));
+    });
+  }, Promise.resolve());
+}
 
 export default route(async function() {
   const body = await parseBodyAsJson(this.req);
@@ -42,7 +58,7 @@ export default route(async function() {
   }
 
   const { fileName, functionName, args } = validation.right;
-  const fn = functions?.[fileName]?.[functionName]?.__fn__;
+  const fn = (functions?.[fileName]?.[functionName] as DSL<any, any>)?.__fn__;
 
   if (!fn) {
     return send(this.res, 406, {
@@ -57,6 +73,12 @@ export default route(async function() {
       res: this.res,
     };
 
+    const middlewares = functions?.[fileName]?.middlewares as
+      | Array<NextHandleFunction>
+      | undefined;
+    if (middlewares) {
+      await applyMiddlewares(middlewares, this.req, this.res);
+    }
     return { payload: await fn.apply(fnThis, args) };
   } catch (error) {
     if (process.env.NODE_ENV === 'production') {
