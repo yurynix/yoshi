@@ -2,7 +2,7 @@ import Scripts from '../../../../scripts';
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  projectType: 'yoshi-server-typescript',
+  projectType: 'yoshi-server-javascript',
 });
 
 describe.each(['prod', 'dev'] as const)(
