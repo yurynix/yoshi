@@ -77,7 +77,7 @@
       }
     },
     {
-      "files": ["test/projects/**/*", "test/fixtures/**/*", "test/*/features/**/*"],
+      "files": ["test/fixtures/**/*", "test/*/features/**/*"],
       "rules": {
         "import/no-unresolved": 0,
         "import/no-extraneous-dependencies": 0
