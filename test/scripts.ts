@@ -134,13 +134,19 @@ export default class Scripts {
     // promise will reject immediately
     try {
       await Promise.race([
-        waitForStdout(startProcess, 'Compiled with warnings').then(data => {
+        waitForStdout(startProcess, 'Compiled with warnings', {
+          throttle: true,
+        }).then(() => {
           throw new Error(
-            `Yoshi start was compiled with warnings \n \n ${data}`,
+            `Yoshi start was compiled with warnings \n \n ${startProcessOutput}`,
           );
         }),
-        waitForStdout(startProcess, 'Failed to compile').then(data => {
-          throw new Error(`Yoshi start failed to compile: \n \n ${data}`);
+        waitForStdout(startProcess, 'Failed to compile', {
+          throttle: true,
+        }).then(() => {
+          throw new Error(
+            `Yoshi start failed to compile: \n \n ${startProcessOutput}`,
+          );
         }),
         Promise.all([
           waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),

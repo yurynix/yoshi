@@ -1,0 +1,19 @@
+{
+  "name": "yoshi-storybook-dependencies",
+  "version": "4.27.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "start-storybook"
+  },
+  "author": "Nitay Rabinovich",
+  "license": "ISC",
+  "dependencies": {
+    "@storybook/react": "^5.2.8",
+    "storybook": "^5.3.7"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}

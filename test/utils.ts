@@ -143,9 +143,21 @@ export function waitForPortToFree(port: number): Promise<void> {
   });
 }
 
+function throttleFunc(
+  method: Function & { _tId?: NodeJS.Timeout },
+  scope: any,
+  ...args: Array<any>
+) {
+  method._tId && clearTimeout(method._tId);
+  method._tId = setTimeout(function() {
+    method.call(scope, ...args);
+  }, 100);
+}
+
 export function waitForStdout(
   spawnedProcess: execa.ExecaChildProcess<string>,
   stringToMatch: string,
+  options = { throttle: false },
 ): Promise<string> {
   let data = '';
 
@@ -155,7 +167,11 @@ export function waitForStdout(
         data += buffer.toString();
         if (buffer.toString().includes(stringToMatch)) {
           spawnedProcess.stdout && spawnedProcess.stdout.off('data', listener);
-          resolve(data);
+          if (options.throttle) {
+            throttleFunc(resolve, null, data);
+          } else {
+            resolve(data);
+          }
         }
       });
   });

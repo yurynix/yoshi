@@ -1,5 +1,7 @@
+import path from 'path';
 import webpack from 'webpack';
 import createStore, { Store } from 'unistore';
+import execa, { ExecaChildProcess } from 'execa';
 import clearConsole from 'react-dev-utils/clearConsole';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
@@ -13,7 +15,6 @@ import {
   getUrl as getTunnelUrl,
   getDevServerSocketPath,
 } from './utils/suricate';
-
 import devEnvironmentLogger from './dev-environment-logger';
 
 const isInteractive = process.stdout.isTTY;
@@ -25,17 +26,22 @@ type WebpackStatus = {
 
 type StartUrl = string | Array<string> | null | undefined;
 
-export type State =
-  | {
+export type ProcessState =
+  | ({
       status: 'compiling';
-    }
+    } & Partial<WebpackStatus>)
   | ({
       status: 'success';
-      serverUrls: Urls;
-      devServerUrls: Urls;
-    } & WebpackStatus)
-  | ({ status: 'errors' } & WebpackStatus)
-  | ({ status: 'warnings' } & WebpackStatus);
+      urls?: Urls;
+    } & Partial<WebpackStatus>)
+  | ({ status: 'errors' } & Partial<WebpackStatus>)
+  | ({ status: 'warnings' } & Partial<WebpackStatus>);
+
+export type ProcessType = 'DevServer' | 'AppServer' | 'Storybook';
+
+export type State = {
+  [type in ProcessType]?: ProcessState;
+};
 
 type DevEnvironmentProps = {
   webpackDevServer: WebpackDevServer;
@@ -43,6 +49,7 @@ type DevEnvironmentProps = {
   multiCompiler: webpack.MultiCompiler;
   appName: string;
   suricate: boolean;
+  storybookProcess?: ExecaChildProcess;
   startUrl?: StartUrl;
 };
 
@@ -62,9 +69,15 @@ export default class DevEnvironment {
       }
 
       this.store.setState({
-        status: 'compiling',
+        DevServer: {
+          status: 'compiling',
+        },
       });
     });
+
+    if (this.props.storybookProcess) {
+      this.props.storybookProcess.on('message', this.onStoryBookMessage);
+    }
 
     multiCompiler.hooks.done.tap('finished-log', stats => {
       if (isInteractive) {
@@ -85,28 +98,102 @@ export default class DevEnvironment {
         );
 
         this.store.setState({
-          status: 'success',
-          serverUrls,
-          devServerUrls,
-          ...messages,
-        } as State);
+          AppServer: {
+            status: 'success',
+            urls: serverUrls,
+          },
+          DevServer: {
+            status: 'success',
+            urls: devServerUrls,
+            ...messages,
+          },
+        });
       } else if (messages.errors.length) {
         if (messages.errors.length > 1) {
           messages.errors.length = 1;
         }
 
         this.store.setState({
-          status: 'errors',
-          ...messages,
+          AppServer: {
+            status: 'errors',
+          },
+          DevServer: {
+            status: 'errors',
+            ...messages,
+          },
         });
       } else if (messages.warnings.length) {
         this.store.setState({
-          status: 'warnings',
-          ...messages,
+          AppServer: {
+            status: 'warnings',
+          },
+          DevServer: {
+            status: 'warnings',
+            ...messages,
+          },
         });
       }
     });
   }
+
+  onStoryBookMessage = (
+    message:
+      | { type: 'listening'; port: number }
+      | { type: 'compiling' }
+      | { type: 'finished-log'; stats: any; port: number }
+      | { type: 'error'; error: string },
+  ) => {
+    switch (message.type) {
+      case 'error':
+        this.store.setState({
+          Storybook: { status: 'errors', errors: [message.error] },
+        });
+        break;
+      case 'compiling':
+        if (isInteractive) {
+          clearConsole();
+        }
+        this.store.setState({
+          Storybook: { status: 'compiling', errors: [], warnings: [] },
+        });
+        break;
+      case 'listening':
+        openBrowser(`http://localhost:${message.port}`);
+        break;
+      case 'finished-log':
+        if (isInteractive) {
+          clearConsole();
+        }
+        // @ts-ignore
+        const messages = formatWebpackMessages(message.stats);
+        const isSuccessful =
+          !messages.errors.length && !messages.warnings.length;
+        if (isSuccessful) {
+          const urls = prepareUrls('http', host, Number(message.port));
+          this.store.setState({
+            Storybook: { status: 'success', urls, ...messages },
+          });
+        } else if (messages.errors.length) {
+          if (messages.errors.length > 1) {
+            messages.errors.length = 1;
+          }
+          this.store.setState({
+            Storybook: {
+              status: 'errors',
+              ...messages,
+            },
+          });
+        } else if (messages.warnings.length) {
+          this.store.setState({
+            Storybook: {
+              status: 'warnings',
+              ...messages,
+            },
+          });
+        }
+        break;
+    }
+  };
 
   private async triggerBrowserRefresh(jsonStats: webpack.Stats.ToJsonOutput) {
     const { webpackDevServer } = this.props;
@@ -226,6 +313,7 @@ export default class DevEnvironment {
     appName,
     startUrl,
     suricate = false,
+    storybook = false,
   }: {
     webpackConfigs: [
       webpack.Configuration,
@@ -241,6 +329,7 @@ export default class DevEnvironment {
     appName: string;
     startUrl?: StartUrl;
     suricate?: boolean;
+    storybook?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
 
@@ -314,6 +403,17 @@ export default class DevEnvironment {
       cwd,
     });
 
+    let storybookProcess;
+
+    if (storybook) {
+      const pathToStorybookWorker = path.join(
+        __dirname,
+        'storybook',
+        'storybook-worker',
+      );
+      storybookProcess = execa.node(pathToStorybookWorker);
+    }
+
     const devEnvironment = new DevEnvironment({
       webpackDevServer,
       serverProcess,
@@ -321,6 +421,7 @@ export default class DevEnvironment {
       appName,
       suricate,
       startUrl,
+      storybookProcess,
     });
 
     devEnvironment.startServerHotUpdate(serverCompiler);
