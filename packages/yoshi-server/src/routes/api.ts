@@ -17,18 +17,23 @@ const serverChunks = globby.sync('**/*.api.js', {
   absolute: true,
 });
 
-const functions: {
-  [filename: string]: () => { [functionName: string]: DSL<any, any> };
-} = serverChunks.reduce((acc, absolutePath) => {
-  const filename = relativeFilePath(buildDir, absolutePath);
+function createFunctions() {
+  const functions: {
+    [filename: string]: () => { [functionName: string]: DSL<any, any> };
+  } = serverChunks.reduce((acc, absolutePath) => {
+    const filename = relativeFilePath(buildDir, absolutePath);
 
-  return {
-    ...acc,
-    [filename]: () => importFresh(absolutePath),
-  };
-}, {});
+    return {
+      ...acc,
+      [filename]: () => importFresh(absolutePath),
+    };
+  }, {});
+
+  return functions;
+}
 
 export default route(async function() {
+  const functions = createFunctions();
   const body = await parseBodyAsJson(this.req);
   const validation = requestPayloadCodec.decode(body);
 

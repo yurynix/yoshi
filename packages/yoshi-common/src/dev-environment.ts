@@ -1,8 +1,11 @@
+import path from 'path';
 import webpack from 'webpack';
+import chokidar from 'chokidar';
 import createStore, { Store } from 'unistore';
 import clearConsole from 'react-dev-utils/clearConsole';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
+import { SRC_DIR, ROUTES_DIR } from 'yoshi-config/build/paths';
 import openBrowser from './open-browser';
 import { PORT } from './utils/constants';
 import ServerProcess from './server-process';
@@ -13,7 +16,6 @@ import {
   getUrl as getTunnelUrl,
   getDevServerSocketPath,
 } from './utils/suricate';
-
 import devEnvironmentLogger from './dev-environment-logger';
 
 const isInteractive = process.stdout.isTTY;
@@ -44,6 +46,8 @@ type DevEnvironmentProps = {
   appName: string;
   suricate: boolean;
   startUrl?: StartUrl;
+  useYoshiServer: boolean;
+  cwd: string;
 };
 
 export default class DevEnvironment {
@@ -147,7 +151,7 @@ export default class DevEnvironment {
   startServerHotUpdate(compiler: webpack.Compiler) {
     const { serverProcess } = this.props;
 
-    compiler.watch({}, async (error, stats) => {
+    const watching = compiler.watch({}, async (error, stats) => {
       // We save the result of this build to webpack-dev-server's internal state so the last
       // server build results are sent to the browser on every refresh
       //
@@ -185,6 +189,20 @@ export default class DevEnvironment {
         }
       }
     });
+
+    if (this.props.useYoshiServer) {
+      chokidar
+        .watch(
+          [path.join(SRC_DIR, '**/*.api.*'), path.join(ROUTES_DIR, '/**/*.*')],
+          {
+            cwd: this.props.cwd,
+            ignoreInitial: true,
+          },
+        )
+        .on('all', () => {
+          watching.invalidate();
+        });
+    }
   }
 
   async start() {
@@ -226,6 +244,7 @@ export default class DevEnvironment {
     appName,
     startUrl,
     suricate = false,
+    useYoshiServer = false,
   }: {
     webpackConfigs: [
       webpack.Configuration,
@@ -241,6 +260,7 @@ export default class DevEnvironment {
     appName: string;
     startUrl?: StartUrl;
     suricate?: boolean;
+    useYoshiServer?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
 
@@ -321,6 +341,8 @@ export default class DevEnvironment {
       appName,
       suricate,
       startUrl,
+      useYoshiServer,
+      cwd,
     });
 
     devEnvironment.startServerHotUpdate(serverCompiler);
