@@ -1,5 +1,30 @@
 # Changelog
 
+## 4.32.0 (2020-02-09)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-storybook-dependencies`
+  - [#1861](https://github.com/wix/yoshi/pull/1861) Storybook managed under experimental flag ([@NitayRabi](https://github.com/NitayRabi))
+- `eslint-config-yoshi`, `tslint-config-yoshi`
+  - [#1918](https://github.com/wix/yoshi/pull/1918) `eslint-tslint-config-yoshi` - remove `no-full-wsr-lib` ([@mykas](https://github.com/mykas))
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-legacy`, `yoshi`
+  - [#1913](https://github.com/wix/yoshi/pull/1913) Telemetry support with `wix-bi-logger` ([@ronami](https://github.com/ronami))
+
+#### :bug: Bug Fix
+
+- `create-yoshi-app`
+  - [#1930](https://github.com/wix/yoshi/pull/1930) prevent error when project is opened at the first time ([@sidoruk-sv](https://github.com/sidoruk-sv))
+- Other
+  - [#1934](https://github.com/wix/yoshi/pull/1934) Removed remaining references to projects ([@Gongreg](https://github.com/Gongreg))
+
+#### :house: Internal
+
+- Other
+  - [#1924](https://github.com/wix/yoshi/pull/1924) Migrate testing infra to TypeScript ([@ronami](https://github.com/ronami))
+- `jest-yoshi-preset`, `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi-helpers`, `yoshi-server-tools`, `yoshi-server`, `yoshi`
+  - [#1896](https://github.com/wix/yoshi/pull/1896) Remove files from the root pattern all over the monorepo ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.31.0 (2020-02-04)
 
 #### :rocket: New Feature
