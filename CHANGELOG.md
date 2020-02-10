@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.33.0 (2020-02-10)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#1943](https://github.com/wix/yoshi/pull/1943) Yoshi server: add `bo-auth` middleware ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-monorepo`
+  - [#1931](https://github.com/wix/yoshi/pull/1931) Create a webworker bundle that runs on server side ([@roymiloh](https://github.com/roymiloh))
+
 ## 4.32.0 (2020-02-09)
 
 #### :rocket: New Feature
