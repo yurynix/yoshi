@@ -52,7 +52,7 @@ export default class Server {
       for (const { handler, route } of this.routes) {
         const params = pathMatch(route, pathname as string);
 
-        if (params) {
+        if (params || route === '*') {
           return await handler(req, res, params);
         }
       }
@@ -84,7 +84,7 @@ export default class Server {
       // Change `/users/[userid]` to `/users/:userid`
       const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
       return {
-        route: routePath === '/index' ? '/' : routePath,
+        route: routePath === '/index' ? '/*' : routePath,
         handler: async (req, res, params) => {
           const fnThis = {
             context: this.context,
