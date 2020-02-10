@@ -1,5 +1,6 @@
 import path from 'path';
-import webpack from 'webpack';
+import fs from 'fs-extra';
+import webpack, { compilation } from 'webpack';
 import chokidar from 'chokidar';
 import createStore, { Store } from 'unistore';
 import clearConsole from 'react-dev-utils/clearConsole';
@@ -62,7 +63,7 @@ export default class DevEnvironment {
 
     this.props.multiCompiler.hooks.invalid.tap('recompile-log', () => {
       if (isInteractive) {
-        clearConsole();
+        // clearConsole();
       }
 
       this.store.setState({
@@ -72,7 +73,7 @@ export default class DevEnvironment {
 
     multiCompiler.hooks.done.tap('finished-log', stats => {
       if (isInteractive) {
-        clearConsole();
+        // clearConsole();
       }
 
       // @ts-ignore
@@ -174,7 +175,11 @@ export default class DevEnvironment {
         // If there are no errors and the server can be refreshed
         // then send it a signal and wait for a responsne
         if (serverProcess.child && !error && !stats.hasErrors()) {
-          const { success } = (await serverProcess.send({})) as {
+          const entryPaths = stats.compilation.entries.map(entry => {
+            console.log(entry);
+            return path.join(entry.context, entry.name);
+          });
+          const { success } = (await serverProcess.send(entryPaths)) as {
             success: boolean;
           };
 
@@ -199,8 +204,17 @@ export default class DevEnvironment {
             ignoreInitial: true,
           },
         )
-        .on('all', () => {
-          watching.invalidate();
+        .on('all', event => {
+          switch (event) {
+            case 'add':
+            case 'addDir':
+            case 'unlink':
+            case 'unlinkDir':
+              watching.invalidate();
+              break;
+            default:
+              return null;
+          }
         });
     }
   }

@@ -33,7 +33,9 @@ export default class Server {
         `http://localhost:${process.env.HMR_PORT}/_yoshi_server_hmr_`,
       );
 
-      socket.onmessage = async () => {
+      socket.onmessage = async ({ data }) => {
+        console.log(JSON.parse(data));
+
         try {
           this.routes = this.createRoutes();
         } catch (error) {
@@ -73,14 +75,20 @@ export default class Server {
   private createRoutes(): Array<Route> {
     const routesBuildDir = path.resolve(ROUTES_BUILD_DIR);
 
-    const serverChunks = globby.sync('**/*.js', {
-      cwd: routesBuildDir,
+    const serverChunks = globby.sync('**/*.(js|ts)', {
+      cwd: ROUTES_DIR,
       absolute: true,
     });
 
-    return serverChunks.map(absolutePath => {
-      const chunk = importFresh(absolutePath) as RouteFunction<any>;
-      const relativePath = `/${relativeFilePath(routesBuildDir, absolutePath)}`;
+    return serverChunks.map(absoluteSrcPath => {
+      const absoluteBuildPath = absoluteSrcPath
+        .replace('src', 'dist')
+        .replace('.ts', '.js');
+      const chunk = importFresh(absoluteBuildPath) as RouteFunction<any>;
+      const relativePath = `/${relativeFilePath(
+        routesBuildDir,
+        absoluteBuildPath,
+      )}`;
       // Change `/users/[userid]` to `/users/:userid`
       const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
       return {
