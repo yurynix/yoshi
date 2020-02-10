@@ -216,3 +216,33 @@ export function createWebWorkerWebpackConfig(
 
   return workerConfig;
 }
+
+export function createWebWorkerServerWebpackConfig(
+  pkg: PackageGraphNode,
+  { isDev, isHot }: { isDev?: boolean; isHot?: boolean } = {},
+): webpack.Configuration {
+  const defaultOptions = createDefaultOptions(pkg);
+
+  const workerConfig = createBaseWebpackConfig({
+    cwd: pkg.location,
+    configName: 'web-worker-server',
+    target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
+    isDev,
+    isHot,
+    ...defaultOptions,
+  });
+
+  workerConfig.output!.library = '[name]';
+  workerConfig.output!.libraryTarget = 'umd';
+  workerConfig.output!.globalObject = 'self';
+
+  workerConfig.entry = pkg.config.webWorkerServerEntry;
+
+  workerConfig.plugins!.push(
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+  );
+
+  return workerConfig;
+}

@@ -71,6 +71,9 @@ export type InitialConfig = {
     entry?: WebpackEntry;
     externals?: WebpackExternals;
   };
+  webWorkerServer?: {
+    entry?: WebpackEntry;
+  };
   suricate?: boolean;
   experimentalStorybook?: boolean;
 };
@@ -118,6 +121,7 @@ export type Config = {
   projectType: ProjectType | null;
   webWorkerEntry?: WebpackEntry;
   webWorkerExternals?: WebpackExternals;
+  webWorkerServerEntry?: WebpackEntry;
   suricate: boolean;
   experimentalStorybook: boolean;
 };

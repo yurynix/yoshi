@@ -248,7 +248,12 @@ export function createBaseWebpackConfig({
   useYoshiServer = false,
 }: {
   name: string;
-  configName: 'client' | 'server' | 'web-worker' | 'site-assets';
+  configName:
+    | 'client'
+    | 'server'
+    | 'web-worker'
+    | 'site-assets'
+    | 'web-worker-server';
   target: 'web' | 'node' | 'webworker' | 'async-webworker';
   isDev?: boolean;
   isHot?: boolean;

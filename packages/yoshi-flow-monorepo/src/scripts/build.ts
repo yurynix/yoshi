@@ -22,6 +22,7 @@ import {
   createClientWebpackConfig,
   createServerWebpackConfig,
   createWebWorkerWebpackConfig,
+  createWebWorkerServerWebpackConfig,
 } from '../webpack.config';
 import buildLibraries from '../build-libraries';
 
@@ -135,12 +136,21 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
       webWorkerOptimizeConfig = createWebWorkerWebpackConfig(rootConfig, pkg);
     }
 
+    let webWorkerServerConfig;
+
+    if (pkg.config.webWorkerServerEntry) {
+      webWorkerServerConfig = createWebWorkerServerWebpackConfig(pkg, {
+        isDev: true,
+      });
+    }
+
     webpackManager.addConfigs(pkg.name, [
       clientDebugConfig,
       clientOptimizedConfig,
       serverConfig,
       webWorkerConfig,
       webWorkerOptimizeConfig,
+      webWorkerServerConfig,
     ]);
   });
 

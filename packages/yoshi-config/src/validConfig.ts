@@ -74,6 +74,16 @@ const validConfig: RequiredRecursively<InitialConfig> = {
     ),
     externals: multipleValidOptions(['React'], { react: 'React' }),
   },
+  webWorkerServer: {
+    entry: multipleValidOptions(
+      'index.js',
+      ['one.js'],
+      { two: 'two.js' },
+      {
+        app: 'index.js',
+      },
+    ),
+  },
   suricate: false,
   experimentalStorybook: false,
 };
