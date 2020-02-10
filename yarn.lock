@@ -3709,9 +3709,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@12.12.17", "@types/node@8.10.59", "@types/node@>= 8", "@types/node@^10.1.0", "@types/node@^12.0.0", "@types/node@^12.7.7":
-  version "12.12.25"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.25.tgz#792c0afb798f1dd681dce9c4b4c431f7245a0a42"
-  integrity sha1-eSwK+3mPHdaB3OnEtMQx9yRaCkI=
+  version "12.12.26"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.26.tgz#213e153babac0ed169d44a6d919501e68f59dea9"
+  integrity sha1-IT4VO6usDtFp1EptkZUB5o9Z3qk=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -4673,6 +4673,11 @@
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-configurable/-/@wix/wix-configurable-1.0.746.tgz#d0c51af586f5567157cbd0f49b76aacb6d2f3fd3"
   integrity sha1-0MUa9Yb1VnFXy9D0m3aqy20vP9M=
 
+"@wix/wix-crypto@~1.0.704":
+  version "1.0.1189"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-crypto/-/@wix/wix-crypto-1.0.1189.tgz#4f9644714ab9e58143a139cde83d14f3cec3e13b"
+  integrity sha1-T5ZEcUq55YFDoTnN6D0U887D4Ts=
+
 "@wix/wix-debug@~1.0.1", "@wix/wix-debug@~1.0.18":
   version "1.0.551"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-debug/-/@wix/wix-debug-1.0.551.tgz#c2acff61fa00bf9ab76cd39daef7ca9ef3774892"
@@ -5119,6 +5124,13 @@
     shelljs "0.8.3"
     uuid "3.4.0"
 
+"@wix/wnp-bo-auth-crypto@~1.0.0":
+  version "1.0.626"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wnp-bo-auth-crypto/-/@wix/wnp-bo-auth-crypto-1.0.626.tgz#619d9e1e1f83200a09e92fd1e129708d3d2702f9"
+  integrity sha1-YZ2eHh+DIAoJ6S/R4SlwjT0nAvk=
+  dependencies:
+    "@wix/wix-crypto" "~1.0.704"
+
 "@wix/wnp-bootstrap-aspects@~1.0.0":
   version "1.0.885"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wnp-bootstrap-aspects/-/@wix/wnp-bootstrap-aspects-1.0.885.tgz#edc9d578b72fb5c59cdb07d9fbb039477bce5929"
@@ -5378,6 +5390,14 @@
   dependencies:
     "@wix/wix-debug" "~1.0.1"
     eventemitter2 "5.0.1"
+
+"@wix/wnp-express-bo-auth@~1.0.0":
+  version "1.0.456"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wnp-express-bo-auth/-/@wix/wnp-express-bo-auth-1.0.456.tgz#f2f5a395a6ed0d5541c1ba916adcb3738b7e8d15"
+  integrity sha1-8vWjlabtDVVBwbqRatyzc4t+jRU=
+  dependencies:
+    "@wix/wix-errors" "~1.0.171"
+    "@wix/wnp-bo-auth-crypto" "~1.0.0"
 
 "@wix/wnp-greynode-aspects@~1.0.0":
   version "1.0.146"
@@ -25848,6 +25868,18 @@ wix-bi-logger-client@^0.0.724:
   version "0.0.724"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wix-bi-logger-client/-/wix-bi-logger-client-0.0.724.tgz#11271ee7b0da544fcbef802f4ca7b46118082eb9"
   integrity sha1-ESce57DaVE/L74AvTKe0YRgILrk=
+
+wix-bootstrap-bo-auth@^1.0.1888:
+  version "1.0.1888"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wix-bootstrap-bo-auth/-/wix-bootstrap-bo-auth-1.0.1888.tgz#5d4bee17e2b6782d455bd370bf6cfad999c03c41"
+  integrity sha1-XUvuF+K2eC1FW9Nwv2z62ZnAPEE=
+  dependencies:
+    "@wix/wix-bootstrap-api" "~1.0.0"
+    "@wix/wix-configurable" "~1.0.0"
+    "@wix/wix-debug" "~1.0.1"
+    "@wix/wix-run-mode" "~2.0.120"
+    "@wix/wnp-bo-auth-crypto" "~1.0.0"
+    "@wix/wnp-express-bo-auth" "~1.0.0"
 
 wix-eventually@2.2.0:
   version "2.2.0"

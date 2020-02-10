@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { JsonValue } from 'type-fest';
+import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
 import * as t from 'io-ts';
 
 // io-ts' types
@@ -39,7 +40,7 @@ export type DSL<Result extends FunctionResult, Args extends FunctionArgs> = {
 export type RouteContext = {
   req: Request;
   res: Response;
-  context: any;
+  context: BootstrapContext;
   params: { [name: string]: any | undefined };
 };
 

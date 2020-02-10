@@ -30,6 +30,7 @@
     "serialize-error": "4.1.0",
     "sockjs-client": "1.4.0",
     "type-fest": "0.8.1",
+    "wix-bootstrap-bo-auth": "^1.0.1888",
     "yoshi-config": "4.32.0",
     "youch": "2.0.10"
   }
