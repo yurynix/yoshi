@@ -246,6 +246,7 @@ export function createBaseWebpackConfig({
   nodeExternalsWhitelist = [],
   useAssetRelocator = false,
   useYoshiServer = false,
+  createWorkerManifest = true,
 }: {
   name: string;
   configName:
@@ -281,6 +282,7 @@ export function createBaseWebpackConfig({
   nodeExternalsWhitelist?: Array<RegExp>;
   useAssetRelocator?: boolean;
   useYoshiServer?: boolean;
+  createWorkerManifest?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -573,7 +575,8 @@ export function createBaseWebpackConfig({
           ]
         : []),
 
-      ...(target === 'webworker' || target === 'async-webworker'
+      ...(createWorkerManifest &&
+      (target === 'webworker' || target === 'async-webworker')
         ? [new ManifestPlugin({ fileName: 'manifest-worker', isDev })]
         : []),
 

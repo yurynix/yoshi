@@ -229,6 +229,7 @@ export function createWebWorkerServerWebpackConfig(
     target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
     isDev,
     isHot,
+    createWorkerManifest: false,
     ...defaultOptions,
   });
 
