@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.35.0 (2020-02-12)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#1954](https://github.com/wix/yoshi/pull/1954) Yoshi Server: a temp fix for body parsing ([@yanivefraim](https://github.com/yanivefraim))
+- `jest-yoshi-preset`, `yoshi-config`
+  - [#1952](https://github.com/wix/yoshi/pull/1952) jest-preset-override - allow resetMocks config override ([@justtal](https://github.com/justtal))
+
 ## 4.34.0 (2020-02-12)
 
 #### :rocket: New Feature
