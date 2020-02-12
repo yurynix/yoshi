@@ -32,7 +32,7 @@ const functions: {
 }, {});
 
 export default route(async function() {
-  const body = await parseBodyAsJson(this.req);
+  const body = this.req.body || (await parseBodyAsJson(this.req));
   const validation = requestPayloadCodec.decode(body);
 
   if (isLeft(validation)) {
