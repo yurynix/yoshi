@@ -11,13 +11,16 @@ const scripts = Scripts.setupProjectFromTemplate({
 
 describe.each(['prod'] as const)('stats [%s]', mode => {
   it('integration', async () => {
-    await scripts[mode](async () => {
-      const statsFilePath = path.join(
-        scripts.testDirectory,
-        'target/webpack-stats.json',
-      );
+    await scripts[mode](
+      async () => {
+        const statsFilePath = path.join(
+          scripts.testDirectory,
+          'target/webpack-stats.json',
+        );
 
-      expect(fs.existsSync(statsFilePath)).toBeTruthy();
-    }, ['--stats']);
+        expect(fs.existsSync(statsFilePath)).toBeTruthy();
+      },
+      { args: ['--stats'] },
+    );
   });
 });

@@ -170,6 +170,10 @@ function calculatePublicPath({
   appName: string;
   useUnversionedBaseUrl: boolean;
 }) {
+  if (process.env.YOSHI_PUBLIC_PATH) {
+    return process.env.YOSHI_PUBLIC_PATH;
+  }
+
   // default public path
   let publicPath = '/';
 

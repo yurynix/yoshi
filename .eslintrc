@@ -62,18 +62,13 @@
       }
     },
     {
-      "files": ["**/*.spec.js", "**/*.test.js", "**/*.e2e.js", "**/*.it.js"],
-      "rules": {
-        "jest/no-disabled-tests": "off"
-      }
-    },
-    {
-      "files": ["packages/yoshi/test/**/*"],
+      "files": ["packages/yoshi-flow-legacy/test/**/*"],
       "env": {
         "mocha": true
       },
       "rules": {
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "jest/no-disabled-tests": "off"
       }
     },
     {
@@ -81,6 +76,10 @@
       "rules": {
         "import/no-unresolved": 0,
         "import/no-extraneous-dependencies": 0
+      },
+      "globals": {
+        "jestPuppeteer": false,
+        "__webpack_public_path__": false
       }
     },
     {

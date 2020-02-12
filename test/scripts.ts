@@ -31,13 +31,19 @@ export type ProjectType =
   | 'yoshi-server-javascript'
   | 'yoshi-server-typescript';
 
+type ScriptOpts = {
+  args?: Array<string>;
+  env?: { [key: string]: string };
+};
+
 export default class Scripts {
-  private verbose: boolean;
-  public testDirectory: string;
-  private serverProcessPort: number;
-  private staticsServerPort: number;
-  public serverUrl: string;
-  private yoshiPublishDir: string;
+  private readonly verbose: boolean;
+  public readonly testDirectory: string;
+  private readonly serverProcessPort: number;
+  private readonly staticsServerPort: number;
+  public readonly serverUrl: string;
+  private readonly yoshiPublishDir: string;
+  public readonly staticsServerUrl: string;
 
   constructor({ testDirectory }: { testDirectory: string }) {
     this.verbose = !!process.env.DEBUG;
@@ -45,6 +51,7 @@ export default class Scripts {
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
     this.serverUrl = `http://localhost:${this.serverProcessPort}`;
+    this.staticsServerUrl = `http://localhost:${this.staticsServerPort}`;
     this.yoshiPublishDir = isPublish
       ? `${global.yoshiPublishDir}/node_modules`
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
@@ -97,12 +104,12 @@ export default class Scripts {
     return new Scripts({ testDirectory: featureDir });
   }
 
-  async dev(callback: TestCallback = async () => {}) {
+  async dev(callback: TestCallback = async () => {}, opts: ScriptOpts = {}) {
     let startProcessOutput: string = '';
 
     const startProcess = execa(
       'node',
-      [yoshiBin, 'start', '--server', './index.js'],
+      [yoshiBin, 'start', '--server', './index.js', ...(opts.args || [])],
       {
         cwd: this.testDirectory,
         env: {
@@ -110,6 +117,7 @@ export default class Scripts {
           NODE_PATH: this.yoshiPublishDir,
           ...defaultOptions,
           ...localEnv,
+          ...opts.env,
         },
       },
     );
@@ -256,14 +264,9 @@ export default class Scripts {
 
   async prod(
     callback: TestCallbackWithResult = async () => {},
-    args: Array<string> = [],
+    opts: ScriptOpts = {},
   ) {
-    let buildResult;
-    try {
-      buildResult = await this.build(ciEnv, args);
-    } catch (e) {
-      throw new Error(e);
-    }
+    const buildResult = await this.build({ ...ciEnv, ...opts.env }, opts.args);
 
     const staticsServerProcess = execa(
       'npx',
