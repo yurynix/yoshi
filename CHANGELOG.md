@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.34.0 (2020-02-12)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-common`
+  - [#1947](https://github.com/wix/yoshi/pull/1947) Add an ability to modify the public path ([@roymiloh](https://github.com/roymiloh))
+
+#### :nail_care: Polish
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#1949](https://github.com/wix/yoshi/pull/1949) Do not generate manifest for server webworker bundle ([@roymiloh](https://github.com/roymiloh))
+
+#### :memo: Documentation
+
+- [#1951](https://github.com/wix/yoshi/pull/1951) Added documentation about `BROWSER=false` ([@Gongreg](https://github.com/Gongreg))
+
 ## 4.33.0 (2020-02-10)
 
 #### :rocket: New Feature
