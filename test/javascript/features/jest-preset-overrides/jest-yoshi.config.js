@@ -13,6 +13,7 @@ module.exports = {
       '^(?!.+\\.st\\.css$)^.+\\.(?:sass|s?css|less)$': 'identity-obj-proxy',
     },
     testURL: 'http://localhost:3000/?query=param',
+    resetMocks: true,
   },
   server: {
     command: 'node dist/server.js',

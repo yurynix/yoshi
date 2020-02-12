@@ -29,7 +29,12 @@ const projectOverrideMapping = {
 };
 
 const supportedProjectOverrideKeys = {
-  [projectOverrideMapping.spec]: ['globals', 'testURL', 'moduleNameMapper'],
+  [projectOverrideMapping.spec]: [
+    'globals',
+    'testURL',
+    'moduleNameMapper',
+    'resetMocks',
+  ],
   [projectOverrideMapping.e2e]: ['moduleNameMapper'],
 };
 

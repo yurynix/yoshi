@@ -22,7 +22,7 @@ type BootstrapOptions = {
 
 type WhitelistedSpecOptions = Pick<
   InitialOptions,
-  'globals' | 'testURL' | 'moduleNameMapper'
+  'globals' | 'testURL' | 'moduleNameMapper' | 'resetMocks'
 >;
 type WhitelistedE2EOptions = Pick<InitialOptions, 'moduleNameMapper'>;
 

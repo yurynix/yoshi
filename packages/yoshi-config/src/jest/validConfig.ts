@@ -14,6 +14,7 @@ const validConfig: Required<Config> = {
     globals: {},
     testURL: '',
     moduleNameMapper: {},
+    resetMocks: true,
   },
   e2eOptions: {
     moduleNameMapper: {},
