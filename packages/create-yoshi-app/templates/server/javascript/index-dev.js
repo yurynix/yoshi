@@ -1,4 +1,4 @@
-/*eslint import/no-unresolved: 0*/
+/* eslint import/no-unresolved: 0*/
 const { env } = require('./dist/test/environment');
 
 // tear down hooks

@@ -820,7 +820,7 @@ describe('Aggregator: Test', () => {
             ['--mocha'],
             Object.assign(
               {
-                mocha_reporter: 'landing', //eslint-disable-line camelcase
+                mocha_reporter: 'landing', // eslint-disable-line camelcase
               },
               outsideTeamCity,
             ),

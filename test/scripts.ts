@@ -82,7 +82,7 @@ export default class Scripts {
       filter: file => !file.includes('.test.js'),
     });
 
-    //Process tsconfig template for dynamic content
+    // Process tsconfig template for dynamic content
     const tsConfigPath = path.join(featureDir, 'tsconfig.json');
     if (fs.pathExistsSync(tsConfigPath)) {
       const templateData = {

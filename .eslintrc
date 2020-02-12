@@ -1,6 +1,7 @@
 {
   "extends": "./packages/eslint-config-yoshi/index.js",
   "rules": {
+    "spaced-comment": ["error", "always", { "markers": ["/"] }],
     "import/no-extraneous-dependencies": "error",
     "array-callback-return": "off",
     "react-hooks/exhaustive-deps": "off",

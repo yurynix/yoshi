@@ -199,7 +199,7 @@ function calculatePublicPath({
 
 async function runWebpack(
   configs: Array<webpack.Configuration | undefined>,
-  //@ts-ignore
+  // @ts-ignore
 ): Promise<webpack.compilation.MultiStats> {
   try {
     const compiler = createCompiler(configs.filter(isTruthy));
