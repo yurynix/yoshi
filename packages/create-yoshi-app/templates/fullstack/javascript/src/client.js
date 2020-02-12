@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
 import axios from 'axios';
@@ -19,8 +19,10 @@ const fedopsLogger = createFedopsLogger('{%projectName%}');
 fedopsLogger.appLoaded();
 
 ReactDOM.render(
-  <I18nextProvider i18n={i18n(locale)}>
-    <App />
-  </I18nextProvider>,
+  <Suspense fallback={'...loading'}>
+    <I18nextProvider i18n={i18n(locale)}>
+      <App />
+    </I18nextProvider>
+  </Suspense>,
   document.getElementById('root'),
 );

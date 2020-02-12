@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 
 export default function i18n(locale: string) {
-  return i18next
+  void i18next
     .use({
       type: 'backend',
       read: (
@@ -38,4 +38,6 @@ export default function i18n(locale: string) {
         wait: true,
       },
     });
+
+  return i18next;
 }

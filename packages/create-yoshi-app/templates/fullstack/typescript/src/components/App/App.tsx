@@ -1,5 +1,5 @@
 import React from 'react';
-import { translate, InjectedTranslateProps } from 'react-i18next';
+import { withTranslation, WithTranslation } from 'react-i18next';
 import s from './App.scss';
 
 /* <-- To remove demo stuff just copy-paste:
@@ -7,7 +7,7 @@ import s from './App.scss';
   to your search input with RegExp enabled and remove everything matched.
 --> */
 
-interface AppProps extends InjectedTranslateProps {}
+interface AppProps extends WithTranslation {}
 
 class App extends React.Component<AppProps> {
   /* <-- Feel free to remove this lifecycle hook and state */
@@ -28,6 +28,7 @@ class App extends React.Component<AppProps> {
         <h2 className={s.title} data-testid="app-title">
           {t('app.title')}
         </h2>
+
         {/* <-- Feel free to remove TemplateIntro */}
         <this.state.TemplateIntro />
         {/* --> */}
@@ -36,4 +37,4 @@ class App extends React.Component<AppProps> {
   }
 }
 
-export default translate()(App);
+export default withTranslation()(App);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import s from './App.scss';
 
 /* <-- To remove demo stuff just copy-paste:
@@ -29,6 +29,7 @@ class App extends React.Component {
         <h2 className={s.title} data-testid="app-title">
           {t('app.title')}
         </h2>
+
         {/* <-- Feel free to remove TemplateIntro */}
         {this.state.TemplateIntro &&
           React.createElement(this.state.TemplateIntro)}
@@ -38,4 +39,4 @@ class App extends React.Component {
   }
 }
 
-export default translate()(App);
+export default withTranslation()(App);
