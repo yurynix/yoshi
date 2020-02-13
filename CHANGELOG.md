@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.31.3 (2020-02-13)
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`
+  - [#1958](https://github.com/wix/yoshi/pull/1958) Fix a bug with `jest-preset-yoshi` `yoshi-config` resolution ([@NitayRabi](https://github.com/NitayRabi))
+
 ## 3.31.2 (2019-08-01)
 
 #### :nail_care: Polish
