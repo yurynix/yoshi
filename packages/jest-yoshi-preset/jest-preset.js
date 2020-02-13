@@ -1,7 +1,9 @@
 const fs = require('fs');
 const globby = require('globby');
 const { envs } = require('./constants');
-const globs = require('../yoshi-config/globs');
+const importFrom = require('import-from');
+
+const globs = importFrom('yoshi', 'yoshi-config/globs');
 
 const modulePathIgnorePatterns = ['<rootDir>/dist/', '<rootDir>/target/'];
 module.exports = {

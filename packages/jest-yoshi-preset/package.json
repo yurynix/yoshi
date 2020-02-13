@@ -20,6 +20,7 @@
     "babel-jest": "^23.2.0",
     "globby": "^8.0.2",
     "identity-obj-proxy": "^3.0.0",
+    "import-from": "^3.0.0",
     "jest-environment-yoshi-bootstrap": "3.31.0",
     "jest-environment-yoshi-puppeteer": "3.31.0",
     "ts-jest": "^23.0.1"
