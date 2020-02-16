@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.35.1 (2020-02-16)
+
+#### :rocket: New Feature
+* `create-yoshi-app`
+  * [#1929](https://github.com/wix/yoshi/pull/1929) Upgrade 18next and change fullstack templates ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :bug: Bug Fix
+* `create-yoshi-app`
+  * [#1965](https://github.com/wix/yoshi/pull/1965) Drop type declarations for wnp modules with types ([@hugebdu](https://github.com/hugebdu))
+
+#### :house: Internal
+* `create-yoshi-app`, `yoshi-common`, `yoshi-flow-legacy`
+  * [#1956](https://github.com/wix/yoshi/pull/1956) Add the `spaced-comment` lint rule ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.35.0 (2020-02-12)
 
 #### :rocket: New Feature
