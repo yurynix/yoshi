@@ -24,7 +24,7 @@ import {
   createWebWorkerWebpackConfig,
   createWebWorkerServerWebpackConfig,
 } from '../webpack.config';
-import buildLibraries from '../build-libraries';
+import buildPkgs from '../build';
 
 const inTeamCity = checkInTeamCity();
 
@@ -70,7 +70,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     process.exit(0);
   }
 
-  await buildLibraries(libs);
+  await buildPkgs([...libs, ...apps]);
 
   await Promise.all(
     apps.reduce((acc: Array<Promise<void>>, app) => {

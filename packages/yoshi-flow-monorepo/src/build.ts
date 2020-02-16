@@ -6,11 +6,11 @@ import globby from 'globby';
 import { BUILD_DIR } from 'yoshi-config/build/paths';
 import { PackageGraphNode } from './load-package-graph';
 
-export default async function buildLibs(libs: Array<PackageGraphNode>) {
-  const libsLocations = libs.map(lib => lib.location);
+export default async function build(pkgs: Array<PackageGraphNode>) {
+  const pkgsLocations = pkgs.map(pkg => pkg.location);
 
   try {
-    await execa(`npx tsc -b ${libsLocations.join(' ')}`, {
+    await execa(`npx tsc -b ${pkgsLocations.join(' ')}`, {
       stdio: 'inherit',
       shell: true,
     });
@@ -21,17 +21,17 @@ export default async function buildLibs(libs: Array<PackageGraphNode>) {
     process.exit(1);
   }
 
-  libs.forEach(lib => {
+  pkgs.forEach(pkg => {
     const assets = globby.sync('src/**/*', {
-      cwd: lib.location,
+      cwd: pkg.location,
       ignore: ['**/*.js', '**/*.ts', '**/*.tsx', '**/*.json'],
     });
 
     assets.forEach(assetPath => {
-      const dirname = path.join(lib.location, BUILD_DIR, assetPath);
+      const dirname = path.join(pkg.location, BUILD_DIR, assetPath);
 
       fs.ensureDirSync(path.dirname(dirname));
-      fs.copyFileSync(path.join(lib.location, assetPath), dirname);
+      fs.copyFileSync(path.join(pkg.location, assetPath), dirname);
     });
   });
 }
