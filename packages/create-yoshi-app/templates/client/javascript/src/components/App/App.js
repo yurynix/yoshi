@@ -1,5 +1,5 @@
 import React from 'react';
-import { translate } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import s from './App.scss';
 
@@ -13,7 +13,7 @@ class App extends React.Component {
     t: PropTypes.func,
   };
 
-  /* <-- Feel free to remove this lifecycle hook */
+  /* <-- Feel free to remove this lifecycle hook and state */
   /* <-- Please also remove `yoshi-template-intro` from your package.json */
   state = {};
   async componentDidMount() {
@@ -38,4 +38,4 @@ class App extends React.Component {
   }
 }
 
-export default translate()(App);
+export default withTranslation()(App);
