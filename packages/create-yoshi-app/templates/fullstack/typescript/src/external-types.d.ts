@@ -11,5 +11,3 @@ declare namespace Express {
 }
 
 declare module 'yoshi-template-intro';
-declare module '@wix/wix-express-require-https';
-declare module '@wix/wix-express-csrf';
