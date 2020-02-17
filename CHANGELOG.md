@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.37.0 (2020-02-17)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#1967](https://github.com/wix/yoshi/pull/1967) [create-yoshi-app][out-of-iframe] - Remove wix-ui-core dependency ([@shlomitc](https://github.com/shlomitc))
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`
+  - [#1971](https://github.com/wix/yoshi/pull/1971) Yoshi Server: do not apply Yoshi Server Jest Transform in e2e tests ([@yanivefraim](https://github.com/yanivefraim))
+- `create-yoshi-app`
+  - [#1972](https://github.com/wix/yoshi/pull/1972) FEDINF-488 - moved the validation of node version to the start of the… ([@asaf-yonay](https://github.com/asaf-yonay))
+
+#### :house: Internal
+
+- [#1966](https://github.com/wix/yoshi/pull/1966) Fix website publishing: enforce registry to be the public registry for the website ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.36.0 (2020-02-16)
 
 #### :rocket: New Feature
