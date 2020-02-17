@@ -49,6 +49,31 @@ const supportedGlobalOverrideKeys = [
 
 const globalValidOverrides = pick(jestYoshiConfig, supportedGlobalOverrideKeys);
 
+const staticAssetsExtensions = [
+  'png',
+  'jpg',
+  'jpeg',
+  'gif',
+  'svg',
+  'woff',
+  'woff2',
+  'ttf',
+  'otf',
+  'eot',
+  'wav',
+  'mp3',
+  'html',
+  'md',
+];
+
+const reStaticAssets = staticAssetsExtensions.join('|');
+
+const defaultTransform = {
+  '\\.st.css?$': require.resolve('@stylable/jest'),
+  '\\.(gql|graphql)$': require.resolve('jest-transform-graphql'),
+  [`\\.(${reStaticAssets})$`]: require.resolve('./transforms/file'),
+};
+
 global.__isDebugMode__ =
   jestYoshiConfig.puppeteer && jestYoshiConfig.puppeteer.devtools;
 
@@ -69,6 +94,13 @@ const config = {
         testURL: 'http://localhost',
         testMatch: globs.unitTests.map(glob => `<rootDir>/${glob}`),
         setupFiles: [require.resolve('regenerator-runtime/runtime')],
+        transform: {
+          '^.+\\.jsx?$': require.resolve('./transforms/babel-yoshi-server'),
+          '^.+\\.tsx?$': require.resolve(
+            './transforms/typescript-yoshi-server',
+          ),
+          ...defaultTransform,
+        },
       },
       {
         displayName: 'e2e',
@@ -86,6 +118,11 @@ const config = {
         globalTeardown: require.resolve(
           './jest-environment-yoshi-puppeteer/globalTeardown',
         ),
+        transform: {
+          '^.+\\.jsx?$': require.resolve('./transforms/babel'),
+          '^.+\\.tsx?$': require.resolve('./transforms/typescript'),
+          ...defaultTransform,
+        },
       },
     ]
       .filter(({ displayName }) => {
@@ -145,25 +182,6 @@ const config = {
           setupTestsFile,
         ].filter(Boolean);
 
-        const staticAssetsExtensions = [
-          'png',
-          'jpg',
-          'jpeg',
-          'gif',
-          'svg',
-          'woff',
-          'woff2',
-          'ttf',
-          'otf',
-          'eot',
-          'wav',
-          'mp3',
-          'html',
-          'md',
-        ];
-
-        const reStaticAssets = staticAssetsExtensions.join('|');
-
         return {
           ...project,
           modulePathIgnorePatterns,
@@ -183,14 +201,6 @@ const config = {
             // See here for more details: https://github.com/facebook/jest/blob/6af2f677e5c48f71f526d4be82d29079c1cdb658/packages/jest-core/src/runGlobalHook.js#L61
             '/babel-preset-yoshi/',
           ],
-
-          transform: {
-            '^.+\\.jsx?$': require.resolve('./transforms/babel'),
-            '^.+\\.tsx?$': require.resolve('./transforms/typescript'),
-            '\\.st.css?$': require.resolve('@stylable/jest'),
-            '\\.(gql|graphql)$': require.resolve('jest-transform-graphql'),
-            [`\\.(${reStaticAssets})$`]: require.resolve('./transforms/file'),
-          },
 
           moduleNameMapper: {
             '^(?!.+\\.st\\.css$)^.+\\.(?:sass|s?css|less)$': require.resolve(
