@@ -32,6 +32,8 @@ let workingDir = process.cwd();
 const customProjectDir = program.args[0];
 const answersFile = program.answersFile;
 
+verifyNodeVersion();
+
 verifyDirectoryName(customProjectDir || workingDir);
 
 if (customProjectDir) {
@@ -42,7 +44,6 @@ if (customProjectDir) {
 
 verifyWorkingDirectory(workingDir);
 verifyRegistry(workingDir);
-verifyNodeVersion();
 
 const templateModel = answersFile
   ? TemplateModel.fromFilePath(answersFile)
