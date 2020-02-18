@@ -1,6 +1,6 @@
 {
   "name": "yoshi-server",
-  "version": "4.35.0",
+  "version": "4.37.1",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
@@ -31,7 +31,7 @@
     "sockjs-client": "1.4.0",
     "type-fest": "0.10.0",
     "wix-bootstrap-bo-auth": "^1.0.1888",
-    "yoshi-config": "4.35.0",
+    "yoshi-config": "4.37.1",
     "youch": "2.0.10"
   }
 }

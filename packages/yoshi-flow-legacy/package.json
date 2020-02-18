@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.37.0",
+  "version": "4.37.1",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -33,7 +33,7 @@
     "@wix/depkeeper-preset-yoshi": "1.0.288",
     "babel-eslint": "10.0.3",
     "babel-jest": "24.9.0",
-    "babel-plugin-transform-hmr-runtime": "4.22.0",
+    "babel-plugin-transform-hmr-runtime": "4.37.1",
     "bfj": "6.1.2",
     "boxen": "4.2.0",
     "chalk": "2.4.2",
@@ -107,11 +107,11 @@
     "wnpm-ci": "8.0.115",
     "word-wrap": "1.2.3",
     "xmldoc": "1.1.2",
-    "yoshi-common": "4.35.1",
-    "yoshi-config": "4.35.0",
-    "yoshi-helpers": "4.35.0",
+    "yoshi-common": "4.37.1",
+    "yoshi-config": "4.37.1",
+    "yoshi-helpers": "4.37.1",
     "yoshi-runtime": "1.0.684",
-    "yoshi-server-tools": "4.35.0"
+    "yoshi-server-tools": "4.37.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "7.8.3",
@@ -132,7 +132,7 @@
     "generic-names": "1.0.3",
     "graphql-tag": "2.10.3",
     "identity-obj-proxy": "3.0.0",
-    "jest-yoshi-preset": "4.37.0",
+    "jest-yoshi-preset": "4.37.1",
     "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
@@ -159,7 +159,7 @@
     "strip-ansi": "4.0.0",
     "tempy": "0.4.0",
     "typescript": "3.7.5",
-    "yoshi-angular-dependencies": "4.23.0",
-    "yoshi-style-dependencies": "4.23.7"
+    "yoshi-angular-dependencies": "4.37.1",
+    "yoshi-style-dependencies": "4.37.1"
   }
 }
