@@ -48,6 +48,6 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "jest-transform-graphql": "^2.1.0",
-    "typescript": "3.7.2"
+    "typescript": "3.7.5"
   }
 }

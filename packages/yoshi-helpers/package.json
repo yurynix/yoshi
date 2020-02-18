@@ -24,13 +24,13 @@
   },
   "devDependencies": {
     "@types/detect-port": "1.1.0",
-    "@types/http-proxy": "1.17.2",
+    "@types/http-proxy": "1.17.3",
     "@types/mkdirp": "0.5.2",
     "@types/ps-tree": "1.1.0",
-    "@types/semver": "6.2.0",
+    "@types/semver": "6.2.1",
     "@types/server-destroy": "1.0.0",
-    "@types/webpack": "4.41.0",
+    "@types/webpack": "4.41.6",
     "@types/xmldoc": "1.1.4",
-    "typescript": "3.7.2"
+    "typescript": "3.7.5"
   }
 }
