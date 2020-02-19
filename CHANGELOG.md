@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.37.4 (2020-02-19)
+
+#### :nail_care: Polish
+
+- `yoshi-flow-legacy`
+  - [#1981](https://github.com/wix/yoshi/pull/1981) Yoshi Server: add support for mocha ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.37.3 (2020-02-19)
 
 #### :bug: Bug Fix
