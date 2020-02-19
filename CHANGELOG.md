@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.37.2 (2020-02-19)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#1982](https://github.com/wix/yoshi/pull/1982) Add content hash to client `webworker` bundle ([@roymiloh](https://github.com/roymiloh))
+
+#### :house: Internal
+
+- `create-yoshi-app`
+  - [#1976](https://github.com/wix/yoshi/pull/1976) fix(create-yoshi-app): Increase timeout time for `h2` selector for viewer. ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.37.1 (2020-02-18)
 
 #### :nail_care: Polish
