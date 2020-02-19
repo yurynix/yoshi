@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.37.3 (2020-02-19)
+
+#### :bug: Bug Fix
+
+- `create-yoshi-app`, `yoshi-common`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#1983](https://github.com/wix/yoshi/pull/1983) Bump to `tpa-style-webpack-plugin@1.3.13` to fix a bug with enhanced tpa style option usage ([@sagish](https://github.com/sagish))
+
 ## 4.37.2 (2020-02-19)
 
 #### :bug: Bug Fix
