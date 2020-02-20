@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.38.0 (2020-02-20)
+
+#### :boom: Breaking Change
+
+- `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`
+  - [#1978](https://github.com/wix/yoshi/pull/1978) Removing `--ssl` `--https` options ([@Gongreg](https://github.com/Gongreg))
+
 ## 4.37.5 (2020-02-20)
 
 #### :bug: Bug Fix
