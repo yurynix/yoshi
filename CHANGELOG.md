@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.37.5 (2020-02-20)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#1984](https://github.com/wix/yoshi/pull/1984) use a separate runtime chunk only for target web ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- [#1985](https://github.com/wix/yoshi/pull/1985) Tests: increase timeout for flaky TS test ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.37.4 (2020-02-19)
 
 #### :nail_care: Polish
