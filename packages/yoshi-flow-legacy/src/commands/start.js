@@ -5,13 +5,7 @@ process.env.NODE_ENV = 'development';
 const parseArgs = require('minimist');
 
 const cliArgs = parseArgs(process.argv.slice(2), {
-  alias: {
-    https: 'ssl',
-  },
   boolean: ['with-tests'],
-  default: {
-    https: false,
-  },
 });
 
 if (cliArgs.production) {
@@ -89,8 +83,6 @@ module.exports = runner.command(
 
     await clean({ pattern: `{dist,target}/*` });
 
-    const ssl = cliArgs.ssl || servers.cdn.ssl;
-
     const [localUrlForBrowser] = await Promise.all([
       transpileJavascriptAndRunServer(),
       ...transpileCss(),
@@ -129,7 +121,7 @@ module.exports = runner.command(
         {
           port: servers.cdn.port,
           host: '0.0.0.0',
-          ssl,
+          ssl: servers.cdn.ssl,
           publicPath: servers.cdn.url,
           statics: clientFilesPath,
           webpackConfigPath: require.resolve(

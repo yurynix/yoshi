@@ -60,20 +60,6 @@ Do not spawn the app server
 
 Default: `false`
 
-#### `--ssl`
-
-Serve the app bundle on https
-
-Default: `false`
-
-#### `--https`
-
-> An alias for `ssl` configuration option.
-
-Serve the app bundle on https
-
-Default: `false`
-
 #### `--debug`
 
 Allow server debugging, debugger will be available at 127.0.0.1:[port]

@@ -22,14 +22,12 @@ const start: cliCommand = async function(argv, config) {
       '--server': String,
       '--url': String,
       '--production': Boolean,
-      '--https': Boolean,
       '--debug': Boolean,
       '--debug-brk': Boolean,
 
       // Aliases
       '--entry-point': '--server',
       '-e': '--server',
-      '--ssl': '--https',
     },
     { argv },
   );
@@ -39,7 +37,6 @@ const start: cliCommand = async function(argv, config) {
     '--server': serverEntry = 'index.js',
     '--url': url,
     '--production': shouldRunAsProduction,
-    '--https': shouldUseHttps = config.servers.cdn.ssl,
   } = args;
 
   if (help) {
@@ -56,7 +53,6 @@ const start: cliCommand = async function(argv, config) {
         --server        The main file to start your server
         --url           Opens the browser with the supplied URL
         --production    Start using unminified production build
-        --https         Serve the app bundle on https
         --debug         Allow app-server debugging
         --debug-brk     Allow app-server debugging, process won't start until debugger will be attached
     `,
@@ -100,7 +96,7 @@ const start: cliCommand = async function(argv, config) {
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
     webpackDevServerPort: config.servers.cdn.port,
-    https: shouldUseHttps,
+    https: config.servers.cdn.ssl,
     serverFilePath: serverEntry,
     suricate: config.suricate,
     appName: config.name,

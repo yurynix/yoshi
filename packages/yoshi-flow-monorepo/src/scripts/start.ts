@@ -16,14 +16,12 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
       '--server': String,
       '--url': String,
       '--production': Boolean,
-      '--https': Boolean,
       '--debug': Boolean,
       '--debug-brk': Boolean,
 
       // Aliases
       '--entry-point': '--server',
       '-e': '--server',
-      '--ssl': '--https',
     },
     { argv },
   );
@@ -42,7 +40,6 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
         --server        The main file to start your server
         --url           Opens the browser with the supplied URL
         --production    Start using unminified production build
-        --https         Serve the app bundle on https
         --debug         Allow app-server debugging
         --debug-brk     Allow app-server debugging, process won't start until debugger will be attached
     `,
@@ -81,7 +78,6 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     '--server': serverEntry = 'index.js',
     '--url': url,
     // '--production': shouldRunAsProduction,
-    '--https': shouldUseHttps = pkg.config.servers.cdn.ssl,
   } = args;
 
   const clientConfig = createClientWebpackConfig(rootConfig, pkg, {
@@ -105,7 +101,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
 
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
-    https: shouldUseHttps,
+    https: pkg.config.servers.cdn.ssl,
     webpackDevServerPort: pkg.config.servers.cdn.port,
     serverFilePath: serverEntry,
     appName: pkg.config.name,

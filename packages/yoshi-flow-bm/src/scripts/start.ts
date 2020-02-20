@@ -29,7 +29,6 @@ const start: CliCommand = async function(argv, config) {
       // Aliases
       '--entry-point': '--server',
       '-e': '--server',
-      '--ssl': '--https',
     },
     { argv },
   );
@@ -39,7 +38,6 @@ const start: CliCommand = async function(argv, config) {
     '--server': serverEntry = 'index.js',
     '--url': url,
     '--production': shouldRunAsProduction,
-    '--https': shouldUseHttps = config.servers.cdn.ssl,
   } = args;
 
   if (help) {
@@ -92,7 +90,7 @@ const start: CliCommand = async function(argv, config) {
 
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: [clientConfig, serverConfig],
-    https: shouldUseHttps,
+    https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
     serverFilePath: serverEntry,
     appName: config.name,
