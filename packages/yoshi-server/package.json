@@ -31,6 +31,7 @@
     "sockjs-client": "1.4.0",
     "type-fest": "0.10.0",
     "wix-bootstrap-bo-auth": "^1.0.1888",
+    "wix-express-require-https": "^1.0.756",
     "yoshi-config": "4.37.1",
     "youch": "2.0.10"
   }

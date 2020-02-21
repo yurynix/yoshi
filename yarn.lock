@@ -3427,9 +3427,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@12.12.17", "@types/node@8.10.59", "@types/node@>= 8", "@types/node@^10.1.0", "@types/node@^12.0.0", "@types/node@^12.7.7":
-  version "12.12.27"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.27.tgz#d7506f73160ad30fcebbcf5b8b7d2d976e649e42"
-  integrity sha1-11BvcxYK0w/Ou89bi30tl25knkI=
+  version "12.12.28"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/node/-/node-12.12.28.tgz#3a2b5f8d21f96ace690a8832ae9779114612575f"
+  integrity sha1-OitfjSH5as5pCogyrpd5EUYSV18=
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -19385,7 +19385,7 @@ pinkie@^2.0.0:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pirates@^4.0.0, pirates@^4.0.1:
+pirates@4.0.1, pirates@^4.0.0, pirates@^4.0.1:
   version "4.0.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/pirates/-/pirates-4.0.1.tgz#643a92caf894566f91b2b986d2c66950a8e2fb87"
   integrity sha1-ZDqSyviUVm+RsrmG0sZpUKji+4c=
@@ -25697,6 +25697,14 @@ wix-eventually@2.2.0:
   integrity sha1-ZcjeF4DomPqsb/oQ0aq6Qi8xN7U=
   dependencies:
     trier-promise "~1.0.1"
+
+wix-express-require-https@^1.0.756:
+  version "1.0.756"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wix-express-require-https/-/wix-express-require-https-1.0.756.tgz#2e81cb69f538e51bdb8fcca74f9d2b476f0b281a"
+  integrity sha1-LoHLafU45Rvbj8ynT50rR28LKBo=
+  dependencies:
+    "@types/express" "4.17.2"
+    "@wix/wix-run-mode" "~2.0.120"
 
 wix-tpa-style-loader@1.0.13:
   version "1.0.13"
