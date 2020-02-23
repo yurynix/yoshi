@@ -1,5 +1,5 @@
-import { fn } from 'yoshi-server';
+import { method } from 'yoshi-server';
 
-export const greet = fn(function(name) {
+export const greet = method(function(name) {
   return `hello ${name}`;
 });

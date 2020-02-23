@@ -23,21 +23,27 @@ export default class implements HttpClient {
     this.mocks = mocks;
   }
 
-  async request<Result extends FunctionResult, Args extends FunctionArgs>(
-    dsl: DSL<Result, Args>,
-    ...args: Args
-  ): Promise<UnpackPromise<Result>> {
+  async request<Result extends FunctionResult, Args extends FunctionArgs>({
+    method,
+    args,
+  }: {
+    method: DSL<Result, Args>;
+    args: Args;
+    headers?: any;
+  }): Promise<UnpackPromise<Result>> {
     if (!this.mocks.length) {
       throw new Error(
         `\n\n
-        A request to ${JSON.stringify(dsl)} was made without supplying a mock.
+        A request to ${JSON.stringify(
+          method,
+        )} was made without supplying a mock.
         Please supply an array of mocks for each request you make.
         `,
       );
     }
 
     const mock = this.mocks.find(({ request }) => {
-      if (request.fn === dsl) {
+      if (request.fn === method) {
         return isEqual(args, request.variables);
       }
     });
@@ -49,7 +55,7 @@ export default class implements HttpClient {
     throw new Error(
       `\n\n
       We couldn't find a mock for the following request: ${JSON.stringify(
-        dsl,
+        method,
       )}, with arguments: ${args}.
       The array of mocks is:
       ${JSON.stringify(this.mocks)}

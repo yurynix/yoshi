@@ -6,9 +6,10 @@ import {
   DSL,
 } from './types';
 
-export function fn<Result extends FunctionResult, Args extends FunctionArgs>(
-  _fn_: ServerFunction<Result, Args>,
-): DSL<Result, Args> {
+export function method<
+  Result extends FunctionResult,
+  Args extends FunctionArgs
+>(_fn_: ServerFunction<Result, Args>): DSL<Result, Args> {
   // Explain that this is done in build-time
   return { fileName: '', functionName: '', __fn__: _fn_ };
 }

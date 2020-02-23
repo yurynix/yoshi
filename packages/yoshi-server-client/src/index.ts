@@ -13,10 +13,15 @@ type Options = {
 };
 
 export interface HttpClient {
-  request<Result extends FunctionResult, Args extends FunctionArgs>(
-    { fileName, functionName }: DSL<Result, Args>,
-    ...args: Args
-  ): Promise<UnpackPromise<Result>>;
+  request<Result extends FunctionResult, Args extends FunctionArgs>({
+    method: { fileName, functionName },
+    args,
+    headers,
+  }: {
+    method: DSL<Result, Args>;
+    args: Args;
+    headers?: { [index: string]: string };
+  }): Promise<UnpackPromise<Result>>;
 }
 
 // https://github.com/developit/unfetch/issues/46
@@ -29,10 +34,15 @@ export default class implements HttpClient {
     this.baseUrl = baseUrl;
   }
 
-  async request<Result extends FunctionResult, Args extends FunctionArgs>(
-    { fileName, functionName }: DSL<Result, Args>,
-    ...args: Args
-  ): Promise<UnpackPromise<Result>> {
+  async request<Result extends FunctionResult, Args extends FunctionArgs>({
+    method: { fileName, functionName },
+    args,
+    headers = {},
+  }: {
+    method: DSL<Result, Args>;
+    args: Args;
+    headers?: { [index: string]: string };
+  }): Promise<UnpackPromise<Result>> {
     const url = joinUrls(this.baseUrl, '/_api_');
 
     const body: RequestPayload = { fileName, functionName, args };
@@ -42,6 +52,7 @@ export default class implements HttpClient {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...headers,
       },
       body: JSON.stringify(body),
     });

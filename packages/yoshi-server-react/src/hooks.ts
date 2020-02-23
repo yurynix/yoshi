@@ -29,7 +29,7 @@ export function useRequest<
   });
 
   useEffect(() => {
-    context!.client!.request(dsl, ...args).then(
+    context!.client!.request({ method: dsl, args }).then(
       data => setState({ ...state, loading: false, data, error: null }),
       error => setState({ ...state, loading: false, data: null, error }),
     );
