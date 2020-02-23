@@ -1,6 +1,7 @@
 import arg from 'arg';
 import chalk from 'chalk';
 import DevEnvironment from 'yoshi-common/build/dev-environment';
+import { getServerStartFile } from 'yoshi-helpers/build/server-start-file';
 import { cliCommand } from '../bin/yoshi-monorepo';
 import {
   createClientWebpackConfig,
@@ -37,7 +38,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
 
       Options
         --help, -h      Displays this message
-        --server        The main file to start your server
+        --server        (Deprecated!) The main file to start your server
         --url           Opens the browser with the supplied URL
         --production    Start using unminified production build
         --debug         Allow app-server debugging
@@ -75,10 +76,18 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   }
 
   const {
-    '--server': serverEntry = 'index.js',
+    '--server': serverStartFileCLI,
     '--url': url,
     // '--production': shouldRunAsProduction,
   } = args;
+
+  let serverStartFile;
+  try {
+    serverStartFile = getServerStartFile(serverStartFileCLI);
+  } catch (e) {
+    console.error(e.message);
+    process.exit(1);
+  }
 
   const clientConfig = createClientWebpackConfig(rootConfig, pkg, {
     isDev: true,
@@ -103,7 +112,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
     https: pkg.config.servers.cdn.ssl,
     webpackDevServerPort: pkg.config.servers.cdn.port,
-    serverFilePath: serverEntry,
+    serverFilePath: serverStartFile,
     appName: pkg.config.name,
     suricate: pkg.config.suricate,
     enableClientHotUpdates: Boolean(pkg.config.hmr),

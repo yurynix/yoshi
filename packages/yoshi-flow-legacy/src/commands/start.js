@@ -41,6 +41,7 @@ const {
   suffix,
   watch,
 } = require('yoshi-helpers/utils');
+const { getServerStartFile } = require('yoshi-helpers/build/server-start-file');
 const { debounce } = require('lodash');
 const wixAppServer = require('../tasks/app-server');
 const createBabelConfig = require('yoshi-common/build/create-babel-config')
@@ -55,7 +56,15 @@ const addJsSuffix = suffix('.js');
 const shouldRunTests = cliArgs['with-tests'] === true;
 const debugPort = cliArgs.debug;
 const debugBrkPort = cliArgs['debug-brk'];
-const entryPoint = addJsSuffix(cliArgs['entry-point'] || 'index.js');
+const serverStartFileCLI = cliArgs['entry-point'];
+
+let serverStartFile = 'index.js';
+try {
+  // Legacy flow can start while missing server entry (for instance library projects).
+  serverStartFile = getServerStartFile(
+    serverStartFileCLI ? addJsSuffix(serverStartFileCLI) : undefined,
+  );
+} catch (e) {}
 
 module.exports = runner.command(
   async tasks => {
@@ -74,7 +83,7 @@ module.exports = runner.command(
       }
 
       return wixAppServer({
-        entryPoint,
+        entryPoint: serverStartFile,
         debugPort,
         debugBrkPort,
         manualRestart: cliArgs['manual-restart'],

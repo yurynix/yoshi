@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import DevEnvironment from 'yoshi-common/build/dev-environment';
 import { TARGET_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
+import { getServerStartFile } from 'yoshi-helpers/build/server-start-file';
 import { CliCommand } from '../bin/yoshi-bm';
 import {
   createClientWebpackConfig,
@@ -35,7 +36,7 @@ const start: CliCommand = async function(argv, config) {
 
   const {
     '--help': help,
-    '--server': serverEntry = 'index.js',
+    '--server': serverStartFileCLI,
     '--url': url,
     '--production': shouldRunAsProduction,
   } = args;
@@ -51,7 +52,7 @@ const start: CliCommand = async function(argv, config) {
 
       Options
         --help, -h      Displays this message
-        --server        The main file to start your server
+        --server        (Deprecated!) The main file to start your server
         --url           Opens the browser with the supplied URL
         --production    Start using unminified production build
         --https         Serve the app bundle on https
@@ -61,6 +62,14 @@ const start: CliCommand = async function(argv, config) {
     );
 
     process.exit(0);
+  }
+
+  let serverStartFile;
+  try {
+    serverStartFile = getServerStartFile(serverStartFileCLI);
+  } catch (e) {
+    console.error(e.message);
+    process.exit(1);
   }
 
   console.log(chalk.cyan('Starting development environment...\n'));
@@ -92,7 +101,7 @@ const start: CliCommand = async function(argv, config) {
     webpackConfigs: [clientConfig, serverConfig],
     https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
-    serverFilePath: serverEntry,
+    serverFilePath: serverStartFile,
     appName: config.name,
     startUrl: url || config.startUrl,
     enableClientHotUpdates: Boolean(config.hmr),
