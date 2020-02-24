@@ -13,7 +13,12 @@ module.exports = {
   plugins: ['jest'],
   overrides: [
     {
-      files: ['**/*.spec.js', '**/*.test.js', '**/*.e2e.js', '**/*.it.js'],
+      files: [
+        '**/*.spec.[tj]s',
+        '**/*.test.[tj]s',
+        '**/*.e2e.[tj]s',
+        '**/*.it.[tj]s',
+      ],
       rules: {
         'jest/no-disabled-tests': 'warn',
         'jest/no-focused-tests': 'error',

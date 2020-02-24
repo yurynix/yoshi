@@ -35,7 +35,7 @@ describe('eslint-config-yoshi', () => {
     rules.forEach(rule => {
       describe(rule, () => {
         const ruleDir = path.join(rulesDir, rule);
-        const validFiles = glob.sync(path.join(ruleDir, 'valid*.js'));
+        const validFiles = glob.sync(path.join(ruleDir, 'valid*.[tj]s'));
 
         validFiles.forEach(validFile => {
           it(`should be valid for ${relativeToTestDir(validFile)}`, () => {
@@ -57,7 +57,7 @@ describe('eslint-config-yoshi', () => {
           });
         });
 
-        const invalidFiles = glob.sync(path.join(ruleDir, 'invalid*.js'));
+        const invalidFiles = glob.sync(path.join(ruleDir, 'invalid*.[tj]s'));
 
         invalidFiles.forEach(invalidFile => {
           it(`should error with ${rule} for ${relativeToTestDir(
