@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.40.1 (2020-02-24)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#1991](https://github.com/wix/yoshi/pull/1991) Support single viewerScript + few fixes and enhancements ([@yavorsky](https://github.com/yavorsky))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#1927](https://github.com/wix/yoshi/pull/1927) Emit Webpack stats file for worker compilation ([@ronami](https://github.com/ronami))
+
 ## 4.40.0 (2020-02-23)
 
 #### :rocket: New Feature
