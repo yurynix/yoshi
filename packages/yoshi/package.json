@@ -1,6 +1,6 @@
 {
   "name": "yoshi",
-  "version": "4.40.0",
+  "version": "4.40.1",
   "bin": {
     "yoshi": "./bin/yoshi-cli.js"
   },
@@ -28,7 +28,7 @@
     "yoshi-config": "4.37.1",
     "yoshi-flow-app": "4.40.0",
     "yoshi-flow-legacy": "4.40.0",
-    "yoshi-flow-monorepo": "4.40.0",
+    "yoshi-flow-monorepo": "4.40.1",
     "yoshi-helpers": "4.40.0"
   }
 }
