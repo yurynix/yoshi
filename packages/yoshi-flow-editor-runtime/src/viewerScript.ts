@@ -3,12 +3,58 @@ import { createInstances, objectPromiseAll, fetchFrameworkData } from './utils';
 
 let frameworkData: any;
 
+type ControllerDescriptor = {
+  id: string | null;
+  method: Function;
+};
+
+const getFirstDescriptor = (descriptors: Array<ControllerDescriptor>) => {
+  if (descriptors.length === 1) {
+    return descriptors[0];
+  }
+};
+
+const getDescriptorForConfig = (
+  type: string,
+  descriptors: Array<ControllerDescriptor>,
+) => {
+  return (
+    descriptors.find(descriptor => descriptor.id === type) ||
+    getFirstDescriptor(descriptors)
+  );
+};
+
 export const createControllers = (
   createController: Function,
   initApp: Function,
+) => {
+  return createControllersWithDescriptors(
+    [
+      {
+        method: createController,
+        id: null,
+      },
+    ],
+    initApp,
+  );
+};
+
+export const createControllersWithDescriptors = (
+  controllerDescriptors: Array<ControllerDescriptor>,
+  initApp: Function,
 ) => (controllerConfigs: Array<IWidgetControllerConfig>) => {
   const wrappedControllers = controllerConfigs.map(controllerConfig => {
-    const { appParams, platformAPIs, wixCodeApi } = controllerConfig;
+    // [Platform surprise] `type` here, is a widgetId. :(
+    const { appParams, platformAPIs, wixCodeApi, type } = controllerConfig;
+    const controllerDescriptor:
+      | ControllerDescriptor
+      | undefined = getDescriptorForConfig(type, controllerDescriptors);
+
+    if (!controllerDescriptor) {
+      throw new Error(
+        `Descriptor for widgetId: "${controllerConfig.type}" was not found. Please create a ".component.json" file for current widget`,
+      );
+    }
 
     initializeExperiments();
 
@@ -47,7 +93,7 @@ export const createControllers = (
       setState,
     };
 
-    const userControllerPromise = createController.call(context, {
+    const userControllerPromise = controllerDescriptor.method.call(context, {
       controllerConfig,
       frameworkData,
       appData,

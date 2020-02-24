@@ -2,7 +2,8 @@ import path from 'path';
 import writeComponentWrapping from './wrappers/componentWrapping';
 import writeEditorAppWrapping from './wrappers/editorAppWrapping';
 import writeSettingsWrapping from './wrappers/settingsWrapping';
-import writeViewerScriptWrapping from './wrappers/viewerScriptWrapping';
+import writeWidgetViewerScriptWrapping from './wrappers/widgetViewerScriptWrapping';
+import writeCommonViewerScriptWrapping from './wrappers/commonViewerScriptWrapping';
 import wixPrivateMockWrapping from './wrappers/wixPrivateMockWrapping';
 import { FlowEditorModel } from './model';
 
@@ -33,7 +34,11 @@ export const buildEditorPlatformEntries = (model: FlowEditorModel) => {
 };
 
 export const buildViewerScriptEntry = (model: FlowEditorModel) => {
-  return writeViewerScriptWrapping(generatedWidgetEntriesPath, model);
+  return {
+    // TODO: Disable it if we don't need to generate viewerScript for each widget.
+    ...writeWidgetViewerScriptWrapping(generatedWidgetEntriesPath, model),
+    ...writeCommonViewerScriptWrapping(generatedWidgetEntriesPath, model),
+  };
 };
 
 export const webWorkerExternals = {

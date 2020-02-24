@@ -1,8 +1,9 @@
-import { createAppController } from './controller';
 import LaboratoryTestkit from '@wix/wix-experiments/dist/src/laboratory-testkit';
+import { ExperimentsBag } from '@wix/wix-experiments';
 import { EXPERIMENTS_SCOPE } from '../../config/constants';
+import createAppController, { ControllerConfig } from './controller';
 
-export function mockExperiments(scope, experiments) {
+export function mockExperiments(scope: string, experiments: ExperimentsBag) {
   new LaboratoryTestkit()
     .withScope(scope)
     .withBaseUrl(window.location.href)
@@ -20,11 +21,10 @@ describe('createAppController', () => {
       },
     };
     const language = 'en-US';
-    const formFactor = 'Desktop';
+    const formFactor: string = 'Desktop';
     const experiments = { someExperiment: 'true' };
     const mobile = formFactor === 'Mobile';
-
-    const controller = await createAppController({
+    const controllerConfig: ControllerConfig = {
       appParams,
       setProps: setPropsSpy,
       wixCodeApi: {
@@ -38,9 +38,11 @@ describe('createAppController', () => {
           language,
         },
       },
-    });
+    };
 
-    controller.pageReady();
+    const controller = await createAppController({ controllerConfig });
+
+    await controller.pageReady();
 
     expect(setPropsSpy).toBeCalledWith({
       name: 'World',
