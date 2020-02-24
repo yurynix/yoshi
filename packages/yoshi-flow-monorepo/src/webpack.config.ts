@@ -207,6 +207,16 @@ export function createWebWorkerWebpackConfig(
     ...defaultOptions,
   });
 
+  workerConfig.plugins!.push(
+    new StatsWriterPlugin({
+      filename: `stats-worker${isDev ? '' : '.min'}.json`,
+      stats: {
+        all: true,
+        maxModules: Infinity,
+      },
+    }),
+  );
+
   workerConfig.output!.library = '[name]';
   workerConfig.output!.libraryTarget = 'umd';
   workerConfig.output!.globalObject = 'self';
