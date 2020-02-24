@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.40.0 (2020-02-23)
+
+#### :rocket: New Feature
+
+- `yoshi-server-client`, `yoshi-server-react`, `yoshi-server-testing`, `yoshi-server`
+  - [#1996](https://github.com/wix/yoshi/pull/1996) Yoshi Server - change the api ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `create-yoshi-app`, `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi-helpers`
+  - [#1960](https://github.com/wix/yoshi/pull/1960) Deprecating --entry-point and --server flags ([@Gongreg](https://github.com/Gongreg))
+
+#### :memo: Documentation
+
+- [#1997](https://github.com/wix/yoshi/pull/1997) Update configuration.md ([@Gongreg](https://github.com/Gongreg))
+
 ## 4.39.0 (2020-02-21)
 
 #### :rocket: New Feature
