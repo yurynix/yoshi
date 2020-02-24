@@ -154,7 +154,7 @@ Configuration for the CDN server. The default config is:
 
 ### ssl
 
-By setting ssl to true your CDN server will start with HTTPS. You may have to approve the certificates by manually going to `http://localhost:3200` on your browser.
+By setting ssl to true your CDN server will start with HTTPS. You may have to approve the certificates by manually going to `https://localhost:3200` on your browser.
 
 ### url
 
