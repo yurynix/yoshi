@@ -1,9 +1,11 @@
 import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
-import { AppContext } from './types';
+import { AppContext, Config } from './types';
 
 export = (context: BootstrapContext): AppContext => {
   // load your app-specific configuration values
-  const { petriScopes } = context.config.load('{%projectName%}');
+  const { petriScopes, baseDomain } = context.config.load<Config>(
+    '{%projectName%}',
+  );
 
   // return your app-specific context - an object which contains your domain singletons
   // (eg DB connections, kafka producers/consumers) shared by all your express, websocket and RPC services.
@@ -11,5 +13,6 @@ export = (context: BootstrapContext): AppContext => {
   // that promise to resolve before bringing up the listeners (HTTP/kafka/RPC).
   return {
     petriScopes,
+    baseDomain,
   } as AppContext;
 };

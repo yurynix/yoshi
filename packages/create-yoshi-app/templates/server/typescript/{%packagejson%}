@@ -36,7 +36,6 @@
     "@types/mocha": "~2.2.0",
     "@types/node": "^8.0.0",
     "@wix/wix-bootstrap-testkit": "latest",
-    "@wix/wix-config-emitter": "latest",
     "@wix/wix-test-env": "latest"
   },
   "dependencies": {
@@ -45,8 +44,7 @@
     "@wix/wix-bootstrap-ng": "latest",
     "@wix/wix-config": "latest",
     "@wix/wix-express-csrf": "latest",
-    "@wix/wix-express-require-https": "latest",
-    "@wix/wix-run-mode": "latest"
+    "@wix/wix-express-require-https": "latest"
   },
   "yoshi": {
     "hmr": "auto"

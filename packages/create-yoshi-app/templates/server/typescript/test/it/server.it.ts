@@ -13,6 +13,7 @@ describe('API', () => {
       success: true,
       payload: 'Hello world!',
       petriScopes: ['foo', 'bar'],
+      baseDomain: 'test.wix.com',
     });
   });
 });

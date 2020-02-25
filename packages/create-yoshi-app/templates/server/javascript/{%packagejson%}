@@ -29,7 +29,6 @@
     "lint-staged": "^10.0.7",
     "yoshi": "^4.1.0",
     "@wix/wix-bootstrap-testkit": "latest",
-    "@wix/wix-config-emitter": "latest",
     "@wix/wix-test-env": "latest"
   },
   "dependencies": {
@@ -38,8 +37,7 @@
     "regenerator-runtime": "^0.11.0",
     "@wix/wix-bootstrap-ng": "latest",
     "@wix/wix-express-csrf": "latest",
-    "@wix/wix-express-require-https": "latest",
-    "@wix/wix-run-mode": "latest"
+    "@wix/wix-express-require-https": "latest"
   },
   "yoshi": {
     "hmr": "auto"

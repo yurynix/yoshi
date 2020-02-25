@@ -12,6 +12,7 @@ export = (app: Router, context: AppContext) => {
       success: true,
       payload: 'Hello world!',
       petriScopes: context.petriScopes,
+      baseDomain: context.baseDomain,
     });
   });
 
