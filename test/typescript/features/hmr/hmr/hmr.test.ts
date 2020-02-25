@@ -15,6 +15,7 @@ const serverFilePath = path.join(scripts.testDirectory, 'src/server.tsx');
 const originalServerContent = fs.readFileSync(serverFilePath, 'utf-8');
 
 describe.each(['dev'] as const)('hmr [%s]', mode => {
+  // eslint-disable-next-line jest/no-disabled-tests
   describe.skip('client side', () => {
     it('integration', async () => {
       await scripts[mode](async () => {
@@ -50,6 +51,7 @@ describe.each(['dev'] as const)('hmr [%s]', mode => {
       });
     });
   });
+  // eslint-disable-next-line jest/no-disabled-tests
   describe.skip('server side', () => {
     it('reloads server on changes and reloads the browser', async () => {
       await scripts[mode](async () => {

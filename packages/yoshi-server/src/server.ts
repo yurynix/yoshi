@@ -90,8 +90,8 @@ export default class Server {
         handler: async (req, res, params) => {
           const fnThis = {
             context: this.context,
-            req: req,
-            res: res,
+            req,
+            res,
             params,
           };
 

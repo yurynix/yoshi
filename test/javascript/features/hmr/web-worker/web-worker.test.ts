@@ -43,6 +43,7 @@ describe.each(['dev'] as const)('hmr, web-worker [%s]', mode => {
     });
   });
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('shows error overlay on the browser', async () => {
     await scripts[mode](async () => {
       // There is a jest-puppeteer listener that throws an error in case there is

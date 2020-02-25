@@ -486,14 +486,14 @@ export function createBaseWebpackConfig({
 
                           // Values available for injection in EJS template
                           return {
-                            compilation: compilation,
+                            compilation,
                             webpackConfig: compilation.options,
                             tags: {
                               css: assetTags.headTags,
                               js: assetTags.bodyTags,
                             },
                             files: assets,
-                            options: options,
+                            options,
                           };
                         },
                       });

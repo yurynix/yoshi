@@ -86,8 +86,11 @@ export default async function startRewriteForwardProxy({
 function closePromise(closable: any) {
   return new Promise((resolve, reject) => {
     closable.destroy((err: Error | null) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
     });
   });
 }

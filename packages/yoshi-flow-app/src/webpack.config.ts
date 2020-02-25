@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
 import {
@@ -83,6 +84,7 @@ export function createClientWebpackConfig(
   });
 
   clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   clientConfig.resolve!.alias = config.resolveAlias;
   clientConfig.externals = config.externals;
 
@@ -93,6 +95,7 @@ export function createClientWebpackConfig(
       ? useSplitChunks
       : defaultSplitChunksConfig;
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     clientConfig!.optimization!.splitChunks = splitChunksConfig as webpack.Options.SplitChunksOptions;
   }
 

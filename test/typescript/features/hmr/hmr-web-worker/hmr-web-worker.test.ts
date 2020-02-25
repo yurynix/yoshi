@@ -10,6 +10,7 @@ const scripts = Scripts.setupProjectFromTemplate({
 const workerFilePath = path.join(scripts.testDirectory, 'src/worker.ts');
 
 describe.each(['dev'] as const)('hmr, web-worker [%s]', mode => {
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('refresh the browser after changes in the web-worker', async () => {
     await scripts[mode](async () => {
       const originalLog = 'hello from a web worker';
@@ -43,6 +44,7 @@ describe.each(['dev'] as const)('hmr, web-worker [%s]', mode => {
     });
   });
 
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('shows error overlay on the browser', async () => {
     await scripts[mode](async () => {
       // There is a jest-puppeteer listener that throws an error in case there is

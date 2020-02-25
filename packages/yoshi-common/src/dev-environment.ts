@@ -333,6 +333,7 @@ export default class DevEnvironment {
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const publicPath = clientConfig.output!.publicPath!;
 
     const serverProcess = await ServerProcessWithHMR.create({

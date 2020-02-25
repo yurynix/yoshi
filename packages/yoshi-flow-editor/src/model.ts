@@ -110,7 +110,7 @@ For more info, visit http://tiny.cc/dev-center-registration`);
   );
 
   return {
-    appName: config.name!,
+    appName: config.name,
     // TODO: import from named export
     appDefId: '',
     artifactId,

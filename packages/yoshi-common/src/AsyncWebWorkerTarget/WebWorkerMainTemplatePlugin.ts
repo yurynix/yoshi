@@ -5,7 +5,9 @@ export class WebWorkerMainTemplatePlugin {
   apply(mainTemplate) {
     const needChunkOnDemandLoadingCode = chunk => {
       for (const chunkGroup of chunk.groupsIterable) {
-        if (chunkGroup.getNumberOfChildren() > 0) return true;
+        if (chunkGroup.getNumberOfChildren() > 0) {
+          return true;
+        }
       }
       return false;
     };

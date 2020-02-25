@@ -31,6 +31,7 @@ function removeDependencies(
   if (pkg.dependencies) {
     for (const dependencyName of Object.keys(pkg.dependencies)) {
       if (dependeciesToRemove.includes(dependencyName)) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete pkg.dependencies[dependencyName];
       }
     }
@@ -39,6 +40,7 @@ function removeDependencies(
   if (pkg.devDependencies) {
     for (const dependencyName of Object.keys(pkg.devDependencies)) {
       if (dependeciesToRemove.includes(dependencyName)) {
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete pkg.devDependencies[dependencyName];
       }
     }

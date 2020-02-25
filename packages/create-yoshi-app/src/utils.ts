@@ -20,8 +20,7 @@ export const npmInstall = (dir: string) => {
       PATH: process.env.PATH,
       // Somewhat hacky: Install from `process.env['npm_config_registry']` in PR CI
       // or from the private registry for actual users
-      npm_config_registry:
-        process.env['npm_config_registry'] || privateRegistry,
+      npm_config_registry: process.env.npm_config_registry || privateRegistry,
     },
   });
 };

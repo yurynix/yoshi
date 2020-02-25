@@ -12,7 +12,7 @@ const explorer = cosmiconfig('yoshi', {
 
 export default ({ validate = true, cwd = process.cwd() } = {}): Config => {
   const result = explorer.searchSync(cwd);
-  const initialConfig = <InitialConfig>(result ? result.config : {});
+  const initialConfig = (result ? result.config : {}) as InitialConfig;
 
   // Load and copy values from a file that extends the config
   if (initialConfig.extends) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
 import { createServerEntries } from 'yoshi-common/build/webpack-utils';

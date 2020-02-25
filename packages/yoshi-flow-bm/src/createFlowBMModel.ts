@@ -43,6 +43,7 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
       expandDirectories: false,
     });
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const moduleId = getProjectArtifactId(cwd)!;
 
   const pages = globFiles(pagesPattern).map(pagePath => ({
@@ -53,12 +54,12 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
 
   const components = globFiles(componentsPattern).map(componentPath => ({
     componentId: `${moduleId}.components.${path.parse(componentPath).name}`,
-    componentPath: componentPath,
+    componentPath,
   }));
 
   const methods = globFiles(methodsPattern).map(methodPath => ({
     methodId: `${moduleId}.methods.${path.parse(methodPath).name}`,
-    methodPath: methodPath,
+    methodPath,
   }));
 
   const [moduleInitPath] = globFiles(moduleInitPattern);
