@@ -243,6 +243,27 @@ export default class Scripts {
     return buildResult;
   }
 
+  async serve(
+    resolve: TestCallback,
+    reject: (reason: string) => void = () => {},
+  ) {
+    const serve = require('../packages/yoshi-flow-app/build/scripts/serve')
+      .default;
+
+    const curDir = process.cwd();
+    process.chdir(this.testDirectory);
+
+    try {
+      const stop = await serve();
+      await resolve();
+      await stop();
+    } catch (e) {
+      reject(e);
+    }
+
+    process.chdir(curDir);
+  }
+
   async test(mode: 'prod' | 'dev') {
     const env = mode === 'prod' ? ciEnv : localEnv;
     let res;
