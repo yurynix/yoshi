@@ -20,7 +20,8 @@
   ],
   "ignorePaths": [
     "**/test/**",
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "website/yarn.lock"
   ],
   "masterIssue": true,
   "lockFileMaintenance": {

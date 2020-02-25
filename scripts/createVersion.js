@@ -67,7 +67,7 @@ Promise.resolve()
     console.log('installing website...');
     console.log();
 
-    execa.sync('yarn install', {
+    execa.sync('yarn install --pure-lockfile', {
       cwd: websiteDirectory,
       stdio: 'inherit',
       shell: true,
