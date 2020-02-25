@@ -1,5 +1,31 @@
 # Changelog
 
+## 4.41.0 (2020-02-25)
+
+#### :rocket: New Feature
+
+- `eslint-config-yoshi-base`
+  - [#2012](https://github.com/wix/yoshi/pull/2012) Remove `@typescript-eslint/consistent-type-definitions` rule ([@Gongreg](https://github.com/Gongreg))
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-helpers`
+  - [#1980](https://github.com/wix/yoshi/pull/1980) Yoshi serve command implementation ([@Gongreg](https://github.com/Gongreg))
+- `eslint-config-yoshi-base`, `eslint-config-yoshi`
+  - [#2005](https://github.com/wix/yoshi/pull/2005) Add `eslint-config-yoshi` TypeScript support ([@Gongreg](https://github.com/Gongreg))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2004](https://github.com/wix/yoshi/pull/2004) Server templates cleanups ([@hugebdu](https://github.com/hugebdu))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#2015](https://github.com/wix/yoshi/pull/2015) Scoping thunderbolt modules under `@wix` ([@orgranit](https://github.com/orgranit))
+
+#### :house: Internal
+
+- [#2014](https://github.com/wix/yoshi/pull/2014) Fix website publishing ([@ranyitz](https://github.com/ranyitz))
+- [#2011](https://github.com/wix/yoshi/pull/2011) Add templates label to changelog ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.40.1 (2020-02-24)
 
 #### :rocket: New Feature
