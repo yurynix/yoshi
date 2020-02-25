@@ -192,7 +192,6 @@ module.exports = {
         'prefer-const': 'error',
         '@typescript-eslint/array-type': ['error', { default: 'array' }],
         '@typescript-eslint/prefer-function-type': 'error',
-        '@typescript-eslint/consistent-type-definitions': 'error',
         '@typescript-eslint/consistent-type-assertions': 'error',
         'no-undef-init': 'error',
         'object-shorthand': 'error',
