@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.42.0 (2020-02-26)
+
+#### :rocket: New Feature
+
+- `yoshi-common`
+  - [#2018](https://github.com/wix/yoshi/pull/2018) Yoshi serve node API ([@Gongreg](https://github.com/Gongreg))
+
+#### :memo: Documentation
+
+- [#2016](https://github.com/wix/yoshi/pull/2016) Yoshi serve documentation ([@Gongreg](https://github.com/Gongreg))
+- [#2020](https://github.com/wix/yoshi/pull/2020) Remove `index-dev.ts` option from docs ([@Gongreg](https://github.com/Gongreg))
+
 ## 4.41.0 (2020-02-25)
 
 #### :rocket: New Feature
