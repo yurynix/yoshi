@@ -83,6 +83,7 @@ export function createClientWebpackConfig(
     exportAsLibraryName: pkg.config.exports,
     enhancedTpaStyle: pkg.config.enhancedTpaStyle,
     tpaStyle: pkg.config.tpaStyle,
+    separateStylableCss: pkg.config.separateStylableCss,
     createEjsTemplates: pkg.config.experimentalBuildHtml,
     ...(isSiteAssetsModule(pkg)
       ? {

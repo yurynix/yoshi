@@ -9,6 +9,7 @@ const validConfig: RequiredRecursively<InitialConfig> = {
   cssModules: true,
   tpaStyle: false,
   enhancedTpaStyle: false,
+  separateStylableCss: false,
   features: {
     externalizeRelativeLodash: false,
   },

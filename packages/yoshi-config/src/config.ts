@@ -40,6 +40,7 @@ export type InitialConfig = {
   cssModules?: boolean;
   tpaStyle?: boolean;
   enhancedTpaStyle?: boolean;
+  separateStylableCss?: boolean;
   features?: featuresConfig;
   clientProjectName?: string;
   keepFunctionNames?: boolean;
@@ -100,6 +101,7 @@ export type Config = {
   cssModules: boolean;
   tpaStyle: boolean;
   enhancedTpaStyle: boolean;
+  separateStylableCss: boolean;
   features: featuresConfig;
   externals: WebpackExternals;
   transpileTests: boolean;

@@ -23,7 +23,8 @@ const computedSeparateCss =
     ? inTeamCity || isProduction
     : projectConfig.separateCss;
 
-const stylableSeparateCss = projectConfig.enhancedTpaStyle;
+const separateStylableCss =
+  projectConfig.enhancedTpaStyle || projectConfig.separateStylableCss;
 
 const defaultSplitChunksConfig = {
   chunks: 'all',
@@ -44,7 +45,7 @@ const defaultOptions = {
   devServerUrl: projectConfig.servers.cdn.url,
   separateCss: computedSeparateCss,
   keepFunctionNames: projectConfig.keepFunctionNames,
-  stylableSeparateCss,
+  separateStylableCss,
   experimentalRtlCss: projectConfig.experimentalRtlCss,
   cssModules: projectConfig.cssModules,
   externalizeRelativeLodash: projectConfig.externalizeRelativeLodash,

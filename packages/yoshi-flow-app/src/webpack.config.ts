@@ -75,7 +75,7 @@ export function createClientWebpackConfig(
     enhancedTpaStyle: config.enhancedTpaStyle,
     tpaStyle: config.tpaStyle,
     keepFunctionNames: config.keepFunctionNames,
-    stylableSeparateCss: config.enhancedTpaStyle,
+    separateStylableCss: config.enhancedTpaStyle || config.separateStylableCss,
     experimentalRtlCss: config.experimentalRtlCss,
     externalizeRelativeLodash: config.externalizeRelativeLodash,
     createEjsTemplates: config.experimentalBuildHtml,

@@ -82,6 +82,13 @@ declare module '*.svg' {
   export default src;
 }
 
+declare module '*.st.css' {
+  import { RuntimeStylesheet } from '@stylable/runtime';
+
+  const value: RuntimeStylesheet;
+  export = value;
+}
+
 declare module '*.css' {
   const classes: { [key: string]: string };
   export = classes;

@@ -228,7 +228,7 @@ export function createBaseWebpackConfig({
   separateCss = false,
   keepFunctionNames = false,
   suricate = false,
-  stylableSeparateCss = false,
+  separateStylableCss = false,
   experimentalRtlCss = false,
   cssModules = true,
   cwd = process.cwd(),
@@ -264,7 +264,7 @@ export function createBaseWebpackConfig({
   separateCss?: boolean;
   keepFunctionNames?: boolean;
   suricate?: boolean;
-  stylableSeparateCss?: boolean;
+  separateStylableCss?: boolean;
   experimentalRtlCss?: boolean;
   cssModules?: boolean;
   cwd?: string;
@@ -556,9 +556,9 @@ export function createBaseWebpackConfig({
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
             new StylableWebpackPlugin({
-              outputCSS: stylableSeparateCss,
+              outputCSS: separateStylableCss,
               filename: '[name].stylable.bundle.css',
-              includeCSSInJS: !stylableSeparateCss,
+              includeCSSInJS: !separateStylableCss,
               optimize: {
                 classNameOptimizations: false,
                 shortNamespaces: false,

@@ -52,6 +52,7 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     cssModules: initialConfig.cssModules ?? true,
     tpaStyle: initialConfig.tpaStyle ?? false,
     enhancedTpaStyle: initialConfig.enhancedTpaStyle ?? false,
+    separateStylableCss: initialConfig.separateStylableCss ?? false,
     features: initialConfig.features ?? {},
     externals: initialConfig.externals ?? [],
     transpileTests: initialConfig.transpileTests ?? true,

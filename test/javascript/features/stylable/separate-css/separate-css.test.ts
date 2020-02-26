@@ -1,0 +1,17 @@
+import Scripts from '../../../../scripts';
+import { request } from '../../../../utils';
+
+const scripts = Scripts.setupProjectFromTemplate({
+  templateDir: __dirname,
+  projectType: 'javascript',
+});
+
+describe.each(['prod', 'dev'] as const)('stylable separate css [%s]', mode => {
+  it('outputs stylable into a separate css file', async () => {
+    await scripts[mode](async () => {
+      expect(
+        await request('http://localhost:3200/app.stylable.bundle.css'),
+      ).toContain('root{height:100vh}');
+    });
+  });
+});

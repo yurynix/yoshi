@@ -120,6 +120,18 @@ Set to true to build with enhanced TPA style.
 
 - ![status experimental](https://img.shields.io/badge/status-experimental-ff69b4.svg)
 
+## separateStylableCss
+
+Output the stylable css into `app.stylable.bundle.css` file.
+
+> By default, the Stylable CSS output will be bundled to the JS bundle (using the [`includeCSSInJS` option](https://github.com/wix/stylable/tree/master/packages/webpack-plugin#plugin-configuration-options)).
+
+```json
+"yoshi": {
+  "separateStylableCss": true
+}
+```
+
 ## clientProjectName
 
 The name of the client project.
