@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.43.0 (2020-02-26)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi`
+  - [#2010](https://github.com/wix/yoshi/pull/2010) Expose `stylableSeparateCss` configuration ([@nitayneeman](https://github.com/nitayneeman))
+- `yoshi-server`
+  - [#2019](https://github.com/wix/yoshi/pull/2019) Yoshi Server HMR ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.42.0 (2020-02-26)
 
 #### :rocket: New Feature
