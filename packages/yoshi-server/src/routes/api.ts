@@ -7,29 +7,45 @@ import { isLeft } from 'fp-ts/lib/Either';
 import serializeError from 'serialize-error';
 import { BUILD_DIR } from 'yoshi-config/build/paths';
 import { requestPayloadCodec, DSL } from '../types';
-import { relativeFilePath } from '../utils';
+import { relativeFilePath, connectToYoshiServerHMR } from '../utils';
 import { route } from '..';
 
 const buildDir = path.resolve(BUILD_DIR);
 
-const serverChunks = globby.sync('**/*.api.js', {
-  cwd: buildDir,
-  absolute: true,
-});
+let functions = createFunctions();
 
-const functions: {
-  [filename: string]:
-    | { [functionName: string]: DSL<any, any> | undefined }
-    | undefined;
-} = serverChunks.reduce((acc, absolutePath) => {
-  const chunk = importFresh(absolutePath);
-  const filename = relativeFilePath(buildDir, absolutePath);
+function createFunctions() {
+  const serverChunks = globby.sync('**/*.api.js', {
+    cwd: buildDir,
+    absolute: true,
+  });
 
-  return {
-    ...acc,
-    [filename]: chunk,
+  const functions: {
+    [filename: string]: { [functionName: string]: DSL<any, any> };
+  } = serverChunks.reduce((acc, absolutePath) => {
+    const filename = relativeFilePath(buildDir, absolutePath);
+
+    return {
+      ...acc,
+      [filename]: importFresh(absolutePath),
+    };
+  }, {});
+
+  return functions;
+}
+
+if (process.env.NODE_ENV === 'development') {
+  const socket = connectToYoshiServerHMR();
+
+  socket.onmessage = async () => {
+    try {
+      functions = createFunctions();
+    } catch (error) {
+      socket.send(JSON.stringify({ success: false }));
+    }
+    socket.send(JSON.stringify({ success: true }));
   };
-}, {});
+}
 
 export default route(async function() {
   const body = this.req.body || (await parseBodyAsJson(this.req));

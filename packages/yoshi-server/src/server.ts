@@ -3,13 +3,12 @@ import { parse as parseUrl } from 'url';
 import { RequestHandler, Request, Response } from 'express';
 import Youch from 'youch';
 import globby from 'globby';
-import SockJS from 'sockjs-client';
 import { send } from 'micro';
 import importFresh from 'import-fresh';
 import requireHttps from 'wix-express-require-https';
 import { ROUTES_BUILD_DIR } from 'yoshi-config/build/paths';
 import { RouteFunction } from './types';
-import { relativeFilePath, pathMatch } from './utils';
+import { relativeFilePath, pathMatch, connectToYoshiServerHMR } from './utils';
 
 export type Route = {
   route: string;
@@ -30,9 +29,7 @@ export default class Server {
     this.routes = this.createRoutes();
 
     if (process.env.NODE_ENV === 'development') {
-      const socket = new SockJS(
-        `http://localhost:${process.env.HMR_PORT}/_yoshi_server_hmr_`,
-      );
+      const socket = connectToYoshiServerHMR();
 
       socket.onmessage = async () => {
         try {
