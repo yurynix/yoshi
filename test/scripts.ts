@@ -2,6 +2,7 @@ import path from 'path';
 import execa from 'execa';
 import fs from 'fs-extra';
 import { ciEnv, localEnv } from '../scripts/utils/constants';
+import serve from '../packages/yoshi-common/serve';
 import {
   waitForPort,
   waitForStdout,
@@ -247,9 +248,6 @@ export default class Scripts {
     resolve: TestCallback,
     reject: (reason: string) => void = () => {},
   ) {
-    const serve = require('../packages/yoshi-flow-app/build/scripts/serve')
-      .default;
-
     const curDir = process.cwd();
     process.chdir(this.testDirectory);
 

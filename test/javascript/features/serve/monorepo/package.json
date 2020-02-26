@@ -1,0 +1,11 @@
+{
+  "name": "serve-monorepo-js",
+  "private": true,
+  "sideEffects": false,
+  "yoshi": {
+    "experimentalMonorepo": true
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

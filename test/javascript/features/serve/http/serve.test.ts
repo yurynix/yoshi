@@ -9,7 +9,7 @@ describe('Yoshi, serve', () => {
   it('should notify is yoshi build was not run', async () => {
     expect.assertions(1);
 
-    scripts.serve(
+    await scripts.serve(
       () => Promise.resolve(),
       e => {
         expect(e).toEqual(

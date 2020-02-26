@@ -1,18 +1,23 @@
-process.env.NODE_ENV = 'production';
-process.env.BABEL_ENV = 'production';
-
 import path from 'path';
 import fs from 'fs';
 import loadConfig from 'yoshi-config/loadConfig';
-import { ServerProcess } from 'yoshi-common/build/server-process';
-import { startCDN } from 'yoshi-common/build/cdn';
 import { getServerStartFile } from 'yoshi-helpers/build/server-start-file';
 import { serverStartFileParser } from 'yoshi-helpers/build/server-start-file-parser';
 import { STATICS_DIR } from 'yoshi-config/build/paths';
+import { ServerProcess } from '../server-process';
+import { startCDN } from '../cdn';
 
 const serve = async function() {
-  return new Promise(async (resolve, reject) => {
+  process.env.NODE_ENV = 'production';
+  process.env.BABEL_ENV = 'production';
+
+  return new Promise<() => Promise<void>>(async (resolve, reject) => {
     const config = loadConfig();
+
+    if (config.experimentalMonorepo) {
+      reject(`Error: yoshi-flow-monorepo is not supported yet`);
+      return;
+    }
 
     const packageJSON = require(path.resolve(process.cwd(), 'package.json'));
     const serverFilePath =
@@ -38,7 +43,7 @@ const serve = async function() {
       startCDN(config),
     ]);
 
-    resolve(() => Promise.all([serverProcess.close(), cdn.close()]));
+    resolve(() => Promise.all([serverProcess.close(), cdn.close()]).then());
   });
 };
 
