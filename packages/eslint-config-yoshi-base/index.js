@@ -148,6 +148,8 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
         sourceType: 'module', // Allows for the use of imports
+        tsconfigRootDir: process.cwd(),
+        project: ['./tsconfig.json'],
       },
 
       plugins: ['@typescript-eslint'],
@@ -217,6 +219,15 @@ module.exports = {
         'no-restricted-syntax': ['error', 'SequenceExpression'],
         'import/no-duplicates': 'error',
         'no-throw-literal': 'error',
+        // rules that require type checking
+        '@typescript-eslint/await-thenable': 'error',
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-for-in-array': 'error',
+        '@typescript-eslint/prefer-readonly': 'error',
+        '@typescript-eslint/restrict-plus-operands': 'error',
+        '@typescript-eslint/no-unnecessary-type-arguments': 'error',
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
+        '@typescript-eslint/no-unnecessary-qualifier': 'error',
       },
     },
   ],

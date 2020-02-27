@@ -25,7 +25,7 @@ const getRulesIds = results =>
 describe('eslint-config-yoshi', () => {
   describe('rules', () => {
     const eslintCli = new CLIEngine({
-      configFile: require.resolve('../index'),
+      configFile: require.resolve('./eslintrc-test'),
       useEslintrc: false,
       ignore: false,
     });
