@@ -232,7 +232,7 @@ If set, export the bundle as library. `yoshi.exports` is the name.
 
 Use this if you are writing a library and want to publish it as single file. Library will be exported with `UMD` format.
 
-### hmr
+## hmr
 
 `Boolean` | `"auto"`
 
@@ -240,7 +240,7 @@ Set to `false` in order to disable hot module replacement. (defaults to true)
 
 `"auto"` is an experimental feature which provides zero configuration HMR for react. It will include `react-hot-loader` to the top of the entry file and will wrap React's root component in special Higher Order Component which enables hot module reload for react. Also it will call `module.hot.accept` on the project's entry file.
 
-### liveReload
+## liveReload
 
 `Boolean`
 
