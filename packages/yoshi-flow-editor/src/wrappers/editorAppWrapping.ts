@@ -19,6 +19,7 @@ const componentWrapper = (
 
       const generateWidgetEntryContent = editorEntryTemplate({
         editorAppWrapperPath,
+        componentName: component.name,
         componentFileName: component.fileName,
         controllerFileName: component.controllerFileName,
         initAppPath: model.initApp,

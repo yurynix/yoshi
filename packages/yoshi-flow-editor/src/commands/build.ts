@@ -22,6 +22,7 @@ import {
   webWorkerExternals,
 } from '../buildEditorEntires';
 import { writeCiConfig } from './ciConfigGenerator';
+import { generateEditorHTMLFiles } from './htmlGenerator';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
@@ -141,6 +142,7 @@ const build: cliCommand = async function(argv, config, model) {
 
   printBuildResult({ webpackStats: [clientOptimizedStats, serverStats] });
   printBundleSizeSuggestion();
+  generateEditorHTMLFiles(model);
 };
 
 export default build;

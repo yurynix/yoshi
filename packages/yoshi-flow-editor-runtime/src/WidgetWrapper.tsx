@@ -11,6 +11,7 @@ import { IControllerContext } from './react/ControllerContext';
 declare global {
   interface Window {
     Wix: IWixStatic;
+    __STATICS_BASE_URL__: string;
   }
 }
 // TODO - improve this type or bring from controller wrapper
@@ -24,13 +25,13 @@ const PublicDataProvider: typeof React.Component =
     ? PublicDataProviderViewer
     : PublicDataProviderEditor;
 
-const WidgetWrapper = (UserComponent: typeof React.Component) => (
+const WidgetWrapper = (UserComponent: typeof React.Component, name: string) => (
   props: IHostProps & IFrameworkProps & IControllerContext,
 ) => {
   return (
     <div>
       <link
-        href="https://localhost:3200/todoViewerWidget.css"
+        href={`${window.__STATICS_BASE_URL__}${name}ViewerWidget.css`}
         rel="stylesheet"
         type="text/css"
       />

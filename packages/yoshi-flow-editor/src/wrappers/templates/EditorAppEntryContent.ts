@@ -4,7 +4,8 @@ type Opts = Record<
   | 'editorAppWrapperPath'
   | 'componentFileName'
   | 'controllerFileName'
-  | 'initAppPath',
+  | 'initAppPath'
+  | 'componentName',
   string
 >;
 
@@ -19,7 +20,9 @@ export default t<Opts>`
       controllerFileName}';
     import initApp from '${({ initAppPath }) => initAppPath}';
 
-    const EditorApp = EditorAppWrapper(Component, createController, initApp);
+    const EditorApp = EditorAppWrapper(Component, createController, initApp, '${({
+      componentName,
+    }) => componentName}');
 
     ReactDOM.render(React.createElement(EditorApp, null), document.getElementById('root'));
 `;

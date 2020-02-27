@@ -8,8 +8,9 @@ const EditorAppWrapper = (
   UserComponent: typeof React.Component,
   userController: Function,
   initApp: Function,
+  name: string,
 ) =>
-  ViewerScriptWrapper(WidgetWrapper(UserComponent), {
+  ViewerScriptWrapper(WidgetWrapper(UserComponent, name), {
     viewerScript: {
       createControllers: createControllers(userController, initApp),
       initAppForPage,
