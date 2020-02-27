@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.43.1 (2020-02-27)
+
+#### :bug: Bug Fix
+
+- `yoshi`
+  - [#2024](https://github.com/wix/yoshi/pull/2024) Remove `*.st.css` from `types.d.ts` ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.43.0 (2020-02-26)
 
 #### :rocket: New Feature
