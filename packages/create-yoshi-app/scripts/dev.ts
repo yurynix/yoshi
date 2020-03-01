@@ -11,9 +11,7 @@ import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
 import prompts from 'prompts';
 import chokidar from 'chokidar';
-// @ts-ignore
-import clipboardy from 'clipboardy';
-// import newsh from 'newsh';
+import * as newsh from 'newsh';
 import { replaceTemplates, getValuesMap } from '../src/index';
 import TemplateModel from '../src/TemplateModel';
 import createApp from '../src/createApp';
@@ -194,10 +192,7 @@ async function init() {
 
   upsertProjectInCache(templateModel, workingDir);
 
-  clipboardy.writeSync(workingDir);
-
-  console.log('> ', chalk.cyan('directory path has copied to clipboard 📋'));
-  console.log();
+  newsh.command(`echo 'run "npm start"''`, { split: true, cd: workingDir });
 
   startWatcher(workingDir, templateModel);
 }
