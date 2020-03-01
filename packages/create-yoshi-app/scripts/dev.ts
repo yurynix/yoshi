@@ -2,30 +2,30 @@ process.on('unhandledRejection', error => {
   throw error;
 });
 
-const fs = require('fs-extra');
-const path = require('path');
-const tempy = require('tempy');
-const chalk = require('chalk');
-const map = require('lodash/map');
-const reverse = require('lodash/reverse');
-const sortBy = require('lodash/sortBy');
-const prompts = require('prompts');
-const chokidar = require('chokidar');
-const clipboardy = require('clipboardy');
-const { replaceTemplates, getValuesMap } = require('../src/index');
-const { appCacheKey } = require('../src/constants');
-const cache = require('./cache')(appCacheKey);
-const TemplateModel = require('../src/TemplateModel').default;
-const createApp = require('../src/createApp').default;
-const { clearConsole } = require('../src/utils');
-const {
+import path from 'path';
+import fs from 'fs-extra';
+import tempy from 'tempy';
+import chalk from 'chalk';
+import map from 'lodash/map';
+import reverse from 'lodash/reverse';
+import sortBy from 'lodash/sortBy';
+import prompts from 'prompts';
+import chokidar from 'chokidar';
+// @ts-ignore
+import clipboardy from 'clipboardy';
+// import newsh from 'newsh';
+import { replaceTemplates, getValuesMap } from '../src/index';
+import TemplateModel from '../src/TemplateModel';
+import createApp from '../src/createApp';
+import { clearConsole } from '../src/utils';
+import {
   symlinkModules,
   getYoshiModulesList,
-} = require('../../../scripts/utils/symlinkModules');
-const installExternalDependencies = require('../src/installExternalDependnecies')
-  .default;
+} from '../../../scripts/utils/symlinkModules';
+import installExternalDependencies from '../src/installExternalDependnecies';
+import * as cache from './cache';
 
-function startWatcher(workingDir, templateModel) {
+function startWatcher(workingDir: string, templateModel: TemplateModel) {
   const templatePath = templateModel.getPath();
 
   console.log(`Watching ${chalk.magenta(templatePath)} for changes...`);
@@ -40,7 +40,7 @@ function startWatcher(workingDir, templateModel) {
 
   const valuesMap = getValuesMap(templateModel);
 
-  const generateFile = relativePath => {
+  const generateFile = (relativePath: string) => {
     const fullPath = path.join(templatePath, relativePath);
     const fileContents = fs.readFileSync(fullPath, 'utf-8');
     const destinationPath = path.join(workingDir, relativePath);
@@ -79,7 +79,7 @@ function startWatcher(workingDir, templateModel) {
   });
 }
 
-async function askShouldContinueFromCache(cachedProjects) {
+async function askShouldContinueFromCache(cachedProjects: any) {
   const abortConstant = '__new_project__';
   let canceled;
 
@@ -129,7 +129,10 @@ async function askShouldContinueFromCache(cachedProjects) {
   return response.value;
 }
 
-function upsertProjectInCache(templateModel, workingDir) {
+function upsertProjectInCache(
+  templateModel: TemplateModel,
+  workingDir: string,
+) {
   const templateCacheObj = {
     [templateModel.getTitle()]: {
       templateModel,
@@ -148,7 +151,7 @@ function upsertProjectInCache(templateModel, workingDir) {
 }
 
 async function init() {
-  let templateModel;
+  let templateModel: TemplateModel;
   let workingDir;
   let chosenProject;
 
@@ -158,7 +161,7 @@ async function init() {
     chosenProject = await askShouldContinueFromCache(cachedProjects);
   }
 
-  if (!!chosenProject) {
+  if (chosenProject) {
     // using a project from cache
     workingDir = chosenProject.workingDir;
     templateModel = chosenProject.templateModel;

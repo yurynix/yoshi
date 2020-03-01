@@ -23,7 +23,7 @@
     "flow-bm": "npm run templates -- flow-bm-typescript",
     "ooi": "npm run templates -- out-of-iframe out-of-iframe-typescript",
     "flow-editor": "npm run templates -- flow-editor flow-editor-typescript",
-    "dev": "ts-node scripts/dev.js"
+    "dev": "ts-node scripts/dev.ts"
   },
   "dependencies": {
     "chalk": "^2.4.1",
@@ -52,6 +52,7 @@
     "minimist": "^1.2.0",
     "mocha": "^5.2.0",
     "mocha-env-reporter": "^3.0.0",
+    "newsh": "^0.5.0",
     "tempy": "^0.4.0",
     "ts-node": "^8.4.1",
     "type-fest": "^0.11.0"

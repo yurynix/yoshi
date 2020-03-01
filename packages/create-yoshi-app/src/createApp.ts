@@ -25,7 +25,7 @@ export default async ({
   install = true,
   lint = true,
   commit = true,
-}: CreateAppOptions) => {
+}: CreateAppOptions): Promise<TemplateModel> => {
   clearConsole();
 
   if (!templateModel) {

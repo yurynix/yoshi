@@ -1,8 +1,8 @@
-const fs = require('fs-extra');
-const path = require('path');
-const execa = require('execa');
+import path from 'path';
+import fs from 'fs-extra';
+import execa from 'execa';
 
-const getYoshiPackages = () => {
+const getYoshiPackages = (): Array<{ name: string; location: string }> => {
   const { stdout: rawPackages } = execa.sync('npx lerna list --all --json', {
     shell: true,
   });
@@ -10,9 +10,9 @@ const getYoshiPackages = () => {
   return JSON.parse(rawPackages);
 };
 
-module.exports.getYoshiModulesList = () => getYoshiPackages().map(x => x.name);
+export const getYoshiModulesList = () => getYoshiPackages().map(x => x.name);
 
-module.exports.symlinkModules = repoDirectory => {
+export const symlinkModules = (repoDirectory: string) => {
   const parentDirectory = path.dirname(repoDirectory);
 
   // Link yoshi's node_modules to the parent directory of the tested module
@@ -21,7 +21,7 @@ module.exports.symlinkModules = repoDirectory => {
     path.join(parentDirectory, 'node_modules'),
   );
 
-  const symlinkPackage = packageName => {
+  const symlinkPackage = (packageName: string) => {
     fs.removeSync(path.join(repoDirectory, 'node_modules', packageName));
     fs.ensureSymlinkSync(
       path.join(__dirname, '../../packages', packageName),
@@ -29,7 +29,7 @@ module.exports.symlinkModules = repoDirectory => {
     );
   };
 
-  const symlinkPackageBins = packageDir => {
+  const symlinkPackageBins = (packageDir: string) => {
     const { bin: bins = {} } = fs.readJSONSync(
       path.join(packageDir, 'package.json'),
     );
