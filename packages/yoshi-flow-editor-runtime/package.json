@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-editor-runtime",
-  "version": "4.40.1",
+  "version": "4.43.2",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
