@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.43.2 (2020-03-01)
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2028](https://github.com/wix/yoshi/pull/2028) Start `server=dist/server` on TypeScript templates ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2025](https://github.com/wix/yoshi/pull/2025) Fix stylable type mismatches ([@nitayneeman](https://github.com/nitayneeman))
+
 ## 4.43.1 (2020-02-27)
 
 #### :bug: Bug Fix
