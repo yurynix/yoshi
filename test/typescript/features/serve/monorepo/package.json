@@ -1,5 +1,5 @@
 {
-  "name": "serve-monorepo-js",
+  "name": "serve-monorepo-ts",
   "private": true,
   "sideEffects": false,
   "yoshi": {
