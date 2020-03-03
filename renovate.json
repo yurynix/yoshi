@@ -29,7 +29,7 @@
     "schedule": ["after 3:00am and before 7:00am on tuesday"],
     "ignorePaths": [
       "**/website/yarn.lock"
-    ],
+    ]
   },
   "npmrc": "registry=http://npm.dev.wixpress.com"
 }
