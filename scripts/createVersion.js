@@ -63,16 +63,6 @@ Promise.resolve()
       console.log();
     }
 
-    console.log();
-    console.log('installing website...');
-    console.log();
-
-    execa.sync('yarn install --pure-lockfile', {
-      cwd: websiteDirectory,
-      stdio: 'inherit',
-      shell: true,
-    });
-
     const createVersionedDocsCommand = `npm run version "${majorVersion}"`;
 
     execa.sync(createVersionedDocsCommand, {
