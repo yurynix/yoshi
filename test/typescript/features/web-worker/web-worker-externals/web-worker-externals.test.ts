@@ -10,7 +10,7 @@ describe.each(['prod', 'dev'] as const)('web-worker externals [%s]', mode => {
     await scripts[mode](async () => {
       await page.goto(scripts.serverUrl);
       await page.waitForFunction(
-        `document.querySelector('h1').textContent === 'Some external text'`,
+        `document.querySelector('h1').innerText === 'Some external text'`,
       );
     });
   });

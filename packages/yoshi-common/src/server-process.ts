@@ -57,12 +57,7 @@ export class ServerProcess {
       cwd: this.cwd,
     });
 
-    const userServerFilePath = path.join(process.cwd(), this.serverFilePath);
-    const serverProcessWorker = require.resolve(
-      './server-process-worker-with-transpilation.js',
-    );
-
-    this.child = child_process.fork(serverProcessWorker, [], {
+    this.child = child_process.fork(this.serverFilePath, [], {
       stdio: 'pipe',
       execArgv: [inspectArg]
         .filter(notUndefined)
@@ -72,7 +67,6 @@ export class ServerProcess {
         PORT: `${PORT}`,
         ...bootstrapEnvironmentParams,
         ...this.env,
-        __SERVER_FILE_PATH__: userServerFilePath,
       },
     });
 

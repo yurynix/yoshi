@@ -39,7 +39,7 @@ Test each feature on a dedicated installed project.
 
 How it works:
 
-1. We copy [base fixture template](./test/fixtures/typescript/base-template/package.json) to `.tmp` folder (file which are needed in most tests, like `package.json`)
+1. We copy base fixture template to `.tmp` folder (basic files like `package.json` etc.)
 2. Copy test feature folder to the same destination, overriding existing files.
 3. Run the test using puppeteer, against the installed project. This will test how the feature works for the user's production code.
 4. Most tests run:

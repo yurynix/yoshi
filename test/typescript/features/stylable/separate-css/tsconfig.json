@@ -3,9 +3,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
   },
   "files": [
-    "./src/test-types.d.ts"
+    "./src/test-types.d.ts",
   ]
 }
