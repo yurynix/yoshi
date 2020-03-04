@@ -21,7 +21,7 @@ prog
   .action(() => runCLI('lint'));
 
 prog
-  .command('test')
+  .command('test [files]...')
   .description('Run unit tests and e2e tests if exists')
   .option('--mocha', 'Run unit tests with Mocha')
   .option('--jasmine', 'Run unit tests with Jasmine')
