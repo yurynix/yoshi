@@ -1,6 +1,7 @@
 import path from 'path';
 import execa from 'execa';
 import fs from 'fs-extra';
+import defaultsDeep from 'lodash/defaultsDeep';
 import { ciEnv, localEnv } from '../scripts/utils/constants';
 import serve from '../packages/yoshi-common/serve';
 import {
@@ -93,6 +94,26 @@ export default class Scripts {
       const transformedContents = replaceTemplates(fileContents, templateData);
       fs.outputFileSync(tsConfigPath, transformedContents);
     }
+
+    // Add scripts to package.json template
+    const scripts = {
+      scripts: {
+        start: `node ${yoshiBin} start`,
+        build: `node ${yoshiBin} build`,
+        test: `node ${yoshiBin} test`,
+      },
+    };
+    const packageJSONPath = path.join(featureDir, 'package.json');
+    const packageJSONfileContents = require(packageJSONPath);
+    const newPackageJSONfileContents = defaultsDeep(
+      {},
+      packageJSONfileContents,
+      scripts,
+    );
+    fs.outputFileSync(
+      packageJSONPath,
+      JSON.stringify(newPackageJSONfileContents, null, 2),
+    );
 
     // we have __node_modules__ in our feature templates, in order to mock some devendency data
     if (fs.pathExistsSync(path.join(featureDir, '__node_modules__'))) {

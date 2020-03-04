@@ -109,11 +109,15 @@ This will open the browser and produce verbose logs.
 The tests will run under `.tmp` folder and can be debugged easily. For example:
 
 ```
-> .tmp/javascript/features/css-inclution >> node /{project path}/yoshi/packages/yoshi/bin/yoshi-cli.js build
+> .tmp/javascript/features/css-inclution >> npm start
 ```
 
 ```
-> .tmp/javascript/features/css-inclution >> node /{project path}/yoshi/packages/yoshi/bin/yoshi-cli.js start
+> .tmp/javascript/features/css-inclution >> npm test
+```
+
+```
+> .tmp/javascript/features/css-inclution >> npm build
 ```
 
 ## Running Legacy Integration Tests Locally
