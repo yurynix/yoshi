@@ -69,7 +69,7 @@ const staticAssetsExtensions = [
 const reStaticAssets = staticAssetsExtensions.join('|');
 
 const defaultTransform = {
-  '\\.st.css?$': require.resolve('@stylable/jest'),
+  '\\.st.css?$': require.resolve('yoshi-common/build/@stylable/jest'),
   '\\.(gql|graphql)$': require.resolve('jest-transform-graphql'),
   [`\\.(${reStaticAssets})$`]: require.resolve('./transforms/file'),
 };

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const graphqlLoader = require('graphql-tag/loader');
 const { noop } = require('lodash');
-const { stylableModuleFactory } = require('@stylable/node');
+const { stylableModuleFactory } = require('yoshi-common/build/@stylable/node');
 
 const stylableToModule = stylableModuleFactory({
   fileSystem: fs,

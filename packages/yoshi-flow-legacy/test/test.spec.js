@@ -290,17 +290,17 @@ describe('Aggregator: Test', () => {
             `,
         '__tests__/styles.js': `
               it('pass stylable', () => {
-                const style = require('./main.st.css').default;
+                const {classes, style} = require('./main.st.css');
 
-                expect(style.someclass.indexOf('someclass') > -1).toBe(true);
-                expect(style('root').className.indexOf('root') > -1).toBe(true);
+                expect(classes.someclass.indexOf('someclass') > -1).toBe(true);
+                expect(style('root').indexOf('root') > -1).toBe(true);
               });
             `,
         '__tests__/separate-styles.js': `
                 it('pass styles from node_modules', () => {
-                  const style = require('pkg/main.st.css').default;
-                  expect(style.someclass.indexOf('someclass') > -1).toBe(true);
-                  expect(style('root').className.indexOf('root') > -1).toBe(true);
+                  const {classes, style} = require('pkg/main.st.css');
+                  expect(classes.someclass.indexOf('someclass') > -1).toBe(true);
+                  expect(style('root').indexOf('root') > -1).toBe(true);
                 });`,
         '__tests__/main.st.css': `
               .someclass {
@@ -748,224 +748,226 @@ describe('Aggregator: Test', () => {
     it('should run e2e tests using mocha', () => {
       expect(res.stdout).to.contain('passed e2e');
     });
+  });
 
-    describe('with custom build', () => {
-      let customTest;
-      beforeEach(() => (customTest = tp.create()));
-      afterEach(function() {
-        if (this.currentTest.state === 'failed') {
-          test.logOutput();
-        }
-        test.teardown();
-      });
+  describe('--mocha with custom build', () => {
+    let customTest;
+    let res;
 
-      it('should fail with exit code 1', function() {
-        this.timeout(60000);
+    beforeEach(() => (customTest = tp.create()));
+    afterEach(function() {
+      if (this.currentTest.state === 'failed') {
+        customTest.logOutput();
+      }
 
-        res = customTest
-          .setup({
-            'test/some.spec.js': `it("fail", () => { throw new Error() });`,
-            'package.json': fx.packageJson(),
-          })
-          .execute('test', ['--mocha'], outsideTeamCity);
+      customTest.teardown();
+    });
 
-        expect(res.code).to.be.above(0);
-        expect(res.stdout).to.contain('1 failing');
-      });
+    it('should fail with exit code 1', function() {
+      this.timeout(60000);
 
-      it('should run specs from test/app/src by default', () => {
-        res = customTest
-          .setup({
-            'test/bla/comp.spec.js': `it("pass", () => 1);`,
-            'app/bla/comp.spec.js': `it("pass", () => 1);`,
-            'src/bla/comp.spec.js': `it("pass", () => 1);`,
-            'package.json': fx.packageJson(),
-          })
-          .execute('test', ['--mocha'], outsideTeamCity);
+      res = customTest
+        .setup({
+          'test/some.spec.js': `it("fail", () => { throw new Error() });`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
 
-        expect(res.code).to.equal(0);
-        expect(res.stdout).to.contain('3 passing');
-      });
+      expect(res.code).to.be.above(0);
+      expect(res.stdout).to.contain('1 failing');
+    });
 
-      it('should use the right reporter when running inside TeamCity', () => {
-        res = customTest
-          .setup({
-            'test/some.spec.js': `it.only("pass", () => 1);`,
-            'package.json': fx.packageJson(),
-          })
-          .execute('test', ['--mocha'], insideTeamCity);
-        expect(res.stdout).to.contain('##teamcity[');
-      });
+    it('should run specs from test/app/src by default', () => {
+      res = customTest
+        .setup({
+          'test/bla/comp.spec.js': `it("pass", () => 1);`,
+          'app/bla/comp.spec.js': `it("pass", () => 1);`,
+          'src/bla/comp.spec.js': `it("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
 
-      it('should use the right reporter when running outside TeamCity', () => {
-        res = customTest
-          .setup({
-            'test/some.spec.js': `it.only("pass", () => 1);`,
-            'package.json': fx.packageJson(),
-          })
-          .execute('test', ['--mocha'], outsideTeamCity);
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('3 passing');
+    });
 
-        expect(res.code).to.equal(0);
-        expect(res.stdout).to.contain('▬▬▬▬▬▬▬▬▬▬▬▬▬');
-      });
+    it('should use the right reporter when running inside TeamCity', () => {
+      res = customTest
+        .setup({
+          'test/some.spec.js': `it.only("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], insideTeamCity);
+      expect(res.stdout).to.contain('##teamcity[');
+    });
 
-      it('should use a custom reporter when requested', () => {
-        res = customTest
-          .setup({
-            'test/some.spec.js': `it.only("pass", () => 1);`,
-            'package.json': fx.packageJson(),
-          })
-          .execute(
-            'test',
-            ['--mocha'],
-            Object.assign(
-              {
-                mocha_reporter: 'landing', // eslint-disable-line camelcase
-              },
-              outsideTeamCity,
-            ),
-          );
+    it('should use the right reporter when running outside TeamCity', () => {
+      res = customTest
+        .setup({
+          'test/some.spec.js': `it.only("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
 
-        expect(res.code).to.equal(0);
-        expect(res.stdout).to.contain('✈');
-      });
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('▬▬▬▬▬▬▬▬▬▬▬▬▬');
+    });
 
-      it('should not transpile tests if `transpileTests` is `false`', () => {
-        res = customTest
-          .setup({
-            'test/bar.js': 'export default 5;',
-            'test/some.spec.js': `import foo from './bar';`,
-            'package.json': fx.packageJson({ transpileTests: false }),
-          })
-          .execute('test', ['--mocha']);
-
-        expect(res.code).to.equal(1);
-        expect(res.stderr).to.contain(
-          'Cannot use import statement outside a module',
+    it('should use a custom reporter when requested', () => {
+      res = customTest
+        .setup({
+          'test/some.spec.js': `it.only("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute(
+          'test',
+          ['--mocha'],
+          Object.assign(
+            {
+              mocha_reporter: 'landing', // eslint-disable-line camelcase
+            },
+            outsideTeamCity,
+          ),
         );
-      });
 
-      it('should output test coverage when --coverage is passed', () => {
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('✈');
+    });
+
+    it('should not transpile tests if `transpileTests` is `false`', () => {
+      res = customTest
+        .setup({
+          'test/bar.js': 'export default 5;',
+          'test/some.spec.js': `import foo from './bar';`,
+          'package.json': fx.packageJson({ transpileTests: false }),
+        })
+        .execute('test', ['--mocha']);
+
+      expect(res.code).to.equal(1);
+      expect(res.stderr).to.contain(
+        'Cannot use import statement outside a module',
+      );
+    });
+
+    it('should output test coverage when --coverage is passed', () => {
+      res = customTest
+        .setup({
+          'test/some.spec.js': `it.only("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .verbose()
+        .execute('test', ['--mocha', '--coverage']);
+
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain(
+        'All files |        0 |        0 |        0 |        0 |                   |',
+      );
+    });
+
+    it('should not run webpack-dev-server (cdn) when there are no e2e tests', () => {
+      res = customTest
+        .setup({
+          'test/bla/comp.spec.js': `it("pass", () => 1);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
+
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('1 passing');
+      expect(res.stdout).to.not.contain('cdn');
+    });
+
+    describe('with @babel/register', () => {
+      it('should transpile explicitly configured externalUnprocessedModules', function() {
         res = customTest
           .setup({
-            'test/some.spec.js': `it.only("pass", () => 1);`,
-            'package.json': fx.packageJson(),
+            'node_modules/my-unprocessed-module/index.js': 'export default 1',
+            'test/some.js': `import x from 'my-unprocessed-module'; export default x => x`,
+            'test/some.spec.js': `import identity from './some'; it.only("pass", () => 1);`,
+            'package.json': `{
+              "name": "a",
+              "yoshi": {
+                "externalUnprocessedModules": ["my-unprocessed-module"]
+              }
+            }`,
           })
-          .verbose()
-          .execute('test', ['--mocha', '--coverage']);
+          .execute('test', ['--mocha'], outsideTeamCity);
 
         expect(res.code).to.equal(0);
-        expect(res.stdout).to.contain(
-          'All files |        0 |        0 |        0 |        0 |                   |',
-        );
+        expect(res.stdout).to.contain('1 passing');
       });
 
-      it('should not run webpack-dev-server (cdn) when there are no e2e tests', () => {
+      it('should transpile es modules w/o any configurations', () => {
         res = customTest
           .setup({
-            'test/bla/comp.spec.js': `it("pass", () => 1);`,
+            'test/some.spec.js': `
+            import assert from 'assert';
+            it.only("pass", () => {
+              assert.equal(1, 1);
+            });
+          `,
             'package.json': fx.packageJson(),
           })
           .execute('test', ['--mocha'], outsideTeamCity);
 
         expect(res.code).to.equal(0);
         expect(res.stdout).to.contain('1 passing');
-        expect(res.stdout).to.not.contain('cdn');
       });
+    });
 
-      describe('with @babel/register', () => {
-        it('should transpile explicitly configured externalUnprocessedModules', function() {
-          res = customTest
-            .setup({
-              'node_modules/my-unprocessed-module/index.js': 'export default 1',
-              'test/some.js': `import x from 'my-unprocessed-module'; export default x => x`,
-              'test/some.spec.js': `import identity from './some'; it.only("pass", () => 1);`,
-              'package.json': `{
-                "name": "a",
-                "yoshi": {
-                  "externalUnprocessedModules": ["my-unprocessed-module"]
-                }
+    it('should run typescript tests with runtime compilation and force commonjs module system', () => {
+      res = customTest
+        .setup({
+          'tsconfig.json': fx.tsconfig(),
+          'test/some.spec.ts': `import * as usageOfFS from 'fs'; it.only("pass", () => !!usageOfFS);`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
+
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('1 passing');
+    });
+
+    it('should support dynamic imports syntax for node js', () => {
+      res = customTest
+        .setup({
+          'tsconfig.json': fx.tsconfig(),
+          'test/foo.ts': `console.log('hello');`,
+          'test/some.spec.ts': `it.only("pass", async () => { await import('./foo'); });`,
+          'package.json': fx.packageJson(),
+        })
+        .execute('test', ['--mocha'], outsideTeamCity);
+
+      expect(res.code).to.equal(0);
+      expect(res.stdout).to.contain('1 passing');
+      expect(res.stdout).to.contain('hello');
+    });
+
+    describe('stylable integration', () => {
+      it('should transform stylable stylesheets', () => {
+        res = customTest
+          .setup({
+            'src/main.st.css': `
+              .someclass {
+                color: yellow;
               }`,
-            })
-            .execute('test', ['--mocha'], outsideTeamCity);
+            'test/style.spec.js': `
+              const assert = require('assert');
+              const {style, classes} = require('../src/main.st.css');
 
-          expect(res.code).to.equal(0);
-          expect(res.stdout).to.contain('1 passing');
-        });
-
-        it('should transpile es modules w/o any configurations', () => {
-          res = customTest
-            .setup({
-              'test/some.spec.js': `
-              import assert from 'assert';
-              it.only("pass", () => {
-                assert.equal(1, 1);
-              });
-            `,
-              'package.json': fx.packageJson(),
-            })
-            .execute('test', ['--mocha'], outsideTeamCity);
-
-          expect(res.code).to.equal(0);
-          expect(res.stdout).to.contain('1 passing');
-        });
-      });
-
-      it('should run typescript tests with runtime compilation and force commonjs module system', () => {
-        res = customTest
-          .setup({
-            'tsconfig.json': fx.tsconfig(),
-            'test/some.spec.ts': `import * as usageOfFS from 'fs'; it.only("pass", () => !!usageOfFS);`,
+              it('pass', () => {
+                assert.equal(classes.someclass.indexOf('someclass') > -1, true);
+                assert.equal(style('root').indexOf('root') > -1, true);
+              })`,
             'package.json': fx.packageJson(),
           })
           .execute('test', ['--mocha'], outsideTeamCity);
 
         expect(res.code).to.equal(0);
         expect(res.stdout).to.contain('1 passing');
-      });
-
-      it('should support dynamic imports syntax for node js', () => {
-        res = customTest
-          .setup({
-            'tsconfig.json': fx.tsconfig(),
-            'test/foo.ts': `console.log('hello');`,
-            'test/some.spec.ts': `it.only("pass", async () => { await import('./foo'); });`,
-            'package.json': fx.packageJson(),
-          })
-          .execute('test', ['--mocha'], outsideTeamCity);
-
-        expect(res.code).to.equal(0);
-        expect(res.stdout).to.contain('1 passing');
-        expect(res.stdout).to.contain('hello');
-      });
-
-      describe('stylable integration', () => {
-        it('should transform stylable stylesheets', () => {
-          res = customTest
-            .setup({
-              'src/main.st.css': `
-                .someclass {
-                  color: yellow;
-                }`,
-              'src/style.spec.js': `
-                const assert = require('assert');
-                const style = require('./main.st.css').default;
-
-                it('pass', () => {
-                  assert.equal(style.someclass.indexOf('someclass') > -1, true);
-                  assert.equal(style('root').className.indexOf('root') > -1, true);
-                })`,
-              'package.json': fx.packageJson(),
-            })
-            .execute('test', ['--mocha'], outsideTeamCity);
-
-          expect(res.code).to.equal(0);
-          expect(res.stdout).to.contain('1 passing');
-        });
       });
     });
   });
-
   describe('--karma', function() {
     this.timeout(60000);
     let test;
