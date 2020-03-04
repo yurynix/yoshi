@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.44.0 (2020-03-04)
+
+#### :rocket: New Feature
+
+- `jest-yoshi-preset`, `yoshi-common`, `yoshi-flow-legacy`, `yoshi-stylable-dependencies`, `yoshi`
+  - [#2023](https://github.com/wix/yoshi/pull/2023) Add `yoshi-stylable-dependencies` (Support for stylable 3) ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2036](https://github.com/wix/yoshi/pull/2036) Change integration package name to avoid haste map warning ([@yanivefraim](https://github.com/yanivefraim))
+- [#2035](https://github.com/wix/yoshi/pull/2035) Remove website lockfile ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.43.2 (2020-03-01)
 
 #### :building_construction: Templates
