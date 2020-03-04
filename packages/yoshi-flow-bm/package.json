@@ -13,7 +13,7 @@
     "fs-extra": "8.1.0",
     "globby": "10.0.2",
     "react-dev-utils": "9.1.0",
-    "webpack": "4.41.6",
+    "webpack": "4.42.0",
     "yoshi-common": "4.43.2",
     "yoshi-config": "4.43.2",
     "yoshi-flow-bm-runtime": "4.43.2",
