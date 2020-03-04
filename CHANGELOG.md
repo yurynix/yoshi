@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.44.1 (2020-03-04)
+
+#### :bug: Bug Fix
+
+- `yoshi`
+  - [#2046](https://github.com/wix/yoshi/pull/2046) Fix `webpack.config.storybook.js` stylable webpack plugin import ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2040](https://github.com/wix/yoshi/pull/2040) Add scripts to Yoshi tests fixtures ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.44.0 (2020-03-04)
 
 #### :rocket: New Feature
