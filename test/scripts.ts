@@ -11,6 +11,7 @@ import {
   terminateAsync,
   tmpDirectory,
   replaceTemplates,
+  logMessage,
 } from './utils';
 
 const isPublish = !!process.env.WITH_PUBLISH;
@@ -188,9 +189,7 @@ export default class Scripts {
 
       await callback();
     } catch (e) {
-      console.log('--------------- Yoshi Start Output ---------------');
-      console.log(startProcessOutput);
-      console.log('--------------- End of Yoshi Start Output ---------------');
+      logMessage('Yoshi Start Output:', startProcessOutput);
       throw e;
     } finally {
       await terminateAsyncSafe(startProcess.pid);
@@ -227,9 +226,7 @@ export default class Scripts {
     try {
       await callback();
     } catch (e) {
-      console.log('--------------- Yoshi Build Output ---------------');
-      console.log(buildProcessOutput);
-      console.log('--------------- End of Yoshi Build Output ---------------');
+      logMessage('Yoshi Build Output:', buildProcessOutput);
       throw e;
     } finally {
       terminateAsync(buildProcess.pid);
@@ -318,24 +315,31 @@ export default class Scripts {
 
     const appServerProcess = execa('node', ['./index.js'], {
       cwd: this.testDirectory,
-      stdio: !this.verbose ? 'pipe' : 'inherit',
       env: {
         NODE_PATH: this.yoshiPublishDir,
         PORT: `${this.serverProcessPort}`,
       },
+      all: true,
     });
 
-    await Promise.all([
-      waitForPort(this.staticsServerPort),
-      waitForPort(this.serverProcessPort),
-    ]);
+    let serverOutput = '';
+
+    appServerProcess.all &&
+      appServerProcess.all.on('data', d => {
+        serverOutput += d.toString();
+      });
 
     try {
+      // wait for staticsServerPort && (serverProcessPort || error in server)
+      await Promise.all([
+        waitForPort(this.staticsServerPort),
+        Promise.race([waitForPort(this.serverProcessPort), appServerProcess]),
+      ]);
+
       await callback(buildResult);
     } catch (e) {
-      console.log('--------------- Yoshi Build Output ---------------');
-      console.log(buildResult.all);
-      console.log('--------------- End of Yoshi Build Output ---------------');
+      logMessage('Yoshi Build Output:', buildResult.all as string);
+      serverOutput && logMessage('Server Results:', serverOutput);
       throw e;
     } finally {
       await Promise.all([

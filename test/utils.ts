@@ -7,7 +7,11 @@ import waitPort from 'wait-port';
 // @ts-ignore missing types
 import terminate from 'terminate';
 import execa from 'execa';
+import chalk from 'chalk';
+import boxen from 'boxen';
 import { parastorageCdnUrl, localCdnUrl } from './constants';
+
+const boxenOptions = { padding: 1, margin: 1, borderColor: 'magenta' };
 
 export const terminateAsync = promisify(terminate);
 
@@ -206,3 +210,8 @@ export const replaceTemplates = (
 
     return map[key];
   });
+
+export const logMessage = (title: string, message: string) =>
+  console.log(
+    boxen(`${chalk.bold.bgBlue(title)} \n\n ${message}`, boxenOptions),
+  );
