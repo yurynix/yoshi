@@ -1,4 +1,5 @@
-const StylableWebpackPlugin = require('yoshi-common/build/@stylable/webpack-plugin');
+const StylableWebpackPlugin = require('yoshi-common/build/@stylable/webpack-plugin')
+  .default;
 const {
   createClientWebpackConfig,
   getStyleLoaders,
