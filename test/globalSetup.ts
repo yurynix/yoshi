@@ -27,7 +27,7 @@ export default async (globalConfig: any) => {
       You are trying to run integration tests locally in a slow way,
       using Verdaccio, which will publish the monorepo locally to your file system.
       A better way is to use one of the 'fast' commands, from your package.json,
-      or just run 'npx jest --runInBand' with filters as you want (recommended).
+      or just run 'npx jest' with filters as you want (recommended).
       If you still want to run those tests locally with the publish option,
       please add the 'forcePublish' environment variable to the command.
       Please notice that this will change some files on your file system

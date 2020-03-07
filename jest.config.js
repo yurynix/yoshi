@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-puppeteer',
+  runner: './config/serial-runner.js',
   rootDir: './test',
   verbose: true,
   testResultsProcessor: 'jest-teamcity-reporter',

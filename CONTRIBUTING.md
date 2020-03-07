@@ -48,7 +48,7 @@ How it works:
 
 Command:
 
-`npx jest --runInBand` - Run all integration tests (not recommended locally). Please see below how to run those localy.
+`npx jest` - Run all integration tests (not recommended locally). Please see below how to run those localy.
 
 ### Unit tests
 
@@ -81,19 +81,19 @@ Command:
 We have several status checks for integration tests, in order to parallelize them in CI. Locally, we usually run the specific feature relevant for us. You can filter it using jest (awesome) filtering capabilities. For example:
 
 ```
-npx jest css-inclution --runInBand
+npx jest css-inclution
 ```
 
 or
 
 ```
-npx jest typescript/features/loaders/css/css-inclusion/css-inclusion.test.js --runInBand
+npx jest typescript/features/loaders/css/css-inclusion/css-inclusion.test.js
 ```
 
 You can also filter a specific test:
 
 ```
-npx jest moment -t='exclude locales imported from moment' --runInBand
+npx jest moment -t='exclude locales imported from moment'
 ```
 
 #### Debugging a test locally:
@@ -101,7 +101,7 @@ npx jest moment -t='exclude locales imported from moment' --runInBand
 Add a `DEBUG=true` before the command, for example:
 
 ```
-DEBUG=true npx jest css-inclution --runInBand
+DEBUG=true npx jest css-inclution
 ```
 
 This will open the browser and produce verbose logs.
