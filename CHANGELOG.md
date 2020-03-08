@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.45.1 (2020-03-08)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2057](https://github.com/wix/yoshi/pull/2057) Fix yoshi serve: app-server use `NODE_ENV="development"` ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2045](https://github.com/wix/yoshi/pull/2045) Run webworker server compiler in start command ([@ronami](https://github.com/ronami))
+
 ## 4.45.0 (2020-03-08)
 
 #### :rocket: New Feature
