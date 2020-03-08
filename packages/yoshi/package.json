@@ -1,6 +1,6 @@
 {
   "name": "yoshi",
-  "version": "4.44.1",
+  "version": "4.45.0",
   "bin": {
     "yoshi": "./bin/yoshi-cli.js"
   },
@@ -23,11 +23,11 @@
   ],
   "dependencies": {
     "@babel/core": "7.8.6",
-    "yoshi-common": "4.44.0",
+    "yoshi-common": "4.45.0",
     "yoshi-config": "4.43.2",
-    "yoshi-flow-app": "4.44.0",
-    "yoshi-flow-legacy": "4.44.0",
-    "yoshi-flow-monorepo": "4.44.0",
+    "yoshi-flow-app": "4.45.0",
+    "yoshi-flow-legacy": "4.45.0",
+    "yoshi-flow-monorepo": "4.45.0",
     "yoshi-helpers": "4.43.2"
   }
 }
