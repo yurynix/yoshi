@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.45.0",
+  "version": "4.45.1",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -106,11 +106,11 @@
     "wnpm-ci": "8.0.115",
     "word-wrap": "1.2.3",
     "xmldoc": "1.1.2",
-    "yoshi-common": "4.45.0",
+    "yoshi-common": "4.45.1",
     "yoshi-config": "4.43.2",
     "yoshi-helpers": "4.43.2",
     "yoshi-runtime": "1.0.704",
-    "yoshi-server-tools": "4.43.2"
+    "yoshi-server-tools": "4.45.1"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "7.8.3",
@@ -131,7 +131,7 @@
     "generic-names": "1.0.3",
     "graphql-tag": "2.10.3",
     "identity-obj-proxy": "3.0.0",
-    "jest-yoshi-preset": "4.45.0",
+    "jest-yoshi-preset": "4.45.1",
     "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
@@ -158,7 +158,7 @@
     "strip-ansi": "4.0.0",
     "tempy": "0.4.0",
     "typescript": "3.7.5",
-    "yoshi-angular-dependencies": "4.44.0",
+    "yoshi-angular-dependencies": "4.45.1",
     "yoshi-style-dependencies": "4.37.1"
   }
 }
