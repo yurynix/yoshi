@@ -37,7 +37,7 @@ export class ServerProcess {
     serverFilePath,
     appName,
     env = {
-      NODE_ENV: 'production',
+      NODE_ENV: 'development',
     },
   }: {
     cwd?: string;
