@@ -1,5 +1,20 @@
 # Changelog
 
+## 4.45.0 (2020-03-08)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-common`
+  - [#2051](https://github.com/wix/yoshi/pull/2051) Support for `TypeScript`/`Babel` transpilation for server process ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-flow-legacy`
+  - [#2037](https://github.com/wix/yoshi/pull/2037) Make `yoshi test --help` show how to run specific test files ([@jakutis](https://github.com/jakutis))
+
+#### :house: Internal
+
+- [#2052](https://github.com/wix/yoshi/pull/2052) Run integration tests serially by default ([@ranyitz](https://github.com/ranyitz))
+- [#2048](https://github.com/wix/yoshi/pull/2048) Integration tests: Remove duplications ([@yanivefraim](https://github.com/yanivefraim))
+- [#2044](https://github.com/wix/yoshi/pull/2044) Integration tests: Handle errors in tests + better logs ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.44.1 (2020-03-04)
 
 #### :bug: Bug Fix
