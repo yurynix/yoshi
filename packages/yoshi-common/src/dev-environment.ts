@@ -319,6 +319,7 @@ export default class DevEnvironment {
       webpack.Configuration,
       webpack.Configuration,
       webpack.Configuration?,
+      webpack.Configuration?,
     ];
     serverFilePath: string;
     https: boolean;
@@ -389,9 +390,11 @@ export default class DevEnvironment {
       clientCompiler,
       serverCompiler,
       webWorkerCompiler,
+      webWorkerServerCompiler,
     ] = multiCompiler.compilers as [
       webpack.Compiler,
       webpack.Compiler,
+      webpack.Compiler?,
       webpack.Compiler?,
     ];
 
@@ -429,6 +432,10 @@ export default class DevEnvironment {
 
     if (webWorkerCompiler) {
       devEnvironment.startWebWorkerHotUpdate(webWorkerCompiler);
+    }
+
+    if (webWorkerServerCompiler) {
+      devEnvironment.startWebWorkerHotUpdate(webWorkerServerCompiler);
     }
 
     devEnvironment.store.subscribe(state =>

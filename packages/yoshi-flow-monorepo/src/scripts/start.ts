@@ -7,6 +7,7 @@ import {
   createClientWebpackConfig,
   createServerWebpackConfig,
   createWebWorkerWebpackConfig,
+  createWebWorkerServerWebpackConfig,
 } from '../webpack.config';
 
 const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
@@ -108,8 +109,21 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     });
   }
 
+  let webWorkerServerConfig;
+
+  if (pkg.config.webWorkerServerEntry) {
+    webWorkerServerConfig = createWebWorkerServerWebpackConfig(pkg, {
+      isDev: true,
+    });
+  }
+
   const devEnvironment = await DevEnvironment.create({
-    webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
+    webpackConfigs: [
+      clientConfig,
+      serverConfig,
+      webWorkerConfig,
+      webWorkerServerConfig,
+    ],
     https: pkg.config.servers.cdn.ssl,
     webpackDevServerPort: pkg.config.servers.cdn.port,
     serverFilePath: serverStartFile,
