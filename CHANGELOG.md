@@ -1,5 +1,34 @@
 # Changelog
 
+## 4.46.0 (2020-03-09)
+
+#### :boom: Breaking Change
+
+- `stylelint-config-yoshi`, `yoshi-flow-legacy`
+  - [#2062](https://github.com/wix/yoshi/pull/2062) Remove stylelint dependency ([@ranyitz](https://github.com/ranyitz))
+
+#### :rocket: New Feature
+
+- `eslint-config-yoshi-base`
+  - [#2066](https://github.com/wix/yoshi/pull/2066) Add the spaced comment eslint rule ([@ranyitz](https://github.com/ranyitz))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2065](https://github.com/wix/yoshi/pull/2065) Use eslint for TypeScript templates ([@ranyitz](https://github.com/ranyitz))
+  - [#2067](https://github.com/wix/yoshi/pull/2067) `tsconfig` skip lib check for templates ([@ranyitz](https://github.com/ranyitz))
+  - [#2063](https://github.com/wix/yoshi/pull/2063) Update vscode intregration ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-legacy`, `yoshi-helpers`
+  - [#2059](https://github.com/wix/yoshi/pull/2059) Use `SRC_MD5` to consturct public patch ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :house: Internal
+
+- `yoshi-common`
+  - [#2061](https://github.com/wix/yoshi/pull/2061) Refactor server process class usage (default `env`) ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.45.1 (2020-03-08)
 
 #### :bug: Bug Fix
