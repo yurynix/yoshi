@@ -193,8 +193,8 @@ export const getProjectArtifactVersion = () => {
   return (process.env.ARTIFACT_VERSION
     ? // Dev CI
       process.env.ARTIFACT_VERSION.replace('-SNAPSHOT', '')
-    : // PR CI won't have a version, only BUILD_NUMBER and BUILD_VCS_NUMBER
-      process.env.BUILD_VCS_NUMBER) as string;
+    : // PR CI won't have a version, only SRC_MD5
+      process.env.SRC_MD5) as string;
 };
 
 // Gets the CDN base path for the project at the current working dir

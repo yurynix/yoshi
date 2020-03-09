@@ -78,7 +78,7 @@ export const hasBundleInStaticsDir = (cwd = process.cwd()) => {
 export const shouldDeployToCDN = () => {
   return (
     inTeamCity() &&
-    (process.env.ARTIFACT_VERSION || process.env.BUILD_VCS_NUMBER) &&
+    (process.env.ARTIFACT_VERSION || process.env.SRC_MD5) &&
     fs.existsSync(POM_FILE)
   );
 };

@@ -137,7 +137,7 @@ describe('Webpack basic configs', () => {
         );
       });
 
-      it('should construct the public path according to pom.xml "artifactId" and BUILD_VCS_NUMBER environment variable', () => {
+      it('should construct the public path according to pom.xml "artifactId" and SRC_MD5 environment variable', () => {
         test
           .setup({
             'src/client.js': `console.log('test');`,
@@ -145,7 +145,7 @@ describe('Webpack basic configs', () => {
           })
           .execute('build', [], {
             ...insideTeamCity,
-            BUILD_VCS_NUMBER: 'this_is_hash',
+            SRC_MD5: 'this_is_hash',
           });
 
         expect(test.content('dist/statics/app.bundle.js')).to.contain(
