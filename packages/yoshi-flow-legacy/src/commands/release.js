@@ -21,6 +21,7 @@ and will be removed in the next major version (yoshi@5)
 
 In order to continue and bump the minor/patch version in the CI,
 please add this to the \`publishConfig\` in \`package.json\`
+and remove the \`release\` script
 
 ...
   "publishConfig": {
@@ -36,5 +37,5 @@ https://github.com/wix-private/wix-fed-scripts/pull/37
       { padding: 1 },
     ),
   );
-  wnpm.prepareForRelease({ shouldBumpMinor });
+  await wnpm.prepareForRelease({ shouldBumpMinor });
 });
