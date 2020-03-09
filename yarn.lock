@@ -23860,14 +23860,14 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylelint-prettier@1.1.2:
+stylelint-prettier@^1.0.3:
   version "1.1.2"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/stylelint-prettier/-/stylelint-prettier-1.1.2.tgz#2b19abe40789c380bffee3d4267c413d981a86ea"
   integrity sha1-Kxmr5AeJw4C//uPUJnxBPZgahuo=
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-stylelint@9.10.1:
+stylelint@^9.7.1:
   version "9.10.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/stylelint/-/stylelint-9.10.1.tgz#5f0ee3701461dff1d68284e1386efe8f0677a75d"
   integrity sha1-Xw7jcBRh3/HWgoThOG7+jwZ3p10=
