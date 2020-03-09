@@ -1,6 +1,6 @@
 {
   "name": "yoshi-server",
-  "version": "4.44.0",
+  "version": "4.47.0",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
@@ -17,8 +17,8 @@
     "@wix/wix-bootstrap-hadron": "^1.0.0",
     "@wix/wix-bootstrap-ng": "^1.0.0",
     "@wix/wix-bootstrap-require-login": "^1.0.0",
-    "@wix/wix-express-csrf": "^1.0.0",
     "@wix/wix-errors": "^1.0.0",
+    "@wix/wix-express-csrf": "^1.0.0",
     "@wix/wix-express-require-https": "^1.0.0",
     "ejs": "2.7.4",
     "express": "4.17.1",
