@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.47.0 (2020-03-09)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#2058](https://github.com/wix/yoshi/pull/2058) Provide `404` and `500` errors on Yoshi Server Routes ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :warning: Deprecation :building_construction: Templates
+
+- `create-yoshi-app`, `yoshi-flow-legacy`
+  - [#2069](https://github.com/wix/yoshi/pull/2069) Deprecate `yoshi release` command ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2060](https://github.com/wix/yoshi/pull/2060) Move some integration tests from `.js` to `.ts` ([@yanivefraim](https://github.com/yanivefraim))
+- [#2070](https://github.com/wix/yoshi/pull/2070) Add deprecation PR label ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.46.0 (2020-03-09)
 
 #### :boom: Breaking Change
