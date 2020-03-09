@@ -55,5 +55,8 @@
   },
   "jest": {
     "preset": "jest-yoshi-preset"
+  },
+  "eslintConfig": {
+    "extends": "yoshi"
   }
 }

@@ -45,5 +45,8 @@
   },
   "yoshi": {
     "hmr": "auto"
+  },
+  "eslintConfig": {
+    "extends": "yoshi"
   }
 }

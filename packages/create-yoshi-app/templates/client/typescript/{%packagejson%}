@@ -61,5 +61,8 @@
       "@wix/fedops-logger": "fedopsLogger"
     },
     "hmr": "auto"
+  },
+  "eslintConfig": {
+    "extends": "yoshi"
   }
 }
