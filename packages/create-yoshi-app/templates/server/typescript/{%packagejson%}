@@ -12,8 +12,7 @@
     "start": "yoshi start",
     "pretest": "yoshi build",
     "test": "yoshi test --mocha",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "posttest": "yoshi lint"
   },
   "husky": {
     "hooks": {

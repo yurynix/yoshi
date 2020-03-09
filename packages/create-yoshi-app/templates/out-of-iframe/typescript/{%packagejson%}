@@ -11,8 +11,7 @@
     "start": "yoshi start",
     "pretest": "yoshi build",
     "test": "yoshi test --jest",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "posttest": "yoshi lint"
   },
   "husky": {
     "hooks": {

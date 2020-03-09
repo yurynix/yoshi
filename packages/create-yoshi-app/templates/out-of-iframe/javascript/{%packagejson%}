@@ -12,8 +12,7 @@
     "pretest": "yoshi build",
     "test": "yoshi test --jest",
     "test:ssr": "jest --config jest-ssr.config.js",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "posttest": "yoshi lint"
   },
   "husky": {
     "hooks": {

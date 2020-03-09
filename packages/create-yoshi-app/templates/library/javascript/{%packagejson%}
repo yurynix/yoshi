@@ -13,13 +13,13 @@
     "dist"
   ],
   "publishConfig": {
-    "registry": "http://npm.dev.wixpress.com/"
+    "registry": "http://npm.dev.wixpress.com/",
+    "versionBumpStrategy": "minor"
   },
   "scripts": {
     "pretest": "yoshi build",
     "test": "yoshi test",
-    "posttest": "yoshi lint",
-    "release": "yoshi release"
+    "posttest": "yoshi lint"
   },
   "husky": {
     "hooks": {
