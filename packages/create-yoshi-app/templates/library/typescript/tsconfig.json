@@ -10,7 +10,8 @@
     "importHelpers": true,
     "target": "es5",
     "jsx": "react",
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "esnext"],
+    "skipLibCheck": true
   },
   "include": [
     "./__tests__/**/*.ts"

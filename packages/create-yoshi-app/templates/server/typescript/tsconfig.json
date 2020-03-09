@@ -11,7 +11,8 @@
     "target": "es6",
     "jsx": "react",
     "lib": ["dom", "esnext"],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": [
     "./test/**/*.ts"

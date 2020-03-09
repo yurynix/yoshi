@@ -10,7 +10,8 @@
     "jsx": "react",
     "lib": ["dom", "dom.iterable", "esnext"],
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "skipLibCheck": true
   },
   "include": ["./src/**/*", "./dev/**/*", "./__tests__/**/*"],
   "files": [
