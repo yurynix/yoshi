@@ -131,6 +131,8 @@ module.exports = {
     'import/no-absolute-path': 'error',
     'import/no-useless-path-segments': 'error',
 
+    // https://eslint.org/docs/rules/spaced-comment
+    'spaced-comment': ['warn', 'always', { markers: ['/'] }],
     // https://github.com/prettier/eslint-plugin-prettier
     'prettier/prettier': [
       'warn',
