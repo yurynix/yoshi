@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.47.1 (2020-03-09)
+
+#### :boom: Breaking Change
+
+- `yoshi-flow-monorepo`
+  - [#2072](https://github.com/wix/yoshi/pull/2072) Remove the `yoshi release` command of the monorepo flow ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-legacy`
+  - [#2077](https://github.com/wix/yoshi/pull/2077) Wait for release command - fix yoshi release ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.47.0 (2020-03-09)
 
 #### :rocket: New Feature
