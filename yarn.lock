@@ -4661,6 +4661,17 @@
   dependencies:
     velocityjs "2.0.0"
 
+"@wix/wix-errors@^1.0.0":
+  version "1.0.854"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-errors/-/@wix/wix-errors-1.0.854.tgz#752b614763bc41a929532f168971a44fcfbb2acb"
+  integrity sha1-dSthR2O8QakpUy8WiXGkT8+7Kss=
+  dependencies:
+    "@types/long" "4.0.1"
+    "@wix/wix-aspects" "~1.0.640"
+    "@wix/wix-proto-runtime-toolkit" "~1.0.0"
+    http-status-codes "1.4.0"
+    long "4.0.0"
+
 "@wix/wix-errors@~1.0.171":
   version "1.0.850"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-errors/-/@wix/wix-errors-1.0.850.tgz#197eb00ef66c4e1e86f58d1e7d28c1b6cbb807bd"

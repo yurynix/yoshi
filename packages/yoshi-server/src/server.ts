@@ -1,12 +1,14 @@
 import path from 'path';
 import { parse as parseUrl } from 'url';
 import { RequestHandler, Request, Response } from 'express';
+// @ts-ignore - missing types
 import Youch from 'youch';
 import globby from 'globby';
 import { send } from 'micro';
 import importFresh from 'import-fresh';
 import requireHttps from 'wix-express-require-https';
 import { ROUTES_BUILD_DIR } from 'yoshi-config/build/paths';
+import { InternalServerError } from './httpErrors';
 import { RouteFunction } from './types';
 import { relativeFilePath, pathMatch, connectToYoshiServerHMR } from './utils';
 
@@ -43,7 +45,7 @@ export default class Server {
     }
   }
 
-  public handle: RequestHandler = async (req, res): Promise<void> => {
+  public handle: RequestHandler = async (req, res, next): Promise<void> => {
     try {
       const { pathname } = parseUrl(req.url as string, true);
 
@@ -56,14 +58,22 @@ export default class Server {
         }
       }
     } catch (error) {
-      if (process.env.NODE_ENV === 'production') {
-        return send(res, 500, 'internal server error');
+      if (
+        process.env.NODE_ENV === 'production' ||
+        process.env.IS_INTEGRATION_TEST_PROD === 'true'
+      ) {
+        return next(new InternalServerError('internal server error', error));
       }
 
       const youch = new Youch(error, req);
       const html: string = await youch.toHTML();
 
       return send(res, 500, html);
+    }
+
+    if (process.env.NODE_ENV === 'production') {
+      // If Yoshi Server did not find anything, pass the request on
+      return next();
     }
 
     return send(res, 404, 'not found');
