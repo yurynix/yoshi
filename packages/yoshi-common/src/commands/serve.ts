@@ -36,6 +36,9 @@ const serve = async function() {
     const serverProcess = new ServerProcess({
       serverFilePath,
       appName: config.name,
+      env: {
+        NODE_ENV: 'development',
+      },
     });
 
     const [, cdn] = await Promise.all([

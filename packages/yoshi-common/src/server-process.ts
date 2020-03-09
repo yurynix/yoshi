@@ -25,10 +25,15 @@ function notUndefined<T>(x: T | undefined): x is T {
 
 const inspectArg = process.argv.find(arg => arg.includes('--debug'));
 
+type ServerProcessEnv = {
+  NODE_ENV: 'development' | 'production';
+  HMR_PORT?: string;
+};
+
 export class ServerProcess {
   private cwd: string;
   private serverFilePath: string;
-  private env: object;
+  private env: ServerProcessEnv;
   public child?: child_process.ChildProcess;
   public appName: string;
 
@@ -36,14 +41,12 @@ export class ServerProcess {
     cwd = process.cwd(),
     serverFilePath,
     appName,
-    env = {
-      NODE_ENV: 'development',
-    },
+    env,
   }: {
     cwd?: string;
     serverFilePath: string;
     appName: string;
-    env?: object;
+    env: ServerProcessEnv;
   }) {
     this.cwd = cwd;
     this.serverFilePath = serverFilePath;
