@@ -232,7 +232,7 @@ Default: `false`
 
 #### `--format`
 
-Use a specific formatter for eslint/tslint/stylelint
+Use a specific formatter for eslint/tslint
 
 Default: `stylish`
 
@@ -246,7 +246,6 @@ Executes linters based on the project type:
 
 - [`TSLint`](https://palantir.github.io/tslint/) for TypeScript projects (a `tslint.json` configuration file is required)
 - [`ESLint`](https://eslint.org/) for Babel projects (an `.eslintrc` configuration file is required)
-- [`Stylelint`](https://stylelint.io/) for any project with a `stylelint` configuration
 
 ## `release`
 
