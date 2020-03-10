@@ -30,6 +30,10 @@ and remove the \`release\` script
   },
 ...
 
+You can also run the migration script from the root of your project:
+
+npx https://gist.github.com/ranyitz/f595b72098477ab2146d64f984ac865f
+
 Note that this is a CI feature, for more information see:
 
 https://github.com/wix-private/wix-fed-scripts/pull/37
