@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.47.2 (2020-03-10)
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2076](https://github.com/wix/yoshi/pull/2076) Duplicated module field in library template ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-legacy`
+  - [#2083](https://github.com/wix/yoshi/pull/2083) Revert telemetry and bi-logger private dependency ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.47.1 (2020-03-09)
 
 #### :boom: Breaking Change
