@@ -1,5 +1,5 @@
+import axios from 'axios';
 import Scripts from '../../../../scripts';
-import { request } from '../../../../utils';
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
@@ -9,9 +9,10 @@ const scripts = Scripts.setupProjectFromTemplate({
 describe.each(['prod', 'dev'] as const)('stylable separate css [%s]', mode => {
   it('outputs stylable into a separate css file', async () => {
     await scripts[mode](async () => {
-      expect(
-        await request('http://localhost:3200/app.stylable.bundle.css'),
-      ).toContain('root{height:100vh}');
+      const { data: res } = await axios(
+        'http://localhost:3200/app.stylable.bundle.css',
+      );
+      expect(res).toContain('root{height:100vh}');
     });
   });
 });
