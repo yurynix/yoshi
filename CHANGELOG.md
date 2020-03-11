@@ -1,5 +1,28 @@
 # Changelog
 
+## 4.47.3 (2020-03-11)
+
+#### :bug: Bug Fix
+
+- `yoshi-server`
+  - [#2078](https://github.com/wix/yoshi/pull/2078) Yoshi Server: Support nested default routes ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-flow-legacy`
+  - [#2089](https://github.com/wix/yoshi/pull/2089) Remove dep check ([@ranyitz](https://github.com/ranyitz))
+- Other
+  - [#2085](https://github.com/wix/yoshi/pull/2085) Integration tests: fix flaky storybook test ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-legacy`
+  - [#2081](https://github.com/wix/yoshi/pull/2081) Add migration script link to release deprecation ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- Other
+  - [#2085](https://github.com/wix/yoshi/pull/2085) Integration tests: fix flaky storybook test ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm-runtime`, `yoshi-flow-bm`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-monorepo`, `yoshi-helpers`, `yoshi-server-react`, `yoshi-server-tools`
+  - [#2074](https://github.com/wix/yoshi/pull/2074) Remove not needed type resolutions ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.47.2 (2020-03-10)
 
 #### :building_construction: Templates
