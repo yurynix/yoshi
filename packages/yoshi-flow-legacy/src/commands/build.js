@@ -41,15 +41,9 @@ module.exports = runner.command(
       tasks[require.resolve('yoshi-common/build/sync-petri-specs')];
     const wixMavenStatics =
       tasks[require.resolve('yoshi-common/build/maven-statics')];
-    const wixDepCheck = tasks[require.resolve('../tasks/dep-check')];
     const ngAnnotate = tasks[require.resolve('../tasks/ng-annotate')];
 
-    await Promise.all([
-      clean({ pattern: `{dist,target}/*` }),
-      printAndExitOnErrors(() =>
-        wixDepCheck({}, { title: 'dep-check', log: false }),
-      ),
-    ]);
+    await Promise.all([clean({ pattern: `{dist,target}/*` })]);
 
     const useEsTarget = shouldExportModule();
 

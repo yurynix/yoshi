@@ -4192,14 +4192,6 @@
   dependencies:
     ms "^2.1.1"
 
-"@wix/depkeeper-preset-yoshi@1.0.309":
-  version "1.0.309"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/depkeeper-preset-yoshi/-/@wix/depkeeper-preset-yoshi-1.0.309.tgz#ec4ec954f78fec66d406d678bcbc256465671d5e"
-  integrity sha1-7E7JVPeP7GbUBtZ4vLwlZGVnHV4=
-  dependencies:
-    depkeeper "~1.0.36"
-    lodash "^4.17.10"
-
 "@wix/env-support@~1.0.699":
   version "1.0.1268"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/env-support/-/@wix/env-support-1.0.1268.tgz#666d0fe3f70d9d9764c54a536111c6f88abfe52b"
@@ -9806,26 +9798,6 @@ depd@~2.0.0:
   version "2.0.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/depd/-/depd-2.0.0.tgz#b696163cc757560d09cf22cc8fad1571b79e76df"
   integrity sha1-tpYWPMdXVg0JzyLMj60Vcbeedt8=
-
-depkeeper@1.0.392:
-  version "1.0.392"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/depkeeper/-/depkeeper-1.0.392.tgz#80a63b2d4e6836617a57711b1b3b4a40b3cf02ef"
-  integrity sha1-gKY7LU5oNmF6V3EbGztKQLPPAu8=
-  dependencies:
-    ini "~1.3.0"
-    minimatch "~3.0.0"
-    node-fetch "~1.7.0"
-    semver "~5.4.0"
-
-depkeeper@~1.0.36:
-  version "1.0.393"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/depkeeper/-/depkeeper-1.0.393.tgz#c0895eb2e0145e91c35f05b2f6a4250ae61a4448"
-  integrity sha1-wIlesuAUXpHDXwWy9qQlCuYaREg=
-  dependencies:
-    ini "~1.3.0"
-    minimatch "~3.0.0"
-    node-fetch "~1.7.0"
-    semver "~5.4.0"
 
 deprecation@^2.0.0, deprecation@^2.3.1:
   version "2.3.1"
@@ -17532,7 +17504,7 @@ minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
-"minimatch@2 || 3", minimatch@3.0.4, minimatch@^3.0.2, minimatch@^3.0.4, minimatch@~3.0.0, minimatch@~3.0.2:
+"minimatch@2 || 3", minimatch@3.0.4, minimatch@^3.0.2, minimatch@^3.0.4, minimatch@~3.0.2:
   version "3.0.4"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=
@@ -18065,7 +18037,7 @@ node-fetch@2.6.0, node-fetch@^2.2.0, node-fetch@^2.3.0, node-fetch@^2.5.0, node-
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha1-5jNFY4bUqlWGP2dqerDaqP3ssP0=
 
-node-fetch@^1.0.1, node-fetch@^1.5.1, node-fetch@~1.7.0:
+node-fetch@^1.0.1, node-fetch@^1.5.1:
   version "1.7.3"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
   integrity sha1-mA9vcthSEaU0fGsrwYxbhMPrR+8=
@@ -22428,11 +22400,6 @@ semver@~5.3.0:
   version "5.3.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
   integrity sha1-myzl094C0XxgEq0yaqa00M9U+U8=
-
-semver@~5.4.0:
-  version "5.4.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
-  integrity sha1-4FnAnYVx8FQII3M0M1BdOi8AsY4=
 
 send@0.1.4:
   version "0.1.4"
