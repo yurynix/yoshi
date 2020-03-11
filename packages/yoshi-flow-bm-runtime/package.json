@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-bm-runtime",
-  "version": "4.45.1",
+  "version": "4.47.3",
   "description": "",
   "main": "./build/index.js",
   "scripts": {},
