@@ -1,6 +1,9 @@
 import path from 'path';
 import SockJS from 'sockjs-client';
 import pathToRegexp from 'path-to-regexp';
+import { ROUTES_BUILD_DIR } from 'yoshi-config/build/paths';
+
+const routesBuildDir = path.resolve(ROUTES_BUILD_DIR);
 
 export function relativeFilePath(from: string, to: string) {
   return path.relative(from, to.replace(/\.[^/.]+$/, ''));
@@ -35,4 +38,18 @@ export function pathMatch(route: string, pathname: string | undefined) {
       [key.name]: key.repeat ? value.split(key.delimiter) : value,
     };
   }, {});
+}
+export function buildRoute(absolutePath: string) {
+  const relativePath = `/${relativeFilePath(routesBuildDir, absolutePath)}`;
+  // Change `/users/[userid]` to `/users/:userid`
+  const routePath = relativePath.replace(/\[(\w+)\]/g, ':$1');
+
+  if (routePath === '/index') {
+    return '/';
+  }
+  // '/app/index' -> '/app'
+  if (path.basename(routePath) === 'index') {
+    return routePath.replace('/index', '');
+  }
+  return routePath;
 }
