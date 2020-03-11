@@ -67,11 +67,12 @@ const testTemplate = mockedAnswers => {
       }
     };
 
-    // Important Notice: this test case sets up the environment
+    // !!!************************** Important Notice **************************!!!
+    // this test case sets up the environment
     // for the following test cases. So test case execution order is important!
     // If you nest a describe here (and the tests are run by mocha) the test cases
     // in the describe block will run first!
-    it('should generate project successfully', async () => {
+    it('step 1: should generate project successfully', async () => {
       prompts.inject(mockedAnswers);
       console.log(chalk.cyan(testDirectory));
 
@@ -95,19 +96,31 @@ const testTemplate = mockedAnswers => {
       });
     }
 
-    it('should run npm test with no configuration warnings', async () => {
-      console.log('running npm test...');
+    it('step 2: should run npm run build with no configuration warnings', async () => {
+      console.log('running npm build...');
 
-      const result = await exec('npm test');
+      const buildResult = await exec('npm run build');
 
-      if (result.exitCode !== 0) {
+      if (buildResult.exitCode !== 0) {
         throw new Error(
-          `"npm test" exited with code ${result.exitCode}.\nPlease see above for its output.`,
+          `"npm run build" exited with code ${buildResult.exitCode}.\nPlease see above for its output.`,
         );
       }
-      expect(result.stderr).not.toContain(
+      expect(buildResult.stderr).not.toContain(
         'Warning: Invalid configuration object',
       );
+    });
+
+    it('step 3: should run npm test', async () => {
+      console.log('running npm test...');
+
+      const testResult = await exec('npm test');
+
+      if (testResult.exitCode !== 0) {
+        throw new Error(
+          `"npm test" exited with code ${testResult.exitCode}.\nPlease see above for its output.`,
+        );
+      }
     });
   });
 };
