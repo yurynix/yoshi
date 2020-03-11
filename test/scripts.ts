@@ -37,6 +37,7 @@ export type ProjectType =
 type ScriptOpts = {
   args?: Array<string>;
   env?: { [key: string]: string };
+  waitForStorybook?: boolean;
 };
 
 export default class Scripts {
@@ -44,6 +45,7 @@ export default class Scripts {
   public readonly testDirectory: string;
   private readonly serverProcessPort: number;
   private readonly staticsServerPort: number;
+  private readonly storybookServerPort: number;
   public readonly serverUrl: string;
   private readonly yoshiPublishDir: string;
   public readonly staticsServerUrl: string;
@@ -53,6 +55,7 @@ export default class Scripts {
     this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
     this.staticsServerPort = 3200;
+    this.storybookServerPort = 9009;
     this.serverUrl = `http://localhost:${this.serverProcessPort}`;
     this.staticsServerUrl = `http://localhost:${this.staticsServerPort}`;
     this.yoshiPublishDir = isPublish
@@ -183,6 +186,9 @@ export default class Scripts {
           waitForPort(this.serverProcessPort, { timeout: 60 * 1000 }),
           waitForPort(this.staticsServerPort, { timeout: 60 * 1000 }),
           waitForStdout(startProcess, 'Compiled successfully!'),
+          opts.waitForStorybook
+            ? waitForPort(this.storybookServerPort, { timeout: 60 * 1000 })
+            : Promise.resolve(),
         ]),
         startProcess,
       ]);
