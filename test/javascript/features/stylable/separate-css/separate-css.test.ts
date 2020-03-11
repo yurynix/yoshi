@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Scripts from '../../../../scripts';
 
+jest.setTimeout(40 * 1000);
+
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
   projectType: 'javascript',
