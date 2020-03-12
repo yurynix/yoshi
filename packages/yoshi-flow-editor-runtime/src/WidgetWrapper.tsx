@@ -18,6 +18,7 @@ declare global {
 interface IFrameworkProps {
   __publicData__: any;
   experiments: any;
+  cssBaseUrl?: string;
 }
 
 const PublicDataProvider: typeof React.Component =
@@ -28,10 +29,12 @@ const PublicDataProvider: typeof React.Component =
 const WidgetWrapper = (UserComponent: typeof React.Component, name: string) => (
   props: IHostProps & IFrameworkProps & IControllerContext,
 ) => {
+  const { cssBaseUrl = window.__STATICS_BASE_URL__ } = props;
+
   return (
     <div>
       <link
-        href={`${window.__STATICS_BASE_URL__}${name}ViewerWidget.css`}
+        href={`${cssBaseUrl}${name}ViewerWidget.css`}
         rel="stylesheet"
         type="text/css"
       />

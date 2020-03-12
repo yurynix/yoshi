@@ -7,6 +7,13 @@ export interface ControllerConfig {
   wixCodeApi: any;
 }
 
+export interface ControllerContext {
+  frameworkData?: any;
+  appData?: Promise<any>;
+  widgetConfig?: any;
+  controllerConfig: ControllerConfig;
+}
+
 function getSiteLanguage({ wixCodeApi }: ControllerConfig) {
   if (wixCodeApi.window.multilingual.isEnabled) {
     return wixCodeApi.window.multilingual.currentLanguage;
@@ -28,11 +35,7 @@ async function getExperimentsByScope(scope: string) {
   return experiments.all();
 }
 
-async function createAppController({
-  controllerConfig,
-}: {
-  controllerConfig: ControllerConfig;
-}) {
+async function createController({ controllerConfig }: ControllerContext) {
   const { appParams, setProps } = controllerConfig;
   const language = getSiteLanguage(controllerConfig);
   const mobile = isMobile(controllerConfig);
@@ -52,4 +55,4 @@ async function createAppController({
   };
 }
 
-export default createAppController;
+export default createController;

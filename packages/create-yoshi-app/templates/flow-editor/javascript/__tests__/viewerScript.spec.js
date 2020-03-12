@@ -1,5 +1,5 @@
 import 'isomorphic-fetch';
-import createController from '../src/components/todo/controller';
+import createController from '../src/components/button/controller';
 import { EXPERIMENTS_SCOPE } from '../src/config/constants';
 import { mockExperiments } from '../src/components/button/controller.spec';
 
@@ -28,17 +28,35 @@ describe('createControllers', () => {
   it('should return controllers with pageReady method given widgets config', async () => {
     const experiments = { someExperiment: 'true' };
     mockExperiments(EXPERIMENTS_SCOPE, experiments);
-
-    const result = createController.call(
-      { state: undefined },
-      {
-        frameworkData: {
-          experimentsPromise: () => Promise.resolve(experiments),
+    const setPropsSpy = jest.fn();
+    const appParams = {
+      baseUrls: {
+        staticsBaseUrl: 'http://some-static-url.com',
+      },
+    };
+    const controllerConfig = {
+      appParams,
+      setProps: setPropsSpy,
+      wixCodeApi: {
+        window: {
+          multilingual: {
+            isEnabled: false,
+          },
+        },
+        site: {
+          language: 'en-US',
         },
       },
+    };
+
+    const result = createController({
+      frameworkData: {
+        experimentsPromise: () => Promise.resolve(experiments),
+      },
       widgetConfig,
-    );
-    expect(result).resolves.toHaveProperty('methods');
-    expect(result).resolves.toHaveProperty('corvid');
+      controllerConfig,
+    });
+
+    await expect(result).resolves.toHaveProperty('pageReady');
   });
 });

@@ -1,5 +1,7 @@
 import 'isomorphic-fetch';
-import createController from '../src/components/todo/controller';
+import createController, {
+  ControllerConfig,
+} from '../src/components/button/controller';
 import { EXPERIMENTS_SCOPE } from '../src/config/constants';
 import { mockExperiments } from '../src/components/button/controller.spec';
 
@@ -28,17 +30,35 @@ describe('createControllers', () => {
   it('should return controllers with pageReady method given widgets config', async () => {
     const experiments = { someExperiment: 'true' };
     mockExperiments(EXPERIMENTS_SCOPE, experiments);
-
-    const result = createController.call(
-      { state: {}, setState: () => {} },
-      {
-        frameworkData: {
-          experimentsPromise: () => Promise.resolve(experiments),
-        },
-        widgetConfig,
+    const setPropsSpy = jest.fn();
+    const appParams = {
+      baseUrls: {
+        staticsBaseUrl: 'http://some-static-url.com',
       },
-    );
-    await expect(result).resolves.toHaveProperty('methods');
-    await expect(result).resolves.toHaveProperty('corvid');
+    };
+    const controllerConfig: ControllerConfig = {
+      appParams,
+      setProps: setPropsSpy,
+      wixCodeApi: {
+        window: {
+          multilingual: {
+            isEnabled: false,
+          },
+        },
+        site: {
+          language: 'en-US',
+        },
+      },
+    };
+
+    const result = createController({
+      frameworkData: {
+        experimentsPromise: () => Promise.resolve(experiments),
+      },
+      widgetConfig,
+      controllerConfig,
+    });
+
+    await expect(result).resolves.toHaveProperty('pageReady');
   });
 });

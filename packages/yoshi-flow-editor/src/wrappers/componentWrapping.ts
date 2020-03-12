@@ -18,6 +18,7 @@ const componentWrapper = (
 
       const generateWidgetEntryContent = widgetEntryTemplate({
         widgetWrapperPath,
+        componentName: component.name,
         componentFileName: component.fileName,
       });
 
