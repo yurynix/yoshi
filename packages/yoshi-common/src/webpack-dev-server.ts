@@ -86,6 +86,7 @@ export class WebpackDevServer extends OriginalWebpackDevServer {
         '.wix.com',
         '.wixsite.com',
         '.ooidev.com',
+        '.editor-flow-dev.com',
         '.deviantart.lan',
       ],
       // TODO - check if needed for suricate and how can be better implemented
