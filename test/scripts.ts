@@ -333,10 +333,7 @@ export default class Scripts {
     try {
       // wait for staticsServerPort && (serverProcessPort || error in server)
       await Promise.all([
-        Promise.race([
-          waitForPort(this.staticsServerPort),
-          staticsServerProcess,
-        ]),
+        waitForPort(this.staticsServerPort),
         Promise.race([waitForPort(this.serverProcessPort), appServerProcess]),
       ]);
 
