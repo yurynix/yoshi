@@ -1,6 +1,8 @@
 import Scripts from '../../../../scripts';
 import { request } from '../../../../utils';
 
+jest.setTimeout(40 * 1000);
+
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
   projectType: 'javascript',
