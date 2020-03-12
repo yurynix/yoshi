@@ -32,7 +32,9 @@ export type ProjectType =
   | 'typescript'
   | 'javascript'
   | 'yoshi-server-javascript'
-  | 'yoshi-server-typescript';
+  | 'yoshi-server-typescript'
+  | 'monorepo-javascript'
+  | 'monorepo-typescript';
 
 type ScriptOpts = {
   args?: Array<string>;
@@ -49,8 +51,15 @@ export default class Scripts {
   public readonly serverUrl: string;
   private readonly yoshiPublishDir: string;
   public readonly staticsServerUrl: string;
+  private readonly isMonorepo: boolean;
 
-  constructor({ testDirectory }: { testDirectory: string }) {
+  constructor({
+    testDirectory,
+    isMonorepo,
+  }: {
+    testDirectory: string;
+    isMonorepo: boolean;
+  }) {
     this.verbose = !!process.env.DEBUG;
     this.testDirectory = testDirectory;
     this.serverProcessPort = 3000;
@@ -61,6 +70,7 @@ export default class Scripts {
     this.yoshiPublishDir = isPublish
       ? `${global.yoshiPublishDir}/node_modules`
       : path.join(__dirname, '../packages/yoshi-flow-legacy/node_modules');
+    this.isMonorepo = isMonorepo;
   }
 
   static setupProjectFromTemplate({
@@ -127,26 +137,49 @@ export default class Scripts {
       );
     }
 
-    return new Scripts({ testDirectory: featureDir });
+    // If this is a monorepo, run `yarn install` to symlink local modules
+    const isMonorepo =
+      projectType === 'monorepo-javascript' ||
+      projectType === 'monorepo-typescript';
+
+    if (isMonorepo) {
+      const args = [
+        path.resolve(
+          require.resolve('lerna/package.json'),
+          '..',
+          require('lerna/package.json').bin.lerna,
+        ),
+        'link',
+        '--force-local',
+      ];
+
+      execa.sync('node', args, {
+        cwd: featureDir,
+        stdio: 'inherit',
+      });
+    }
+
+    return new Scripts({ testDirectory: featureDir, isMonorepo });
   }
 
-  async dev(callback: TestCallback = async () => {}, opts: ScriptOpts = {}) {
+  async dev(
+    callback: TestCallback = async () => {},
+    opts: ScriptOpts & { extraStartArgs?: Array<string> } = {},
+  ) {
     let startProcessOutput: string = '';
 
-    const startProcess = execa(
-      'node',
-      [yoshiBin, 'start', ...(opts.args || [])],
-      {
-        cwd: this.testDirectory,
-        env: {
-          PORT: `${this.serverProcessPort}`,
-          NODE_PATH: this.yoshiPublishDir,
-          ...defaultOptions,
-          ...localEnv,
-          ...opts.env,
-        },
+    const args = [yoshiBin, 'start', ...(opts.extraStartArgs || [])];
+
+    const startProcess = execa('node', [...args, ...(opts.args || [])], {
+      cwd: this.testDirectory,
+      env: {
+        PORT: `${this.serverProcessPort}`,
+        NODE_PATH: this.yoshiPublishDir,
+        ...defaultOptions,
+        ...localEnv,
+        ...opts.env,
       },
-    );
+    });
 
     startProcess.stdout &&
       startProcess.stdout.on('data', buffer => {
@@ -307,13 +340,19 @@ export default class Scripts {
 
   async prod(
     callback: TestCallbackWithResult = async () => {},
-    opts: ScriptOpts = {},
+    opts: ScriptOpts & { staticsDir?: string } = {},
   ) {
     const buildResult = await this.build({ ...ciEnv, ...opts.env }, opts.args);
 
     const staticsServerProcess = execa(
       'npx',
-      ['serve', '-p', `${this.staticsServerPort}`, '-s', 'dist/statics/'],
+      [
+        'serve',
+        '-p',
+        `${this.staticsServerPort}`,
+        '-s',
+        opts.staticsDir || 'dist/statics/',
+      ],
       {
         cwd: this.testDirectory,
       },
