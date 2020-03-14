@@ -60,7 +60,9 @@ export class ServerProcess {
       cwd: this.cwd,
     });
 
-    const userServerFilePath = path.join(process.cwd(), this.serverFilePath);
+    const userServerFilePath = path.isAbsolute(this.serverFilePath)
+      ? this.serverFilePath
+      : path.join(process.cwd(), this.serverFilePath);
     const serverProcessWorker = require.resolve(
       './server-process-worker-with-transpilation.js',
     );
