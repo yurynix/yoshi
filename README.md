@@ -40,7 +40,9 @@ Head on to the [changelog](https://github.com/wix/yoshi/blob/master/CHANGELOG.md
 
 ## Contribute
 
-Yoshi is actively and openly being developed on GitHub. Contributions of any kind are welcome, including pull requests for bug fixes or features, and describing problems or ideas with new issues. 
+> For Wix employees only
+
+Yoshi is actively and openly being developed on GitHub. Contributions of any kind are welcome, including pull requests for bug fixes or features, and describing problems or ideas with new issues.
 
 See our [contributing guide](https://github.com/wix/yoshi/blob/master/CONTRIBUTING.md) to understand our development process before your first contribution.
 
