@@ -25,7 +25,6 @@
   "files.insertFinalNewline": true,
   "javascript.validate.enable": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.fixAll.tslint": true
+    "source.fixAll.eslint": true
   }
 }
