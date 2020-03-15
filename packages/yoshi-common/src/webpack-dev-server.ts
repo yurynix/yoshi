@@ -71,7 +71,6 @@ export class WebpackDevServer extends OriginalWebpackDevServer {
       compress: true,
       clientLogLevel: 'error',
       contentBase: path.join(cwd, STATICS_DIR),
-      watchContentBase: true,
       hot: true,
       publicPath,
       writeToDisk: true,
