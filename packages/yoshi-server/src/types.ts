@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { JsonValue } from 'type-fest';
 import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
 import * as t from 'io-ts';
 
@@ -15,8 +14,8 @@ export type RequestPayload = t.TypeOf<typeof requestPayloadCodec>;
 // General stuff
 export type UnpackPromise<T> = T extends Promise<infer U> ? U : T;
 export type OptionalPromise<T> = T | Promise<T>;
-export type FunctionArgs = Array<JsonValue>;
-export type FunctionResult = OptionalPromise<JsonValue | void | undefined>;
+export type FunctionArgs = Array<any>;
+export type FunctionResult = OptionalPromise<any>;
 
 // Server function types
 export type FunctionContext = {
