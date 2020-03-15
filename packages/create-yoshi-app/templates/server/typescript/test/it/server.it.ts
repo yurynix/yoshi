@@ -1,13 +1,11 @@
 import { expect } from 'chai';
-import axios from 'axios';
 import { env } from '../environment';
 
 describe('API', () => {
-  env.beforeAndAfter();
+  const { axios } = env.beforeAndAfter();
 
   it('should return a valid response', async () => {
-    const url = env.mainApp.getUrl('/');
-    const response = await axios.get(url);
+    const response = await axios.get('/');
 
     expect(response.data).to.deep.include({
       success: true,

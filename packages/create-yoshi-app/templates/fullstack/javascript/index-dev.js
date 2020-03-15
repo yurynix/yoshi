@@ -1,8 +1,3 @@
-const { bootstrapServer, emitConfigs } = require('./environment');
+const { env } = require('./environment');
 
-(async () => {
-  const app = bootstrapServer();
-
-  await emitConfigs();
-  await app.start();
-})();
+env.start();

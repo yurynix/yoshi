@@ -8,6 +8,7 @@ export const env = TestEnv.builder()
   .withMainAppConfigEmitter(builder =>
     builder.val('base_domain', 'test.wix.com'),
   )
+  .withAxios()
   .build();
 
 function bootstrapServer() {

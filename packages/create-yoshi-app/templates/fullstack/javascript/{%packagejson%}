@@ -46,6 +46,7 @@
     "@wix/fedops-logger": "^5.0.0",
     "@wix/wix-bootstrap-testkit": "latest",
     "@wix/wix-config-emitter": "latest",
+    "@wix/wix-test-env": "latest",
     "husky": "^4.2.1",
     "jest-yoshi-preset": "^4.1.0",
     "lint-staged": "^10.0.7",
@@ -68,7 +69,8 @@
   "eslintConfig": {
     "extends": "yoshi",
     "globals": {
-      "app": false
+      "app": false,
+      "axios": false
     }
   }
 }
