@@ -1,5 +1,41 @@
 # Changelog
 
+## 4.48.0 (2020-03-15)
+
+#### :rocket: New Feature
+
+- Other
+  - [#2096](https://github.com/wix/yoshi/pull/2096) Revert "Remove ts in index-dev" ([@ranyitz](https://github.com/ranyitz))
+- `create-yoshi-app`
+  - [#2090](https://github.com/wix/yoshi/pull/2090) Remove erb from BM templates ([@banuni](https://github.com/banuni))
+- `yoshi-common`
+  - [#2093](https://github.com/wix/yoshi/pull/2093) Add `.editor-flow-dev.com` to allowedHosts ([@yavorsky](https://github.com/yavorsky))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2075](https://github.com/wix/yoshi/pull/2075) Align npm scripts in templates ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2097](https://github.com/wix/yoshi/pull/2097) Enable adding an absolute path to `serverFilePath` in `serverProcess` ([@yavorsky](https://github.com/yavorsky))
+
+#### :nail_care: Polish
+
+- `create-yoshi-app`
+  - [#2091](https://github.com/wix/yoshi/pull/2091) [yoshi template "library"]: use `maven-v4.0.0.xsd` in `pom.xml` ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :memo: Documentation
+
+- `yoshi-flow-editor`
+  - [#2030](https://github.com/wix/yoshi/pull/2030) Add docs for overview and dev center registration + troubleshooting. ([@yavorsky](https://github.com/yavorsky))
+
+#### :house: Internal
+
+- [#2087](https://github.com/wix/yoshi/pull/2087) Integration tests: fix stylable flaky test ([@yanivefraim](https://github.com/yanivefraim))
+- [#1970](https://github.com/wix/yoshi/pull/1970) Basic setup for testing monorepo flow use cases ([@ronami](https://github.com/ronami))
+
 ## 4.47.3 (2020-03-11)
 
 #### :bug: Bug Fix
