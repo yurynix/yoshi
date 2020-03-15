@@ -30,7 +30,7 @@
     "path-to-regexp": "3.2.0",
     "serialize-error": "4.1.0",
     "sockjs-client": "1.4.0",
-    "type-fest": "0.11.0",
+    "type-fest": "0.12.0",
     "wix-bootstrap-bo-auth": "^1.0.1888",
     "wix-express-require-https": "^1.0.756",
     "yoshi-config": "4.47.3",

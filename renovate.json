@@ -16,7 +16,9 @@
   "ignoreDeps": [
     "webpack-dev-server",
     "typescript",
-    "@sentry/browser"
+    "@sentry/browser",
+    "@types/react",
+    "@types/webpack"
   ],
   "ignorePaths": [
     "**/test/**",
