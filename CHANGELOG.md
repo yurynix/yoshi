@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.49.0 (2020-03-15)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#2101](https://github.com/wix/yoshi/pull/2101) Yoshi Server: less strict return type restrictions ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2021](https://github.com/wix/yoshi/pull/2021) Fullstack templates use @wix/wix-test-env ([@hugebdu](https://github.com/hugebdu))
+
+#### :nail_care: Polish
+
+- `create-yoshi-app`
+  - [#2100](https://github.com/wix/yoshi/pull/2100) Remove tslint rule from settings.json ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.48.0 (2020-03-15)
 
 #### :rocket: New Feature
