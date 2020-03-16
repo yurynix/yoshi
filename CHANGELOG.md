@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.49.1 (2020-03-16)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2104](https://github.com/wix/yoshi/pull/2104) Don't make full page reload if client HMR is defined ([@ronami](https://github.com/ronami))
+- `jest-yoshi-preset`
+  - [#2103](https://github.com/wix/yoshi/pull/2103) Fix `devtools` option in `jest-yoshi.config.js` not working bug ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2099](https://github.com/wix/yoshi/pull/2099) add a message to the readme that only wix employees can contribute ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- `yoshi-flow-monorepo`
+  - [#2056](https://github.com/wix/yoshi/pull/2056) thunderbolt - Add `editor-elements-registry` to bundling check ([@NitayRabi](https://github.com/NitayRabi))
+
 ## 4.49.0 (2020-03-15)
 
 #### :rocket: New Feature
