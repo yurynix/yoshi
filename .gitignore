@@ -11,3 +11,4 @@ tsconfig.tsbuildinfo
 *_backup
 .tmp
 .history
+yarn-error.log

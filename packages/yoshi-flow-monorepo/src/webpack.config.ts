@@ -47,8 +47,10 @@ const createDefaultOptions = (pkg: PackageGraphNode) => {
   };
 };
 
+// TODO - thunderbolt-elements should be removed once editor-elements-registry is source of truth for comps
 const isThunderboltElementModule = (pkg: PackageGraphNode) =>
-  pkg.name === 'thunderbolt-elements';
+  pkg.name === 'thunderbolt-elements' ||
+  pkg.name === 'editor-elements-registry';
 
 const isSiteAssetsModule = (pkg: PackageGraphNode) =>
   pkg.name === 'thunderbolt-becky' || pkg.name === '@wix/thunderbolt-becky';
@@ -148,21 +150,19 @@ export function createServerWebpackConfig(
 ): webpack.Configuration {
   const defaultOptions = createDefaultOptions(pkg);
 
-  const customThunderboltElements = pkg.name === 'thunderbolt-elements';
-
   const serverConfig = createBaseWebpackConfig({
     cwd: pkg.location,
     configName: 'server',
     target: 'node',
     isDev,
     isHot,
-    useNodeExternals: !customThunderboltElements,
+    useNodeExternals: !isThunderboltElementModule(pkg),
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
     ...defaultOptions,
   });
 
-  if (customThunderboltElements) {
+  if (isThunderboltElementModule(pkg)) {
     serverConfig.output!.path = path.join(pkg.location, STATICS_DIR);
     serverConfig.plugins!.push(
       new webpack.optimize.LimitChunkCountPlugin({
