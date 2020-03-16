@@ -8,7 +8,7 @@ sidebar_label: Node API
 
 `yoshi-common` exposes `serve` functionality through Node API.
 
-Serve runs your `index-dev`/`dev/server` file with `NODE_ENV=PRODUCTION` and serves your `dist/statics` directory as a local CDN.
+Serve runs your `index-dev`/`dev/server` file and serves your `dist/statics` directory as a local CDN.
 
 > Note: You need to build the statics before running serve. You can do that with `yoshi build`.
 
