@@ -3,6 +3,7 @@ import bootstrap from '@wix/wix-bootstrap-ng';
 import Server from './server';
 
 bootstrap()
+  .use(require('@wix/ambassador/runtime/rpc'))
   // https://github.com/wix-platform/wix-node-platform/tree/master/greynode/wix-bootstrap-greynode
   .use(require('@wix/wix-bootstrap-greynode'))
   // https://github.com/wix-platform/wix-node-platform/tree/master/bootstrap-plugins/hadron/wix-bootstrap-hadron
