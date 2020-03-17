@@ -219,6 +219,11 @@ export function createWebWorkerWebpackConfig(
     }),
   );
 
+  // Use inline source maps since Thunderbolt loads worker as a blob locally
+  if (!isProduction()) {
+    workerConfig.devtool = 'inline-source-map';
+  }
+
   workerConfig.output!.library = '[name]';
   workerConfig.output!.libraryTarget = 'umd';
   workerConfig.output!.globalObject = 'self';
