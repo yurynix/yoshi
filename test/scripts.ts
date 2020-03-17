@@ -364,6 +364,7 @@ export default class Scripts {
         NODE_PATH: this.yoshiPublishDir,
         PORT: `${this.serverProcessPort}`,
         IS_INTEGRATION_TEST_PROD: 'true',
+        ...opts.env,
       },
       all: true,
     });

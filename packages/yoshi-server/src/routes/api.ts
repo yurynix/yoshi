@@ -71,6 +71,7 @@ export default route(async function() {
       context: this.context,
       req: this.req,
       res: this.res,
+      initData: this.initData,
     };
 
     return { payload: await fn.apply(fnThis, args) };

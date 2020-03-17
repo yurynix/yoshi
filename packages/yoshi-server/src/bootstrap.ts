@@ -12,8 +12,7 @@ bootstrap()
   .use(require('@wix/wix-bootstrap-require-login'))
   .use(require('wix-bootstrap-bo-auth'))
   .express(async (app: Router, context: any) => {
-    const server = new Server(context);
-
+    const server = await Server.create(context);
     app.all('*', server.handle);
 
     return app;

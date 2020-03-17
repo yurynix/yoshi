@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
+import resolve from 'resolve';
 import webpack from 'webpack';
 import globby from 'globby';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
@@ -101,10 +102,20 @@ function createServerEntries(context: string, cwd: string = process.cwd()) {
       })
     : [];
 
+  let initServerPath;
+  try {
+    initServerPath = resolve.sync(path.join(cwd, SRC_DIR, 'init-server'), {
+      extensions: ['.js', '.ts'],
+    });
+  } catch (e) {
+    // No 'init-server' file, Do nothing
+  }
+
   // Normalize to an object with short entry names
   const entries: Record<string, string> = [
     ...serverFunctions,
     ...serverRoutes,
+    ...(initServerPath ? [initServerPath] : []),
   ].reduce((acc, filepath) => {
     return {
       ...acc,

@@ -22,6 +22,7 @@ export type FunctionContext = {
   req: Request;
   res: Response;
   context: any;
+  initData: any;
 };
 
 export type ServerFunction<
@@ -41,8 +42,11 @@ export type RouteContext = {
   res: Response;
   context: BootstrapContext;
   params: { [name: string]: any | undefined };
+  initData: any;
 };
 
 export type RouteFunction<Result extends FunctionResult> = (
   this: RouteContext,
 ) => Result;
+
+export type InitServerFunction = (context: RouteContext) => any;

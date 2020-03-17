@@ -3,13 +3,14 @@ import { parse as parseUrl } from 'url';
 import { RequestHandler, Request, Response } from 'express';
 // @ts-ignore - missing types
 import Youch from 'youch';
+import fs from 'fs-extra';
 import globby from 'globby';
 import { send } from 'micro';
 import importFresh from 'import-fresh';
 import requireHttps from 'wix-express-require-https';
-import { ROUTES_BUILD_DIR } from 'yoshi-config/build/paths';
+import { ROUTES_BUILD_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { InternalServerError } from './httpErrors';
-import { RouteFunction } from './types';
+import { RouteFunction, InitServerFunction } from './types';
 import { pathMatch, connectToYoshiServerHMR, buildRoute } from './utils';
 
 export type Route = {
@@ -24,6 +25,7 @@ export type Route = {
 export default class Server {
   private context: any;
   private routes: Array<Route>;
+  private initData: any;
 
   constructor(context: any) {
     this.context = context;
@@ -44,6 +46,22 @@ export default class Server {
       };
     }
   }
+
+  static async create(context: any) {
+    const server = new Server(context);
+    await server.initServer();
+    return server;
+  }
+
+  private initServer: () => Promise<void> = async () => {
+    const initServerPath = path.resolve(BUILD_DIR, 'init-server.js');
+
+    if (await fs.pathExists(initServerPath)) {
+      const chunk = importFresh(initServerPath) as InitServerFunction;
+
+      this.initData = await chunk(this.context);
+    }
+  };
 
   public handle: RequestHandler = async (req, res, next): Promise<void> => {
     try {
@@ -98,6 +116,7 @@ export default class Server {
             req,
             res,
             params,
+            initData: this.initData,
           };
 
           const result = await chunk.call(fnThis);
