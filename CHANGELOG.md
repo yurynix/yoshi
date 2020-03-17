@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.50.0 (2020-03-17)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-server`
+  - [#2106](https://github.com/wix/yoshi/pull/2106) Yoshi server: init server ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-server`
+  - [#2111](https://github.com/wix/yoshi/pull/2111) Yoshi Server: Support ambassador ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.49.1 (2020-03-16)
 
 #### :bug: Bug Fix
