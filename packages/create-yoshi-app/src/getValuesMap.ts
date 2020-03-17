@@ -7,8 +7,8 @@ export default ({ projectName, authorName, authorEmail }: TemplateModel) => {
     projectName,
     authorName,
     authorEmail,
-    gitignore: '.gitignore',
-    packagejson: 'package.json',
+    gitignore: 'gitignore',
+    packagejson: 'package',
   };
 
   Object.keys(valuesMap).forEach(key => {
