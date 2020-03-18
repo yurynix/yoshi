@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.51.1 (2020-03-18)
+
+#### :rocket: New Feature
+
+- `babel-preset-yoshi`, `create-yoshi-app`, `jest-yoshi-preset`, `yoshi-common`, `yoshi-flow-library`
+  - [#2094](https://github.com/wix/yoshi/pull/2094) Yoshi flow library ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.51.0 (2020-03-18)
 
 #### :rocket: New Feature
