@@ -8,6 +8,9 @@ import {
 } from 'yoshi-helpers/build/queries';
 import { Config } from './config/types';
 
+const stripOrganization = (name: string): string =>
+  name.slice(name.indexOf('/') + 1);
+
 export function createClientWebpackConfig(
   config: Config,
   {
@@ -30,8 +33,11 @@ export function createClientWebpackConfig(
       ? inTeamCity() || isProduction()
       : config.separateCss;
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const name = stripOrganization(config.pkgJson.name!);
+
   const clientConfig = createBaseWebpackConfig({
-    name: config.pkgJson.name as string,
+    name,
     useTypeScript: true,
     typeCheckTypeScript: false,
     devServerUrl: config.url,
@@ -46,9 +52,13 @@ export function createClientWebpackConfig(
     separateCss,
   });
 
-  clientConfig.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
+  clientConfig.entry = isSingleEntry(entry)
+    ? { [stripOrganization(name)]: entry as string }
+    : entry;
 
   clientConfig.externals = config.externals;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  clientConfig.output!.filename = isDev ? '[name].umd.js' : '[name].umd.min.js';
 
   return clientConfig;
 }
