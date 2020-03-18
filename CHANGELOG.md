@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.51.0 (2020-03-18)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#2107](https://github.com/wix/yoshi/pull/2107) Enable IDE syntax highlighting for templates `package.json` files ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+
+- `bootstrap-hot-loader`
+  - [#2116](https://github.com/wix/yoshi/pull/2116) bootstrap-hot-loader: change `BootstrapContext` to be `any` ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-flow-monorepo`
+  - [#2114](https://github.com/wix/yoshi/pull/2114) Use inline source maps for worker locally to support loading worker as a blob ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- [#2112](https://github.com/wix/yoshi/pull/2112) [create-yoshi-app:dev]: Improve symlink strategy to ignore development types ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.50.0 (2020-03-17)
 
 #### :rocket: New Feature
