@@ -43,7 +43,7 @@ const serve = async function() {
 
     const [, cdn] = await Promise.all([
       serverProcess.initialize(),
-      startCDN(config),
+      startCDN({ ssl: config.servers.cdn.ssl, port: config.servers.cdn.port }),
     ]);
 
     resolve(() => Promise.all([serverProcess.close(), cdn.close()]).then());

@@ -2,9 +2,9 @@ import path from 'path';
 import webpack from 'webpack';
 import createStore, { Store } from 'unistore';
 import execa, { ExecaChildProcess } from 'execa';
-import clearConsole from 'react-dev-utils/clearConsole';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
+import debounce from 'lodash/debounce';
 import openBrowser from './open-browser';
 import { PORT } from './utils/constants';
 import { ServerProcessWithHMR } from './server-process';
@@ -16,8 +16,9 @@ import {
   getDevServerSocketPath,
 } from './utils/suricate';
 import devEnvironmentLogger from './dev-environment-logger';
-
-const isInteractive = process.stdout.isTTY;
+import { formatTypescriptError } from './tsc/formatter';
+import * as tscWorker from './tsc/tsc-worker';
+import TscProcess, { TscProcessEvent } from './tsc/tsc-process';
 
 type WebpackStatus = {
   errors: Array<string>;
@@ -37,19 +38,24 @@ export type ProcessState =
   | ({ status: 'errors' } & Partial<WebpackStatus>)
   | ({ status: 'warnings' } & Partial<WebpackStatus>);
 
-export type ProcessType = 'DevServer' | 'AppServer' | 'Storybook';
+export type ProcessType =
+  | 'DevServer'
+  | 'AppServer'
+  | 'Storybook'
+  | 'TypeScript';
 
 export type State = {
   [type in ProcessType]?: ProcessState;
 };
 
 type DevEnvironmentProps = {
-  webpackDevServer: WebpackDevServer;
-  serverProcess: ServerProcessWithHMR;
-  multiCompiler: webpack.MultiCompiler;
+  webpackDevServer?: WebpackDevServer;
+  serverProcess?: ServerProcessWithHMR;
+  multiCompiler?: webpack.MultiCompiler;
   appName: string;
   suricate: boolean;
   storybookProcess?: ExecaChildProcess;
+  tscProcess?: TscProcess;
   startUrl?: StartUrl;
 };
 
@@ -61,82 +67,76 @@ export default class DevEnvironment {
     this.props = props;
     this.store = createStore<State>();
 
-    const { multiCompiler, webpackDevServer } = props;
+    const {
+      multiCompiler,
+      webpackDevServer,
+      storybookProcess,
+      tscProcess,
+    } = props;
 
-    this.props.multiCompiler.hooks.invalid.tap('recompile-log', () => {
-      if (isInteractive) {
-        clearConsole();
-      }
-
-      this.store.setState({
-        DevServer: {
-          status: 'compiling',
-        },
+    if (multiCompiler && webpackDevServer) {
+      multiCompiler.hooks.invalid.tap('recompile-log', () => {
+        this.store.setState({
+          DevServer: {
+            status: 'compiling',
+          },
+        });
       });
-    });
 
-    if (this.props.storybookProcess) {
-      this.props.storybookProcess.on('message', this.onStoryBookMessage);
+      multiCompiler.hooks.done.tap('finished-log', stats => {
+        // @ts-ignore
+        const messages = formatWebpackMessages(stats.toJson({}, true));
+        const isSuccessful =
+          !messages.errors.length && !messages.warnings.length;
+
+        if (isSuccessful) {
+          const devServerUrls = prepareUrls(
+            webpackDevServer.https ? 'https' : 'http',
+            host,
+            webpackDevServer.port,
+          );
+
+          this.store.setState({
+            DevServer: {
+              status: 'success',
+              urls: devServerUrls,
+              ...messages,
+            },
+          });
+        } else if (messages.errors.length) {
+          if (messages.errors.length > 1) {
+            messages.errors.length = 1;
+          }
+
+          this.store.setState({
+            DevServer: {
+              status: 'errors',
+              ...messages,
+            },
+          });
+        } else if (messages.warnings.length) {
+          this.store.setState({
+            DevServer: {
+              status: 'warnings',
+              ...messages,
+            },
+          });
+        }
+      });
     }
 
-    multiCompiler.hooks.done.tap('finished-log', stats => {
-      if (isInteractive) {
-        clearConsole();
-      }
+    if (storybookProcess) {
+      storybookProcess.on('message', this.onStoryBookMessage);
+    }
 
-      // @ts-ignore
-      const messages = formatWebpackMessages(stats.toJson({}, true));
-      const isSuccessful = !messages.errors.length && !messages.warnings.length;
-
-      if (isSuccessful) {
-        const serverUrls = prepareUrls('http', host, PORT);
-
-        const devServerUrls = prepareUrls(
-          webpackDevServer.https ? 'https' : 'http',
-          host,
-          webpackDevServer.port,
-        );
-
-        this.store.setState({
-          AppServer: {
-            status: 'success',
-            urls: serverUrls,
-          },
-          DevServer: {
-            status: 'success',
-            urls: devServerUrls,
-            ...messages,
-          },
-        });
-      } else if (messages.errors.length) {
-        if (messages.errors.length > 1) {
-          messages.errors.length = 1;
-        }
-
-        this.store.setState({
-          AppServer: {
-            status: 'errors',
-          },
-          DevServer: {
-            status: 'errors',
-            ...messages,
-          },
-        });
-      } else if (messages.warnings.length) {
-        this.store.setState({
-          AppServer: {
-            status: 'warnings',
-          },
-          DevServer: {
-            status: 'warnings',
-            ...messages,
-          },
-        });
-      }
-    });
+    if (tscProcess) {
+      tscProcess.on('message', this.onTscMessage);
+      // Send a compiling message as soon as possible
+      tscProcess.emit('message', { type: 'compiling' });
+    }
   }
 
-  onStoryBookMessage = (
+  private onStoryBookMessage = (
     message:
       | { type: 'listening'; port: number }
       | { type: 'compiling' }
@@ -150,9 +150,6 @@ export default class DevEnvironment {
         });
         break;
       case 'compiling':
-        if (isInteractive) {
-          clearConsole();
-        }
         this.store.setState({
           Storybook: { status: 'compiling', errors: [], warnings: [] },
         });
@@ -161,9 +158,6 @@ export default class DevEnvironment {
         openBrowser(`http://localhost:${message.port}`);
         break;
       case 'finished-log':
-        if (isInteractive) {
-          clearConsole();
-        }
         // @ts-ignore
         const messages = formatWebpackMessages(message.stats);
         const isSuccessful =
@@ -195,20 +189,49 @@ export default class DevEnvironment {
     }
   };
 
+  private onTscMessage = (message: TscProcessEvent) => {
+    switch (message.type) {
+      // in case there is an error with tsc
+      case 'error':
+        throw new Error(message.error);
+      case 'compiling':
+        this.store.setState({
+          TypeScript: { status: 'compiling' },
+        });
+        break;
+      case 'compile-successfully':
+        this.store.setState({
+          TypeScript: { status: 'success' },
+        });
+        break;
+      case 'compile-with-errors':
+        this.store.setState({
+          TypeScript: {
+            status: 'errors',
+            errors: message.errors.map(error => formatTypescriptError(error)),
+          },
+        });
+        break;
+    }
+  };
+
   private async triggerBrowserRefresh(jsonStats: webpack.Stats.ToJsonOutput) {
     const { webpackDevServer } = this.props;
-
-    await webpackDevServer.send('hash', jsonStats.hash);
-    await webpackDevServer.send('ok', {});
+    if (webpackDevServer) {
+      await webpackDevServer.send('hash', jsonStats.hash);
+      await webpackDevServer.send('ok', {});
+    }
   }
 
   private async showErrorsOnBrowser(jsonStats: webpack.Stats.ToJsonOutput) {
     const { webpackDevServer } = this.props;
 
-    if (jsonStats.errors.length > 0) {
-      await webpackDevServer.send('errors', jsonStats.errors);
-    } else if (jsonStats.warnings.length > 0) {
-      await webpackDevServer.send('warnings', jsonStats.warnings);
+    if (webpackDevServer) {
+      if (jsonStats.errors.length > 0) {
+        await webpackDevServer.send('errors', jsonStats.errors);
+      } else if (jsonStats.warnings.length > 0) {
+        await webpackDevServer.send('warnings', jsonStats.warnings);
+      }
     }
   }
 
@@ -245,7 +268,7 @@ export default class DevEnvironment {
 
       // If the spawned server process has died, restart it
       if (
-        serverProcess.child &&
+        serverProcess?.child &&
         // @ts-ignore
         serverProcess.child.exitCode !== null
       ) {
@@ -256,7 +279,7 @@ export default class DevEnvironment {
       else {
         // If there are no errors and the server can be refreshed
         // then send it a signal and wait for a responsne
-        if (serverProcess.child && !error && !stats.hasErrors()) {
+        if (serverProcess?.child && !error && !stats.hasErrors()) {
           const { success } = (await serverProcess.send({})) as {
             success: boolean;
           };
@@ -284,22 +307,35 @@ export default class DevEnvironment {
       startUrl,
     } = this.props;
 
-    const compilationPromise = new Promise(resolve => {
-      multiCompiler.hooks.done.tap('done', resolve);
-    });
+    if (multiCompiler && webpackDevServer) {
+      const compilationPromise = new Promise(resolve => {
+        multiCompiler.hooks.done.tap('done', resolve);
+      });
 
-    // Start Webpack compilation
-    await webpackDevServer.listenPromise();
-    await compilationPromise;
+      // Start Webpack compilation
+      await webpackDevServer.listenPromise();
+      await compilationPromise;
+    }
 
-    // start app server
-    await serverProcess.initialize();
+    // start app server if exists
+    if (serverProcess) {
+      await serverProcess.initialize();
 
-    const actualStartUrl = suricate
-      ? getTunnelUrl(appName)
-      : startUrl || 'http://localhost:3000';
+      const serverUrls = prepareUrls('http', host, PORT);
 
-    openBrowser(actualStartUrl);
+      this.store.setState({
+        AppServer: {
+          status: 'success',
+          urls: serverUrls,
+        },
+      });
+
+      const actualStartUrl = suricate
+        ? getTunnelUrl(appName)
+        : startUrl || 'http://localhost:3000';
+
+      openBrowser(actualStartUrl);
+    }
   }
 
   static async create({
@@ -314,14 +350,15 @@ export default class DevEnvironment {
     startUrl,
     suricate = false,
     storybook = false,
+    compileTypeScriptFiles = false,
   }: {
     webpackConfigs: [
-      webpack.Configuration,
-      webpack.Configuration,
+      webpack.Configuration?,
+      webpack.Configuration?,
       webpack.Configuration?,
       webpack.Configuration?,
     ];
-    serverFilePath: string;
+    serverFilePath?: string;
     https: boolean;
     webpackDevServerPort: number;
     enableClientHotUpdates: boolean;
@@ -331,81 +368,98 @@ export default class DevEnvironment {
     startUrl?: StartUrl;
     suricate?: boolean;
     storybook?: boolean;
+    compileTypeScriptFiles?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const publicPath = clientConfig.output!.publicPath!;
+    let serverProcess;
 
-    const serverProcess = await ServerProcessWithHMR.create({
-      serverFilePath,
-      cwd,
-      suricate,
-      appName,
-    });
+    if (serverFilePath) {
+      serverProcess = await ServerProcessWithHMR.create({
+        serverFilePath,
+        cwd,
+        suricate,
+        appName,
+      });
 
-    // Add client hot entries
-    if (enableClientHotUpdates) {
-      if (!clientConfig.entry) {
-        throw new Error('client webpack config was created without an entry');
-      }
+      if (serverProcess && serverConfig) {
+        if (!serverConfig.entry) {
+          throw new Error('server webpack config was created without an entry');
+        }
 
-      const hmrSocketPath = suricate
-        ? getDevServerSocketPath(appName)
-        : publicPath;
-
-      const hotEntries = [
-        require.resolve('webpack/hot/dev-server'),
-        // Adding the query param with the CDN URL allows HMR when working with a production site
-        // because the bundle is requested from "parastorage" we need to specify to open the socket to localhost
-        `${require.resolve('webpack-dev-server/client')}?${hmrSocketPath}`,
-      ];
-
-      // Add hot entries as a separate entry if using experimental build html
-      if (createEjsTemplates) {
-        clientConfig.entry = {
-          // @ts-ignore
-          ...clientConfig.entry,
-          hot: hotEntries,
-        };
-      } else {
-        clientConfig.entry = addEntry(clientConfig.entry, hotEntries);
+        // Add server hot entry
+        serverConfig.entry = addEntry(serverConfig.entry, [
+          `${require.resolve('./utils/server-hot-client')}?${
+            serverProcess.socketServer.hmrPort
+          }`,
+        ]);
       }
     }
 
-    if (!serverConfig.entry) {
-      throw new Error('server webpack config was created without an entry');
+    let publicPath: string | undefined;
+
+    if (clientConfig) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      publicPath = clientConfig.output!.publicPath!;
+
+      // Add client hot entries
+      if (enableClientHotUpdates) {
+        if (!clientConfig.entry) {
+          throw new Error('client webpack config was created without an entry');
+        }
+
+        const hmrSocketPath = suricate
+          ? getDevServerSocketPath(appName)
+          : publicPath;
+
+        const hotEntries = [
+          require.resolve('webpack/hot/dev-server'),
+          // Adding the query param with the CDN URL allows HMR when working with a production site
+          // because the bundle is requested from "parastorage" we need to specify to open the socket to localhost
+          `${require.resolve('webpack-dev-server/client')}?${hmrSocketPath}`,
+        ];
+
+        // Add hot entries as a separate entry if using experimental build html
+        if (createEjsTemplates) {
+          clientConfig.entry = {
+            // @ts-ignore
+            ...clientConfig.entry,
+            hot: hotEntries,
+          };
+        } else {
+          clientConfig.entry = addEntry(clientConfig.entry, hotEntries);
+        }
+      }
     }
 
-    // Add server hot entry
-    serverConfig.entry = addEntry(serverConfig.entry, [
-      `${require.resolve('./utils/server-hot-client')}?${
-        serverProcess.socketServer.hmrPort
-      }`,
-    ]);
+    let multiCompiler: webpack.MultiCompiler | undefined;
+    let clientCompiler: webpack.Compiler | undefined;
+    let serverCompiler: webpack.Compiler | undefined;
+    let webWorkerCompiler: webpack.Compiler | undefined;
+    let webWorkerServerCompiler: webpack.Compiler | undefined;
 
-    const multiCompiler = createCompiler(webpackConfigs.filter(isTruthy));
+    if (webpackConfigs.length > 0) {
+      multiCompiler = createCompiler(webpackConfigs.filter(isTruthy));
 
-    const [
-      clientCompiler,
-      serverCompiler,
-      webWorkerCompiler,
-      webWorkerServerCompiler,
-    ] = multiCompiler.compilers as [
-      webpack.Compiler,
-      webpack.Compiler,
-      webpack.Compiler?,
-      webpack.Compiler?,
-    ];
+      clientCompiler = multiCompiler.compilers[0];
+      serverCompiler = multiCompiler.compilers[1];
+      webWorkerCompiler = multiCompiler.compilers[2];
+      webWorkerServerCompiler = multiCompiler.compilers[3];
+    }
 
-    const webpackDevServer = new WebpackDevServer(clientCompiler, {
-      publicPath,
-      https,
-      port: webpackDevServerPort,
-      appName,
-      suricate,
-      cwd,
-    });
+    let webpackDevServer;
+
+    if (clientCompiler) {
+      webpackDevServer = new WebpackDevServer(clientCompiler, {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        publicPath: publicPath!, // we have public path if we have clientCompiler
+        https,
+        port: webpackDevServerPort,
+        appName,
+        suricate,
+        cwd,
+      });
+    }
 
     let storybookProcess;
 
@@ -415,7 +469,14 @@ export default class DevEnvironment {
         'storybook',
         'storybook-worker',
       );
+
       storybookProcess = execa.node(pathToStorybookWorker);
+    }
+
+    let tscProcess;
+
+    if (compileTypeScriptFiles) {
+      tscProcess = tscWorker.watch();
     }
 
     const devEnvironment = new DevEnvironment({
@@ -425,10 +486,13 @@ export default class DevEnvironment {
       appName,
       suricate,
       startUrl,
+      tscProcess,
       storybookProcess,
     });
 
-    devEnvironment.startServerHotUpdate(serverCompiler);
+    if (serverCompiler) {
+      devEnvironment.startServerHotUpdate(serverCompiler);
+    }
 
     if (webWorkerCompiler) {
       devEnvironment.startWebWorkerHotUpdate(webWorkerCompiler);
@@ -438,8 +502,11 @@ export default class DevEnvironment {
       devEnvironment.startWebWorkerHotUpdate(webWorkerServerCompiler);
     }
 
-    devEnvironment.store.subscribe(state =>
-      devEnvironmentLogger({ state, appName, suricate }),
+    devEnvironment.store.subscribe(
+      debounce(
+        (state: State) => devEnvironmentLogger({ state, appName, suricate }),
+        300,
+      ),
     );
 
     return devEnvironment;

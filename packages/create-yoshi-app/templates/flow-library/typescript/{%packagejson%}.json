@@ -1,0 +1,56 @@
+{
+  "name": "@wix/{%projectName%}",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "{%authorName%}",
+    "email": "{%authorEmail%}"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "http://npm.dev.wixpress.com/",
+    "versionBumpStrategy": "minor"
+  },
+  "scripts": {
+    "build": "yoshi-library build",
+    "dev": "yoshi-library start",
+    "test": "yoshi-library test",
+    "lint": "yoshi-library lint",
+    "posttest": "npm run lint",
+    "start": "npm start --prefix example"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": "yoshi lint"
+  },
+  "devDependencies": {
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.7",
+    "yoshi-flow-library": "^4.0.0",
+    "jest-yoshi-preset": "^4.48.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "~3.8.0",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^8.0.0"
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  },
+  "yoshiFlowLibrary": {
+    "bundle": {
+      "umd": "counter"
+    }
+  },
+  "eslintConfig": {
+    "extends": "yoshi"
+  }
+}

@@ -11,7 +11,8 @@
     "start": "yoshi start",
     "build": "yoshi build",
     "test": "yoshi test --jest",
-    "posttest": "yoshi lint"
+    "lint": "yoshi lint",
+    "posttest": "npm run lint"
   },
   "husky": {
     "hooks": {

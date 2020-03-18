@@ -32,4 +32,11 @@ if (process.env.EXPERIMENTAL_FLOW_EDITOR === 'true') {
   });
 }
 
+if (process.env.EXPERIMENTAL_FLOW_LIBRARY === 'true') {
+  templates.push({
+    name: 'flow-library',
+    path: toTemplatePath('flow-library'),
+  });
+}
+
 export default templates;

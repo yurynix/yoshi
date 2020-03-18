@@ -2,10 +2,6 @@ const DEFAULT_ENV = 'development';
 const DEFAULT_MODULES = 'commonjs';
 const env = process.env.BABEL_ENV || process.env.NODE_ENV || DEFAULT_ENV;
 
-const isDevelopment = env === 'development';
-const isProduction = env === 'production';
-const isTest = env === 'test';
-
 const requireDefault = path => {
   const required = require(path);
   return required.default || required;
@@ -22,7 +18,14 @@ const normaliseOptions = opts => {
 module.exports = function(api, opts = {}) {
   const options = normaliseOptions(opts);
   const inWebpack = process.env.IN_WEBPACK;
-  let { modules } = options;
+
+  // eslint-disable-next-line prefer-const
+  let { modules, mode = env } = options;
+
+  const isDevelopment = mode === 'development';
+  const isProduction = mode === 'production';
+  const isTest = mode === 'test';
+
   if (typeof modules === 'undefined') {
     modules = inWebpack ? false : DEFAULT_MODULES;
   }

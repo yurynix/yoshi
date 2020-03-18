@@ -2,10 +2,9 @@ import fs from 'fs';
 import http, { IncomingMessage, ServerResponse } from 'http';
 import https from 'https';
 import serveHandler from 'serve-handler';
-import { Config } from 'yoshi-config/build/config';
 import { STATICS_DIR } from 'yoshi-config/build/paths';
 
-export async function startCDN(config: Config) {
+export async function startCDN({ port, ssl }: { port: number; ssl: boolean }) {
   function serverFn(req: IncomingMessage, res: ServerResponse) {
     return serveHandler(req, res, {
       public: STATICS_DIR,
@@ -47,8 +46,6 @@ export async function startCDN(config: Config) {
       serverFn,
     );
   }
-
-  const { port, ssl } = config.servers.cdn;
 
   const server = ssl ? httpsCdn() : httpCdn();
   await new Promise(resolve => server.listen(port, resolve));

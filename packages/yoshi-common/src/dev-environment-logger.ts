@@ -1,7 +1,10 @@
 import chalk from 'chalk';
 import { Urls } from 'react-dev-utils/WebpackDevServerUtils';
+import clearConsole from 'react-dev-utils/clearConsole';
 import { State, ProcessState, ProcessType } from './dev-environment';
 import { getUrl, getDevServerUrl } from './utils/suricate';
+
+const isInteractive = process.stdout.isTTY;
 
 const logSuricateUrls = (type: ProcessType, appName: string) => {
   switch (type) {
@@ -25,6 +28,7 @@ const logMessageByProcessType: { [type in ProcessType]: string } = {
   DevServer: `Your bundles and other static assets are served from your ${chalk.bold(
     'dev-server',
   )}.`,
+  TypeScript: 'TypeScript compiled successfully',
 };
 
 const logUrls = ({
@@ -69,11 +73,17 @@ const logProcessState = (
 ) => {
   switch (state.status) {
     case 'compiling':
+      console.log();
       console.log(`${getProcessName(processType)}:`, 'Compiling...');
       break;
 
     case 'success':
-      logUrls({ processType, suricate, appName, urls: state.urls });
+      if (processType === 'TypeScript') {
+        console.log('');
+        console.log('Found 0 type errors. Watching for file changes.');
+      } else {
+        logUrls({ processType, suricate, appName, urls: state.urls });
+      }
       break;
   }
 };
@@ -85,7 +95,13 @@ const hasErrorsOrWarnings = (state: State): boolean => {
 };
 
 const logStateErrorsOrWarnings = (state: State) => {
-  const { DevServer, Storybook } = state;
+  const { DevServer, TypeScript, Storybook } = state;
+
+  if (TypeScript && TypeScript.status === 'errors') {
+    console.log(TypeScript.errors?.join('\n\n'));
+    return;
+  }
+
   if (DevServer && DevServer.status === 'errors') {
     console.log(chalk.red('Failed to compile.\n'));
     console.log(DevServer.errors?.join('\n\n'));
@@ -127,17 +143,24 @@ export default ({
   appName: string;
   suricate: boolean;
 }) => {
+  if (isInteractive) {
+    clearConsole();
+  }
+
   if (hasErrorsOrWarnings(state)) {
     return logStateErrorsOrWarnings(state);
   }
 
   if (isAllCompiled(state)) {
     console.log(chalk.green('Compiled successfully!'));
+  } else {
+    console.log(chalk.bold('Compiling...'));
   }
 
   for (const processTypeKey in state) {
     const processType = processTypeKey as ProcessType;
     const processState = state[processType];
+
     processState &&
       logProcessState({ processType, suricate, appName }, processState);
   }

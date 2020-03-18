@@ -32,7 +32,7 @@ const serverLogPrefixer = () => {
   });
 };
 
-module.exports = async config => {
+module.exports = async () => {
   const jestYoshiConfig = loadJestYoshiConfig();
   // a bit hacky, run puppeteer setup only if it's required
   if (await shouldRunE2Es()) {
@@ -45,14 +45,11 @@ module.exports = async config => {
       await cdnProxy.start(forwardProxyPort);
     }
 
-    const puppeteerRuntimeOverrides = {};
+    const isDebugMode = JestWatchDebug.getDebugMode();
 
-    if (config.watch || config.watchAll) {
-      const watchDebugMode = JestWatchDebug.getDebugMode();
-
-      puppeteerRuntimeOverrides.devtools = watchDebugMode;
-      await fs.outputFile(IS_DEBUG_MODE, watchDebugMode);
-    }
+    const puppeteerRuntimeOverrides = {
+      devtools: isDebugMode,
+    };
 
     global.BROWSER = await puppeteer.launch({
       // user defined options
@@ -80,6 +77,7 @@ module.exports = async config => {
     });
 
     await fs.outputFile(WS_ENDPOINT_PATH, global.BROWSER.wsEndpoint());
+    await fs.outputFile(IS_DEBUG_MODE, isDebugMode);
 
     const webpackDevServerProcess = await getProcessOnPort(
       servers.cdn.port,

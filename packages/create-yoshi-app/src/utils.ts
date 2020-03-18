@@ -40,8 +40,8 @@ export const isPrivateRegistryReachable = (dir: string) => {
 };
 
 export const lintFix = (dir: string) => {
-  console.log(`\nRunning ${chalk.magenta('yoshi lint --fix')}\n`);
-  execa.sync('npx yoshi lint --fix', {
+  console.log(`\nRunning ${chalk.magenta('npm run lint -- --fix')}\n`);
+  execa.sync('npm run lint -- --fix', {
     shell: true,
     cwd: dir,
     stdio: 'inherit',
