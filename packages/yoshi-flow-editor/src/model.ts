@@ -24,6 +24,9 @@ export interface ComponentModel {
   id: string | null;
 }
 
+export interface AppConfig {
+  appDefinitionId: string;
+}
 export interface ComponentConfig {
   id: string;
 }
@@ -39,7 +42,9 @@ function resolveFrom(dir: string, fileName: string): string | null {
   }
 }
 
-function getComponentConfig(path: string): ComponentConfig {
+function getLocalConfig<C extends AppConfig | ComponentConfig>(
+  path: string,
+): C {
   return JSON.parse(fs.readFileSync(path, 'utf8'));
 }
 
@@ -54,9 +59,19 @@ export async function generateFlowEditorModel(
 
   const rootPath = process.cwd();
   const initApp = resolveFrom(path.join(rootPath, 'src'), 'app');
+  const appConfigFileName = resolveFrom(rootPath, '.application');
+  const appConfig =
+    appConfigFileName && getLocalConfig<AppConfig>(appConfigFileName);
+
   if (!initApp) {
     throw new Error(`Missing app file.
     Please create "app.js/ts" file in "${path.resolve('./src')}" directory`);
+  }
+
+  if (!appConfig || !appConfig.appDefinitionId) {
+    console.warn(`Seems like your app doesn't contain .application.json with appDefId specified.
+You should register it in dev-center and paste id of it to ".application.json" in the root directory: ${rootPath}.
+For more info, visit http://tiny.cc/dev-center-registration`);
   }
 
   const componentsDirectories = await globby('./src/components/*', {
@@ -75,7 +90,7 @@ export async function generateFlowEditorModel(
       const settingsFileName = resolveFromComponents('Settings');
       const configFileName = resolveFromComponents('.component');
       const componentConfig =
-        configFileName && getComponentConfig(configFileName);
+        configFileName && getLocalConfig<ComponentConfig>(configFileName);
       const componentPathRelativeToRoot = path.relative(
         rootPath,
         componentDirectory,
@@ -111,8 +126,7 @@ For more info, visit http://tiny.cc/dev-center-registration`);
 
   return {
     appName: config.name,
-    // TODO: import from named export
-    appDefId: '',
+    appDefId: appConfig ? appConfig.appDefinitionId : '',
     artifactId,
     initApp,
     components: componentsModel,

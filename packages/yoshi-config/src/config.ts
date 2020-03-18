@@ -16,6 +16,8 @@ type CdnConfig = {
   ssl: boolean;
 };
 
+export type StartUrl = string | Array<string> | null;
+
 type HooksConfig = {
   prelint?: string;
 };
@@ -111,7 +113,7 @@ export type Config = {
   petriSpecsConfig: PetriOptions;
   performanceBudget: Options.Performance | false;
   resolveAlias: { [key: string]: string };
-  startUrl: string | Array<string> | null;
+  startUrl: StartUrl;
   keepFunctionNames: boolean;
   umdNamedDefine: boolean;
   experimentalBuildHtml: boolean;

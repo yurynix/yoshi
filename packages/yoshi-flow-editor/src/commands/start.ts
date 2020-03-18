@@ -1,10 +1,15 @@
-import path from 'path';
 import arg from 'arg';
 import fs from 'fs-extra';
 import chalk from 'chalk';
 import DevEnvironment from 'yoshi-common/build/dev-environment';
+import { PORT } from 'yoshi-common/build/utils/constants';
 import { TARGET_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { cliCommand } from '../cli';
+import {
+  joinDirs,
+  normalizeStartUrlOption,
+  overrideQueryParamsWithModel,
+} from '../utils';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
@@ -15,8 +20,6 @@ import {
   buildViewerScriptEntry,
   webWorkerExternals,
 } from '../buildEditorEntires';
-
-const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
 const start: cliCommand = async function(argv, config, model) {
   const args = arg(
@@ -34,7 +37,7 @@ const start: cliCommand = async function(argv, config, model) {
 
   const {
     '--help': help,
-    '--url': url,
+    '--url': urlFromCliArgs,
     '--production': shouldRunAsProduction,
   } = args;
 
@@ -67,8 +70,8 @@ const start: cliCommand = async function(argv, config, model) {
   }
 
   await Promise.all([
-    fs.emptyDir(join(BUILD_DIR)),
-    fs.emptyDir(join(TARGET_DIR)),
+    fs.emptyDir(joinDirs(BUILD_DIR)),
+    fs.emptyDir(joinDirs(TARGET_DIR)),
   ]);
 
   const clientConfig = createClientWebpackConfig(config, {
@@ -89,17 +92,23 @@ const start: cliCommand = async function(argv, config, model) {
     webWorkerExternals,
   });
 
+  const normalizedUrls = normalizeStartUrlOption(
+    urlFromCliArgs || config.startUrl,
+  );
+  const startUrl = normalizedUrls.map(
+    overrideQueryParamsWithModel(model, {
+      cdnUrl: config.servers.cdn.url,
+      serverUrl: `https://localhost:${PORT}`,
+    }),
+  );
+
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
     https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
     appName: config.name,
     serverFilePath: require.resolve('yoshi-flow-editor/build/server/server.js'),
-    startUrl: url ||
-      config.startUrl || [
-        `https://localhost:3000/editor/todo`,
-        'https://localhost:3000/settings/todo',
-      ],
+    startUrl,
     enableClientHotUpdates: Boolean(config.hmr),
     createEjsTemplates: config.experimentalBuildHtml,
   });
