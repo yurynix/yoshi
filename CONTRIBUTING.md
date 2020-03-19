@@ -219,6 +219,8 @@ It will create a project in a temp directory. You'll have a watcher that listens
 
 ## Release a New Version
 
+> **Note:** Make sure you fetched up-to date tags from remote: `git fetch --tags` and that you pulled all of master's last changes.
+
 Start by heading to the [CHANGELOG.md](https://github.com/wix/yoshi/blob/master/CHANGELOG.md) and insert the version's changes.
 For changes to appear in the changelog, the PRs should be tagged [with tags](https://github.com/wix/yoshi/blob/89b2b566bbfe961a14123f8de92cd4af9a4a952a/lerna.json#L10-L15) like `PR: New Feature :rocket:`.
 
@@ -230,13 +232,13 @@ npm run changelog
 
 > **Note:** For first time you'll need to [export a GITHUB_AUTH token](https://github.com/lerna/lerna-changelog#github-token)
 
+> **Note:** In this stage we choose the version bump (`patch`/`minor`), we follow semver.
+
 - New releases can be issued from branch `master`.
 
 - `alpha`/`beta`/`rc` versions should be issued from a branch named `version_${version_name}`.
 
-To create a new version use the following command:
-
-Note: Make sure you fetched up-to date tags from remote: `git fetch --tags`, lerna relies on tags for version information
+Now commit the changes - `git commit -m "changelog for v1.2.3"`
 
 ```bash
 npm run createVersion
@@ -244,19 +246,17 @@ npm run createVersion
 
 This command will open an interactive UI for choosing the version, it will bump it in the relevant packages and add a git tag.
 
-```bash
-npm run bumpDocs `${version_name}`
-```
-
-This command will generate documentation for version you've mentioned.
-You should commit all files generated during this process.
-
 > It runs [lerna publish --skip-npm](https://github.com/lerna/lerna#--skip-npm) under the hood
 
-Now Push the commits and tag to GitHub
+> **Note:** Use the same version as in the changelog.
+
+during the release creation process, it will also generate the website according to the new version.
+
+> Verify to run `yarn` in the `website` directory, which is needed for creating the website locally.
+> Now Push the commits and tag to GitHub
 
 ```bash
 git push origin master/version_* --follow-tags
 ```
 
-In the end of the [build](http://ci.dev.wix/viewType.html?buildTypeId=Wix_Angular_WixHaste_HastePresetYoshi) (unless there is a failure) the release should be published to npm
+Push your changes including the tags, a [build](http://ci.dev.wix/viewType.html?buildTypeId=Wix_Angular_WixHaste_HastePresetYoshi) will run in the CI, and after a successful build `wix-ci-publisher` will publish the relevant packages to npm.
