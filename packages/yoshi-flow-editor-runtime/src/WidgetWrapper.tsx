@@ -27,7 +27,7 @@ const PublicDataProvider: typeof React.Component =
     ? PublicDataProviderViewer
     : PublicDataProviderEditor;
 
-// This widget is going to be called inside entry-point wrapeprs.
+// This widget is going to be called inside entry-point wrappers
 // Each widget should contain component to wrap name, so here we return a getter instead of component.
 const getWidgetWrapper = (
   UserComponent: typeof React.Component,
