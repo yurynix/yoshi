@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import { withStyles } from '@wix/native-components-infra';
 import { IHostProps } from '@wix/native-components-infra/dist/src/types/types';
 import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
 import { createInstances } from './createInstances';
@@ -26,33 +27,47 @@ const PublicDataProvider: typeof React.Component =
     ? PublicDataProviderViewer
     : PublicDataProviderEditor;
 
-const WidgetWrapper = (UserComponent: typeof React.Component, name: string) => (
-  props: IHostProps & IFrameworkProps & IControllerContext,
+// This widget is going to be called inside entry-point wrappers
+// Each widget should contain component to wrap name, so here we return a getter instead of component.
+const getWidgetWrapper = (
+  UserComponent: typeof React.Component,
+  {
+    name,
+    isEditor,
+  }: {
+    name: string;
+    isEditor?: boolean;
+  },
 ) => {
-  const { cssBaseUrl = window.__STATICS_BASE_URL__ } = props;
+  const Widget = (props: IHostProps & IFrameworkProps & IControllerContext) => {
+    return (
+      <div>
+        <ErrorBoundary handleException={error => console.log(error)}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <PublicDataProvider data={props.__publicData__} Wix={window.Wix}>
+              <ControllerProvider data={props}>
+                <UserComponent
+                  {...createInstances({ experiments: props.experiments })}
+                  {...props}
+                />
+              </ControllerProvider>
+            </PublicDataProvider>
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+    );
+  };
+  const cssPath = isEditor
+    ? `${name}EditorMode.css`
+    : `${name}ViewerWidget.css`;
 
-  return (
-    <div>
-      <link
-        href={`${cssBaseUrl}${name}ViewerWidget.css`}
-        rel="stylesheet"
-        type="text/css"
-      />
+  const stylablePath = isEditor
+    ? `${name}EditorMode.stylable.bundle.css`
+    : `${name}ViewerWidget.stylable.bundle.css`;
 
-      <ErrorBoundary handleException={error => console.log(error)}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <PublicDataProvider data={props.__publicData__} Wix={window.Wix}>
-            <ControllerProvider data={props}>
-              <UserComponent
-                {...createInstances({ experiments: props.experiments })}
-                {...props}
-              />
-            </ControllerProvider>
-          </PublicDataProvider>
-        </Suspense>
-      </ErrorBoundary>
-    </div>
-  );
+  return withStyles(Widget, {
+    cssPath: [cssPath, stylablePath],
+  });
 };
 
-export default WidgetWrapper;
+export default getWidgetWrapper;

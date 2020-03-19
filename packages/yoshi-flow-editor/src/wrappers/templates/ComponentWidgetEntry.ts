@@ -9,6 +9,7 @@ export default t<Opts>`
   import WidgetWrapper from '${({ widgetWrapperPath }) => widgetWrapperPath}';
   import Widget from '${({ componentFileName }) => componentFileName}';
 
-  export default { component: WidgetWrapper(Widget, '${({ componentName }) =>
-    componentName}')};
+  export default { component: WidgetWrapper(Widget, { name: '${({
+    componentName,
+  }) => componentName}' })};
 `;
