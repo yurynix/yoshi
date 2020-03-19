@@ -5,21 +5,21 @@
 #### :rocket: New Feature
 
 - `yoshi-server-client`, `yoshi-server`
-  - [#2125](https://github.com/wix/yoshi/pull/2125) Yoshi Server: support csrf ([@yanivefraim](https://github.com/yanivefraim))
+  - [#2125](https://github.com/wix/yoshi/pull/2125) Support CSRF ([@yanivefraim](https://github.com/yanivefraim))
 - `yoshi-flow-editor`
-  - [#2123](https://github.com/wix/yoshi/pull/2123) Consider overridePlatformBaseUrls when building a query + build it with join-url. ([@yavorsky](https://github.com/yavorsky))
+  - [#2123](https://github.com/wix/yoshi/pull/2123) Consider `overridePlatformBaseUrls` when building a query + build it with `join-url` ([@yavorsky](https://github.com/yavorsky))
 
 #### :bug: Bug Fix
 
 - `yoshi-common`
-  - [#2127](https://github.com/wix/yoshi/pull/2127) Resolve stylable dependencies from cwd. ([@yavorsky](https://github.com/yavorsky))
+  - [#2127](https://github.com/wix/yoshi/pull/2127) Resolve stylable dependencies from `cwd` ([@yavorsky](https://github.com/yavorsky))
 
 #### :nail_care: Polish
 
 - `yoshi-common`
-  - [#2126](https://github.com/wix/yoshi/pull/2126) Use React as an external module for thunderbolt-elements ([@ronami](https://github.com/ronami))
+  - [#2126](https://github.com/wix/yoshi/pull/2126) Use `React` as an external module for `thunderbolt-elements` ([@ronami](https://github.com/ronami))
 - `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
-  - [#2124](https://github.com/wix/yoshi/pull/2124) [yoshi-editor-flow]: Use withStyles wrapper and always separate css ([@yavorsky](https://github.com/yavorsky))
+  - [#2124](https://github.com/wix/yoshi/pull/2124) Use `withStyles` wrapper and always `separate-css` ([@yavorsky](https://github.com/yavorsky))
 
 #### :memo: Documentation
 
