@@ -10,7 +10,7 @@ const EditorAppWrapper = (
   initApp: Function,
   name: string,
 ) =>
-  ViewerScriptWrapper(WidgetWrapper(UserComponent, name), {
+  ViewerScriptWrapper(WidgetWrapper(UserComponent, { name, isEditor: true }), {
     viewerScript: {
       createControllers: createControllers(userController, initApp),
       initAppForPage,
