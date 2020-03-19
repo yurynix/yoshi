@@ -80,6 +80,7 @@ function createClientWebpackConfig({
     isHot: isHmr,
     isAnalyze,
     includeStyleLoaders,
+    forceEmitSourceMaps: withLocalSourceMaps,
     ...defaultOptions,
   });
 
@@ -103,10 +104,6 @@ function createClientWebpackConfig({
       libraryTarget: 'umd',
       globalObject: "(typeof self !== 'undefined' ? self : this)",
     };
-  }
-
-  if (withLocalSourceMaps) {
-    webpackConfig.devtool = 'source-map';
   }
 
   return webpackConfig;

@@ -47,6 +47,7 @@ import ManifestPlugin from './manifest-webpack-plugin';
 import createBabelConfig from './create-babel-config';
 import SveltePreprocessSSR from './svelte-server-side-preprocess';
 import { asyncWebWorkerTarget } from './AsyncWebWorkerTarget/AsyncWebWorkerTarget';
+import { sourceMapPlugin } from './source-map-plugin';
 
 const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
@@ -245,6 +246,7 @@ export function createBaseWebpackConfig({
   useAssetRelocator = false,
   useYoshiServer = false,
   createWorkerManifest = true,
+  useCustomSourceMapPlugin = false,
 }: {
   name: string;
   configName:
@@ -281,6 +283,9 @@ export function createBaseWebpackConfig({
   useAssetRelocator?: boolean;
   useYoshiServer?: boolean;
   createWorkerManifest?: boolean;
+  // changes source map to include public path and
+  // use plugin directly instead of "devtool" option
+  useCustomSourceMapPlugin?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -355,6 +360,7 @@ export function createBaseWebpackConfig({
             libraryTarget: 'umd',
             globalObject: "(typeof self !== 'undefined' ? self : this)",
             // Point sourcemap entries to original disk location (format as URL on Windows)
+            // todo: remove once useCustomSourceMapPlugin option is getting merged
             devtoolModuleFilenameTemplate: info =>
               path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
           }
@@ -618,7 +624,33 @@ export function createBaseWebpackConfig({
             }),
           ]
         : []),
+
+      ...(useCustomSourceMapPlugin
+        ? target === 'node'
+          ? [sourceMapPlugin({ inline: true, showPathOnDisk: true })]
+          : inTeamCity || forceEmitSourceMaps
+          ? [sourceMapPlugin({ publicPath })]
+          : !isProduction
+          ? [
+              sourceMapPlugin({
+                cheap: true,
+                moduleMaps: true,
+                evaluate: true,
+              }),
+            ]
+          : []
+        : []),
     ],
+
+    devtool: useCustomSourceMapPlugin
+      ? false
+      : target !== 'node'
+      ? inTeamCity || forceEmitSourceMaps
+        ? 'source-map'
+        : !isProduction
+        ? 'cheap-module-eval-source-map'
+        : false
+      : 'inline-source-map',
 
     module: {
       // Makes missing exports an error instead of warning
@@ -904,15 +936,6 @@ export function createBaseWebpackConfig({
             __filename: false,
             __dirname: false,
           },
-
-    devtool:
-      target !== 'node'
-        ? inTeamCity || forceEmitSourceMaps
-          ? 'source-map'
-          : !isProduction
-          ? 'cheap-module-eval-source-map'
-          : false
-        : 'inline-source-map',
 
     ...(target === 'node'
       ? {

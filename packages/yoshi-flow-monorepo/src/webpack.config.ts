@@ -52,6 +52,9 @@ const isThunderboltElementModule = (pkg: PackageGraphNode) =>
   pkg.name === 'thunderbolt-elements' ||
   pkg.name === 'editor-elements-registry';
 
+const isThunderboltAppModule = (pkg: PackageGraphNode) =>
+  pkg.name === '@wix/thunderbolt-app';
+
 const isSiteAssetsModule = (pkg: PackageGraphNode) =>
   pkg.name === 'thunderbolt-becky' || pkg.name === '@wix/thunderbolt-becky';
 
@@ -87,6 +90,8 @@ export function createClientWebpackConfig(
     tpaStyle: pkg.config.tpaStyle,
     separateStylableCss: pkg.config.separateStylableCss,
     createEjsTemplates: pkg.config.experimentalBuildHtml,
+    useCustomSourceMapPlugin:
+      isThunderboltElementModule(pkg) || isThunderboltAppModule(pkg),
     ...(isSiteAssetsModule(pkg)
       ? {
           configName: 'site-assets',
