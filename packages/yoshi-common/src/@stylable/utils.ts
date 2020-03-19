@@ -1,16 +1,10 @@
 import path from 'path';
+import resolveCwd from 'resolve-cwd';
 
 export const isStylableDependencies = () => {
-  try {
-    require.resolve('yoshi-stylable-dependencies/package.json');
-    return true;
-  } catch (error) {
-    return false;
-  }
+  return !!resolveCwd.silent('yoshi-stylable-dependencies/package.json');
 };
 
 export const getYoshiStylableDependenciesDir = () => {
-  return path.dirname(
-    require.resolve('yoshi-stylable-dependencies/package.json'),
-  );
+  return path.dirname(resolveCwd('yoshi-stylable-dependencies/package.json'));
 };
