@@ -961,10 +961,10 @@ export function createBaseWebpackConfig({
                 return callback();
               }
 
-              // Svelte should always be external on the server side. Only relevant when more than one
-              // instance of Svelte exists. Normally, with two different Webpack bundles. Currently only
+              // Svelte and React should always be external on the server side. Only relevant when more than one
+              // instance of Svelte/React exists. Normally, with two different Webpack bundles. Currently only
               // relevant for Thunderbolt's use-case.
-              if (res.match(/node_modules\/svelte/)) {
+              if (res.match(/node_modules\/(svelte|react)/)) {
                 return callback(undefined, `commonjs ${request}`);
               }
 
