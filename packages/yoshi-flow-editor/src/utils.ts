@@ -1,5 +1,6 @@
 import path from 'path';
 import { URL } from 'url';
+import urlJoin from 'url-join';
 import { StartUrl } from 'yoshi-config/build/config';
 import { FlowEditorModel, ComponentModel } from './model';
 
@@ -16,18 +17,25 @@ export const normalizeStartUrlOption = (urls: StartUrl): Array<string> => {
 };
 
 const widgetUrlFormatter = (component: ComponentModel, baseUrl: string) => {
-  return `${component.id}=${baseUrl}/${component.name}ViewerWidget.bundle.js`;
+  return `${component.id}=${urlJoin(
+    baseUrl,
+    `${component.name}ViewerWidget.bundle.js`,
+  )}`;
 };
 
 const tpaUrlFormatterForType = (type: 'editor' | 'settings' = 'editor') => (
   component: ComponentModel,
   baseUrl: string,
 ) => {
-  return `${component.id}=${baseUrl}/${type}/${component.name}`;
+  return `${component.id}=${urlJoin(baseUrl, type, component.name)}`;
 };
 
 const viewerScriptUrlFormatter = (model: FlowEditorModel, baseUrl: string) => {
-  return `${model.appDefId}=${baseUrl}/viewerScript.bundle.js`;
+  return `${model.appDefId}=${urlJoin(baseUrl, 'viewerScript.bundle.js')}`;
+};
+
+const staticsBaseUrlFormatter = (model: FlowEditorModel, baseUrl: string) => {
+  return `${model.appDefId}={"staticsBaseUrl":"${baseUrl}"}`;
 };
 
 const withComponents = (components: Array<ComponentModel>) => {
@@ -67,6 +75,10 @@ export const overrideQueryParamsWithModel = (
   urlWithParams.searchParams.set(
     'viewerPlatformOverrides',
     viewerScriptUrlFormatter(model, cdnUrl),
+  );
+  urlWithParams.searchParams.set(
+    'overridePlatformBaseUrls',
+    staticsBaseUrlFormatter(model, cdnUrl),
   );
 
   // We want to have raw url for debug purposes.
