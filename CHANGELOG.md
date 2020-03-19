@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.51.2 (2020-03-19)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2122](https://github.com/wix/yoshi/pull/2122) Resolve tsc bin only when tsc-process is used ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.51.1 (2020-03-18)
 
 #### :rocket: New Feature
