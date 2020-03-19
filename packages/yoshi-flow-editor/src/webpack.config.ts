@@ -4,27 +4,20 @@ import webpack from 'webpack';
 import { createServerEntries } from 'yoshi-common/build/webpack-utils';
 import { createBaseWebpackConfig } from 'yoshi-common/build/webpack.config';
 import { Config } from 'yoshi-config/build/config';
-import {
-  isTypescriptProject,
-  inTeamCity,
-  isProduction,
-} from 'yoshi-helpers/build/queries';
+import { isTypescriptProject } from 'yoshi-helpers/build/queries';
 
 const useTypeScript = isTypescriptProject();
 
 const createDefaultOptions = (config: Config) => {
-  const separateCss =
-    config.separateCss === 'prod'
-      ? inTeamCity() || isProduction()
-      : config.separateCss;
-
   return {
     name: config.name as string,
     useTypeScript,
     typeCheckTypeScript: useTypeScript,
     useAngular: config.isAngularProject,
     devServerUrl: config.servers.cdn.url,
-    separateCss,
+    separateCss: true,
+    separateStylableCss: true,
+    cssModules: true,
     enhancedTpaStyle: true,
   };
 };
