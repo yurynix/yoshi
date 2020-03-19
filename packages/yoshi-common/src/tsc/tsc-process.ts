@@ -27,8 +27,6 @@ const isCompileSuccessfully = (lines: Array<string>) =>
 const isErrorMessage = (lines: Array<string>) =>
   lines.some(line => typescriptErrorRegex.test(line));
 
-const tscBin = require.resolve('typescript/bin/tsc');
-
 export class TypeError extends Error {
   errors: Array<string>;
 
@@ -40,6 +38,8 @@ export class TypeError extends Error {
 
 export default class TscProcess extends EventEmitter {
   build() {
+    const tscBin = require.resolve('typescript/bin/tsc');
+
     return new Promise((resolve, reject) => {
       return execa('node', [tscBin])
         .then(resolve)
@@ -55,6 +55,8 @@ export default class TscProcess extends EventEmitter {
   }
 
   watch() {
+    const tscBin = require.resolve('typescript/bin/tsc');
+
     const tscWorker = spawn('node', [tscBin, '--watch', '--pretty', 'false']);
 
     process.on('exit', () => tscWorker.kill('SIGTERM'));
