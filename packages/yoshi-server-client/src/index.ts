@@ -34,6 +34,18 @@ export default class implements HttpClient {
     this.baseUrl = baseUrl;
   }
 
+  private getCookie(name: string) {
+    if (typeof document !== 'undefined') {
+      const parts = `; ${document.cookie}`.split(`; ${name}=`);
+      if (parts.length === 2) {
+        return parts
+          .pop()
+          ?.split(';')
+          .shift();
+      }
+    }
+  }
+
   async request<Result extends FunctionResult, Args extends FunctionArgs>({
     method: { fileName, functionName },
     args,
@@ -47,11 +59,14 @@ export default class implements HttpClient {
 
     const body: RequestPayload = { fileName, functionName, args };
 
+    const xsrfToken = this.getCookie('XSRF-TOKEN');
+
     const res = await fetch(url, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...(xsrfToken ? { 'x-xsrf-token': xsrfToken } : {}),
         ...headers,
       },
       body: JSON.stringify(body),

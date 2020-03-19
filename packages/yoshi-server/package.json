@@ -21,6 +21,7 @@
     "@wix/wix-errors": "^1.0.0",
     "@wix/wix-express-csrf": "^1.0.0",
     "@wix/wix-express-require-https": "^1.0.0",
+    "cookie-parser": "^1.0.0",
     "ejs": "2.7.4",
     "express": "4.17.1",
     "fp-ts": "2.5.3",
@@ -37,5 +38,8 @@
     "wix-express-require-https": "^1.0.756",
     "yoshi-config": "4.51.0",
     "youch": "2.0.10"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.0.0"
   }
 }

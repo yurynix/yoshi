@@ -8,6 +8,8 @@ import globby from 'globby';
 import { send } from 'micro';
 import importFresh from 'import-fresh';
 import requireHttps from 'wix-express-require-https';
+import cookieParser from 'cookie-parser';
+import wixExpressCsrf from '@wix/wix-express-csrf';
 import { ROUTES_BUILD_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { InternalServerError } from './httpErrors';
 import { RouteFunction, InitServerFunction } from './types';
@@ -72,6 +74,8 @@ export default class Server {
 
         if (params) {
           await new Promise(resolve => requireHttps(req, res, resolve));
+          await new Promise(resolve => cookieParser()(req, res, resolve));
+          await new Promise(resolve => wixExpressCsrf()(req, res, resolve));
           return await handler(req, res, params);
         }
       }
