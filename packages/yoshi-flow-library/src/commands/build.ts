@@ -79,9 +79,6 @@ const build: cliCommand = async function(argv, config) {
     ]);
   }
 
-  // builds the cjs bundle without typecheck
-  buildCjs();
-
   try {
     // builds the ES bundle
     await tscWorker.build();
@@ -99,32 +96,37 @@ const build: cliCommand = async function(argv, config) {
     throw error;
   }
 
-  const clientDebugConfig = createClientWebpackConfig(config, {
-    isDev: true,
-    forceEmitSourceMaps,
-  });
+  // builds the cjs bundle without typecheck
+  buildCjs();
 
-  const clientOptimizedConfig = createClientWebpackConfig(config, {
-    isAnalyze,
-    forceEmitSourceMaps,
-  });
+  if (config.bundle) {
+    const clientDebugConfig = createClientWebpackConfig(config, {
+      isDev: true,
+      forceEmitSourceMaps,
+    });
 
-  const { stats } = await runWebpack([
-    clientDebugConfig,
-    clientOptimizedConfig,
-  ]);
+    const clientOptimizedConfig = createClientWebpackConfig(config, {
+      isAnalyze,
+      forceEmitSourceMaps,
+    });
 
-  const [, clientOptimizedStats] = stats;
+    const { stats } = await runWebpack([
+      clientDebugConfig,
+      clientOptimizedConfig,
+    ]);
 
-  if (shouldEmitWebpackStats) {
-    const statsFilePath = join(STATS_FILE);
+    const [, clientOptimizedStats] = stats;
 
-    fs.ensureDirSync(path.dirname(statsFilePath));
-    await bfj.write(statsFilePath, clientOptimizedStats.toJson());
+    if (shouldEmitWebpackStats) {
+      const statsFilePath = join(STATS_FILE);
+
+      fs.ensureDirSync(path.dirname(statsFilePath));
+      await bfj.write(statsFilePath, clientOptimizedStats.toJson());
+    }
+
+    printClientBuildResult(clientOptimizedStats);
+    printBundleSizeSuggestion();
   }
-
-  printClientBuildResult(clientOptimizedStats);
-  printBundleSizeSuggestion();
 };
 
 export default build;
