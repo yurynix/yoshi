@@ -9,8 +9,6 @@ type WebpackExternals = ExternalsElement | Array<ExternalsElement>;
 export type InitialConfig = {
   bundle: {
     umd?: string;
-    cssModules?: boolean;
-    separateCss?: boolean | 'prod';
     entry?: WebpackEntry;
     externals?: WebpackExternals;
     port?: number;
@@ -22,8 +20,6 @@ export type InitialConfig = {
 export type Config = {
   pkgJson: PackageJson;
   jestConfig: unknown;
-  cssModules?: boolean;
-  separateCss?: boolean | 'prod';
   bundle: boolean;
   entry: WebpackEntry;
   umd?: string;

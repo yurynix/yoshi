@@ -21,8 +21,6 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     umd,
     bundle: !!initialConfig.bundle,
     entry: initialConfig.bundle?.entry || 'index.ts',
-    separateCss: initialConfig.bundle?.separateCss ?? true,
-    cssModules: initialConfig.bundle?.cssModules ?? true,
     externals: initialConfig.bundle?.externals ?? [],
     jestConfig: jest,
     storybook: initialConfig.storybook ?? false,

@@ -1,11 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import webpack from 'webpack';
 import { createBaseWebpackConfig } from 'yoshi-common/build/webpack.config';
-import {
-  isSingleEntry,
-  inTeamCity,
-  isProduction,
-} from 'yoshi-helpers/build/queries';
+import { isSingleEntry } from 'yoshi-helpers/build/queries';
 import { Config } from './config/types';
 
 const stripOrganization = (name: string): string =>
@@ -28,11 +24,6 @@ export function createClientWebpackConfig(
 ): webpack.Configuration {
   const entry = config.entry;
 
-  const separateCss =
-    config.separateCss === 'prod'
-      ? inTeamCity() || isProduction()
-      : config.separateCss;
-
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const name = stripOrganization(config.pkgJson.name!);
 
@@ -48,8 +39,8 @@ export function createClientWebpackConfig(
     isAnalyze,
     forceEmitSourceMaps,
     exportAsLibraryName: config.umd,
-    cssModules: config.cssModules,
-    separateCss,
+    cssModules: true,
+    separateCss: true,
   });
 
   clientConfig.entry = isSingleEntry(entry)

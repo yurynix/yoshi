@@ -4,8 +4,6 @@ import { InitialConfig, RequiredRecursively } from './types';
 const validConfig: RequiredRecursively<InitialConfig> = {
   bundle: {
     umd: 'app-name',
-    cssModules: true,
-    separateCss: multipleValidOptions(true, 'prod' as 'prod'),
     entry: multipleValidOptions(
       'index.js',
       ['one.js'],
