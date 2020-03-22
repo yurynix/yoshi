@@ -2,6 +2,10 @@ process.on('unhandledRejection', error => {
   throw error;
 });
 
+process.env.EXPERIMENTAL_FLOW_BM = 'true';
+process.env.EXPERIMENTAL_FLOW_EDITOR = 'true';
+process.env.EXPERIMENTAL_FLOW_LIBRARY = 'true';
+
 const fs = require('fs-extra');
 const path = require('path');
 const tempy = require('tempy');
