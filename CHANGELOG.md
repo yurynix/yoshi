@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.52.1 (2020-03-22)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2133](https://github.com/wix/yoshi/pull/2133) Don't transpile with `ts-node/register` files ignored by git ([@ronami](https://github.com/ronami))
+
+#### :house: Internal
+
+- `create-yoshi-app`
+  - [#2130](https://github.com/wix/yoshi/pull/2130) create-yoshi-app:dev should include the experimental flows ([@ranyitz](https://github.com/ranyitz))
+- Other
+  - [#2115](https://github.com/wix/yoshi/pull/2115) Add a test for initData on routes ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.52.0 (2020-03-19)
 
 #### :rocket: New Feature
