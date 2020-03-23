@@ -2,27 +2,28 @@ import path from 'path';
 import fs from 'fs-extra';
 import defaultsDeep from 'lodash/defaultsDeep';
 import isEqual from 'lodash/isEqual';
+import { SRC_DIR, ES_DIR, TYPES_DIR } from 'yoshi-config/build/paths';
 
-const enforcedTsconfigOptions = {
-  include: ['src'],
-  compilerOptions: {
-    target: 'ESNext',
-    module: 'esnext',
-    lib: ['dom', 'esnext'],
-    moduleResolution: 'node',
-    rootDir: 'src',
-    outDir: 'dist/es',
-    declarationDir: 'dist/types',
-    declaration: true,
-    sourceMap: true,
-    importHelpers: true,
-    esModuleInterop: true,
-    jsx: 'react',
-  },
-};
+export const enforceTsconfig = ({ cwd }: { cwd: string }) => {
+  const enforcedTsconfigOptions = {
+    include: [SRC_DIR],
+    compilerOptions: {
+      target: 'ESNext',
+      module: 'esnext',
+      lib: ['dom', 'esnext'],
+      moduleResolution: 'node',
+      rootDir: SRC_DIR,
+      outDir: ES_DIR,
+      declarationDir: TYPES_DIR,
+      declaration: true,
+      sourceMap: true,
+      importHelpers: true,
+      esModuleInterop: true,
+      jsx: 'react',
+    },
+  };
 
-export const enforceTsconfig = () => {
-  const userTsconfigPath = path.join(process.cwd(), 'tsconfig.json');
+  const userTsconfigPath = path.join(cwd, 'tsconfig.json');
   const userTsconfig = fs.readJSONSync(userTsconfigPath);
   const mergedTsconfig = defaultsDeep(enforcedTsconfigOptions, userTsconfig);
 

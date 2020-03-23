@@ -2,7 +2,10 @@ import { spawn } from 'child_process';
 import { EventEmitter } from 'events';
 
 import execa = require('execa');
+import { ES_DIR, SRC_DIR } from 'yoshi-config/build/paths';
 import { formatTypescriptError } from './formatter';
+import copyFilesSync from './copy-files';
+import { enforceTsconfig } from './tsconfig-enforcer';
 
 export type TscProcessEvent =
   | { type: 'compiling' }
@@ -37,7 +40,35 @@ export class TypeError extends Error {
 }
 
 export default class TscProcess extends EventEmitter {
+  copyFiles: boolean;
+  cwd: string;
+
+  constructor({
+    copyFiles = true,
+    cwd = process.cwd(),
+  }: {
+    copyFiles?: boolean;
+    cwd?: string;
+  }) {
+    super();
+    this.copyFiles = copyFiles;
+    this.cwd = cwd;
+  }
+
   build() {
+    enforceTsconfig({
+      cwd: this.cwd,
+    });
+
+    if (this.copyFiles) {
+      copyFilesSync({
+        watch: false,
+        outDir: ES_DIR,
+        rootDir: SRC_DIR,
+        cwd: this.cwd,
+      });
+    }
+
     const tscBin = require.resolve('typescript/bin/tsc');
 
     return new Promise((resolve, reject) => {
@@ -55,6 +86,19 @@ export default class TscProcess extends EventEmitter {
   }
 
   watch() {
+    enforceTsconfig({
+      cwd: this.cwd,
+    });
+
+    if (this.copyFiles) {
+      copyFilesSync({
+        watch: true,
+        outDir: ES_DIR,
+        rootDir: SRC_DIR,
+        cwd: this.cwd,
+      });
+    }
+
     const tscBin = require.resolve('typescript/bin/tsc');
 
     const tscWorker = spawn('node', [tscBin, '--watch', '--pretty', 'false']);
@@ -62,6 +106,9 @@ export default class TscProcess extends EventEmitter {
     process.on('exit', () => tscWorker.kill('SIGTERM'));
 
     let errors: Array<string> = [];
+
+    // Emit the first compiling message to give fast feedback to the user
+    this.emit('message', { type: 'compiling' });
 
     tscWorker.stdout.on('data', buffer => {
       const lines = buffer.toString().split('\n');

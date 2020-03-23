@@ -16,9 +16,9 @@ import {
   getDevServerSocketPath,
 } from './utils/suricate';
 import devEnvironmentLogger from './dev-environment-logger';
-import { formatTypescriptError } from './tsc/formatter';
-import * as tscWorker from './tsc/tsc-worker';
-import TscProcess, { TscProcessEvent } from './tsc/tsc-process';
+import { formatTypescriptError } from './typescript/formatter';
+import TscProcess, { TscProcessEvent } from './typescript/tsc-process';
+import runBabel from './typescript/run-babel';
 
 type WebpackStatus = {
   errors: Array<string>;
@@ -57,6 +57,7 @@ type DevEnvironmentProps = {
   storybookProcess?: ExecaChildProcess;
   tscProcess?: TscProcess;
   startUrl?: StartUrl;
+  cwd: string;
 };
 
 export default class DevEnvironment {
@@ -131,8 +132,6 @@ export default class DevEnvironment {
 
     if (tscProcess) {
       tscProcess.on('message', this.onTscMessage);
-      // Send a compiling message as soon as possible
-      tscProcess.emit('message', { type: 'compiling' });
     }
   }
 
@@ -305,7 +304,18 @@ export default class DevEnvironment {
       suricate,
       appName,
       startUrl,
+      tscProcess,
+      cwd,
     } = this.props;
+
+    if (tscProcess) {
+      tscProcess.watch();
+
+      runBabel({
+        watch: true,
+        cwd,
+      });
+    }
 
     if (multiCompiler && webpackDevServer) {
       const compilationPromise = new Promise(resolve => {
@@ -470,13 +480,15 @@ export default class DevEnvironment {
         'storybook-worker',
       );
 
+      // TODO: This line starts storybook
+      // This should be refactored and be moved to start method
       storybookProcess = execa.node(pathToStorybookWorker);
     }
 
-    let tscProcess;
+    let tscProcess: TscProcess | undefined;
 
     if (compileTypeScriptFiles) {
-      tscProcess = tscWorker.watch();
+      tscProcess = new TscProcess({ cwd });
     }
 
     const devEnvironment = new DevEnvironment({
@@ -488,6 +500,7 @@ export default class DevEnvironment {
       startUrl,
       tscProcess,
       storybookProcess,
+      cwd,
     });
 
     if (serverCompiler) {
