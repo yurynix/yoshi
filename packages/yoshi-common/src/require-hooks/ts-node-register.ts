@@ -20,14 +20,14 @@ const shouldIgnore = globby.gitignore.sync({ cwd: process.cwd() });
 
 // `ts-node` only supports regex ignore patterns, use custom extensions so functions can
 // be used
-extensions.forEach(ext => {
-  const originalTsNodeHandler = require.extensions[ext];
+if (extensions.includes('.js')) {
+  const originalTsNodeHandler = require.extensions['.js'];
 
-  require.extensions[ext] = function(m, filename) {
+  require.extensions['.js'] = function(m, filename) {
     if (shouldIgnore(filename)) {
       return originalJsHandler(m, filename);
     }
 
     return originalTsNodeHandler(m, filename);
   };
-});
+}
