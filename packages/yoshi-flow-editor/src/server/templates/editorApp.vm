@@ -10,7 +10,7 @@
     <script
       src="https://${clientTopology.staticsDomain}/unpkg/react-dom@16.6.3/umd/react-dom#if(${debug}).development#else.production.min#{end}.js"
       crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://static.parastorage.com/services/js-sdk/1.108.0/js/wix-private.min.js"></script>
+    <script type="text/javascript" src="https://static.parastorage.com/services/js-sdk/1.190.0/js/wix-private.min.js"></script>
 
   </head>
   <body>

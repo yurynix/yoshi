@@ -5,6 +5,8 @@ import settingsEntryTemplate from './templates/SettingsAppEntryContent';
 
 const settingsWrapperPath =
   'yoshi-flow-editor-runtime/build/SettingsWrapper.js';
+const baseUIPath =
+  'yoshi-flow-editor-runtime/build/styles/wix-base-ui.global.scss';
 
 const settingsWrapper = (
   generatedWidgetEntriesPath: string,
@@ -20,6 +22,7 @@ const settingsWrapper = (
 
         const generateSettingsEntryContent = settingsEntryTemplate({
           settingsWrapperPath,
+          baseUIPath,
           componentFileName: component.settingsFileName,
         });
 
