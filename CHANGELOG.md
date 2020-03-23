@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.52.2 (2020-03-23)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2137](https://github.com/wix/yoshi/pull/2137) Always transpile with `ts-node` ts/tsx files even if they're ignored by git ([@ronami](https://github.com/ronami))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-editor`
+  - [#2134](https://github.com/wix/yoshi/pull/2134) [flow-editor] Dont generate viewerScript for each widget. ([@yavorsky](https://github.com/yavorsky))
+- `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2135](https://github.com/wix/yoshi/pull/2135) [editor-flow] Settings panel fixes. ([@yavorsky](https://github.com/yavorsky))
+
+#### :house: Internal
+
+- [#2136](https://github.com/wix/yoshi/pull/2136) Yoshi Server Tests: a tiny type fix ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.52.1 (2020-03-22)
 
 #### :bug: Bug Fix
