@@ -27,9 +27,7 @@ const viewerScriptWrapper = (
         generatedWidgetEntryPath,
         generateControllerEntryContent,
       );
-      // viewerScript for each module.
-      acc[`${component.name}ViewerScript`] = generatedWidgetEntryPath;
-      // just entry ts file
+      // Generate controllers for each widget.
       acc[`${component.name}Controller`] = component.controllerFileName;
 
       return acc;
