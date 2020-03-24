@@ -18,11 +18,11 @@
   },
   "scripts": {
     "build": "yoshi-library build",
-    "dev": "yoshi-library start",
+    "start": "yoshi-library start",
     "test": "yoshi-library test",
     "lint": "yoshi-library lint",
     "posttest": "npm run lint",
-    "start": "npm start --prefix example"
+    "example": "npm start --prefix example"
   },
   "husky": {
     "hooks": {
