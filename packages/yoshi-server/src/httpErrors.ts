@@ -5,7 +5,4 @@ export class InternalServerError extends wixBusinessError(
   HttpStatus.INTERNAL,
 ) {
   // default error code: -100, default http status: 500.
-  constructor(msg?: string, cause?: Error | string) {
-    super(msg, cause);
-  }
 }
