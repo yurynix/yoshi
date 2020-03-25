@@ -5,7 +5,7 @@
 #### :bug: Bug Fix
 
 - `yoshi-config`
-- [#2152](https://github.com/wix/yoshi/pull/2152) Do not bring webpack as a dependnecy for yoshi config
+  - [#2152](https://github.com/wix/yoshi/pull/2152) Do not bring webpack as a dependnecy for yoshi config
 
 ## 3.31.3 (2020-02-13)
 
