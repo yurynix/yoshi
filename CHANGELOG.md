@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.31.5 (2020-03-25)
+
+- `yoshi-config`
+
+  - Use the correct schemas for webpack validation
+
 ## 3.31.4 (2020-03-25)
 
 #### :bug: Bug Fix
