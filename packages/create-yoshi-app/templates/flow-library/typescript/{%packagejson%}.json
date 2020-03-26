@@ -47,7 +47,7 @@
   },
   "yoshiFlowLibrary": {
     "bundle": {
-      "umd": "counter"
+      "library": "counter"
     }
   },
   "eslintConfig": {
