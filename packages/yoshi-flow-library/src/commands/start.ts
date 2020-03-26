@@ -26,7 +26,7 @@ const start: cliCommand = async function(argv, config) {
     console.log(
       `
       Description
-        Starts the application in development mode
+        Start a development server which rebuilds on any change
 
       Usage
         $ yoshi-library start

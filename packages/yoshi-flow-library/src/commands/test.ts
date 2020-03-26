@@ -31,7 +31,7 @@ const test: cliCommand = async function(argv, config) {
     console.log(
       `
       Description
-        Running the tests
+        Run the tests
 
       Usage
         $ yoshi-library test
