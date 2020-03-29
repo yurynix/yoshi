@@ -51,6 +51,7 @@ export function createClientWebpackConfig(
 
   clientConfig.externals = externals;
   clientConfig.output!.filename = isDev ? '[name].umd.js' : '[name].umd.min.js';
+  clientConfig.output!.umdNamedDefine = true;
 
   return clientConfig;
 }
