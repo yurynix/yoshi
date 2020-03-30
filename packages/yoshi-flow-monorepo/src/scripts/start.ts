@@ -93,6 +93,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   const clientConfig = createClientWebpackConfig(rootConfig, pkg, {
     isDev: true,
     isHot: pkg.config.hmr as boolean,
+    suricate: pkg.config.suricate,
   });
 
   const serverConfig = createServerWebpackConfig(rootConfig, libs, pkg, {

@@ -63,11 +63,13 @@ export function createClientWebpackConfig(
   {
     isDev,
     isHot,
+    suricate,
     isAnalyze,
     forceEmitSourceMaps,
   }: {
     isDev?: boolean;
     isHot?: boolean;
+    suricate?: boolean;
     isAnalyze?: boolean;
     forceEmitSourceMaps?: boolean;
   } = {},
@@ -82,6 +84,7 @@ export function createClientWebpackConfig(
     target: 'web',
     isDev,
     isHot,
+    suricate,
     isAnalyze,
     forceEmitSourceMaps,
     exportAsLibraryName: pkg.config.exports,
