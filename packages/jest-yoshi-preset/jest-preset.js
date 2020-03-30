@@ -69,10 +69,12 @@ const staticAssetsExtensions = [
 
 const reStaticAssets = staticAssetsExtensions.join('|');
 
-const defaultTransform = {
+const transform = {
   '\\.st.css?$': require.resolve('yoshi-common/build/@stylable/jest'),
   '\\.(gql|graphql)$': require.resolve('jest-transform-graphql'),
   [`\\.(${reStaticAssets})$`]: require.resolve('./transforms/file'),
+  '^.+\\.jsx?$': require.resolve('./transforms/babel-yoshi-server'),
+  '^.+\\.tsx?$': require.resolve('./transforms/typescript-yoshi-server'),
 };
 
 global.__isDebugMode__ =
@@ -95,13 +97,6 @@ const config = {
         testURL: 'http://localhost',
         testMatch: globs.unitTests.map(glob => `<rootDir>/${glob}`),
         setupFiles: [require.resolve('regenerator-runtime/runtime')],
-        transform: {
-          '^.+\\.jsx?$': require.resolve('./transforms/babel-yoshi-server'),
-          '^.+\\.tsx?$': require.resolve(
-            './transforms/typescript-yoshi-server',
-          ),
-          ...defaultTransform,
-        },
       },
       {
         displayName: 'e2e',
@@ -119,11 +114,6 @@ const config = {
         globalTeardown: require.resolve(
           './jest-environment-yoshi-puppeteer/globalTeardown',
         ),
-        transform: {
-          '^.+\\.jsx?$': require.resolve('./transforms/babel'),
-          '^.+\\.tsx?$': require.resolve('./transforms/typescript'),
-          ...defaultTransform,
-        },
       },
     ]
       .filter(({ displayName }) => {
@@ -202,6 +192,8 @@ const config = {
             // See here for more details: https://github.com/facebook/jest/blob/6af2f677e5c48f71f526d4be82d29079c1cdb658/packages/jest-core/src/runGlobalHook.js#L61
             '/babel-preset-yoshi/',
           ],
+
+          transform,
 
           moduleNameMapper: {
             '^(?!.+\\.st\\.css$)^.+\\.(?:sass|s?css|less)$': require.resolve(
