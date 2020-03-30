@@ -3,9 +3,7 @@ import webpack from 'webpack';
 import { createBaseWebpackConfig } from 'yoshi-common/build/webpack.config';
 import { isSingleEntry } from 'yoshi-helpers/build/queries';
 import { Config, BundleConfig } from './config/types';
-
-const stripOrganization = (name: string): string =>
-  name.slice(name.indexOf('/') + 1);
+import { stripOrganization } from './utils';
 
 export function createClientWebpackConfig(
   config: Config,

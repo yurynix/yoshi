@@ -1,5 +1,6 @@
 import { PackageJson } from 'read-pkg';
 import defaultsDeep from 'lodash/defaultsDeep';
+import { stripOrganization } from '../utils';
 import {
   Config,
   InitialConfig,
@@ -15,7 +16,7 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     https: false,
     entry: 'index.ts',
     externals: [],
-    library: pkgJson.name,
+    library: stripOrganization(pkgJson.name!),
   };
 
   let bundleConfig: BundleConfig | null = null;

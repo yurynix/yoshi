@@ -64,7 +64,7 @@ const start: cliCommand = async function(argv, config) {
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: webpackConfigs as [webpack.Configuration?],
     // @ts-ignore - we won't need this port if we won't have clientConfig
-    webpackDevServerPort: config.bundleConfig.port,
+    webpackDevServerPort: config.bundleConfig?.port,
     https: false,
     appName: config.pkgJson.name!,
     enableClientHotUpdates: false,
