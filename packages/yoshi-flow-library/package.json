@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-library",
-  "version": "4.53.0",
+  "version": "4.53.1",
   "bin": {
     "yoshi-library": "./bin/yoshi-library.js"
   },
@@ -33,9 +33,9 @@
     "jest-validate": "24.9.0",
     "lodash": "4.17.15",
     "read-pkg": "5.2.0",
-    "yoshi-common": "4.53.0",
+    "yoshi-common": "4.53.1",
     "yoshi-config": "4.53.0",
-    "yoshi-flow-legacy": "4.53.0",
+    "yoshi-flow-legacy": "4.53.1",
     "yoshi-helpers": "4.53.0"
   }
 }
