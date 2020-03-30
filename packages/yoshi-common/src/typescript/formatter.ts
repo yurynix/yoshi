@@ -19,7 +19,7 @@ export function formatTypescriptError(errorString: string) {
   );
 
   if (!match) {
-    throw new Error(`couldn't parse ${errorString}`);
+    return errorString;
   }
 
   const [, fileName, line, column, severity, code, message] = match;
@@ -35,7 +35,7 @@ export function formatTypescriptError(errorString: string) {
     isWarningSeverity: () => false,
   };
 
-  const errorLocation = chalk.bgWhite.black(`${fileName}(${column},${line})`);
+  const errorLocation = chalk.underline(`${fileName}(${line},${column})`);
 
   return errorLocation + `\n` + formatter(errorInfo, true);
 }
