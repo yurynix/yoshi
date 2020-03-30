@@ -1,27 +1,47 @@
 # Changelog
 
+## 4.53.1 (2020-03-30)
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`
+  - [#2166](https://github.com/wix/yoshi/pull/2166) Yoshi Server: use jest transform on e2e tests ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#2165](https://github.com/wix/yoshi/pull/2165) Fix Suricate configuration for monorepo flow ([@giladsegal](https://github.com/giladsegal))
+
+#### :house: Internal
+
+- [#1974](https://github.com/wix/yoshi/pull/1974) Add missing tests for `yoshi-server-testing` ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.53.0 (2020-03-27)
 
 #### :rocket: New Feature
-* `create-yoshi-app`, `yoshi-flow-editor`
-  * [#2151](https://github.com/wix/yoshi/pull/2151) Add `editorScript` support using `editor.app.ts` entry ([@yavorsky](https://github.com/yavorsky))
+
+- `create-yoshi-app`, `yoshi-flow-editor`
+  - [#2151](https://github.com/wix/yoshi/pull/2151) Add `editorScript` support using `editor.app.ts` entry ([@yavorsky](https://github.com/yavorsky))
 
 #### :bug: Bug Fix
-* `yoshi-flow-editor-runtime`
-  * [#2158](https://github.com/wix/yoshi/pull/2158) Fix `ssr` by checking `window` approachability ([@yavorsky](https://github.com/yavorsky))
-* `eslint-config-yoshi-base`, `yoshi-server`
-  * [#2145](https://github.com/wix/yoshi/pull/2145) Update eslint-config-yoshi-base for TS ([@malcolmmadsheep](https://github.com/malcolmmadsheep))
+
+- `yoshi-flow-editor-runtime`
+  - [#2158](https://github.com/wix/yoshi/pull/2158) Fix `ssr` by checking `window` approachability ([@yavorsky](https://github.com/yavorsky))
+- `eslint-config-yoshi-base`, `yoshi-server`
+  - [#2145](https://github.com/wix/yoshi/pull/2145) Update eslint-config-yoshi-base for TS ([@malcolmmadsheep](https://github.com/malcolmmadsheep))
 
 #### :memo: Documentation
-* [#2156](https://github.com/wix/yoshi/pull/2156) Fixing the test watch command ([@lironch](https://github.com/lironch))
+
+- [#2156](https://github.com/wix/yoshi/pull/2156) Fixing the test watch command ([@lironch](https://github.com/lironch))
 
 #### :house: Internal
-* `yoshi-common`, `yoshi-helpers`
-  * [#2148](https://github.com/wix/yoshi/pull/2148) Add support for custom cdn certificate ([@amiryonatan](https://github.com/amiryonatan))
-* `create-yoshi-app`, `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-library`, `yoshi-flow-monorepo`, `yoshi-server-react`
-  * [#2147](https://github.com/wix/yoshi/pull/2147) Disable no `null` assertion rule in yoshi's codebase ([@ranyitz](https://github.com/ranyitz))
-* `yoshi-common`
-  * [#2142](https://github.com/wix/yoshi/pull/2142) Prevent clearing console when `DEBUG` environment parameter is enabled ([@ranyitz](https://github.com/ranyitz))
+
+- `yoshi-common`, `yoshi-helpers`
+  - [#2148](https://github.com/wix/yoshi/pull/2148) Add support for custom cdn certificate ([@amiryonatan](https://github.com/amiryonatan))
+- `create-yoshi-app`, `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-library`, `yoshi-flow-monorepo`, `yoshi-server-react`
+  - [#2147](https://github.com/wix/yoshi/pull/2147) Disable no `null` assertion rule in yoshi's codebase ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-common`
+  - [#2142](https://github.com/wix/yoshi/pull/2142) Prevent clearing console when `DEBUG` environment parameter is enabled ([@ranyitz](https://github.com/ranyitz))
 
 ## 4.52.2 (2020-03-23)
 
