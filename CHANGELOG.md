@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.53.2 (2020-03-31)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-library`
+  - [#2172](https://github.com/wix/yoshi/pull/2172) add yoshi-flow-library's bin to the package.json's files array ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- `yoshi-flow-editor`
+  - [#2167](https://github.com/wix/yoshi/pull/2167) feat(yoshi-flow-editor): Add migraiton guide ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.53.1 (2020-03-30)
 
 #### :bug: Bug Fix
