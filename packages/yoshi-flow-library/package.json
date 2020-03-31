@@ -11,7 +11,8 @@
   ],
   "files": [
     "build",
-    "src"
+    "src",
+    "bin"
   ],
   "author": "Ran Yitzhaki",
   "license": "ISC",
