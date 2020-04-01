@@ -7,7 +7,7 @@ import { greet } from './api/greeting.api';
 
 const mocks = [
   {
-    request: { fn: greet, variables: ['Yaniv'] },
+    request: { method: greet, args: ['Yaniv'] },
     result: () => ({
       greeting: 'Hello Yaniv',
     }),
