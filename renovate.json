@@ -20,6 +20,12 @@
     "@types/react",
     "@types/webpack"
   ],
+  "packageRules": [
+    {
+      "packagePatterns": ["^@babel/"],
+      "enabled": false
+    }
+  ],
   "ignorePaths": [
     "**/test/**",
     "**/__tests__/**"
