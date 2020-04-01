@@ -7,7 +7,8 @@
     ],
     "API": [
       "api/configuration",
-      "api/cli"
+      "api/cli",
+      "api/node"
     ],
     "Guides": [
       "guides/ab-translate",
