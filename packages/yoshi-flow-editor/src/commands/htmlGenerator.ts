@@ -18,6 +18,7 @@ const generateHTML = (type: vmType, widgetName: string) => {
   const vmPath = vmPaths[type];
   const rendered = renderVM(vmPath, {
     widgetName,
+    debug: false,
     clientTopology: {
       staticsBaseUrl: '../',
     },

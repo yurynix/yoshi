@@ -1,5 +1,4 @@
 import { Engine } from 'velocity';
-
 import velocityData from './velocity.data.json';
 import velocityDataPrivate from './velocity.private.data.json';
 
@@ -7,6 +6,7 @@ export default (
   url: string,
   data: {
     widgetName?: string;
+    debug?: boolean;
     clientTopology?: Partial<
       Record<'staticsDomain' | 'staticsBaseUrl', string>
     >;
