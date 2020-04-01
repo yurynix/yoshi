@@ -39,7 +39,7 @@ const TranslationProvider: FC<TranslationProviderProps> = ({
   children,
   translations,
 }) => {
-  const { locale } = useModuleParams();
+  const { locale = 'en' } = useModuleParams();
 
   const i18nConfig = useMemo(() => i18n(locale, translations), [locale]);
 

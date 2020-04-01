@@ -45,7 +45,7 @@ createModule({
     )}
   ], // ${JSON.stringify(methods)},
   ${moduleInitPath ? `moduleInit: require('${moduleInitPath}').default,` : ''}
-  loadLocale: locale => import(\`${localePath}/\${locale}\`),
+  loadLocale: (locale = 'en') => import(\`${localePath}/\${locale}\`),
   config: ${JSON.stringify(moduleConfig)},
 });`;
 

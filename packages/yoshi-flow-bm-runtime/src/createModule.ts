@@ -27,7 +27,7 @@ interface ModuleOptions {
     methodId: string;
     loadMethod(): (...args: Array<any>) => any;
   }>;
-  loadLocale: (locale: string) => Record<string, string>;
+  loadLocale: (locale?: string) => Record<string, string>;
   moduleInit: (
     this: any,
     _module: BusinessManagerModule,

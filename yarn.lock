@@ -4543,10 +4543,10 @@
     rimraf "^2.6.3"
     typescript "^2.9.2"
 
-"@wix/business-manager-api@1.0.964":
-  version "1.0.964"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/business-manager-api/-/@wix/business-manager-api-1.0.964.tgz#a8ec0088accf921410b4aa32a3bccf3e12e7274f"
-  integrity sha1-qOwAiKzPkhQQtKoyo7zPPhLnJ08=
+"@wix/business-manager-api@1.0.989":
+  version "1.0.989"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/business-manager-api/-/@wix/business-manager-api-1.0.989.tgz#c80bd6f1a3327e3af5e79f69c85f3fe16aa72eb0"
+  integrity sha1-yAvW8aMyfjr1559pyF8/4WqnLrA=
   dependencies:
     "@sentry/browser" "5.7.1"
     "@wix/wix-experiments" latest
