@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.53.3 (2020-04-01)
+
+#### :nail_care: Polish
+
+- `yoshi-flow-legacy`
+  - [#2175](https://github.com/wix/yoshi/pull/2175) Yoshi Server: support yoshi-server for storybook ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.53.2 (2020-03-31)
 
 #### :bug: Bug Fix
