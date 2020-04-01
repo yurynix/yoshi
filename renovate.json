@@ -5,13 +5,8 @@
   "labels": [
     "PR: Chore :construction_worker:"
   ],
-   "major": {
+  "major": {
     "enabled": false
-  },
-  "separateMinorPatch": false,
-  "minor": {
-    "groupName": "dependencies (weekly)",
-    "schedule": ["after 3:00am and before 7:00am on sunday"]
   },
   "ignoreDeps": [
     "webpack-dev-server",
@@ -24,6 +19,18 @@
     {
       "packagePatterns": ["^@babel/"],
       "enabled": false
+    },
+    {
+      "updateTypes": ["minor", "patch"],
+      "depTypeList": ["dependencies"],
+      "groupName": "dependencies (weekly)",
+      "schedule": ["after 3:00am and before 7:00am on sunday"]
+    },
+    {
+      "updateTypes": ["minor", "patch"],
+      "depTypeList": ["devDependencies"],
+      "groupName": "devDependencies (weekly)",
+      "schedule": ["after 3:00am and before 7:00am on sunday"]
     }
   ],
   "ignorePaths": [
