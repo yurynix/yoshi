@@ -34,6 +34,8 @@ const defaultSplitChunksConfig = {
 
 const useSplitChunks = projectConfig.splitChunks;
 
+const useYoshiServer = projectConfig.yoshiServer;
+
 const splitChunksConfig = isObject(useSplitChunks)
   ? useSplitChunks
   : defaultSplitChunksConfig;
@@ -81,6 +83,7 @@ function createClientWebpackConfig({
     isAnalyze,
     includeStyleLoaders,
     forceEmitSourceMaps: withLocalSourceMaps,
+    useYoshiServer,
     ...defaultOptions,
   });
 
