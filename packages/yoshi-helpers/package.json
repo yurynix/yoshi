@@ -16,7 +16,7 @@
     "globby": "9.2.0",
     "http-proxy": "1.18.0",
     "lodash": "4.17.15",
-    "mkdirp": "0.5.1",
+    "mkdirp": "0.5.4",
     "ps-tree": "1.2.0",
     "semver": "5.7.1",
     "server-destroy": "1.0.1",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@types/detect-port": "1.1.0",
-    "@types/http-proxy": "1.17.3",
+    "@types/http-proxy": "1.17.4",
     "@types/mkdirp": "0.5.2",
     "@types/ps-tree": "1.1.0",
     "@types/semver": "6.2.1",
