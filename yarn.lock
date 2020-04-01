@@ -13946,10 +13946,10 @@ html-void-elements@^1.0.1:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/html-void-elements/-/html-void-elements-1.0.5.tgz#ce9159494e86d95e45795b166c2021c2cfca4483"
   integrity sha1-zpFZSU6G2V5FeVsWbCAhws/KRIM=
 
-html-webpack-plugin@4.0.3:
-  version "4.0.3"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/html-webpack-plugin/-/html-webpack-plugin-4.0.3.tgz#70659c8836210249cb6fa9dd6706a957547666d5"
-  integrity sha1-cGWciDYhAknLb6ndZwapV1R2ZtU=
+html-webpack-plugin@4.0.4:
+  version "4.0.4"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/html-webpack-plugin/-/html-webpack-plugin-4.0.4.tgz#90cdfb168094e93e047174d9baca098ec5540636"
+  integrity sha1-kM37FoCU6T4EcXTZusoJjsVUBjY=
   dependencies:
     "@types/html-minifier-terser" "^5.0.0"
     "@types/tapable" "^1.0.5"
