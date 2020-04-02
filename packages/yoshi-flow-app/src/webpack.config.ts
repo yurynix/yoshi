@@ -48,12 +48,14 @@ export function createClientWebpackConfig(
     suricate,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
   }: {
     isDev?: boolean;
     isHot?: boolean;
     suricate?: boolean;
     isAnalyze?: boolean;
     forceEmitSourceMaps?: boolean;
+    forceEmitStats?: boolean;
   } = {},
 ): webpack.Configuration {
   const entry = config.entry || defaultEntry;
@@ -67,6 +69,7 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
     exportAsLibraryName: config.exports,
     suricate,
     cssModules: config.cssModules,

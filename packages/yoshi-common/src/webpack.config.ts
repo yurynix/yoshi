@@ -12,12 +12,15 @@ import {
   TEMPLATES_DIR,
   TEMPLATES_BUILD_DIR,
   SERVER_CHUNKS_DIR,
+  STATS_FILE,
 } from 'yoshi-config/build/paths';
 import resolve from 'resolve';
 import {
   isProduction as checkIsProduction,
   inTeamCity as checkInTeamCity,
 } from 'yoshi-helpers/build/queries';
+// @ts-ignore - missing types
+import { StatsWriterPlugin } from 'webpack-stats-plugin';
 // @ts-ignore - missing types
 import ModuleNotFoundPlugin from 'react-dev-utils/ModuleNotFoundPlugin';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
@@ -53,6 +56,8 @@ const isProduction = checkIsProduction();
 const inTeamCity = checkInTeamCity();
 
 const disableModuleConcat = process.env.DISABLE_MODULE_CONCATENATION === 'true';
+
+const disableStatsOutput = process.env.DISABLE_WEBPACK_STATS_OUTPUT === 'true';
 
 const reScript = /\.js?$/;
 const reStyle = /\.(css|less|scss|sass)$/;
@@ -258,6 +263,7 @@ export function createBaseWebpackConfig({
   useYoshiServer = false,
   createWorkerManifest = true,
   useCustomSourceMapPlugin = false,
+  forceEmitStats = false,
 }: {
   name: string;
   configName:
@@ -297,6 +303,7 @@ export function createBaseWebpackConfig({
   // changes source map to include public path and
   // use plugin directly instead of "devtool" option
   useCustomSourceMapPlugin?: boolean;
+  forceEmitStats?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -634,6 +641,20 @@ export function createBaseWebpackConfig({
           ]
         : []),
 
+      ...(forceEmitStats ||
+      (inTeamCity && isProduction && !isDev && !disableStatsOutput)
+        ? [
+            new StatsWriterPlugin({
+              // The plugin does not accept absolute path, so we have to navigate relatively from bundle location
+              // /dist/statics to stats file /target/webpack-stats.json
+              filename: path.join('../../', STATS_FILE),
+              stats: {
+                all: true,
+                maxModules: Infinity,
+              },
+            }),
+          ]
+        : []),
       ...(useCustomSourceMapPlugin
         ? target === 'node'
           ? [sourceMapPlugin({ inline: true, showPathOnDisk: true })]

@@ -12,12 +12,14 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
   }: {
     isDev?: boolean;
     isHot?: boolean;
     suricate?: boolean;
     isAnalyze?: boolean;
     forceEmitSourceMaps?: boolean;
+    forceEmitStats?: boolean;
   } = {},
 ): webpack.Configuration {
   const bundleConfig = config.bundleConfig as BundleConfig;
@@ -36,6 +38,7 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
     // it's actually being passed as a Library to webpack
     // @ts-ignore and not as a string
     exportAsLibraryName: library,

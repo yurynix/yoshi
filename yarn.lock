@@ -7499,23 +7499,13 @@ better-assert@~1.0.0:
   dependencies:
     callsite "1.0.0"
 
-bfj@6.1.2, bfj@^6.1.1:
+bfj@^6.1.1:
   version "6.1.2"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/bfj/-/bfj-6.1.2.tgz#325c861a822bcb358a41c78a33b8e6e2086dde7f"
   integrity sha1-MlyGGoIryzWKQceKM7jm4ght3n8=
   dependencies:
     bluebird "^3.5.5"
     check-types "^8.0.3"
-    hoopy "^0.1.4"
-    tryer "^1.0.1"
-
-bfj@7.0.2, bfj@^7.0.1:
-  version "7.0.2"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/bfj/-/bfj-7.0.2.tgz#1988ce76f3add9ac2913fd8ba47aad9e651bfbb2"
-  integrity sha1-GYjOdvOt2awpE/2LpHqtnmUb+7I=
-  dependencies:
-    bluebird "^3.5.5"
-    check-types "^11.1.1"
     hoopy "^0.1.4"
     tryer "^1.0.1"
 
@@ -8447,11 +8437,6 @@ check-error@^1.0.2:
   version "1.0.2"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
   integrity sha1-V00xLt2Iu13YkS6Sht1sCu1KrII=
-
-check-types@^11.1.1:
-  version "11.1.2"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/check-types/-/check-types-11.1.2.tgz#86a7c12bf5539f6324eb0e70ca8896c0e38f3e2f"
-  integrity sha1-hqfBK/VTn2Mk6w5wyoiWwOOPPi8=
 
 check-types@^8.0.3:
   version "8.0.3"

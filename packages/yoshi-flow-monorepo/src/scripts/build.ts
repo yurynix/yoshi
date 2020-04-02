@@ -2,7 +2,6 @@ import path from 'path';
 import arg from 'arg';
 import fs from 'fs-extra';
 import chalk from 'chalk';
-import bfj from 'bfj';
 import {
   printBuildResult,
   printBundleSizeSuggestion,
@@ -13,7 +12,6 @@ import {
   TARGET_DIR,
   SERVER_CHUNKS_BUILD_DIR,
   SERVER_BUNDLE,
-  STATS_FILE,
 } from 'yoshi-config/build/paths';
 import { inTeamCity as checkInTeamCity } from 'yoshi-helpers/build/queries';
 import { copyTemplates } from 'yoshi-common/build/copy-assets';
@@ -46,7 +44,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   const {
     '--help': help,
     '--analyze': isAnalyze,
-    '--stats': shouldEmitWebpackStats,
+    '--stats': forceEmitStats,
     '--source-map': forceEmitSourceMaps,
   } = args;
 
@@ -119,6 +117,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     const clientOptimizedConfig = createClientWebpackConfig(rootConfig, pkg, {
       isAnalyze,
       forceEmitSourceMaps,
+      forceEmitStats,
     });
 
     const serverConfig = createServerWebpackConfig(rootConfig, libs, pkg, {
@@ -155,20 +154,6 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   });
 
   const { getAppData } = await webpackManager.run();
-
-  if (shouldEmitWebpackStats) {
-    await Promise.all(
-      apps.map(async app => {
-        const { stats } = getAppData(app.pkg.name);
-        const [, clientOptimizedStats] = stats;
-
-        const statsFilePath = path.join(app.location, STATS_FILE);
-
-        fs.ensureDirSync(path.dirname(statsFilePath));
-        await bfj.write(statsFilePath, clientOptimizedStats.toJson());
-      }),
-    );
-  }
 
   apps.forEach(pkg => {
     console.log(chalk.bold.underline(pkg.name));

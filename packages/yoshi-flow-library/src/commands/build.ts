@@ -1,17 +1,11 @@
 import path from 'path';
 import arg from 'arg';
-import bfj from 'bfj';
 import { runWebpack } from 'yoshi-common/build/webpack-utils';
 import {
   printClientBuildResult,
   printBundleSizeSuggestion,
 } from 'yoshi-common/build/print-build-results';
-import {
-  BUILD_DIR,
-  TARGET_DIR,
-  STATS_FILE,
-  STATICS_DIR,
-} from 'yoshi-config/build/paths';
+import { BUILD_DIR, TARGET_DIR, STATICS_DIR } from 'yoshi-config/build/paths';
 import { inTeamCity } from 'yoshi-helpers/build/queries';
 import fs from 'fs-extra';
 import TscProcess, {
@@ -41,7 +35,7 @@ const build: cliCommand = async function(argv, config) {
   const {
     '--help': help,
     '--analyze': isAnalyze,
-    '--stats': shouldEmitWebpackStats,
+    '--stats': forceEmitStats,
     '--source-map': forceEmitSourceMaps,
   } = args;
 
@@ -114,6 +108,7 @@ const build: cliCommand = async function(argv, config) {
     const clientOptimizedConfig = createClientWebpackConfig(config, {
       isAnalyze,
       forceEmitSourceMaps,
+      forceEmitStats,
     });
 
     const { stats } = await runWebpack([
@@ -122,13 +117,6 @@ const build: cliCommand = async function(argv, config) {
     ]);
 
     const [, clientOptimizedStats] = stats;
-
-    if (shouldEmitWebpackStats) {
-      const statsFilePath = join(STATS_FILE);
-
-      fs.ensureDirSync(path.dirname(statsFilePath));
-      await bfj.write(statsFilePath, clientOptimizedStats.toJson());
-    }
 
     printClientBuildResult(clientOptimizedStats);
     printBundleSizeSuggestion();

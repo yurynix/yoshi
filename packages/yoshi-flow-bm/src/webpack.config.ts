@@ -38,11 +38,13 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
   }: {
     isDev?: boolean;
     isHot?: boolean;
     isAnalyze?: boolean;
     forceEmitSourceMaps?: boolean;
+    forceEmitStats?: boolean;
   } = {},
 ): Configuration {
   const defaultOptions = createDefaultOptions(config);
@@ -54,6 +56,7 @@ export function createClientWebpackConfig(
     isHot,
     isAnalyze,
     forceEmitSourceMaps,
+    forceEmitStats,
     cssModules: config.cssModules,
     ...defaultOptions,
   });

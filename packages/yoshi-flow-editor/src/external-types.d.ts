@@ -1,4 +1,3 @@
-declare module 'bfj';
 declare module 'yoshi-flow-legacy/bin/yoshi-legacy';
 declare module '@wix/santa-site-renderer-testkit';
 declare module 'velocity';
