@@ -19,8 +19,8 @@ const viewerScriptWrapper = (
 
       const generateControllerEntryContent = controllerEntry({
         viewerScriptWrapperPath,
-        controllerFileName: component.controllerFileName,
-        initAppPath: model.initApp,
+        controllerFileName: component.viewerControllerFileName,
+        viewerAppFileName: model.viewerAppFileName,
       });
 
       fs.outputFileSync(
@@ -28,7 +28,7 @@ const viewerScriptWrapper = (
         generateControllerEntryContent,
       );
       // Generate controllers for each widget.
-      acc[`${component.name}Controller`] = component.controllerFileName;
+      acc[`${component.name}Controller`] = component.viewerControllerFileName;
 
       return acc;
     },

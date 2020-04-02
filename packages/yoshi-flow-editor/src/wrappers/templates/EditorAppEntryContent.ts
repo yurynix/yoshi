@@ -4,7 +4,7 @@ type Opts = Record<
   | 'editorAppWrapperPath'
   | 'componentFileName'
   | 'controllerFileName'
-  | 'initAppPath'
+  | 'viewerAppFileName'
   | 'componentName',
   string
 >;
@@ -18,9 +18,11 @@ export default t<Opts>`
     import Component from '${({ componentFileName }) => componentFileName}';
     import createController from '${({ controllerFileName }) =>
       controllerFileName}';
-    import initApp from '${({ initAppPath }) => initAppPath}';
+    import * as viewerApp from '${({ viewerAppFileName }) =>
+      viewerAppFileName}';
+    const importedApp = viewerApp;
 
-    const EditorApp = EditorAppWrapper(Component, createController, initApp, '${({
+    const EditorApp = EditorAppWrapper(Component, createController, importedApp.mapPlatformStateToAppData, importedApp.initAppForPage, '${({
       componentName,
     }) => componentName}');
 

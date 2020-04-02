@@ -11,6 +11,10 @@ const componentWrapper = (
 ) => {
   return model.components.reduce(
     (acc: Record<string, string>, component: ComponentModel) => {
+      if (!component.widgetFileName) {
+        return acc;
+      }
+
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
         `${component.name}Component.js`,
@@ -19,7 +23,7 @@ const componentWrapper = (
       const generateWidgetEntryContent = widgetEntryTemplate({
         widgetWrapperPath,
         componentName: component.name,
-        componentFileName: component.fileName,
+        componentFileName: component.widgetFileName,
       });
 
       fs.outputFileSync(generatedWidgetEntryPath, generateWidgetEntryContent);

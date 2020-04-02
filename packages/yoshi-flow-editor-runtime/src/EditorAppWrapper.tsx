@@ -1,19 +1,23 @@
 import React from 'react';
 import { ViewerScriptWrapper } from '@wix/native-components-infra';
 import WidgetWrapper from './WidgetWrapper';
-import { createControllers, initAppForPage } from './viewerScript.js';
+import { createControllers, initAppForPageWrapper } from './viewerScript.js';
 
 // TODO: fill overrides and whatnot from santawrapper
 const EditorAppWrapper = (
   UserComponent: typeof React.Component,
   userController: Function,
-  initApp: Function,
+  mapPlatformStateToAppData: Function,
+  customInitAppForPage: Function,
   name: string,
 ) =>
   ViewerScriptWrapper(WidgetWrapper(UserComponent, { name, isEditor: true }), {
     viewerScript: {
-      createControllers: createControllers(userController, initApp),
-      initAppForPage,
+      createControllers: createControllers(
+        userController,
+        mapPlatformStateToAppData,
+      ),
+      initAppForPage: initAppForPageWrapper(customInitAppForPage),
     },
     Wix: window.Wix,
     widgetConfig: {

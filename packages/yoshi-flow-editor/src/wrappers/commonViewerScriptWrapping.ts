@@ -12,7 +12,7 @@ const toControllerMeta = (
   component: ComponentModel,
 ): TemplateControllerConfig => {
   return {
-    controllerFileName: component.controllerFileName,
+    controllerFileName: component.viewerControllerFileName,
     id: component.id,
   };
 };
@@ -37,7 +37,7 @@ const viewerScriptWrapper = (
   const generateControllerEntryContent = viewerScriptEntry({
     viewerScriptWrapperPath,
     controllersMeta,
-    initAppPath: model.initApp,
+    viewerAppFileName: model.viewerAppFileName,
   });
 
   fs.outputFileSync(

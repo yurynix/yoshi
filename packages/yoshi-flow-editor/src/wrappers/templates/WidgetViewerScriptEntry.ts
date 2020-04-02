@@ -1,18 +1,19 @@
 import t from './template';
 
 type Opts = Record<
-  'viewerScriptWrapperPath' | 'controllerFileName' | 'initAppPath',
+  'viewerScriptWrapperPath' | 'controllerFileName' | 'viewerAppFileName',
   string
 >;
 
 export default t<Opts>`
-  import {createControllers as createControllersWrapper, initAppForPage as initAppForPageWrapper} from '${({
+  import {createControllers as createControllersWrapper, initAppForPageWrapper} from '${({
     viewerScriptWrapperPath,
   }) => viewerScriptWrapperPath}';
   import userController from '${({ controllerFileName }) =>
     controllerFileName}';
-  import userInitApp from '${({ initAppPath }) => initAppPath}';
+  import * as viewerApp from '${({ viewerAppFileName }) => viewerAppFileName}';
+  const importedApp = viewerApp;
 
-  export const initAppForPage = initAppForPageWrapper;
-  export const createControllers = createControllersWrapper(userController, userInitApp);
+  export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
+  export const createControllers = createControllersWrapper(userController, importedApp.mapPlatformStateToAppData);
 `;

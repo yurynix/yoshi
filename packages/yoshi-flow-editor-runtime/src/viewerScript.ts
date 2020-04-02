@@ -26,7 +26,7 @@ const getDescriptorForConfig = (
 
 export const createControllers = (
   createController: Function,
-  initApp: Function,
+  mapPlatformStateToAppData: Function,
 ) => {
   return createControllersWithDescriptors(
     [
@@ -35,17 +35,30 @@ export const createControllers = (
         id: null,
       },
     ],
-    initApp,
+    mapPlatformStateToAppData,
   );
 };
 
 export const createControllersWithDescriptors = (
   controllerDescriptors: Array<ControllerDescriptor>,
-  initApp: Function,
+  mapPlatformStateToAppData: Function,
 ) => (controllerConfigs: Array<IWidgetControllerConfig>) => {
+  // It should be called inside initAppForPage
+  const { appParams, platformAPIs, wixCodeApi } = controllerConfigs[0];
+  const appData =
+    typeof mapPlatformStateToAppData === 'function'
+      ? mapPlatformStateToAppData({
+          controllerConfigs,
+          frameworkData,
+          appParams,
+          platformAPIs,
+          wixCodeApi,
+        })
+      : {};
+
   const wrappedControllers = controllerConfigs.map(controllerConfig => {
     // [Platform surprise] `type` here, is a widgetId. :(
-    const { appParams, platformAPIs, wixCodeApi, type } = controllerConfig;
+    const { type } = controllerConfig;
     const controllerDescriptor:
       | ControllerDescriptor
       | undefined = getDescriptorForConfig(type, controllerDescriptors);
@@ -57,14 +70,6 @@ export const createControllersWithDescriptors = (
     }
 
     initializeExperiments();
-
-    const appData = initApp({
-      controllerConfigs,
-      frameworkData,
-      appParams,
-      platformAPIs,
-      wixCodeApi,
-    });
 
     const { setProps } = controllerConfig;
 
@@ -140,9 +145,11 @@ const initializeExperiments = () => {
   );
 };
 
-export const initAppForPage = async () =>
-  // initParams,
-  // platformApis,
-  // scopedSdkApis,
-  // platformServicesApis,
-  {};
+export const initAppForPageWrapper = (initAppForPage: Function) => (
+  ...args: Array<any>
+) => {
+  if (initAppForPage) {
+    return initAppForPage(...args);
+  }
+  return {};
+};

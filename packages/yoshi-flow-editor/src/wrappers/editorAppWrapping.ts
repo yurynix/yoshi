@@ -12,6 +12,10 @@ const componentWrapper = (
 ) => {
   return model.components.reduce(
     (acc: Record<string, string>, component: ComponentModel) => {
+      if (!component.widgetFileName) {
+        return acc;
+      }
+
       const generatedWidgetEntryPath = path.join(
         generatedWidgetEntriesPath,
         `${component.name}EditorApp.js`,
@@ -20,9 +24,9 @@ const componentWrapper = (
       const generateWidgetEntryContent = editorEntryTemplate({
         editorAppWrapperPath,
         componentName: component.name,
-        componentFileName: component.fileName,
-        controllerFileName: component.controllerFileName,
-        initAppPath: model.initApp,
+        componentFileName: component.widgetFileName,
+        controllerFileName: component.viewerControllerFileName,
+        viewerAppFileName: model.viewerAppFileName,
       });
 
       fs.outputFileSync(generatedWidgetEntryPath, generateWidgetEntryContent);

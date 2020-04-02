@@ -7,7 +7,7 @@ export type TemplateControllerConfig = {
 
 type Opts = {
   viewerScriptWrapperPath: string;
-  initAppPath: string;
+  viewerAppFileName: string;
   controllersMeta: Array<TemplateControllerConfig>;
 };
 
@@ -40,15 +40,18 @@ const controllerConfigs = t<{
     .join(', ')}`;
 
 export default t<Opts>`
-  import {createControllersWithDescriptors, initAppForPage as initAppForPageWrapper} from '${({
+  import {createControllersWithDescriptors, initAppForPageWrapper} from '${({
     viewerScriptWrapperPath,
   }) => viewerScriptWrapperPath}';
-
-  import userInitApp from '${({ initAppPath }) => initAppPath}';
   ${({ controllersMeta }) => importsForControllers({ controllersMeta })}
+  import * as viewerApp from '${({ viewerAppFileName }) => viewerAppFileName}';
+  const importedApp = viewerApp;
 
-  export const initAppForPage = initAppForPageWrapper;
+  export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
   export const createControllers = createControllersWithDescriptors([${({
     controllersMeta,
-  }) => controllerConfigs({ controllersMeta })}], userInitApp);
+  }) =>
+    controllerConfigs({
+      controllersMeta,
+    })}], importedApp.mapPlatformStateToAppData);
 `;

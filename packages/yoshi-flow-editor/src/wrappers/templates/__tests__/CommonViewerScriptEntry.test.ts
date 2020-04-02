@@ -11,7 +11,7 @@ describe('CommonViewerScriptEntry template', () => {
           id: '123',
         },
       ],
-      initAppPath: 'project/src/app.ts',
+      viewerAppFileName: 'project/src/app.ts',
     });
 
     expect(generateControllerEntryContent).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('CommonViewerScriptEntry template', () => {
           id: '567',
         },
       ],
-      initAppPath: 'project/src/app.ts',
+      viewerAppFileName: 'project/src/app.ts',
     });
 
     expect(generateControllerEntryContent).toMatchSnapshot();
@@ -42,7 +42,7 @@ describe('CommonViewerScriptEntry template', () => {
       viewerScriptWrapperPath:
         'yoshi-flow-editor-runtime/build/viewerScript.js',
       controllersMeta: [],
-      initAppPath: 'project/src/app.ts',
+      viewerAppFileName: 'project/src/app.ts',
     });
 
     expect(generateControllerEntryContent).toMatchSnapshot();

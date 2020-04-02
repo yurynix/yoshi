@@ -2,43 +2,43 @@
 
 exports[`CommonViewerScriptEntry template generates correct template w/o controllers 1`] = `
 "
-  import {createControllersWithDescriptors, initAppForPage as initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
-
-  import userInitApp from 'project/src/app.ts';
+  import {createControllersWithDescriptors, initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
   
   
 
+  import * as viewerApp from 'project/src/app.ts';
+  const importedApp = viewerApp;
 
-  export const initAppForPage = initAppForPageWrapper;
-  export const createControllers = createControllersWithDescriptors([], userInitApp);
+  export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
+  export const createControllers = createControllersWithDescriptors([], importedApp.mapPlatformStateToAppData);
 "
 `;
 
 exports[`CommonViewerScriptEntry template generates correct template with multiple controllers 1`] = `
 "
-  import {createControllersWithDescriptors, initAppForPage as initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
-
-  import userInitApp from 'project/src/app.ts';
+  import {createControllersWithDescriptors, initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
   
   import controller0 from 'project/src/components/todo/controller.ts';
 import controller1 from 'project/src/components/todo/controller.ts';
 
+  import * as viewerApp from 'project/src/app.ts';
+  const importedApp = viewerApp;
 
-  export const initAppForPage = initAppForPageWrapper;
-  export const createControllers = createControllersWithDescriptors([{ method: controller0, id: \\"123\\" }, { method: controller1, id: \\"567\\" }], userInitApp);
+  export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
+  export const createControllers = createControllersWithDescriptors([{ method: controller0, id: \\"123\\" }, { method: controller1, id: \\"567\\" }], importedApp.mapPlatformStateToAppData);
 "
 `;
 
 exports[`CommonViewerScriptEntry template generates correct template with single controller 1`] = `
 "
-  import {createControllersWithDescriptors, initAppForPage as initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
-
-  import userInitApp from 'project/src/app.ts';
+  import {createControllersWithDescriptors, initAppForPageWrapper} from 'yoshi-flow-editor-runtime/build/viewerScript.js';
   
   import controller0 from 'project/src/components/button/controller.ts';
 
+  import * as viewerApp from 'project/src/app.ts';
+  const importedApp = viewerApp;
 
-  export const initAppForPage = initAppForPageWrapper;
-  export const createControllers = createControllersWithDescriptors([{ method: controller0, id: \\"123\\" }], userInitApp);
+  export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
+  export const createControllers = createControllersWithDescriptors([{ method: controller0, id: \\"123\\" }], importedApp.mapPlatformStateToAppData);
 "
 `;
