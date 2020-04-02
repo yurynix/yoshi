@@ -23,7 +23,8 @@ interface IFrameworkProps {
 }
 
 // Bolt ssr environment doesn't contain window.
-const globalWix = typeof window !== 'undefined' ? window.Wix : undefined;
+const inBrowser = typeof window !== 'undefined';
+const globalWix = inBrowser ? window.Wix : undefined;
 
 const PublicDataProvider: typeof React.Component =
   typeof globalWix === 'undefined'

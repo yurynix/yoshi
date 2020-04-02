@@ -4,10 +4,11 @@ import { PublicDataContext } from './PublicDataContext';
 
 // Later it can be passed into a hook as `usePublicData(scope)`
 const scope = 'COMPONENT';
+const PUBLIC_DATA_TIMEOUT = 1500;
 
 interface IState {
   ready: boolean;
-  data: Record<string, any> | null;
+  data: Record<string, any>;
   readyPromise?: Promise<boolean>;
 }
 
@@ -21,8 +22,7 @@ export class PublicDataProviderEditor extends React.Component<
 > {
   state: IState = {
     ready: false,
-    data: null,
-    readyPromise: Promise.reject(),
+    data: {},
   };
 
   componentDidMount() {
@@ -30,8 +30,10 @@ export class PublicDataProviderEditor extends React.Component<
 
     const publicDataPromise = new Promise((resolve, reject) => {
       setTimeout(function() {
-        reject(new Error('timeout of 500ms reached on Wix.Data.Public.getAll'));
-      }, 500);
+        reject(
+          new Error(`timeout of ${PUBLIC_DATA_TIMEOUT}ms reached on Wix.Data.Public.getAll`),
+        );
+      }, PUBLIC_DATA_TIMEOUT);
       Wix.Data.Public.getAll(resolve, reject);
     }).then(
       (data: any) => {
@@ -68,8 +70,8 @@ export class PublicDataProviderEditor extends React.Component<
   }
 
   handleGetParam = (key: string) => {
-    if (!this.state.ready || !this.state.data) {
-      throw this.state.readyPromise;
+    if (!this.state.ready) {
+      return undefined;
     }
 
     return this.state.data[key];
@@ -78,7 +80,7 @@ export class PublicDataProviderEditor extends React.Component<
   handleSetParam = (key: string, value: any) => {
     const { Wix } = this.props;
 
-    if (!this.state.ready || !this.state.data) {
+    if (!this.state.ready) {
       throw this.state.readyPromise;
     }
 
