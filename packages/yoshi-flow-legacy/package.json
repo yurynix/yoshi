@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.53.3",
+  "version": "4.54.0",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -40,8 +40,8 @@
     "detect-port": "1.3.0",
     "envinfo": "5.12.1",
     "eslint": "5.16.0",
-    "eslint-config-yoshi": "4.53.0",
-    "eslint-config-yoshi-base": "4.53.0",
+    "eslint-config-yoshi": "4.54.0",
+    "eslint-config-yoshi-base": "4.54.0",
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-jest": "22.21.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
@@ -100,9 +100,9 @@
     "wnpm-ci": "8.0.115",
     "word-wrap": "1.2.3",
     "xmldoc": "1.1.2",
-    "yoshi-common": "4.53.1",
+    "yoshi-common": "4.54.0",
     "yoshi-config": "4.53.0",
-    "yoshi-helpers": "4.53.0",
+    "yoshi-helpers": "4.54.0",
     "yoshi-runtime": "1.0.727",
     "yoshi-server-tools": "4.53.0"
   },
@@ -125,7 +125,7 @@
     "generic-names": "1.0.3",
     "graphql-tag": "2.10.3",
     "identity-obj-proxy": "3.0.0",
-    "jest-yoshi-preset": "4.53.1",
+    "jest-yoshi-preset": "4.54.0",
     "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
@@ -152,7 +152,7 @@
     "strip-ansi": "4.0.0",
     "tempy": "0.5.0",
     "typescript": "3.7.5",
-    "yoshi-angular-dependencies": "4.49.0",
+    "yoshi-angular-dependencies": "4.54.0",
     "yoshi-style-dependencies": "4.37.1"
   }
 }
