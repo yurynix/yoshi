@@ -1,5 +1,30 @@
 # Changelog
 
+## 4.54.0 (2020-04-02)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
+  - [#2171](https://github.com/wix/yoshi/pull/2171) Output Webpack stats to a file (`target/webpack-stats.json`) by default on CI ([@Gongreg](https://github.com/Gongreg))
+- `yoshi-common`
+  - [#2170](https://github.com/wix/yoshi/pull/2170) Support bundling `st.css` files in SSR ([@NitayRabi](https://github.com/NitayRabi))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-editor-runtime`
+  - [#2184](https://github.com/wix/yoshi/pull/2184) Prevent throwing errors for `publicData` getter when value is not loaded yet ([@yavorsky](https://github.com/yavorsky))
+- `yoshi-flow-editor`
+  - [#2177](https://github.com/wix/yoshi/pull/2177) Use `debug: false` value for editor bundles ([@yavorsky](https://github.com/yavorsky))
+
+#### :memo: Documentation
+
+- [#2169](https://github.com/wix/yoshi/pull/2169) add `node-api` doc to the website's sidebar ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
+  - [#2173](https://github.com/wix/yoshi/pull/2173) Fix BM `moduleParams` type breakage ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.53.3 (2020-04-01)
 
 #### :nail_care: Polish
