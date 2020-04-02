@@ -7,7 +7,8 @@
     ],
     "API": [
       "version-4.x-api/configuration",
-      "version-4.x-api/cli"
+      "version-4.x-api/cli",
+      "version-4.x-api/node"
     ],
     "Guides": [
       "version-4.x-guides/ab-translate",
