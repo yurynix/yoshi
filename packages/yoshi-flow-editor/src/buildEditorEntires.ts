@@ -15,6 +15,7 @@ export const buildEditorPlatformEntries = (model: FlowEditorModel) => {
     generatedWidgetEntriesPath,
     model,
   );
+
   const editorAppEntries = writeEditorAppWrapping(
     generatedWidgetEntriesPath,
     model,
@@ -51,6 +52,7 @@ export const buildViewerScriptEntry = (model: FlowEditorModel) => {
 export const webWorkerExternals = {
   lodash: {
     commonjs: 'lodash',
+    commonjs2: 'lodash',
     amd: 'lodash',
     root: '_',
   },
