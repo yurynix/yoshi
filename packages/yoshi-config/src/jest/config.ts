@@ -24,7 +24,10 @@ type WhitelistedSpecOptions = Pick<
   InitialOptions,
   'globals' | 'testURL' | 'moduleNameMapper' | 'resetMocks'
 >;
-type WhitelistedE2EOptions = Pick<InitialOptions, 'moduleNameMapper'>;
+type WhitelistedE2EOptions = Pick<
+  InitialOptions,
+  'globals' | 'moduleNameMapper'
+>;
 
 type WhitelistedGlobalOptions = Pick<
   InitialOptions,

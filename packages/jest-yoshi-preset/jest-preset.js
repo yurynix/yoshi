@@ -36,7 +36,7 @@ const supportedProjectOverrideKeys = {
     'moduleNameMapper',
     'resetMocks',
   ],
-  [projectOverrideMapping.e2e]: ['moduleNameMapper'],
+  [projectOverrideMapping.e2e]: ['globals', 'moduleNameMapper'],
 };
 
 const supportedGlobalOverrideKeys = [

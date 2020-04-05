@@ -17,6 +17,7 @@ const validConfig: Required<Config> = {
     resetMocks: true,
   },
   e2eOptions: {
+    globals: {},
     moduleNameMapper: {},
   },
   collectCoverage: true,

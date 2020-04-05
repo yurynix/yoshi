@@ -1,5 +1,8 @@
 module.exports = {
   e2eOptions: {
+    globals: {
+      foo: 'bar',
+    },
     moduleNameMapper: {
       '^[./a-zA-Z0-9$_-]+\\.foo$': '<rootDir>/src/stub.js',
     },
