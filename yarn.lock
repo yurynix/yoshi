@@ -23217,10 +23217,10 @@ screenshot-reporter@1.1.325:
   dependencies:
     mkdirp "~0.3.5"
 
-screenshot-reporter@1.1.326:
-  version "1.1.326"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/screenshot-reporter/-/screenshot-reporter-1.1.326.tgz#a1ecbdbc43062a6c0976b450315b4cbf6795d315"
-  integrity sha1-oey9vEMGKmwJdrRQMVtMv2eV0xU=
+screenshot-reporter@1.1.329:
+  version "1.1.329"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/screenshot-reporter/-/screenshot-reporter-1.1.329.tgz#c445479dde51780a7ae34745fcc501887c588ce4"
+  integrity sha1-xEVHnd5ReAp640dF/MUBiHxYjOQ=
   dependencies:
     mkdirp "~0.3.5"
 
