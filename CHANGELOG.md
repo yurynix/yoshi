@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.54.1 (2020-04-05)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2185](https://github.com/wix/yoshi/pull/2185) [editor-flow] Add BoB apps support and allow users override platform hooks ([@yavorsky](https://github.com/yavorsky))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2189](https://github.com/wix/yoshi/pull/2189) [server templates]: Update express version ([@alexandervain](https://github.com/alexandervain))
+
 ## 4.54.0 (2020-04-02)
 
 #### :rocket: New Feature
