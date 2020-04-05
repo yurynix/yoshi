@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.55.0 (2020-04-05)
+
+#### :rocket: New Feature
+
+- `jest-yoshi-preset`, `yoshi-config`
+  - [#2186](https://github.com/wix/yoshi/pull/2186) Add the option to override the `globals` object in `e2eOptions` (#2102) ([@lironch](https://github.com/lironch))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2192](https://github.com/wix/yoshi/pull/2192) Remove strict implicit compiler options ([@ranyitz](https://github.com/ranyitz))
+  - [#2183](https://github.com/wix/yoshi/pull/2183) Bump `bootstrap-hot-loader` to V4 ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-editor`
+  - [#2191](https://github.com/wix/yoshi/pull/2191) [flow-editor] Add `commonjs2` external for lodash. ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.54.1 (2020-04-05)
 
 #### :rocket: New Feature
