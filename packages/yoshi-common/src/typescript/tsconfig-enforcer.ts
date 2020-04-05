@@ -33,11 +33,11 @@ const compilerOptions: CustomCompilerOptions = {
   // These values are required and cannot be changed by the user
   // Keep this in sync with babel transpilation and the webpack config
   target: {
-    value: 'ESNext',
-    reason: 'this is needed in order to create the esm directory',
+    value: 'ES5',
+    reason: 'this is needed to support IE 11',
   },
   module: {
-    value: 'esnext',
+    value: 'ESNext',
     reason: 'for import() and import/export',
   },
   rootDir: {
