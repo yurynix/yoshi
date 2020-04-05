@@ -30,7 +30,7 @@
     "yoshi": "^4.1.0",
     "typescript": "~3.6.0",
     "@types/ejs": "~2.5.0",
-    "@types/express": "~4.0.0",
+    "@types/express": "^4.17.0",
     "@types/chai": "~4.0.0",
     "@types/mocha": "~2.2.0",
     "@types/node": "^8.0.0",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "ejs": "~2.5.0",
-    "express": "~4.15.0",
+    "express": "^4.17.0",
     "@wix/wix-bootstrap-ng": "latest",
     "@wix/wix-config": "latest",
     "@wix/wix-express-csrf": "latest",
