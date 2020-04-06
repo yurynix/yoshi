@@ -73,25 +73,26 @@ export default class implements HttpClient {
     });
 
     if (!res.ok) {
-      let error;
-      try {
-        error = await res.json();
-      } catch (e) {
-        if ((e.message as string).includes('invalid json response body')) {
-          const errorMessage = `
+      if (res.headers.get('content-type')?.includes('application/json')) {
+        const error = await res.json();
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(error);
+        }
+
+        throw new Error(JSON.stringify(error));
+      } else {
+        const error = await res.text();
+        const errorMessage = `
             Yoshi Server: the server returned a non JSON response.
             This is probable due to an error in one of the middlewares before Yoshi Server.
-            Please look for an error in your server log
+            ${error}
           `;
-          throw new Error(errorMessage);
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(error);
         }
-      }
 
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(error);
+        throw new Error(errorMessage);
       }
-
-      throw new Error(JSON.stringify(error));
     }
 
     const result = await res.json();
