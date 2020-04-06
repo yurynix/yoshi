@@ -83,7 +83,6 @@ export default class implements HttpClient {
             This is probable due to an error in one of the middlewares before Yoshi Server.
             Please look for an error in your server log
           `;
-          console.error(errorMessage);
           throw new Error(errorMessage);
         }
       }
