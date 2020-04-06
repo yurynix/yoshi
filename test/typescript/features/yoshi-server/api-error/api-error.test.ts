@@ -4,7 +4,7 @@ jest.setTimeout(40 * 1000);
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
-  projectType: 'typescript',
+  projectType: 'yoshi-server-typescript',
 });
 
 describe.each(['prod', 'dev'] as const)('e2e [%s]', mode => {
