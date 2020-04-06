@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.55.1 (2020-04-06)
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-legacy`, `yoshi-flow-monorepo`
+  - [#2197](https://github.com/wix/yoshi/pull/2197) Bump wnpm-ci to `8.0.121` to fix a bug with publishing versions when there were no changes ([@netanelgilad](https://github.com/netanelgilad))
+- `yoshi-flow-library`
+  - [#2194](https://github.com/wix/yoshi/pull/2194) Add `jest` and `jest-teamcity-reporter` as dependencies ([@ranyitz](https://github.com/ranyitz))
+
+#### :nail_care: Polish
+
+- `yoshi-server`
+  - [#2161](https://github.com/wix/yoshi/pull/2161) Refactor `InternalServerError` ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :house: Internal
+
+- [#2195](https://github.com/wix/yoshi/pull/2195) Update timeout for a flaky test ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.55.0 (2020-04-05)
 
 #### :rocket: New Feature
