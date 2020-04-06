@@ -48,7 +48,7 @@
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-react": "7.19.0",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "eslint-plugin-wix-style-react": "1.0.407",
+    "eslint-plugin-wix-style-react": "1.0.410",
     "execa": "1.0.0",
     "express": "4.17.1",
     "find-pkg": "2.0.0",
@@ -77,7 +77,7 @@
     "jest-teamcity-reporter": "0.9.0",
     "lodash": "4.17.15",
     "minimist": "1.2.5",
-    "mkdirp": "0.5.4",
+    "mkdirp": "0.5.5",
     "mocha": "3.5.3",
     "mocha-teamcity-reporter": "2.5.2",
     "mock-require": "2.0.2",
@@ -103,7 +103,7 @@
     "yoshi-common": "4.55.0",
     "yoshi-config": "4.55.0",
     "yoshi-helpers": "4.55.0",
-    "yoshi-runtime": "1.0.727",
+    "yoshi-runtime": "1.0.730",
     "yoshi-server-tools": "4.55.0"
   },
   "devDependencies": {

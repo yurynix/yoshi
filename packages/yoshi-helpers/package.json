@@ -16,7 +16,7 @@
     "globby": "9.2.0",
     "http-proxy": "1.18.0",
     "lodash": "4.17.15",
-    "mkdirp": "0.5.4",
+    "mkdirp": "0.5.5",
     "ps-tree": "1.2.0",
     "semver": "5.7.1",
     "server-destroy": "1.0.1",
