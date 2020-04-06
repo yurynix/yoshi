@@ -46,12 +46,18 @@ app.get(
 
 app.use('/editor/:widgetName', (req, res) => {
   const { widgetName } = req.params;
-  res.send(renderVM(editorTemplate, { widgetName }));
+  const { instance } = req.query;
+  res.send(
+    renderVM(editorTemplate, { widgetName, usePrivateSDKMock: !instance }),
+  );
 });
 
 app.use('/settings/:widgetName', (req, res) => {
   const { widgetName } = req.params;
-  res.send(renderVM(settingsTemplate, { widgetName }));
+  const { instance } = req.query;
+  res.send(
+    renderVM(settingsTemplate, { widgetName, usePrivateSDKMock: !instance }),
+  );
 });
 
 // Launch the server

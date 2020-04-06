@@ -10,18 +10,16 @@
     <script
       src="https://${clientTopology.staticsDomain}/unpkg/react-dom@16.6.3/umd/react-dom#if(${debug}).development#else.production.min#{end}.js"
       crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://static.parastorage.com/services/js-sdk/1.190.0/js/wix-private.min.js"></script>
-
   </head>
   <body>
     <div id="root"></div>
-    #if (${debug})
-    <script type="text/javascript" src="${clientTopology.staticsBaseUrl}wix-private-mock.bundle.js"></script>
-    #end
     <script>
       window.__BASEURL__ = '${basename}';
       window.__LOCALE__ = '${locale}';
       window.__STATICS_BASE_URL__ = '${clientTopology.staticsBaseUrl}';
+      #if (${usePrivateSDKMock})
+        window.__USE_PRIVATE_SDK_MOCK__ = true;
+      #end
     </script>
 
     <script src="${clientTopology.staticsBaseUrl}${widgetName}EditorMode.bundle#if(!${debug}).min#{end}.js"></script>

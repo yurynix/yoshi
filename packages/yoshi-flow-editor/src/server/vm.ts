@@ -7,6 +7,7 @@ export default (
   data: {
     widgetName?: string;
     debug?: boolean;
+    usePrivateSDKMock?: boolean;
     clientTopology?: Partial<
       Record<'staticsDomain' | 'staticsBaseUrl', string>
     >;

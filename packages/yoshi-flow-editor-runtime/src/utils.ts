@@ -10,5 +10,11 @@ export function objectPromiseAll(target: Record<string, any>) {
   }, Promise.resolve({}));
 }
 
+export const getQueryParams = (
+  search = window.location.search,
+): URLSearchParams => {
+  return new URLSearchParams(search);
+};
+
 export * from './createInstances';
 export * from './fetchFrameworkData';

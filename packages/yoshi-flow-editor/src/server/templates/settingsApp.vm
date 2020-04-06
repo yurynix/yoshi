@@ -12,7 +12,6 @@
     <script
       src="https://${clientTopology.staticsDomain}/unpkg/react-dom@16.9.0/umd/react-dom#if(${debug}).development#else.production.min#{end}.js"
       crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//static.parastorage.com/services/js-sdk/1.190.0/js/wix-private.min.js"></script>
   </head>
   <body>
     <div id="root"></div>
@@ -20,6 +19,9 @@
       window.__BASEURL__ = '${basename}';
       window.__LOCALE__ = '${locale}';
       window.__STATICS_BASE_URL__ = '${clientTopology.staticsBaseUrl}';
+      #if (${usePrivateSDKMock})
+        window.__USE_PRIVATE_SDK_MOCK__ = true;
+      #end
     </script>
     <script src="${clientTopology.staticsBaseUrl}${widgetName}SettingsPanel.bundle#if(!${debug}).min#{end}.js"></script>
   </body>

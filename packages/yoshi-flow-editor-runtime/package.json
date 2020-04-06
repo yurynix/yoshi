@@ -11,6 +11,7 @@
   "author": "Ran Yitzhaki",
   "license": "ISC",
   "dependencies": {
+    "@wix/platform-editor-sdk": "0.0.865",
     "@wix/native-components-infra": "^1.0.668",
     "@wix/wix-base-ui": "^3.0.0",
     "@wix/wix-experiments": "3.0.439",
