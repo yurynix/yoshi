@@ -27024,10 +27024,10 @@ wix-tpa-style-loader@1.0.13:
     loader-utils "^1.1.0"
     postcss-extract-styles "^1.1.1"
 
-wnpm-ci@8.0.115:
-  version "8.0.115"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wnpm-ci/-/wnpm-ci-8.0.115.tgz#40ad21ddbdbaac4251e9e2127348a1fc9f736fa9"
-  integrity sha1-QK0h3b26rEJR6eISc0ih/J9zb6k=
+wnpm-ci@8.0.121:
+  version "8.0.121"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wnpm-ci/-/wnpm-ci-8.0.121.tgz#5b7db227f47e2ec21d86bbf676a80e6bd37d0d1d"
+  integrity sha1-W32yJ/R+LsIdhrv2dqgOa9N9DR0=
   dependencies:
     execa "^2.0.3"
     fs-extra "^8.1.0"
