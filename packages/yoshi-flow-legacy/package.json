@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.55.0",
+  "version": "4.55.1",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },

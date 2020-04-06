@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-monorepo",
-  "version": "4.55.0",
+  "version": "4.55.1",
   "bin": {
     "yoshi-monorepo": "./build/bin/yoshi-monorepo.js"
   },
@@ -33,7 +33,7 @@
     "wnpm-ci": "8.0.121",
     "yoshi-common": "4.55.0",
     "yoshi-config": "4.55.0",
-    "yoshi-flow-legacy": "4.55.0",
+    "yoshi-flow-legacy": "4.55.1",
     "yoshi-helpers": "4.55.0"
   }
 }
