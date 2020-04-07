@@ -41,6 +41,7 @@ const getWidgetWrapper = (
           <PublicDataProvider data={props.__publicData__} Wix={Wix}>
             <ControllerProvider data={props}>
               <UserComponent
+                Wix={Wix}
                 {...createInstances({ experiments: props.experiments })}
                 {...props}
               />
