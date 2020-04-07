@@ -65,21 +65,10 @@ export default function WrapWithEditorSDK<P>(
       loadSDK(editorSdkScriptSrc).then(() => {
         this.editorSDK = window.editorSDK;
         this.Wix = window.Wix;
-       if (this.editorSDK) {
-         this.editorSDK.panel.onEvent(({ eventType, eventPayload }) => {
-            if (eventType === 'startConfiguration') {
-              this.setState({
-              isSDKLoaded: true,
-                config: eventPayload,
-                Component: WrappedComponentCallback(this.Wix, this.editorSDK)
-              });
-            }
-       } else {
         this.setState({
           isSDKLoaded: true,
           Component: WrappedComponentCallback(this.Wix, this.editorSDK),
         });
-        }
         if (this.editorSDK) {
           this.editorSDK.panel.onEvent(({ eventType, eventPayload }) => {
             if (eventType === 'startConfiguration') {
