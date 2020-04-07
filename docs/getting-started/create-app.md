@@ -9,7 +9,7 @@ npx create-yoshi-app my-app
 ```
 
 - Answer a few questions
-- Choose [Project Type](./project-types)
+- Choose [Project Type](./project-types.md)
 - Choose [Babel](https://babeljs.io/)/[TypeScript](https://www.typescriptlang.org/)
 
 ```sh
