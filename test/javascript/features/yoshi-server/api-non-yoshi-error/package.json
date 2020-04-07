@@ -1,0 +1,16 @@
+{
+  "name": "yoshi-server-javascript-non-yoshi-response",
+  "private": true,
+  "yoshi": {
+    "projectType": "app",
+    "experimentalBuildHtml": true,
+    "yoshiServer": true,
+    "externals": {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
+  },
+  "jest": {
+    "preset": "jest-yoshi-preset"
+  }
+}

@@ -5,13 +5,13 @@ const client = new HttpClient({
   baseUrl: 'http://localhost:3000',
 });
 
-test('should reject on a non JSON response', async () => {
+test('should reject on a non yoshi-server failing response', async () => {
   const response = client.request({
     method: greet,
     args: ['Yaniv'],
   });
 
   await expect(response).rejects.toThrow(
-    'the server returned a non JSON response',
+    'Yoshi Server: we received a response which we do not recognize',
   );
 });

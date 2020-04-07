@@ -72,27 +72,36 @@ export default class implements HttpClient {
       body: JSON.stringify(body),
     });
 
+    let hasYoshiServerHeader = true;
+    let errorMessage;
+    if (!res.headers.get('x-wix-yoshi-server')) {
+      errorMessage = `
+        Yoshi Server: we received a response which we do not recognize.
+        This is probably because of a middleware before Yoshi Server kicked in.
+        Please look for an error in one of your middlewares.
+      `;
+      hasYoshiServerHeader = false;
+    }
+
     if (!res.ok) {
-      if (res.headers.get('content-type')?.includes('application/json')) {
-        const error = await res.json();
-        if (process.env.NODE_ENV !== 'production') {
-          console.error(error);
-        }
+      let error = res.headers.get('content-type')?.includes('application/json')
+        ? await res.json()
+        : await res.text();
 
-        throw new Error(JSON.stringify(error));
-      } else {
-        const error = await res.text();
-        const errorMessage = `
-            Yoshi Server: the server returned a non JSON response.
-            This is probable due to an error in one of the middlewares before Yoshi Server.
-            ${error}
-          `;
-        if (process.env.NODE_ENV !== 'production') {
-          console.error(error);
-        }
-
-        throw new Error(errorMessage);
+      if (!hasYoshiServerHeader) {
+        error = errorMessage + error;
       }
+
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(error);
+      }
+
+      throw new Error(error);
+    }
+
+    // no error + unrecognized response
+    if (!hasYoshiServerHeader) {
+      throw new Error(errorMessage);
     }
 
     const result = await res.json();
