@@ -85,7 +85,7 @@ export default class implements HttpClient {
 
     if (!res.ok) {
       let error = res.headers.get('content-type')?.includes('application/json')
-        ? await res.json()
+        ? JSON.stringify(await res.json())
         : await res.text();
 
       if (!hasYoshiServerHeader) {
