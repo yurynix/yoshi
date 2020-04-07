@@ -66,6 +66,7 @@ export default class Server {
   };
 
   public handle: RequestHandler = async (req, res, next): Promise<void> => {
+    res.setHeader('x-wix-yoshi-server', 1);
     try {
       const { pathname } = parseUrl(req.url as string, true);
 
