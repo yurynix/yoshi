@@ -1,4 +1,5 @@
 import React from 'react';
+import { IWixStatic } from '@wix/native-components-infra/dist/src/types/wix-sdk';
 import './Settings.global.scss';
 import { get } from 'lodash';
 import {
@@ -9,13 +10,17 @@ import {
 } from '@wix/wix-base-ui';
 import * as css from './Settings.scss';
 
+interface ISettingsProps {
+  Wix: IWixStatic;
+}
+
 const defaultSettingsValues = {
   backgroundColor: '#ffffff',
   buttonBackgroundColor: '#ffffff',
   fontSize: 14,
 };
 
-export default class Settings extends React.Component {
+export default class Settings extends React.Component<ISettingsProps> {
   state = defaultSettingsValues;
 
   componentDidMount() {

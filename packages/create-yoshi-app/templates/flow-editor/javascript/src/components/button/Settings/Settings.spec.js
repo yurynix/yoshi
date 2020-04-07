@@ -22,20 +22,21 @@ describe('Settings', () => {
     },
   };
 
-  window.Wix = {
+  const Wix = {
     Styles: {
       getStyleParams: callback => callback(styleParams),
       setFontParam: () => {},
+      setColorParam: () => {},
     },
   };
 
   it('should render a color picker component', () => {
-    const { getAllByTestId } = render(<Settings />);
+    const { getAllByTestId } = render(<Settings Wix={Wix} />);
     expect(getAllByTestId('base-ui-color-picker')).not.toBeNull();
   });
 
   it('should render a font size picker', () => {
-    const { getByTestId } = render(<Settings />);
+    const { getByTestId } = render(<Settings Wix={Wix} />);
     expect(getByTestId('base-ui-slider')).not.toBeNull();
   });
 });
