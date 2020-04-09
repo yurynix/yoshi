@@ -69,9 +69,7 @@ class EditorAppWithCreator extends React.Component<
 
     let EditorAppComponent = null;
     if (props.sdk.Wix) {
-      EditorAppComponent = createEditorAppForWixSDK(
-        props as IEditorAppWithWixSDKCreatorProps,
-      );
+      EditorAppComponent = createEditorAppForWixSDK(props);
       // Just to verify we are not exposing it.
     } else if ((props.sdk as any).editorSDK) {
       throw new Error('Editor App does not support editorSDK');
