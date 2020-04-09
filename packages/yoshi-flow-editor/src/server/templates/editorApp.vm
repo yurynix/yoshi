@@ -16,6 +16,7 @@
     <script>
       window.__BASEURL__ = '${basename}';
       window.__LOCALE__ = '${locale}';
+      window.__EDITOR_MODE__ = true;
       window.__STATICS_BASE_URL__ = '${clientTopology.staticsBaseUrl}';
       #if (${usePrivateSDKMock})
         window.__USE_PRIVATE_SDK_MOCK__ = true;

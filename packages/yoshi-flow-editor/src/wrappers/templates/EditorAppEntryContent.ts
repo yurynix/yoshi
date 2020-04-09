@@ -15,16 +15,22 @@ export default t<Opts>`
     import EditorAppWrapper from '${({ editorAppWrapperPath }) =>
       editorAppWrapperPath}';
 
-    import Component from '${({ componentFileName }) => componentFileName}';
+    import UserComponent from '${({ componentFileName }) => componentFileName}';
     import createController from '${({ controllerFileName }) =>
       controllerFileName}';
     import * as viewerApp from '${({ viewerAppFileName }) =>
       viewerAppFileName}';
     const importedApp = viewerApp;
 
-    const EditorApp = EditorAppWrapper(Component, createController, importedApp.mapPlatformStateToAppData, importedApp.initAppForPage, '${({
-      componentName,
-    }) => componentName}');
+    const componentName = '${({ componentName }) => componentName}';
 
-    ReactDOM.render(React.createElement(EditorApp, null), document.getElementById('root'));
+    const WrappedEditorApp = () => React.createElement(EditorAppWrapper, {
+      UserComponent,
+      name: componentName,
+      userController: createController,
+      mapPlatformStateToAppData: importedApp.mapPlatformStateToAppData,
+      customInitAppForPage: importedApp.initAppForPage
+    });
+
+    ReactDOM.render(React.createElement(WrappedEditorApp, null), document.getElementById('root'));
 `;

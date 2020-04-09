@@ -1,11 +1,5 @@
 import * as fakeTpaResponse from './fake-tpa-response.json';
 
-declare global {
-  interface Window {
-    Wix: any;
-  }
-}
-
 (window.Wix as any) = new (class WixMock {
   modelCache = {};
   siteColors: any;

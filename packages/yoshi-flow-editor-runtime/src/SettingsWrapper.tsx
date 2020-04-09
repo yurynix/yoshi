@@ -1,26 +1,35 @@
 import React, { Suspense } from 'react';
-import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
-import { PublicDataProvider } from './react/PublicDataProvider';
+import { PublicDataProvider } from './react/PublicData/PublicDataProvider';
 import { ErrorBoundary } from './react/ErrorBoundary';
-import withEditorSDK, { WrappedComponentCallback } from './react/withEditorSDK';
+import { getEditorSDKSrc } from './utils';
+import { SDKProvider } from './react/SDK/SDKProvider';
+import { SDK } from './react/SDK/SDKRenderProp';
 
 interface SettingsWrapperProps {
-  children: (Wix: IWixStatic) => React.Component;
+  children: React.Component;
   __publicData__: Record<string, any>;
 }
 
-const SettingsWrapperCallback: WrappedComponentCallback<SettingsWrapperProps> = (
-  Wix,
-): React.FunctionComponent<SettingsWrapperProps> => props => {
+const SettingsWrapper = (props: SettingsWrapperProps) => {
+  const editorSDKSrc = getEditorSDKSrc();
+
   return (
     <ErrorBoundary handleException={error => console.error(error)}>
-      <PublicDataProvider Wix={Wix} data={props.__publicData__}>
-        <Suspense fallback={<div>Loading...</div>}>
-          {props.children(Wix)}
-        </Suspense>
-      </PublicDataProvider>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SDKProvider editorSDKSrc={editorSDKSrc}>
+          <SDK editorSDKSrc={editorSDKSrc}>
+            {sdk => {
+              return (
+                <PublicDataProvider sdk={sdk} data={props.__publicData__}>
+                  {props.children}
+                </PublicDataProvider>
+              );
+            }}
+          </SDK>
+        </SDKProvider>
+      </Suspense>
     </ErrorBoundary>
   );
 };
 
-export default withEditorSDK(SettingsWrapperCallback);
+export default SettingsWrapper;

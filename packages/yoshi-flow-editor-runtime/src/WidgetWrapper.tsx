@@ -2,11 +2,11 @@ import React from 'react';
 import { withStyles } from '@wix/native-components-infra';
 import { IHostProps } from '@wix/native-components-infra/dist/src/types/types';
 import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
-import { PublicDataProvider } from './react/PublicDataProvider';
+import { PublicDataProvider } from './react/PublicData/PublicDataProvider';
 import { createInstances } from './createInstances';
-import { ControllerProvider } from './react/ControllerProvider';
+import { ControllerProvider } from './react/Controller/ControllerProvider';
+import { IControllerContext } from './react/Controller/ControllerContext';
 import { ErrorBoundary } from './react/ErrorBoundary';
-import { IControllerContext } from './react/ControllerContext';
 
 declare global {
   interface Window {
@@ -38,10 +38,9 @@ const getWidgetWrapper = (
     return (
       <div>
         <ErrorBoundary handleException={error => console.log(error)}>
-          <PublicDataProvider data={props.__publicData__} Wix={Wix}>
+          <PublicDataProvider data={props.__publicData__} sdk={{ Wix }}>
             <ControllerProvider data={props}>
               <UserComponent
-                Wix={Wix}
                 {...createInstances({ experiments: props.experiments })}
                 {...props}
               />
