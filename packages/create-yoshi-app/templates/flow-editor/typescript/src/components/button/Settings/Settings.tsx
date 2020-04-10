@@ -2,6 +2,7 @@ import React from 'react';
 import { IWixStatic } from '@wix/native-components-infra/dist/src/types/wix-sdk';
 import './Settings.global.scss';
 import { get } from 'lodash';
+import { WixSDK } from 'yoshi-flow-editor-runtime';
 import {
   Slider,
   ColorPickerColorSpace,
@@ -20,7 +21,7 @@ const defaultSettingsValues = {
   fontSize: 14,
 };
 
-export default class Settings extends React.Component<ISettingsProps> {
+class Settings extends React.Component<ISettingsProps> {
   state = defaultSettingsValues;
 
   componentDidMount() {
@@ -114,3 +115,7 @@ export default class Settings extends React.Component<ISettingsProps> {
     );
   }
 }
+
+export default () => (
+  <WixSDK inEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
+);

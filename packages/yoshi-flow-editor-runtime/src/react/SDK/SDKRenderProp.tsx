@@ -4,6 +4,8 @@ import {
   EditorSDKContext,
   IWixSDKContext,
   IEditorSDKContext,
+  IWixSDKEditorEnvironmentContext,
+  IWixSDKViewerEnvironmentContext,
   defaultWixSDKContext,
   defaultEditorSDKContext,
 } from './SDKContext';
@@ -21,6 +23,7 @@ const inViewer = (): boolean => {
 
 interface IWixSDKConsumer {
   children: (sdk: IWixSDKContext) => JSX.Element;
+  inEditor?: boolean;
 }
 
 interface IEditorSDKConsumer {
@@ -33,16 +36,18 @@ interface ISDKConsumer {
 }
 
 export const WixSDK: React.FC<IWixSDKConsumer> = props => {
-  const { children } = props;
+  const { children, inEditor } = props;
 
   // We don't have Wix SDK for viewer part and going to return `{ Wix: null }`
-  if (inViewer()) {
-    return children(defaultWixSDKContext);
+  if (!inEditor && inViewer()) {
+    return children(defaultWixSDKContext as IWixSDKViewerEnvironmentContext);
   }
 
   return (
     <WixSDKContext.Consumer>
-      {(sdk: IWixSDKContext) => (sdk.Wix ? children(sdk) : null)}
+      {(sdk: IWixSDKContext) =>
+        sdk.Wix ? children(sdk as IWixSDKEditorEnvironmentContext) : null
+      }
     </WixSDKContext.Consumer>
   );
 };

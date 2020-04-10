@@ -1,6 +1,7 @@
 import React from 'react';
 import * as css from './Settings.scss';
 import './Settings.global.scss';
+import { WixSDK } from 'yoshi-flow-editor-runtime';
 import { get } from 'lodash';
 import {
   Slider,
@@ -15,7 +16,7 @@ const defaultSettingsValues = {
   fontSize: 14,
 };
 
-export default class Settings extends React.Component {
+class Settings extends React.Component {
   state = defaultSettingsValues;
 
   componentDidMount() {
@@ -109,3 +110,7 @@ export default class Settings extends React.Component {
     );
   }
 }
+
+export default () => (
+  <WixSDK inEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
+);

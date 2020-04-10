@@ -8,8 +8,16 @@ export interface IEditorSDKConfig {
   initialData?: any;
 }
 
-export interface IWixSDKContext {
-  Wix: IWixStatic | null;
+export type IWixSDKContext =
+  | IWixSDKEditorEnvironmentContext
+  | IWixSDKViewerEnvironmentContext;
+
+export interface IWixSDKEditorEnvironmentContext {
+  Wix: IWixStatic;
+}
+
+export interface IWixSDKViewerEnvironmentContext {
+  Wix: null;
 }
 
 export interface IEditorSDKContext {
