@@ -16,13 +16,23 @@ declare global {
   }
 }
 
-const inViewer = (): boolean => {
+const isEditor = (): boolean => {
   // We are checking SSR and CSR cases
-  return typeof window === 'undefined' || !window.__EDITOR_MODE__;
+  return typeof window !== 'undefined' && !!window.__EDITOR_MODE__;
 };
 
+type IWixSDKConsumerEditorChildren = (
+  sdk: IWixSDKEditorEnvironmentContext,
+) => React.ReactElement | null;
+
+type IWixSDKConsumerViewerChildren = (
+  sdk: IWixSDKViewerEnvironmentContext,
+) => React.ReactElement | null;
+
 interface IWixSDKConsumer {
-  children: (sdk: IWixSDKContext) => React.ReactElement | null;
+  children: (
+    sdk: IWixSDKEditorEnvironmentContext | IWixSDKViewerEnvironmentContext,
+  ) => React.ReactElement | null;
   inEditor?: boolean;
 }
 
@@ -37,28 +47,49 @@ interface ISDKConsumer {
   ) => React.ReactElement | null;
 }
 
-export const WixSDK: React.FC<IWixSDKConsumer> = props => {
-  const { children, inEditor } = props;
+// We want to have flexible sdk render prop argument for different places of our app.
+// We can use `isEditor` prop in settings place to excplictly notify our component that we expect sdk is always value
+// For Widget part it will be flexible and users should consider Wix could be null (for viewer).
+interface IWixSDKProps<T extends boolean> {
+  isEditor: T;
+  children: (
+    sdk: T extends true
+      ? IWixSDKEditorEnvironmentContext
+      : IWixSDKViewerEnvironmentContext | IWixSDKEditorEnvironmentContext,
+  ) => React.ReactElement | null;
+}
+export class WixSDK<T extends boolean = false> extends React.Component<
+  IWixSDKProps<T>
+> {
+  static defaultProps = {
+    isEditor: isEditor(),
+  };
+  render() {
+    const { children, isEditor } = this.props;
 
-  // We don't have Wix SDK for viewer part and going to return `{ Wix: null }`
-  if (!inEditor && inViewer()) {
-    return children(defaultWixSDKContext as IWixSDKViewerEnvironmentContext);
+    if (isEditor) {
+      return (
+        <WixSDKContext.Consumer>
+          {(sdk: IWixSDKContext) =>
+            (children as IWixSDKConsumerEditorChildren)(
+              sdk as IWixSDKEditorEnvironmentContext,
+            )
+          }
+        </WixSDKContext.Consumer>
+      );
+    }
+
+    return (children as IWixSDKConsumerViewerChildren)(
+      defaultWixSDKContext as IWixSDKViewerEnvironmentContext,
+    );
   }
-
-  return (
-    <WixSDKContext.Consumer>
-      {(sdk: IWixSDKContext) =>
-        sdk.Wix ? children(sdk as IWixSDKEditorEnvironmentContext) : null
-      }
-    </WixSDKContext.Consumer>
-  );
-};
+}
 
 export const EditorSDK: React.FC<IEditorSDKConsumer> = props => {
   const { children } = props;
 
   // We don't have Editor SDK for viewer part and going to return `{ editorSDK: null, editorSDKConfig: null }`
-  if (inViewer()) {
+  if (!isEditor()) {
     return children(defaultEditorSDKContext);
   }
 

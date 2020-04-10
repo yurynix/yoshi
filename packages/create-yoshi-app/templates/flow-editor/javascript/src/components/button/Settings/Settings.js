@@ -112,5 +112,5 @@ class Settings extends React.Component {
 }
 
 export default () => (
-  <WixSDK inEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
+  <WixSDK isEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
 );
