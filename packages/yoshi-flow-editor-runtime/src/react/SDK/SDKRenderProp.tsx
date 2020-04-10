@@ -71,9 +71,11 @@ export class WixSDK<T extends boolean = false> extends React.Component<
       return (
         <WixSDKContext.Consumer>
           {(sdk: IWixSDKContext) =>
-            (children as IWixSDKConsumerEditorChildren)(
-              sdk as IWixSDKEditorEnvironmentContext,
-            )
+            sdk.Wix
+              ? (children as IWixSDKConsumerEditorChildren)(
+                  sdk as IWixSDKEditorEnvironmentContext,
+                )
+              : null
           }
         </WixSDKContext.Consumer>
       );
