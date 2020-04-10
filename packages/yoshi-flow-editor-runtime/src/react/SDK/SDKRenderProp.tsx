@@ -22,17 +22,19 @@ const inViewer = (): boolean => {
 };
 
 interface IWixSDKConsumer {
-  children: (sdk: IWixSDKContext) => JSX.Element;
+  children: (sdk: IWixSDKContext) => React.ReactElement | null;
   inEditor?: boolean;
 }
 
 interface IEditorSDKConsumer {
-  children: (sdk: IEditorSDKContext) => JSX.Element;
+  children: (sdk: IEditorSDKContext) => React.ReactElement | null;
 }
 
 interface ISDKConsumer {
   editorSDKSrc: string | null;
-  children: (sdk: IWixSDKContext | IEditorSDKContext) => JSX.Element;
+  children: (
+    sdk: IWixSDKContext | IEditorSDKContext,
+  ) => React.ReactElement | null;
 }
 
 export const WixSDK: React.FC<IWixSDKConsumer> = props => {
