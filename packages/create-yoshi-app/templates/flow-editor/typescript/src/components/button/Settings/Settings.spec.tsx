@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { IWixStatic } from '@wix/native-components-infra/dist/src/types/wix-sdk';
-import Settings from './Settings';
+import { Settings } from './Settings';
 
 jest.mock('@wix/wix-base-ui', () => ({
   ...jest.requireActual('@wix/wix-base-ui'),

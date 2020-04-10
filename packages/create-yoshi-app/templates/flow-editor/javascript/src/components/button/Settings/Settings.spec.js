@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Settings from './Settings';
+import { Settings } from './Settings';
 
 jest.mock('@wix/wix-base-ui', () => ({
   ...jest.requireActual('@wix/wix-base-ui'),

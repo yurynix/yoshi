@@ -21,7 +21,7 @@ const defaultSettingsValues = {
   fontSize: 14,
 };
 
-class Settings extends React.Component<ISettingsProps> {
+export class Settings extends React.Component<ISettingsProps> {
   state = defaultSettingsValues;
 
   componentDidMount() {
