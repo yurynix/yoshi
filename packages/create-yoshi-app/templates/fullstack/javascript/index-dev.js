@@ -1,3 +1,3 @@
-const { env } = require('./environment');
+const { envBuilder } = require('./environment');
 
-env.start();
+envBuilder.build().start();

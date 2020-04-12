@@ -1,3 +1,3 @@
-import { env } from './environment';
+import { envBuilder } from './environment';
 
-env.start();
+envBuilder.build().start();

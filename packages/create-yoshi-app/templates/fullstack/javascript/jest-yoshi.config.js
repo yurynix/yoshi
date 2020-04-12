@@ -1,4 +1,4 @@
-const { env } = require('./environment');
+const { envBuilder } = require('./environment');
 
 // The purpose of this file is to start your server and possibly additional servers
 // like RPC/Petri servers.
@@ -8,6 +8,7 @@ const { env } = require('./environment');
 //
 // By attaching the server object (testkit result) on `globalObject` it will be available to every
 // test file globally by that name.
+const env = envBuilder.build();
 module.exports = {
   bootstrap: {
     setup: async ({ globalObject }) => {
