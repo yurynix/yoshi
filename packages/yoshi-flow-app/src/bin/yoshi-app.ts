@@ -7,7 +7,8 @@ process.on('unhandledRejection', error => {
 import arg from 'arg';
 import loadConfig from 'yoshi-config/loadConfig';
 import { Config } from 'yoshi-config/build/config';
-import runPreflightChecks from 'yoshi-common/build/preflight-checks';
+import verifyDependencies from 'yoshi-common/build/verify-dependencies';
+import verifyNodeVersion from 'yoshi-common/build/verify-node-version';
 import normalizeDebuggingArgs from 'yoshi-common/build/normalize-debugging-args';
 
 const defaultCommand = 'start';
@@ -71,7 +72,8 @@ if (args['--help']) {
 }
 
 Promise.resolve().then(async () => {
-  await runPreflightChecks();
+  verifyNodeVersion();
+  await verifyDependencies();
 
   if (command === 'start') {
     process.env.NODE_ENV = 'development';

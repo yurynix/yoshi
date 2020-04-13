@@ -5,7 +5,8 @@ process.on('unhandledRejection', error => {
 });
 
 import arg from 'arg';
-import runPreflightChecks from 'yoshi-common/build/preflight-checks';
+import verifyDependencies from 'yoshi-common/build/verify-dependencies';
+import verifyNodeVersion from 'yoshi-common/build/verify-node-version';
 import normalizeDebuggingArgs from 'yoshi-common/build/normalize-debugging-args';
 import chalk from 'chalk';
 import { Config } from './config/types';
@@ -71,7 +72,8 @@ if (args['--help']) {
 }
 
 Promise.resolve().then(async () => {
-  await runPreflightChecks();
+  verifyNodeVersion();
+  await verifyDependencies();
 
   if (command === 'start') {
     // We log it here for fast feedback to the user
