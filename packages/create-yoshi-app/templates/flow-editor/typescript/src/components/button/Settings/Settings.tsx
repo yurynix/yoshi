@@ -1,6 +1,8 @@
 import React from 'react';
+import { IWixStatic } from '@wix/native-components-infra/dist/src/types/wix-sdk';
 import './Settings.global.scss';
 import { get } from 'lodash';
+import { WixSDK } from 'yoshi-flow-editor-runtime';
 import {
   Slider,
   ColorPickerColorSpace,
@@ -9,17 +11,21 @@ import {
 } from '@wix/wix-base-ui';
 import * as css from './Settings.scss';
 
+interface ISettingsProps {
+  Wix: IWixStatic;
+}
+
 const defaultSettingsValues = {
   backgroundColor: '#ffffff',
   buttonBackgroundColor: '#ffffff',
   fontSize: 14,
 };
 
-export default class Settings extends React.Component {
+export class Settings extends React.Component<ISettingsProps> {
   state = defaultSettingsValues;
 
   componentDidMount() {
-    window.Wix.Styles.getStyleParams((styleParams: any) => {
+    this.props.Wix.Styles.getStyleParams((styleParams: any) => {
       this.setState({
         backgroundColor: get(
           styleParams,
@@ -37,21 +43,21 @@ export default class Settings extends React.Component {
   }
 
   updateHeaderBackgroundColor = (backgroundColor: string) => {
-    window.Wix.Styles.setColorParam('backgroundColor', {
+    this.props.Wix.Styles.setColorParam('backgroundColor', {
       value: { color: false, opacity: 1, rgba: backgroundColor },
     });
     this.setState({ backgroundColor });
   };
 
   updateButtonBackgroundColor = (buttonBackgroundColor: string) => {
-    window.Wix.Styles.setColorParam('buttonBackgroundColor', {
+    this.props.Wix.Styles.setColorParam('buttonBackgroundColor', {
       value: { color: false, opacity: 1, rgba: buttonBackgroundColor },
     });
     this.setState({ buttonBackgroundColor });
   };
 
   updateHeaderFontSize = (fontSize: string) => {
-    window.Wix.Styles.setFontParam('fontSize', {
+    this.props.Wix.Styles.setFontParam('fontSize', {
       value: {
         family: 'roboto-bold',
         fontStyleParam: true,
@@ -109,3 +115,7 @@ export default class Settings extends React.Component {
     );
   }
 }
+
+export default () => (
+  <WixSDK isEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
+);

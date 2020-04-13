@@ -10,5 +10,26 @@ export function objectPromiseAll(target: Record<string, any>) {
   }, Promise.resolve({}));
 }
 
+export const getQueryParams = (
+  search = window.location.search,
+): URLSearchParams => {
+  return new URLSearchParams(search);
+};
+
 export * from './createInstances';
 export * from './fetchFrameworkData';
+
+export const loadScript = (scriptSrc: string) =>
+  new Promise(resolve => {
+    const script = document.createElement('script');
+    script.src = scriptSrc;
+    script.async = false;
+    script.onload = resolve;
+
+    document.body.appendChild(script);
+  });
+
+export const getEditorSDKSrc = (): string | null => {
+  const queryParams: URLSearchParams = getQueryParams();
+  return queryParams.get('wix-sdk-version');
+};

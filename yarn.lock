@@ -4518,6 +4518,13 @@
     lodash "4.17.10"
     raven-js "3.27.0"
 
+"@wix/platform-editor-sdk@0.0.865":
+  version "0.0.865"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/platform-editor-sdk/-/@wix/platform-editor-sdk-0.0.865.tgz#9a166af7f28ccd6a94dd721edd84bbe38c310c06"
+  integrity sha1-mhZq9/KMzWqU3XIe3YS744wxDAY=
+  dependencies:
+    request "^2.87.0"
+
 "@wix/web-bi-logger@2.0.195":
   version "2.0.195"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/web-bi-logger/-/@wix/web-bi-logger-2.0.195.tgz#d2c105ec6435da08ffaee65d0c6bcf58deac7b84"

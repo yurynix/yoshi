@@ -31,7 +31,9 @@ export class PublicDataProviderEditor extends React.Component<
     const publicDataPromise = new Promise((resolve, reject) => {
       setTimeout(function() {
         reject(
-          new Error(`timeout of ${PUBLIC_DATA_TIMEOUT}ms reached on Wix.Data.Public.getAll`),
+          new Error(
+            `timeout of ${PUBLIC_DATA_TIMEOUT}ms reached on Wix.Data.Public.getAll`,
+          ),
         );
       }, PUBLIC_DATA_TIMEOUT);
       Wix.Data.Public.getAll(resolve, reject);

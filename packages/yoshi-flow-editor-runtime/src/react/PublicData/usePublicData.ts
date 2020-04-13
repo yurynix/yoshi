@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { PublicDataContext } from './PublicDataContext';
-import { ControllerContext } from './ControllerContext';
 
 export function usePublicData() {
   const publicDataContext = useContext(PublicDataContext);
@@ -10,8 +9,4 @@ export function usePublicData() {
   }
 
   return publicDataContext;
-}
-
-export function useController() {
-  return useContext(ControllerContext);
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as css from './Settings.scss';
 import './Settings.global.scss';
+import { WixSDK } from 'yoshi-flow-editor-runtime';
 import { get } from 'lodash';
 import {
   Slider,
@@ -15,11 +16,11 @@ const defaultSettingsValues = {
   fontSize: 14,
 };
 
-export default class Settings extends React.Component {
+export class Settings extends React.Component {
   state = defaultSettingsValues;
 
   componentDidMount() {
-    window.Wix.Styles.getStyleParams(styleParams => {
+    this.props.Wix.Styles.getStyleParams(styleParams => {
       this.setState({
         backgroundColor: get(
           styleParams,
@@ -37,21 +38,21 @@ export default class Settings extends React.Component {
   }
 
   updateHeaderBackgroundColor = backgroundColor => {
-    window.Wix.Styles.setColorParam('backgroundColor', {
+    this.props.Wix.Styles.setColorParam('backgroundColor', {
       value: { color: false, opacity: 1, rgba: backgroundColor },
     });
     this.setState({ backgroundColor });
   };
 
   updateButtonBackgroundColor = buttonBackgroundColor => {
-    window.Wix.Styles.setColorParam('buttonBackgroundColor', {
+    this.props.Wix.Styles.setColorParam('buttonBackgroundColor', {
       value: { color: false, opacity: 1, rgba: buttonBackgroundColor },
     });
     this.setState({ buttonBackgroundColor });
   };
 
   updateHeaderFontSize = fontSize => {
-    window.Wix.Styles.setFontParam('fontSize', {
+    this.props.Wix.Styles.setFontParam('fontSize', {
       value: {
         family: 'roboto-bold',
         fontStyleParam: true,
@@ -109,3 +110,7 @@ export default class Settings extends React.Component {
     );
   }
 }
+
+export default () => (
+  <WixSDK isEditor>{({ Wix }) => <Settings Wix={Wix} />}</WixSDK>
+);
