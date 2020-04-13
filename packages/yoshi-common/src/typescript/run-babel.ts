@@ -27,8 +27,8 @@ function transpileFile({ filePath, cwd }: { filePath: string; cwd: string }) {
     filename: filePathInBuildDir,
     sourceFileName: relativeSourceFileName,
     sourceMaps: true,
-    plugins: ['@babel/plugin-transform-typescript'],
-    presets: [['babel-preset-yoshi', { mode: 'test' }]],
+    plugins: [require.resolve('@babel/plugin-transform-typescript')],
+    presets: [[require.resolve('babel-preset-yoshi'), { mode: 'test' }]],
   });
 
   const filePathInBuildDirNoExtensions = stripExtension(filePathInBuildDir);
