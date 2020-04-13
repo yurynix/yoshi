@@ -6,6 +6,7 @@ import {
   IEditorSDKContext,
   IWixSDKEditorEnvironmentContext,
   IWixSDKViewerEnvironmentContext,
+  IEditorSDKLoadedContext,
   defaultWixSDKContext,
 } from './SDKContext';
 
@@ -36,7 +37,7 @@ interface IWixSDKConsumer {
 }
 
 interface IEditorSDKConsumer {
-  children: (sdk: IEditorSDKContext) => React.ReactElement | null;
+  children: (sdk: IEditorSDKLoadedContext) => React.ReactElement | null;
 }
 
 interface ISDKConsumer {

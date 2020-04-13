@@ -20,9 +20,18 @@ export interface IWixSDKViewerEnvironmentContext {
   Wix: null;
 }
 
-export interface IEditorSDKContext {
-  editorSDK: EditorSDK | null;
-  editorSDKConfig: IEditorSDKConfig | null;
+export type IEditorSDKContext =
+  | IEditorSDKLoadedContext
+  | IEditorSDKDefaultContext;
+
+export interface IEditorSDKLoadedContext {
+  editorSDK: EditorSDK;
+  editorSDKConfig: IEditorSDKConfig;
+}
+
+export interface IEditorSDKDefaultContext {
+  editorSDK: null;
+  editorSDKConfig: null;
 }
 
 export const defaultWixSDKContext = {
