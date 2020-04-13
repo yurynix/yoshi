@@ -154,6 +154,9 @@ Run tests with Jest - this is the default
 
 Run unit tests with Mocha
 
+You can set environment variable `MOCHA_TIMEOUT` to set the timeout for mocha tests.
+defaults to 30000ms
+
 #### `--jasmine`
 
 Run unit tests with Jasmine
