@@ -19,7 +19,7 @@ export const getQueryParams = (
 export * from './createInstances';
 export * from './fetchFrameworkData';
 
-export const loadScript = (scriptSrc: string) => 
+export const loadScript = (scriptSrc: string) =>
   new Promise(resolve => {
     const script = document.createElement('script');
     script.src = scriptSrc;
@@ -27,8 +27,7 @@ export const loadScript = (scriptSrc: string) =>
     script.onload = resolve;
 
     document.body.appendChild(script);
-  );
-};
+  });
 
 export const getEditorSDKSrc = (): string | null => {
   const queryParams: URLSearchParams = getQueryParams();
