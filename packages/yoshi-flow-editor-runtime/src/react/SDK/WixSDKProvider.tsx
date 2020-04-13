@@ -1,7 +1,7 @@
 import React from 'react';
 import { IWixStatic } from '@wix/native-components-infra/dist/es/src/types/wix-sdk';
 import { loadScript } from '../../utils';
-import { DEFAULT_EDITOR_SDK_SRC } from '../../constants';
+import { DEFAULT_WIX_SDK_SRC } from '../../constants';
 import {
   WixSDKContext,
   IWixSDKContext,
@@ -25,7 +25,7 @@ export class WixSDKProvider extends React.Component<{}, IState> {
   };
 
   componentDidMount() {
-    const editorSdkScriptSrc = DEFAULT_EDITOR_SDK_SRC;
+    const editorSdkScriptSrc = DEFAULT_WIX_SDK_SRC;
 
     this.loadSDK(editorSdkScriptSrc).then(() => {
       const Wix = window.Wix;
