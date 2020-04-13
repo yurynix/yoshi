@@ -1,5 +1,30 @@
 # Changelog
 
+## 4.56.0 (2020-04-13)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2202](https://github.com/wix/yoshi/pull/2202) Editor Flow now loads Editor SDK dynamically and incapsulate it ([@yavorsky](https://github.com/yavorsky))
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
+  - [#2199](https://github.com/wix/yoshi/pull/2199) Verify dependency tree for dependency conflicts ([@amitdahan](https://github.com/amitdahan))
+- `yoshi-server-client`
+  - [#2196](https://github.com/wix/yoshi/pull/2196) Handle non json response ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `eslint-config-yoshi-base`, `eslint-config-yoshi`
+  - [#2200](https://github.com/wix/yoshi/pull/2200) Remove `no-non-null-assertion` eslint rule ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2219](https://github.com/wix/yoshi/pull/2219) `BROWSER=none` instead of `false` for canceling browser from opening on `start` ([@ranyitz](https://github.com/ranyitz))
+- [#2205](https://github.com/wix/yoshi/pull/2205) Fix a broken link in create-app docs ([@tozaicevas](https://github.com/tozaicevas))
+
+#### :house: Internal
+
+- [#2198](https://github.com/wix/yoshi/pull/2198) Split yoshi server tests to run less time in the CI ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.55.1 (2020-04-06)
 
 #### :bug: Bug Fix
