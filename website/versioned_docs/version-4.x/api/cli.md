@@ -97,7 +97,7 @@ The following are the default values for the CDN server's port, mount directory 
 
 > Similar to the `startUrl` configuration option. If both are specified `--url` will be used.
 
-> Note: You can disable browser opening functionality by using `BROWSER=false` env variable.
+> Note: You can disable browser opening functionality by using `BROWSER=none` env variable.
 
 Opens the browser on a supplied url, also supports multiple urls separated by comma.
 
