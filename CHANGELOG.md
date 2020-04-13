@@ -1,5 +1,22 @@
 # Changelog
 
+## 4.56.1 (2020-04-13)
+
+#### :rocket: New Feature
+
+- `yoshi-flow-legacy`
+  - [#2218](https://github.com/wix/yoshi/pull/2218) Enable setting mocha timeout as an environment variable ([@morsh](https://github.com/morsh))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2220](https://github.com/wix/yoshi/pull/2220) Revert "fullstack templates use @wix/wix-test-env" ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
+  - [#2221](https://github.com/wix/yoshi/pull/2221) Revert "Verify dependency tree for dependency conflicts (#2199)" ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.56.0 (2020-04-13)
 
 #### :rocket: New Feature
