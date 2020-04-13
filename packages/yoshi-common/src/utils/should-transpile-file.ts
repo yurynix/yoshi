@@ -26,6 +26,12 @@ export default (fileName: string): boolean => {
     m => new RegExp(`node_modules/${m}`),
   );
 
+  // Don't transpile the output of Carmi with Babel/TypeScript
+  // https://github.com/wix/yoshi/pull/2227
+  if (/\.carmi.(js|ts)$/.test(fileName)) {
+    return false;
+  }
+
   return (
     externalRegexList.some(regex => regex.test(fileName)) ||
     allSourcesButExternalModules(fileName) ||
