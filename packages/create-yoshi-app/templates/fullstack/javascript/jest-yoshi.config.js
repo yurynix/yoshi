@@ -1,4 +1,4 @@
-const { env } = require('./environment');
+const { emitConfigs, bootstrapServer } = require('./environment');
 
 // The purpose of this file is to start your server and possibly additional servers
 // like RPC/Petri servers.
@@ -11,13 +11,14 @@ const { env } = require('./environment');
 module.exports = {
   bootstrap: {
     setup: async ({ globalObject }) => {
-      globalObject.app = env.mainApp;
-      globalObject.axios = env.axios;
+      await emitConfigs();
 
-      await env.start();
+      globalObject.app = bootstrapServer();
+
+      await globalObject.app.start();
     },
-    teardown: async () => {
-      await env.stop();
+    teardown: async ({ globalObject }) => {
+      await globalObject.app.stop();
     },
   },
   puppeteer: {

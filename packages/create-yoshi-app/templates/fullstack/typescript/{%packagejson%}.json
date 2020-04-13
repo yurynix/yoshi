@@ -48,7 +48,7 @@
     "@types/react-dom": "^16.0.11",
     "@wix/fedops-logger": "^5.0.0",
     "@wix/wix-bootstrap-testkit": "latest",
-    "@wix/wix-test-env": "latest",
+    "@wix/wix-config-emitter": "latest",
     "husky": "^4.2.1",
     "jest-yoshi-preset": "^4.1.0",
     "lint-staged": "^10.0.7",

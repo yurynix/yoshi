@@ -98,7 +98,6 @@
       },
       "globals": {
         "app": false,
-        "axios": false,
         "testKitEnv": false
       }
     }
