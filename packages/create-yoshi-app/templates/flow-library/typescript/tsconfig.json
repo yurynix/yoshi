@@ -6,8 +6,8 @@
     "./node_modules/jest-yoshi-preset/types.d.ts"
   ],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "esnext",
+    "target": "ES5",
+    "module": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
