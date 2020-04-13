@@ -83,6 +83,8 @@ export class WebpackDevServer extends OriginalWebpackDevServer {
       // https://github.com/wix/yoshi/pull/1191
       allowedHosts: [
         '.wix.com',
+        '.editorx.com',
+        '.editorx.io',
         '.wixsite.com',
         '.ooidev.com',
         '.editor-flow-dev.com',
