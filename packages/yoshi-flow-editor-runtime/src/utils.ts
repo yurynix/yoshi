@@ -19,15 +19,15 @@ export const getQueryParams = (
 export * from './createInstances';
 export * from './fetchFrameworkData';
 
-export const loadScript = (scriptSrc: string) => {
-  return new Promise(resolve => {
+export const loadScript = (scriptSrc: string) => 
+  new Promise(resolve => {
     const script = document.createElement('script');
     script.src = scriptSrc;
     script.async = false;
     script.onload = resolve;
 
     document.body.appendChild(script);
-  });
+  );
 };
 
 export const getEditorSDKSrc = (): string | null => {
