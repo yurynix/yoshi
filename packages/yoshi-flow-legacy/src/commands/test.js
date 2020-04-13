@@ -101,11 +101,13 @@ module.exports = runner.command(
         await bootstrapCdn();
       }
 
+      const mochaTimeout = process.env.MOCHA_TIMEOUT || '30000';
+
       const mochaArgs = [
         require.resolve('mocha/bin/_mocha'),
         ...specsPattern,
         `--require=${require.resolve('../../config/test-setup')}`,
-        '--timeout=30000',
+        `--timeout=${mochaTimeout}`,
         `--reporter=${getMochaReporter()}`,
       ];
 
