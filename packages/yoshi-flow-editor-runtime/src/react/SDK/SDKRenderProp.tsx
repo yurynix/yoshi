@@ -7,7 +7,6 @@ import {
   IWixSDKEditorEnvironmentContext,
   IWixSDKViewerEnvironmentContext,
   defaultWixSDKContext,
-  defaultEditorSDKContext,
 } from './SDKContext';
 
 declare global {
@@ -89,11 +88,6 @@ export class WixSDK<T extends boolean = false> extends React.Component<
 
 export const EditorSDK: React.FC<IEditorSDKConsumer> = props => {
   const { children } = props;
-
-  // We don't have Editor SDK for viewer part and going to return `{ editorSDK: null, editorSDKConfig: null }`
-  if (!isEditor()) {
-    return children(defaultEditorSDKContext);
-  }
 
   return (
     <EditorSDKContext.Consumer>
