@@ -1,6 +1,6 @@
 {
   "name": "yoshi-storybook-dependencies",
-  "version": "4.32.0",
+  "version": "4.56.0",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "@storybook/react": "^5.2.8",
-    "storybook": "^5.3.7",
-    "babel-loader": "^8.0.0"
+    "babel-loader": "^8.0.0",
+    "storybook": "^5.3.7"
   },
   "peerDependencies": {
     "react": "^16.12.0",

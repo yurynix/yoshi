@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-editor-runtime",
-  "version": "4.54.1",
+  "version": "4.56.0",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
@@ -11,8 +11,8 @@
   "author": "Ran Yitzhaki",
   "license": "ISC",
   "dependencies": {
-    "@wix/platform-editor-sdk": "0.0.865",
     "@wix/native-components-infra": "^1.0.668",
+    "@wix/platform-editor-sdk": "0.0.865",
     "@wix/wix-base-ui": "^3.0.0",
     "@wix/wix-experiments": "3.0.441",
     "prop-types": "^15.7.2",

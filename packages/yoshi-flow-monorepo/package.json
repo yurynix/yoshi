@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-monorepo",
-  "version": "4.55.1",
+  "version": "4.56.0",
   "bin": {
     "yoshi-monorepo": "./build/bin/yoshi-monorepo.js"
   },
@@ -31,9 +31,9 @@
     "lodash": "^4.17.15",
     "webpack-stats-plugin": "0.3.1",
     "wnpm-ci": "8.0.121",
-    "yoshi-common": "4.55.0",
-    "yoshi-config": "4.55.0",
-    "yoshi-flow-legacy": "4.55.1",
-    "yoshi-helpers": "4.55.0"
+    "yoshi-common": "4.56.0",
+    "yoshi-config": "4.56.0",
+    "yoshi-flow-legacy": "4.56.0",
+    "yoshi-helpers": "4.56.0"
   }
 }
