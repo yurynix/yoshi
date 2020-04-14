@@ -119,6 +119,7 @@ const build: cliCommand = async function(argv, config, model) {
   });
 
   const webWorkerOptimizeConfig = createWebWorkerWebpackConfig(config, {
+    isAnalyze,
     customEntry: webWorkerCustomEntry,
     webWorkerExternals,
   });

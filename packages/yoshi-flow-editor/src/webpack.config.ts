@@ -109,12 +109,14 @@ export function createWebWorkerWebpackConfig(
   config: Config,
   {
     isDev,
+    isAnalyze,
     isHot,
     customEntry,
     webWorkerExternals,
   }: {
     isDev?: boolean;
     isHot?: boolean;
+    isAnalyze?: boolean;
     customEntry?: any;
     webWorkerExternals?: any;
   } = {},
@@ -126,6 +128,7 @@ export function createWebWorkerWebpackConfig(
     target: 'webworker',
     isDev,
     isHot,
+    isAnalyze,
     ...defaultOptions,
   });
 
