@@ -1,6 +1,7 @@
 import path from 'path';
 import { URL } from 'url';
 import urlJoin from 'url-join';
+import lodash from 'lodash';
 import { StartUrl } from 'yoshi-config/build/config';
 import { FlowEditorModel, ComponentModel } from './model';
 
@@ -98,3 +99,23 @@ export const overrideQueryParamsWithModel = (
   // TODO: Remove before releasing stable version.
   return decodeURIComponent(urlWithParams.toString());
 };
+
+const lodashRegExp = /^lodash(\/.+)?$/;
+export const webWorkerExternals = [
+  function(
+    context: unknown,
+    request: string,
+    callback: (ctx?: null, path?: string) => void,
+  ) {
+    if (lodashRegExp.test(request)) {
+      const [, method] = request.split('/');
+      if (!method) {
+        return callback(null, `root _`);
+      }
+      if (lodash.hasOwnProperty(method)) {
+        return callback(null, `root _.${method}`);
+      }
+    }
+    callback();
+  },
+];

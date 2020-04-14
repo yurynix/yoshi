@@ -1,5 +1,5 @@
 import { WIDGET_COMPONENT_TYPE, PAGE_COMPONENT_TYPE } from '../constants';
-import { overrideQueryParamsWithModel } from '../utils';
+import { overrideQueryParamsWithModel, webWorkerExternals } from '../utils';
 
 describe('addOverrideQueryParamsWithModel', () => {
   const cdnUrl = 'https://localhost:5005/';
@@ -98,5 +98,44 @@ describe('addOverrideQueryParamsWithModel', () => {
     expect(urlWithParams).toBe(
       `https://mysite.com/?tpaWidgetUrlOverride=WIDGET_ID=${serverUrl}/editor/comp&tpaSettingsUrlOverride=WIDGET_ID=${serverUrl}/settings/comp&widgetsUrlOverride=WIDGET_ID=${cdnUrl}compViewerWidget.bundle.js&viewerPlatformOverrides=APP_DEF_ID=${cdnUrl}viewerScript.bundle.js&overridePlatformBaseUrls=APP_DEF_ID={"staticsBaseUrl":"${cdnUrl}"}`,
     );
+  });
+});
+
+describe('webWorkerExternals', () => {
+  const externalsFn = webWorkerExternals[0];
+  it('should generate externals pointed to `_` for default lodash import (`lodash`)', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash', fn);
+    expect(fn).toHaveBeenCalledWith(null, 'root _');
+  });
+
+  it('should generate externals pointed to `.get` for cherry-pick lodash import (`lodash/get`)', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash/get', fn);
+    expect(fn).toHaveBeenCalledWith(null, 'root _.get');
+  });
+
+  it('should generate externals pointed to `.isFunction` for cherry-pick lodash import (`lodash/isFunction`)', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash/isFunction', fn);
+    expect(fn).toHaveBeenCalledWith(null, 'root _.isFunction');
+  });
+
+  it("should ignore imports for lodash method that doesn't exist", () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash/kekekek', fn);
+    expect(fn).toHaveBeenCalledWith();
+  });
+
+  it('should ignore imports not related to lodash', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'yoshi', fn);
+    expect(fn).toHaveBeenCalledWith();
+  });
+
+  it('should ignore lodash-like imports', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash-fn', fn);
+    expect(fn).toHaveBeenCalledWith();
   });
 });

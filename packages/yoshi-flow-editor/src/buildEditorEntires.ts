@@ -48,12 +48,3 @@ export const buildViewerScriptEntry = (model: FlowEditorModel) => {
     ...writeCommonViewerScriptWrapping(generatedWidgetEntriesPath, model),
   };
 };
-
-export const webWorkerExternals = {
-  lodash: {
-    commonjs: 'lodash',
-    commonjs2: 'lodash',
-    amd: 'lodash',
-    root: '_',
-  },
-};

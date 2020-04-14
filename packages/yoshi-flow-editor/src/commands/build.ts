@@ -18,8 +18,8 @@ import { cliCommand } from '../cli';
 import {
   buildEditorPlatformEntries,
   buildViewerScriptEntry,
-  webWorkerExternals,
 } from '../buildEditorEntires';
+import { webWorkerExternals } from '../utils';
 import { writeCiConfig } from './ciConfigGenerator';
 import { generateEditorHTMLFiles } from './htmlGenerator';
 

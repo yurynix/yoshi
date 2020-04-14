@@ -9,6 +9,7 @@ import {
   joinDirs,
   normalizeStartUrlOption,
   overrideQueryParamsWithModel,
+  webWorkerExternals,
 } from '../utils';
 import {
   createClientWebpackConfig,
@@ -18,7 +19,6 @@ import {
 import {
   buildEditorPlatformEntries,
   buildViewerScriptEntry,
-  webWorkerExternals,
 } from '../buildEditorEntires';
 
 const start: cliCommand = async function(argv, config, model) {
