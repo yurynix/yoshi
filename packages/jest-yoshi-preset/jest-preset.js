@@ -197,7 +197,7 @@ const config = {
 
           moduleNameMapper: {
             '^(?!.+\\.st\\.css$)^.+\\.(?:sass|s?css|less)$': require.resolve(
-              'identity-obj-proxy',
+              './identity-proxy',
             ),
           },
 
