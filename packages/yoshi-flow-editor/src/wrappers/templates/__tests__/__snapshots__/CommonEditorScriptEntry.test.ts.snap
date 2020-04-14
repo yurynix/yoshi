@@ -2,6 +2,8 @@
 
 exports[`CommonEditorScriptEntry template generates correct template with entry editorScript file 1`] = `
 "
-  export * from 'project/src/editor.app.ts';
+  var editorScriptEntry = require('project/src/editor.app.ts');
+
+  module.exports = editorScriptEntry.default || editorScriptEntry;
 "
 `;
