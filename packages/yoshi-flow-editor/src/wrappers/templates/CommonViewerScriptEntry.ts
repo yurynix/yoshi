@@ -45,7 +45,7 @@ export default t<Opts>`
   }) => viewerScriptWrapperPath}';
   ${({ controllersMeta }) => importsForControllers({ controllersMeta })}
   import * as viewerApp from '${({ viewerAppFileName }) => viewerAppFileName}';
-  const importedApp = viewerApp;
+  var importedApp = viewerApp;
 
   export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
   export const createControllers = createControllersWithDescriptors([${({

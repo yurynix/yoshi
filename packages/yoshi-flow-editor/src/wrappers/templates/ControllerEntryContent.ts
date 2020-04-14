@@ -12,7 +12,7 @@ export default t<Opts>`
   import userController from '${({ controllerFileName }) =>
     controllerFileName}';
   import * as viewerApp from '${({ viewerAppFileName }) => viewerAppFileName}';
-  const importedApp = viewerApp;
+  var importedApp = viewerApp;
 
   export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
   export const createControllers = createControllersWrapper(userController, importedApp.mapPlatformStateToAppData);

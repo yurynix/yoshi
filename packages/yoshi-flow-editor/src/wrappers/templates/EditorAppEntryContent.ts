@@ -20,11 +20,11 @@ export default t<Opts>`
       controllerFileName}';
     import * as viewerApp from '${({ viewerAppFileName }) =>
       viewerAppFileName}';
-    const importedApp = viewerApp;
+    var importedApp = viewerApp;
 
-    const componentName = '${({ componentName }) => componentName}';
+    var componentName = '${({ componentName }) => componentName}';
 
-    const WrappedEditorApp = () => React.createElement(EditorAppWrapper, {
+    var WrappedEditorApp = () => React.createElement(EditorAppWrapper, {
       UserComponent,
       name: componentName,
       userController: createController,

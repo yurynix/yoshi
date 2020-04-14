@@ -50,7 +50,7 @@ interface ISDKConsumer {
 // We can use `isEditor` prop in settings place to excplictly notify our component that we expect sdk is always value
 // For Widget part it will be flexible and users should consider Wix could be null (for viewer).
 interface IWixSDKProps<T extends boolean> {
-  isEditor: T;
+  isEditor?: T;
   children: (
     sdk: T extends true
       ? IWixSDKEditorEnvironmentContext
