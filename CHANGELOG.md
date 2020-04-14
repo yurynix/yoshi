@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.56.2 (2020-04-14)
+
+#### :bug: Bug Fix
+* `yoshi-flow-editor`
+  * [#2229](https://github.com/wix/yoshi/pull/2229) Use ES5 in entry points ([@yavorsky](https://github.com/yavorsky))
+
+#### :nail_care: Polish
+* `yoshi-flow-editor-runtime`
+  * [#2228](https://github.com/wix/yoshi/pull/2228) Use `isEditor` as an optional value for `IWixSDKProps` ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.56.1 (2020-04-13)
 
 #### :rocket: New Feature
