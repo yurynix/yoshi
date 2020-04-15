@@ -8,7 +8,10 @@ import writeCommonViewerScriptWrapping from './wrappers/commonViewerScriptWrappi
 import wixPrivateMockWrapping from './wrappers/wixPrivateMockWrapping';
 import { FlowEditorModel } from './model';
 
-const generatedWidgetEntriesPath = path.resolve(__dirname, '../tmp/components');
+const generatedWidgetEntriesPath = path.resolve(
+  __dirname,
+  '../.custom-entries',
+);
 
 export const buildEditorPlatformEntries = (model: FlowEditorModel) => {
   const componentEntries = writeComponentWrapping(

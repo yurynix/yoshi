@@ -26,10 +26,15 @@ export default (fileName: string): boolean => {
     m => new RegExp(`node_modules/${m}`),
   );
 
+  const isFlowEditorEntryPoint = (filePath: string) => {
+    return filePath.includes('yoshi-flow-editor/.custom-entries');
+  };
+
   return (
     externalRegexList.some(regex => regex.test(fileName)) ||
     allSourcesButExternalModules(fileName) ||
     isWixStyleReactSource(fileName) ||
+    isFlowEditorEntryPoint(fileName) ||
     isEditorElements(fileName)
   );
 };
