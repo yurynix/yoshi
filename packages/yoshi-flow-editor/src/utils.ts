@@ -1,7 +1,7 @@
 import path from 'path';
 import { URL } from 'url';
 import urlJoin from 'url-join';
-import lodash from 'lodash';
+import resolveCwd from 'resolve-cwd';
 import { StartUrl } from 'yoshi-config/build/config';
 import { FlowEditorModel, ComponentModel } from './model';
 
@@ -101,6 +101,8 @@ export const overrideQueryParamsWithModel = (
 };
 
 const lodashRegExp = /^lodash(\/.+)?$/;
+// We want to use user's version of lodash to verify this method exists
+const lodash = resolveCwd.silent('lodash') || {};
 export const webWorkerExternals = [
   function(
     context: unknown,
