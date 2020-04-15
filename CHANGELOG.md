@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.56.3 (2020-04-15)
+
+#### :bug: Bug Fix
+* `yoshi-common`, `yoshi-flow-editor`
+  * [#2237](https://github.com/wix/yoshi/pull/2237) Add entries from editor flow to files needed to be transpiled ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.56.2 (2020-04-14)
 
 #### :bug: Bug Fix
