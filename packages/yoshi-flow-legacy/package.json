@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.56.1",
+  "version": "4.56.3",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -100,7 +100,7 @@
     "wnpm-ci": "8.0.121",
     "word-wrap": "1.2.3",
     "xmldoc": "1.1.2",
-    "yoshi-common": "4.56.1",
+    "yoshi-common": "4.56.3",
     "yoshi-config": "4.56.0",
     "yoshi-helpers": "4.56.0",
     "yoshi-runtime": "1.0.730",
@@ -125,7 +125,7 @@
     "generic-names": "1.0.3",
     "graphql-tag": "2.10.3",
     "identity-obj-proxy": "3.0.0",
-    "jest-yoshi-preset": "4.56.1",
+    "jest-yoshi-preset": "4.56.3",
     "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
