@@ -1,5 +1,23 @@
+import { silent as silentCwd } from 'import-cwd';
+import lodash from 'lodash';
 import { WIDGET_COMPONENT_TYPE, PAGE_COMPONENT_TYPE } from '../constants';
 import { overrideQueryParamsWithModel, webWorkerExternals } from '../utils';
+
+jest.mock('import-cwd', () => ({
+  silent(pkg: string) {
+    if (pkg === 'lodash') {
+      const lodashMock = {};
+      lodashMock.hasOwnProperty = prop => {
+        if (prop === 'someNewLodashMethod') {
+          return true;
+        }
+        return lodash.hasOwnProperty(prop);
+      };
+      return lodashMock;
+    }
+    return silentCwd(pkg);
+  },
+}));
 
 describe('addOverrideQueryParamsWithModel', () => {
   const cdnUrl = 'https://localhost:5005/';
@@ -125,6 +143,12 @@ describe('webWorkerExternals', () => {
     const fn = jest.fn();
     externalsFn(null, 'lodash/kekekek', fn);
     expect(fn).toHaveBeenCalledWith();
+  });
+
+  it('should generate externals pointed to `.someNewLodashMethod` for custom lodash version', () => {
+    const fn = jest.fn();
+    externalsFn(null, 'lodash/someNewLodashMethod', fn);
+    expect(fn).toHaveBeenCalledWith(null, 'root _.someNewLodashMethod');
   });
 
   it('should ignore imports not related to lodash', () => {
